@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int n, r;
+  cin >> n >> r;
+  for (int i = 0; i < n; i++)
+  {
+    int d, a;
+    cin >> d >> a;
+    if ((d == 1) && (1600 <= r) && (r < 2800))
+      r += a;
+    if ((d == 2) && (1200 <= r) && (r < 2400))
+      r += a;
+  }
+  cout << r << endl;
+}

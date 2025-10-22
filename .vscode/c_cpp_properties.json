@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/local/opt/gcc@12/include/c++/12",
+                "/usr/local/opt/gcc@12/include/c++/12/x86_64-apple-darwin21",
+                "/usr/local/opt/gcc@12/include/c++/12/backward"
+            ],
+            "compilerPath": "/usr/local/bin/g++-12",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "macos-gcc-x64"
+        }
+    ],
+    "version": 4
+}

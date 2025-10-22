@@ -9,8 +9,8 @@
 ```
 .
 ├── abc
-│   ├── abc301-310
-│   │   ├── abc301
+│   ├── abc291-100
+│   │   ├── abc291
 │   │   │   ├── a.cpp
 │   │   │   ├── b.cpp
 │   │   │   ├── c.cpp
@@ -20,10 +20,31 @@
 │   │   │   └── g.cpp
 │   │   └── ...
 │   ├── ...
+│   ├── template
+│   │   ├── a.cpp
+│   │   ├── b.cpp
+│   │   ├── c.cpp
+│   │   ├── d.cpp
+│   │   ├── e.cpp
+│   │   ├── f.cpp
+│   │   └── g.cpp
 │   └── makefile
 ├── abs
 │   ├── abc049c.cpp
-│   └── ...
+│   ├── ...
+│   └── practicea.cpp
+├── adt
+│   ├── 2025-10-07
+│   ├── ...
+│   ├── template
+│   │   ├── a.cpp
+│   │   ├── b.cpp
+│   │   ├── c.cpp
+│   │   ├── d.cpp
+│   │   ├── e.cpp
+│   │   ├── f.cpp
+│   │   └── g.cpp
+│   └── makefile
 ├── math-algo
 │   ├── p001.cpp
 │   ├── p002.cpp
@@ -34,6 +55,7 @@
 │   ├── p002.cpp
 │   ├── ...
 │   └── p090.cpp
+├── .gitignore
 ├── README.md
 ├── utils.cpp
 └── wil.md

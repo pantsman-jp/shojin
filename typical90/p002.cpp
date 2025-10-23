@@ -1,12 +1,8 @@
-#include <iostream>
-#include <vector>
-#include <map>
-#include <set>
-#include <algorithm>
-#include <string>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
+#define rep(i, a, b) for (int i = (a); i < (b); i++)
+using ll = long long;
+const ll inf = 1LL << 60;
 
 bool isvalid(string s)
 {
@@ -25,6 +21,8 @@ bool isvalid(string s)
 
 int main()
 {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
   int n;
   cin >> n;
   for (int i = 0; i < (1 << n); ++i)

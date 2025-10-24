@@ -8,4 +8,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, l;
+  cin >> n >> l;
+  vector<ll> dp(n + 1, 0);
+  dp[0] = 1;
+  rep(i, 1, n + 1)
+  {
+    if (i < l)
+      dp[i] = dp[i - 1];
+    else
+      dp[i] = (dp[i - 1] + dp[i - l]) % 1000000007;
+  }
+  cout << dp[n] << endl;
 }

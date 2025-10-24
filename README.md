@@ -1,6 +1,6 @@
 # AtCoder Training Log
 
-## Folder Structure
+## Abbreviation Explanation
 - abc : [AtCoder Beginner Contest](https://atcoder.jp/contests/archive?ratedType=1&category=0&keyword=)
 - abs : [AtCoder Beginners Selection](https://atcoder.jp/contests/abs)
 - adt : [AtCoder Daily Training](https://atcoder.jp/contests/adt_top/)

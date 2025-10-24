@@ -8,4 +8,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll a, b, c;
+  cin >> a >> b >> c;
+  ll powc = 1;
+  rep(i, 0, b) powc *= c;
+  if (a < powc)
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

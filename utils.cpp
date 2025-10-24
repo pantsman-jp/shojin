@@ -109,7 +109,7 @@ ll ncr(ll n, ll r)
   return ans;
 }
 
-// 巨大素数の余りの計算(modpow は pow(a,b)(mod m), div は a÷b(mod m) を計算する)
+// 巨大素数の余りの計算(modpow は 繰り返し二乗法 pow(a,b)(mod m), div は a÷b(mod m) を計算する)
 ll modpow(ll a, ll b, ll m)
 {
   ll ans = 1;

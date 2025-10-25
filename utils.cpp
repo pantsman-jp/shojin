@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
-#define rep(i, n) for (ll i = 0; i < (n); i++)
 using namespace std;
+#define rep(i, a, b) for (int i = (a); i < (b); i++)
 using ll = long long;
+const ll inf = 1LL << 60;
 
 // 素数判定
 bool is_prime(ll n)
@@ -53,10 +54,8 @@ vector<ll> factorization(ll n)
 {
   vector<ll> ans;
   for (ll i = 2; i * i <= n; i++)
-  {
     while (n % i == 0)
       ans.push_back(i), n /= i;
-  }
   if (n > 1)
     ans.push_back(n);
   return ans;
@@ -96,7 +95,7 @@ ll lcm_all(vector<ll> xs)
 ll npr(ll n, ll r)
 {
   ll ans = 1;
-  rep(i, r) { ans *= (n - i); }
+  rep(i, 0, r) ans *= (n - i);
   return ans;
 }
 
@@ -105,7 +104,7 @@ ll ncr(ll n, ll r)
   if (r > n - r)
     r = n - r;
   ll ans = 1;
-  rep(i, r) { ans = ans * (n - i) / (i + 1); }
+  rep(i, 0, r) ans = ans * (n - i) / (i + 1);
   return ans;
 }
 
@@ -117,8 +116,7 @@ ll modpow(ll a, ll b, ll m)
   {
     if (b & 1)
       ans = (ans * a) % m;
-    a = (a * a) % m;
-    b >>= 1;
+    a = (a * a) % m, b >>= 1;
   }
   return ans;
 }

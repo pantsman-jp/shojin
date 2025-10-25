@@ -1,8 +1,18 @@
 #include <bits/stdc++.h>
-#define rep(i, n) for (int i = 0; i < (n); i++)
 using namespace std;
-typedef long long ll;
+#define rep(i, a, b) for (int i = (a); i < (b); i++)
+using ll = long long;
+const ll inf = 1LL << 60;
 
 int main()
 {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  ll ans = 0, s = 0;
+  rep(i, 0, n) ans += a[i] * s, s += a[i];
+  cout << ans << endl;
 }

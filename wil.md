@@ -14,6 +14,7 @@
 - [bit 全探索](#bit-全探索)
 - [深さ優先探索](#深さ優先探索)
 - [幅優先探索](#幅優先探索)
+- [Union-Find](#union-find)
 
 ### 計算テクニック
 - [インクリメント](#インクリメント)
@@ -30,6 +31,8 @@ C++ での解答の雛形を示す。
 ```C++
 #include <bits/stdc++.h>
 using namespace std;
+#include <atcoder/all>
+using namespace atcoder;
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
 using ll = long long;
 const ll inf = 1LL << 60;
@@ -128,7 +131,7 @@ int var = i++; // var = 0, i = 1
 1. `i` の初期化 (`i = 0`)
 2. `i` の値を一時的に保存 (`tmp = 0`)
 3. `i` を `1` 増加 (`i = 1`)
-4. 保存した値（`temp = 0`）が返り，それが `var` に代入される（`var = 0`）
+4. 保存した値（`temp = 0`）が返り、それが `var` に代入される（`var = 0`）
 ---
 ---
 
@@ -233,8 +236,8 @@ cout << fixed << setprecision(10) << ans << endl;
 ---
 
 ## 累積和
-### Last Updated : 2025-10-17
-### 0始まり配列の場合
+### Last Updated : 2025-10-25
+### 0-index の場合
 配列 `a[0..n-1]` に対して
 ```C++
 sum[0] = 0
@@ -243,7 +246,7 @@ sum[i+1] = sum[i] + a[i]  // (0 ≤ i < n)
 - このとき sum は 0..n の n+1 要素
 - 区間 [l, r] の和を `sum[r+1] - sum[l]` で計算するため、`sum[r+1]` にアクセスできるように n+1 要素必要
 
-### 1始まり配列の場合
+### 1-index の場合
 配列 `a[1..n]` に対して
 ```C++
 sum[0] = 0
@@ -261,9 +264,10 @@ sum[i] = sum[i-1] + a[i]  // (1 ≤ i ≤ n)
 連結:どの頂点間も辺を辿って移動できること。
 ```C++
 #include <bits/stdc++.h>
-#define rep(i, n) for (ll i = 0; i < (n); i++)
 using namespace std;
+#define rep(i, a, b) for (int i = (a); i < (b); i++)
 using ll = long long;
+const ll inf = 1LL << 60;
 
 vector<vector<int>> g;
 vector<bool> visited;
@@ -278,11 +282,13 @@ void dfs(ll v)
 
 int main()
 {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
   ll n, m;
   cin >> n >> m;
   g.assign(n, {});
   visited.assign(n, false);
-  rep(_, m)
+  rep(i, 0, m)
   {
     ll a, b;
     cin >> a >> b;
@@ -300,7 +306,6 @@ int main()
   }
   cout << "The graph is connected." << endl;
 }
-
 ```
 ---
 ---
@@ -388,6 +393,56 @@ A[L] += X, A[R + 1] -= X;
 for (int i = 1; i < N; i++)
   A[i] += A[i - 1];
 ```
+---
+---
+
+## Union Find
+### Last Updated : 2025-10-25
+### 使用問題
+- ABC399 C
+### 概要
+Union-Find は、グループ分けを効率的に管理できるデータ構造である。
+
+ある要素 `a` と `b` について、これらをグループに併合したり（`merge(a, b)`）、
+`a` と `b` が同じグループに属するかを調べたり（`same(a, b)`）、
+要素 `a` の所属するグループのサイズを調べたり（`size(a)`）できる。
+
+AtCoder Library を用いて以下のように実行できる。
+```C++
+#include <bits/stdc++.h>
+using namespace std;
+#include <atcoder/all>
+using namespace atcoder;
+
+int main() {
+  int n = 5;
+  dsu uf(n);
+  uf.merge(0, 1);
+  uf.merge(1, 2);
+  if (uf.same(0, 2))
+    cout << "0 と 2 は同じグループです" << endl;
+  cout << "0 のグループサイズ: " << uf.size(0) << endl;
+}
+```
+
+Union-Find（DSU）は、要素をグループに分け、それらのグループ操作を効率的に行う必要がある場面で使える。
+具体的なケースは以下。
+
+1. **連結成分の管理**  
+  - グラフの頂点やネットワークの要素をグループとして管理する場合に有効
+    - 例えば、無向グラフの連結成分を求める際に各辺で `merge` を行い
+    - 頂点が同じ連結成分に属するかを `same` で判定できる
+2. **サイクル検出**  
+  - グラフに辺を順に追加する際、追加する辺の両端がすでに同じグループに属していればサイクルができることが分かる
+    - これは最小全域木（Kruskal法）を構成するときにも使われる
+3. **集合の統合**  
+  - 互いに関係するデータを一つのグループとして扱いたい場合に便利
+    - 例えば、友達関係や同一カテゴリの判定などの問題で `merge` を使って効率的に集合を統合できる
+4. **オフラインクエリ処理**  
+  - 順序付きの情報をもとに集合を統合しながらクエリを処理する場面で役立つ
+    - 「ある時点で A と B は同じグループか」といったクエリを効率的に処理できる
+
+「要素をグループ化し、グループ間の関係を高速に管理する必要がある場合」 に Union-Find は非常に有効。
 ---
 ---
 

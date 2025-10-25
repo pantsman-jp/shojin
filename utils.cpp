@@ -122,3 +122,12 @@ ll modpow(ll a, ll b, ll m)
 }
 
 ll div(ll a, ll b, ll m) { return (a * modpow(b, m - 2, m)) % m; }
+
+// 平方数判別
+bool is_square(ll n)
+{
+  for (int i = 1; i * i <= n; i++)
+    if (i * i == n)
+      return true;
+  return false;
+}

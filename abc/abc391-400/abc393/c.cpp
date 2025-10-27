@@ -11,11 +11,24 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  int n;
-  cin >> n;
-  vector<int> a(n);
-  rep(i, 0, n) cin >> a[i];
-  ll ans = 0;
-  rep(i, 0, n) ans += distance(lower_bound(all(a), a[i] * 2), a.end());
+  int n, m;
+  cin >> n >> m;
+  int ans = 0;
+  map<pair<int, int>, int> g;
+  rep(i, 0, m)
+  {
+    int u, v;
+    cin >> u >> v;
+    if (u == v)
+    {
+      ans++;
+      continue;
+    }
+    if (u > v)
+      swap(u, v);
+    g[{u, v}]++;
+  }
+  for (auto [_, k] : g)
+    ans += k - 1;
   cout << ans << endl;
 }

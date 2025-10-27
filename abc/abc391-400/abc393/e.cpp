@@ -11,11 +11,4 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  int n;
-  cin >> n;
-  vector<int> a(n);
-  rep(i, 0, n) cin >> a[i];
-  ll ans = 0;
-  rep(i, 0, n) ans += distance(lower_bound(all(a), a[i] * 2), a.end());
-  cout << ans << endl;
 }

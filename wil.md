@@ -12,8 +12,8 @@
 
 ### アルゴリズムと探索
 - [bit 全探索](#bit-全探索)
-- [深さ優先探索](#深さ優先探索)
-- [幅優先探索](#幅優先探索)
+- [深さ優先探索 | DFS](#深さ優先探索)
+- [幅優先探索 | BFS](#幅優先探索)
 - [Union-Find](#union-find)
 - [尺取り法](#尺取り法)
 
@@ -34,6 +34,7 @@ C++ での解答の雛形を示す。
 using namespace std;
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
 #define all(p) p.begin(), p.end()
+using P = pair<int, int>;
 using ll = long long;
 const ll inf = 1LL << 60;
 

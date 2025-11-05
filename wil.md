@@ -27,7 +27,7 @@
 
 
 ## 解答雛形
-### Last Updated : 2025-10-27
+### Last Updated : 2025-11-05
 C++ での解答の雛形を示す。
 ```C++
 #include <bits/stdc++.h>

@@ -1,9 +1,22 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
+#define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define all(p) p.begin(), p.end()
+using P = pair<int, int>;
+using ll = long long;
+const ll inf = 1LL << 60;
 
 int main()
 {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  sort(all(a));
+  int m = n - k;
+  ll ans = inf;
+  rep(i, 0, n - m + 1) ans = min(ans, a[i + m - 1] - a[i]);
+  cout << ans << endl;
 }

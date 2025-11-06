@@ -13,6 +13,7 @@
 ### アルゴリズムと探索
 - [bit 全探索](#bit-全探索)
 - [深さ優先探索 | DFS](#深さ優先探索)
+- [DFS 的全探索](#再帰関数による-dfs-的全探索)
 - [幅優先探索 | BFS](#幅優先探索)
 - [Union-Find](#union-find)
 - [尺取り法](#尺取り法)
@@ -462,12 +463,36 @@ Union-Find（DSU）は、要素をグループに分け、それらのグルー�
 
 ---
 
-<!-- ## 
-### Last Updated : 
+## 再帰関数による DFS 的全探索
+### Last Updated : 2025-11-06
 ### 使用問題
-- 
+- ABC367 C
 ## 概要
---- -->
+例えば、長さ `N` で、数列の各項が `[0, M)` となるような数列を列挙したいとする。
+この処理は以下のようなコードで実現できる。
+
+参考：[よくやる再帰関数の書き方 〜 n 重 for 文を機械的に 〜](https://drken1215.hatenablog.com/entry/2020/05/04/190252)
+
+```C++
+void dfs(vector<int> &A) {
+    if (A.size() == N) {
+        // 処理
+        return;
+    }
+
+    for (int v = 0; v < M; ++v) {
+        A.push_back(v);
+        dfs(A);
+        A.pop_back();
+    }
+}
+
+int main() {
+    vector<int> A;
+    dfs(A);
+}
+```
+---
 
 <!-- ## 
 ### Last Updated : 

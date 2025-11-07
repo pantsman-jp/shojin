@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int k, hh = 21, mm = 0;
+  cin >> k;
+  mm += k;
+  if (mm >= 60)
+    hh++, mm %= 60;
+  cout << hh << ':' << setw(2) << setfill('0') << mm << endl;
 }

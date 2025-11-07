@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, x;
+  cin >> n >> x;
+  string s;
+  rep(i, 0, 26) s += string(n, 'A' + i);
+  cout << s[x - 1] << endl;
 }

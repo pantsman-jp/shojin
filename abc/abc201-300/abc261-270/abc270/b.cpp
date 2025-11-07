@@ -10,4 +10,19 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int x, y, z;
+  cin >> x >> y >> z;
+  if (y < 0)
+    x = -x, y = -y, z = -z;
+  if (x < y)
+  {
+    cout << abs(x);
+    return 0;
+  }
+  if (z > y)
+  {
+    cout << -1 << endl;
+    return 0;
+  }
+  cout << abs(z) + abs(x - z) << endl;
 }

@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> p(n + 1);
+  rep(i, 2, n + 1) cin >> p[i];
+  int now = n, ans = 0;
+  while (now != 1)
+    ans++, now = p[now];
+  cout << ans << endl;
 }

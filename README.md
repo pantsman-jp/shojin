@@ -1,4 +1,4 @@
-# AtCoder Training Log
+# Shojin (AtCoder Training Log)
 
 ## Abbreviation Explanation
 - abc : [AtCoder Beginner Contest](https://atcoder.jp/contests/archive?ratedType=1&category=0&keyword=)

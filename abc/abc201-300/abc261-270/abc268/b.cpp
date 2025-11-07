@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s, t;
+  cin >> s >> t;
+  int n = s.size(), m = t.size();
+  if (n > m)
+  {
+    cout << "No" << endl;
+    return 0;
+  }
+  if ((string)t.substr(0, n) == s)
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

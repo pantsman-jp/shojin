@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int y;
+  cin >> y;
+  while (true)
+  {
+    if (y % 4 == 2)
+    {
+      cout << y << endl;
+      return 0;
+    }
+    y++;
+  }
 }

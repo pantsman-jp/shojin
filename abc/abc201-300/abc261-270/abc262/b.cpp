@@ -10,4 +10,20 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<vector<int>> g(n + 1);
+  rep(_, 0, m)
+  {
+    int u, v;
+    cin >> u >> v;
+    g[u].push_back(v), g[v].push_back(u);
+  }
+  int ans = 0;
+  rep(a, 1, n + 1) rep(b, a + 1, n + 1) rep(c, b + 1, n + 1)
+  {
+    if (find(all(g[a]), b) != g[a].end() and find(all(g[b]), c) != g[b].end() and find(all(g[c]), a) != g[c].end())
+      ans++;
+  }
+  cout << ans << endl;
 }

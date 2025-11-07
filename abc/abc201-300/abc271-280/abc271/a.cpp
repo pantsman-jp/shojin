@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  int a = n / 16, b = n % 16;
+  if (a < 10)
+    cout << a;
+  else
+    cout << (char)('A' + a - 10);
+  if (b < 10)
+    cout << b;
+  else
+    cout << (char)('A' + b - 10);
 }

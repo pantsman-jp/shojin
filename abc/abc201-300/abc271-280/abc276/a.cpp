@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  reverse(all(s));
+  rep(i, 0, s.size())
+  {
+    if (s[i] == 'a')
+    {
+      cout << s.size() - i << endl;
+      return 0;
+    }
+  }
+  cout << -1 << endl;
 }

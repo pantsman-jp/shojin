@@ -10,4 +10,13 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int h, w, ans = 0;
+  cin >> h >> w;
+  rep(_, 0, h)
+  {
+    string s;
+    cin >> s;
+    rep(i, 0, w) if (s[i] == '#') ans++;
+  }
+  cout << ans << endl;
 }

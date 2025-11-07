@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> h(n);
+  rep(i, 0, n) cin >> h[i];
+  cout << max_element(all(h)) - h.begin() + 1 << endl;
 }

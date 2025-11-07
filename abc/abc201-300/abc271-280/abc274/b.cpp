@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int h, w;
+  cin >> h >> w;
+  vector<string> c(h);
+  vector<int> x(w);
+  rep(i, 0, h) cin >> c[i];
+  rep(i, 0, h) rep(j, 0, w) if (c[i][j] == '#') x[j]++;
+  rep(j, 0, w) cout << x[j] << ' ';
+  cout << endl;
 }

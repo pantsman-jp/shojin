@@ -225,11 +225,11 @@ int main()
 ---
 
 ## 小数点数の標準出力
-### Last Updated : 2025-10-17
+### Last Updated : 2025-11-07
 ### 概要
 ```C++
 double ans;
-cout << fixed << setprecision(10) << ans << endl;
+printf("%.10f\n" ans);
 ```
 ---
 

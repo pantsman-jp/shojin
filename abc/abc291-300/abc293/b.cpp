@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  vector<bool> called(n, false);
+  rep(i, 0, n) if (!called[i]) called[a[i] - 1] = true;
+  vector<int> x;
+  rep(i, 0, n) if (!called[i]) x.push_back(i + 1);
+  cout << x.size() << endl;
+  rep(i, 0, x.size()) cout << x[i] << ' ';
+  cout << endl;
 }

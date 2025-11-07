@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  if (s.size() != 8)
+  {
+    cout << "No" << endl;
+    return 0;
+  }
+  int n = stoi(s.substr(1, 6));
+  if (isupper(s[0]) and isupper(s[7]) and 100000 <= n and n < 1000000)
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

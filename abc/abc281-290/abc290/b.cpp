@@ -10,4 +10,18 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  string s;
+  cin >> n >> k >> s;
+  rep(i, 0, n)
+  {
+    if (s[i] == 'o' and k > 0)
+    {
+      cout << 'o';
+      k--;
+    }
+    else
+      cout << 'x';
+  }
+  cout << endl;
 }

@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<string> s(n), ans;
+  rep(i, 0, n) cin >> s[i];
+  rep(i, 0, k) ans.push_back(s[i]);
+  sort(all(ans));
+  rep(i, 0, k) cout << ans[i] << endl;
 }

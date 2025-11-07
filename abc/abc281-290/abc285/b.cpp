@@ -10,4 +10,20 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  string s;
+  cin >> n >> s;
+  rep(i, 1, n) rep(j, 1, n + 1)
+  {
+    if (i + j > n)
+    {
+      cout << j - 1 << endl;
+      break;
+    }
+    if (s[j - 1] == s[j + i - 1])
+    {
+      cout << j - 1 << endl;
+      break;
+    }
+  }
 }

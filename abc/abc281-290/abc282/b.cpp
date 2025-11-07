@@ -10,4 +10,24 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<string> s(n);
+  rep(i, 0, n) cin >> s[i];
+  int ans = 0;
+  rep(i, 0, n) rep(j, i + 1, n)
+  {
+    bool ok = true;
+    rep(k, 0, m)
+    {
+      if (s[i][k] == 'x' and s[j][k] == 'x')
+      {
+        ok = false;
+        break;
+      }
+    }
+    if (ok)
+      ans++;
+  }
+  cout << ans << endl;
 }

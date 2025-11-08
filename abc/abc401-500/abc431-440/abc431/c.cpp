@@ -10,4 +10,22 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m, k;
+  cin >> n >> m >> k;
+  vector<int> h(n), b(m);
+  rep(i, 0, n) cin >> h[i];
+  rep(i, 0, m) cin >> b[i];
+  sort(all(h)), sort(all(b));
+  int i = 0, j = 0, ans = 0;
+  while (i < n and j < m)
+  {
+    if (h[i] <= b[j])
+      ans++, i++, j++;
+    else
+      j++;
+  }
+  if (k <= ans)
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

@@ -10,4 +10,8 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  string s;
+  cin >> n >> s;
+  cout << s[n - 1] << endl;
 }

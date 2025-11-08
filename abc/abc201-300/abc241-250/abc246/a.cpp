@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  map<int, int> cntx, cnty;
+  rep(i, 0, 3)
+  {
+    int x, y;
+    cin >> x >> y;
+    cntx[x]++, cnty[y]++;
+  }
+  for (auto [x, c] : cntx)
+    if (c == 1)
+      cout << x << ' ';
+  for (auto [y, c] : cnty)
+    if (c == 1)
+      cout << y << endl;
 }

@@ -10,4 +10,21 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  set<int> a;
+  rep(i, 0, n)
+  {
+    int x;
+    cin >> x;
+    a.insert(x);
+  }
+  rep(ans, 0, n + 2)
+  {
+    if (a.count(ans) == 0)
+    {
+      cout << ans << endl;
+      return 0;
+    }
+  }
 }

@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, a, b;
+  cin >> n >> a >> b;
+  vector<string> ans(a * n, string(b * n, '-'));
+  rep(i, 0, a * n) rep(j, 0, b * n)
+  {
+    if (((i / a) + (j / b)) % 2 == 0)
+      ans[i][j] = '.';
+    else
+      ans[i][j] = '#';
+  }
+  rep(i, 0, a * n) cout << ans[i] << endl;
 }

@@ -10,4 +10,26 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  map<int, int> cnt;
+  rep(_, 0, n)
+  {
+    int a;
+    cin >> a;
+    cnt[a]++;
+  }
+  rep(_, 0, m)
+  {
+    int b;
+    cin >> b;
+    if (cnt[b] < 1)
+    {
+      cout << "No" << endl;
+      return 0;
+    }
+    else
+      cnt[b]--;
+  }
+  cout << "Yes" << endl;
 }

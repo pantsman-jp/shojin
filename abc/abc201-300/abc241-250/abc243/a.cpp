@@ -10,4 +10,27 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int v, a, b, c;
+  cin >> v >> a >> b >> c;
+  while (true)
+  {
+    if (v < a)
+    {
+      cout << 'F' << endl;
+      return 0;
+    }
+    v -= a;
+    if (v < b)
+    {
+      cout << 'M' << endl;
+      return 0;
+    }
+    v -= b;
+    if (v < c)
+    {
+      cout << 'T' << endl;
+      return 0;
+    }
+    v -= c;
+  }
 }

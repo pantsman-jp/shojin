@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector<int> a(9);
+  rep(i, 0, 10) cin >> a[i];
+  int k = 0;
+  rep(_, 0, 3) k = a[k];
+  cout << k << endl;
 }

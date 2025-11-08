@@ -10,4 +10,19 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<int> a(n), b(k);
+  rep(i, 0, n) cin >> a[i];
+  rep(i, 0, k) cin >> b[i], b[i]--;
+  int max = *max_element(all(a));
+  rep(i, 0, n)
+  {
+    if (a[i] == max and find(all(b), i) != b.end())
+    {
+      cout << "Yes" << endl;
+      return 0;
+    }
+  }
+  cout << "No" << endl;
 }

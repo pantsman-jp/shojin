@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b, c;
+  cin >> a >> b >> c;
+  vector<int> xs = {a, b, c};
+  sort(all(xs));
+  if (b == xs[1])
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

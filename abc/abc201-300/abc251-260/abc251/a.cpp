@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s, ans = "";
+  cin >> s;
+  while (ans.size() != 6)
+    ans += s;
+  cout << ans << endl;
 }

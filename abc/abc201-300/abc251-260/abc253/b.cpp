@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int h, w;
+  cin >> h >> w;
+  vector<string> s(h);
+  rep(i, 0, h) cin >> s[i];
+  vector<int> token;
+  rep(i, 0, h) rep(j, 0, w) if (s[i][j] == 'o') token.push_back(i), token.push_back(j);
+  cout << abs(token[0] - token[2]) + abs(token[1] - token[3]) << endl;
 }

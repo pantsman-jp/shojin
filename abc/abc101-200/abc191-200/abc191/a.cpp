@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  double v, t, s, d;
+  cin >> v >> t >> s >> d;
+  if (t <= d / v and d / v <= s)
+    cout << "No" << endl;
+  else
+    cout << "Yes" << endl;
 }

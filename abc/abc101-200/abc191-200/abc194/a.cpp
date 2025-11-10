@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b;
+  cin >> a >> b;
+  if (15 <= a + b and 8 <= b)
+    cout << 1 << endl;
+  else if (10 <= a + b and 3 <= b)
+    cout << 2 << endl;
+  else if (3 <= a + b)
+    cout << 3 << endl;
+  else
+    cout << 4 << endl;
 }

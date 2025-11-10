@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string x;
+  cin >> x;
+  if (find(all(x), '.') == x.end())
+    cout << x << endl;
+  else
+    cout << x.substr(0, distance(x.begin(), find(all(x), '.'))) << endl;
 }

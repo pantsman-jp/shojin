@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<ll> a(n), b(n);
+  rep(i, 0, n) cin >> a[i] >> b[i];
+  ll ans = inf;
+  rep(i, 0, n) rep(j, 0, n)
+  {
+    if (i == j)
+      ans = min(ans, a[i] + b[i]);
+    else
+      ans = min(ans, max(a[i], b[j]));
+  }
+  cout << ans << endl;
 }

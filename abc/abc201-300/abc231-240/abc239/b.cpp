@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll x;
+  cin >> x;
+  if (x < 0 and x % 10 != 0)
+    cout << x / 10 - 1 << endl;
+  else
+    cout << x / 10 << endl;
 }

@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  set<int> a;
+  rep(_, 0, n)
+  {
+    int x;
+    cin >> x;
+    a.insert(x);
+  }
+  cout << a.size() << endl;
 }

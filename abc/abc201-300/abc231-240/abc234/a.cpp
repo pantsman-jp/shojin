@@ -6,8 +6,16 @@ using P = pair<int, int>;
 using ll = long long;
 const ll inf = 1LL << 60;
 
+int f(int x)
+{
+  return x * x + 2 * x + 3;
+}
+
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t;
+  cin >> t;
+  cout << f(f(f(t) + t) + f(f(t))) << endl;
 }

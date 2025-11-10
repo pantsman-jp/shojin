@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int l, r;
+  string s;
+  cin >> l >> r >> s;
+  l--, r--;
+  rep(i, 0, s.size())
+  {
+    if (l <= i and i <= r)
+      cout << s[r - i + l];
+    else
+      cout << s[i];
+  }
+  cout << endl;
 }

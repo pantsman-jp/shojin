@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n;
+  cin >> n;
+  if (-(1ll << 31) <= n and n < (1ll << 31))
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

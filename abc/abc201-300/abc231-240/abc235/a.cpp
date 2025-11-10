@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string abc;
+  cin >> abc;
+  int a, b, c;
+  a = (int)(abc[0] - '0');
+  b = (int)(abc[1] - '0');
+  c = (int)(abc[2] - '0');
+  cout << 111 * (a + b + c) << endl;
 }

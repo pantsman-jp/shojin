@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  if (2 <= n and n <= 4)
+    cout << "No" << endl;
+  else
+    cout << "Yes" << endl;
 }

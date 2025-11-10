@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  string t = s;
+  vector<string> v;
+  rep(i, 0, s.size()) v.push_back(t), t = t.substr(1) + t[0];
+  sort(all(v));
+  cout << v.front() << endl;
+  cout << v.back() << endl;
 }

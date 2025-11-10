@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s1, s2;
+  cin >> s1 >> s2;
+  if ((s1 == "#." and s2 == ".#") or (s1 == ".#" and s2 == "#."))
+    cout << "No" << endl;
+  else
+    cout << "Yes" << endl;
 }

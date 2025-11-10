@@ -10,4 +10,19 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  if (n < 42)
+  {
+    if (n < 10)
+      cout << "AGC00" << n << endl;
+    else
+      cout << "AGC0" << n << endl;
+    return 0;
+  }
+  n++;
+  if (n < 100)
+    cout << "AGC0" << n << endl;
+  else
+    cout << "AGC" << n << endl;
 }

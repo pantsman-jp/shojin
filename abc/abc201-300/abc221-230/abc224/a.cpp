@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  int n = s.size();
+  if (s[n - 2] == 'e' and s[n - 1] == 'r')
+    cout << "er" << endl;
+  else
+    cout << "ist" << endl;
 }

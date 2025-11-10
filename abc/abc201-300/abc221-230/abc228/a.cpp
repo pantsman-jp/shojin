@@ -10,4 +10,20 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int s, t, x;
+  cin >> s >> t >> x;
+  if (s < t)
+  {
+    if (s <= x and x < t)
+      cout << "Yes" << endl;
+    else
+      cout << "No" << endl;
+  }
+  else
+  {
+    if (x < t or s <= x)
+      cout << "Yes" << endl;
+    else
+      cout << "No" << endl;
+  }
 }

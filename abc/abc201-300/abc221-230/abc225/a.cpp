@@ -10,4 +10,13 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  set<string> ans;
+  sort(all(s));
+  do
+  {
+    ans.insert(s);
+  } while (next_permutation(all(s)));
+  cout << ans.size() << endl;
 }

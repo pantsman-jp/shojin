@@ -10,4 +10,8 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector<int> xs(3);
+  rep(i, 0, 3) cin >> xs[i];
+  sort(all(xs));
+  cout << xs[1] + xs[2] << endl;
 }

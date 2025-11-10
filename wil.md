@@ -161,9 +161,9 @@ C++ において床関数は以下で定義できる。
 ll floor(ll a, ll b)
 {
   if (a < 0 and a % b != 0)
-    cout << a / b - 1 << endl;
+    return a / b - 1;
   else
-    cout << a / b << endl;
+    return a / b;
 }
 ```
 

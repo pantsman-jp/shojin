@@ -10,4 +10,20 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, x;
+  cin >> n >> x;
+  rep(i, 1, n + 1)
+  {
+    int a;
+    cin >> a;
+    if (i % 2 == 0)
+      a--;
+    x -= a;
+    if (x < 0)
+    {
+      cout << "No" << endl;
+      return 0;
+    }
+  }
+  cout << "Yes" << endl;
 }

@@ -10,4 +10,18 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  string s;
+  cin >> n >> s;
+  rep(i, 0, n)
+  {
+    if (s[i] == '1')
+    {
+      if (i % 2 == 0)
+        cout << "Takahashi" << endl;
+      else
+        cout << "Aoki" << endl;
+      return 0;
+    }
+  }
 }

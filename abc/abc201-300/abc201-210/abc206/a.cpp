@@ -10,4 +10,13 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  int val = (108 * n) / 100;
+  if (val < 206)
+    cout << "Yay!" << endl;
+  else if (val == 206)
+    cout << "so-so" << endl;
+  else
+    cout << ":(" << endl;
 }

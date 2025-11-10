@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  rep(i, 1, inf)
+  {
+    n -= i;
+    if (n <= 0)
+    {
+      cout << i << endl;
+      return 0;
+    }
+  }
 }

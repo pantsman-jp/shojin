@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector<int> a(3);
+  rep(i, 0, 3) cin >> a[i];
+  sort(all(a));
+  if (a[2] - a[1] == a[1] - a[0])
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

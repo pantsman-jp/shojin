@@ -186,38 +186,31 @@ ll floor(ll a, ll b)
 ---
 
 ## 順位付け
-### Last Updated : 2025-10-06
+### Last Updated : 2025-11-10
 ### 使用問題
 - ABC323 B
+- ABC213 B
 ### 概要
-1. `count[i]` にプレイヤー `i` の勝利数を格納する
-2. プレイヤー番号のインデックス 0..n-1 を配列 `ans` に保持する
-3. sort 関数で ans を並べ替える
-4. 勝利数が異なる場合は勝利数の多い方を前にする
-5. 勝利数が同じ場合はプレイヤー番号の小さい方を前にする
-6. 並べ替えられた `ans` を出力する（番号は 1 始まりなので +1 する）
+1,…,N の番号のついた N 人の選手がゲームを行い、選手 i のスコアは Ai であるとする。
+ポイントが大きいほど上位であるとすれば、順位は以下で得られる。
+
+第 i + 1 位は配列の i 番目にあり、ペアを {p1, p2} とすれば、得点は p1 点で、それは人 p2 である。
 
 ```C++
-#include <bits/stdc++.h>
-#define rep(i, n) for (int i = 0; i < (n); i++)
-using namespace std;
-typedef long long ll;
-
 int main()
 {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
   int n;
   cin >> n;
-  vector<int> count(n);
-  // （略）ポイントの集計
-  vector<int> ans(n);
-  rep(i, n) ans[i] = i;
-  sort(ans.begin(), ans.end(), [&](int a, int b)
-       {
-         if (count[a] != count[b])
-           return count[a] > count[b];
-         return a < b; });
-  rep(i, n) { cout << ans[i] + 1 << ' '; }
-  cout << endl;
+  vector<pair<int, int>> a;
+  rep(i, 0, n)
+  {
+    int x;
+    cin >> x;
+    a.push_back(make_pair(x, i + 1));
+  }
+  sort(all(a), greater<pair<int, int>>());
 }
 ```
 ---

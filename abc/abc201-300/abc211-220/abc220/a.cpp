@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b, c;
+  cin >> a >> b >> c;
+  rep(ans, a, b + 1)
+  {
+    if (ans % c == 0)
+    {
+      cout << ans << endl;
+      return 0;
+    }
+  }
+  cout << -1 << endl;
 }

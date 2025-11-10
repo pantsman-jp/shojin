@@ -10,4 +10,20 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  map<string, int> cnt = {{"H", 0}, {"2B", 0}, {"3B", 0}, {"HR", 0}};
+  rep(_, 0, 4)
+  {
+    string s;
+    cin >> s;
+    cnt[s]++;
+  }
+  for (auto [_, c] : cnt)
+  {
+    if (c != 1)
+    {
+      cout << "No" << endl;
+      return 0;
+    }
+  }
+  cout << "Yes" << endl;
 }

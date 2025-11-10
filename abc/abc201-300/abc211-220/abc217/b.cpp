@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  map<string, int> contest = {{"ABC", 0}, {"ARC", 0}, {"AGC", 0}, {"AHC", 0}};
+  string s1, s2, s3;
+  cin >> s1 >> s2 >> s3;
+  contest[s1]++, contest[s2]++, contest[s3]++;
+  for (auto [ans, c] : contest)
+    if (c == 0)
+      cout << ans << endl;
 }

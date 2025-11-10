@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  rep(_, 0, 26)
+  {
+    int p;
+    cin >> p;
+    cout << (char)(p - 1 + 'a');
+  }
+  cout << endl;
 }

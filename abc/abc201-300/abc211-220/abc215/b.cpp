@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, pow2 = 1, k = 0;
+  cin >> n;
+  while (true)
+  {
+    if (pow2 > n)
+    {
+      cout << k - 1 << endl;
+      return 0;
+    }
+    pow2 *= 2, k++;
+  }
 }

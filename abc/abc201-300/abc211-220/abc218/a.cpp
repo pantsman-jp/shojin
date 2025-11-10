@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  string s;
+  cin >> n >> s;
+  n--;
+  if (s[n] == 'o')
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

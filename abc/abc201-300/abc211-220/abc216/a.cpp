@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  string x = s.substr(0, s.find('.'));
+  int y = s.back() - '0';
+  if (0 <= y and y < 3)
+    cout << x + '-' << endl;
+  else if (3 <= y and y < 7)
+    cout << x << endl;
+  else
+    cout << x + '+' << endl;
 }

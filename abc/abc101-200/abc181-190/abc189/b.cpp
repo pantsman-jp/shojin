@@ -10,4 +10,18 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, x, alc = 0;
+  cin >> n >> x;
+  rep(i, 1, n + 1)
+  {
+    int v, p;
+    cin >> v >> p;
+    alc += v * p;
+    if (alc > x * 100)
+    {
+      cout << i << endl;
+      return 0;
+    }
+  }
+  cout << -1 << endl;
 }

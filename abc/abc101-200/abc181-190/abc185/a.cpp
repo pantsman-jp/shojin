@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector<int> a(4);
+  rep(i, 0, 4) cin >> a[i];
+  cout << *min_element(all(a)) << endl;
 }

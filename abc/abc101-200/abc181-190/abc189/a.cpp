@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string c;
+  cin >> c;
+  if (c[0] == c[1] and c[1] == c[2])
+    cout << "Won" << endl;
+  else
+    cout << "Lost" << endl;
 }

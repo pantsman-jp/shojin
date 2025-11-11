@@ -6,8 +6,18 @@ using P = pair<int, int>;
 using ll = long long;
 const ll inf = 1LL << 60;
 
+int relu(int x)
+{
+  if (x >= 0)
+    return x;
+  return 0;
+}
+
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int x;
+  cin >> x;
+  cout << relu(x) << endl;
 }

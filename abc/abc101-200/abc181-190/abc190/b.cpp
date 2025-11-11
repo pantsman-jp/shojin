@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, s, d;
+  cin >> n >> s >> d;
+  rep(_, 0, n)
+  {
+    int x, y;
+    cin >> x >> y;
+    if (x < s and d < y)
+    {
+      cout << "Yes" << endl;
+      return 0;
+    }
+  }
+  cout << "No" << endl;
 }

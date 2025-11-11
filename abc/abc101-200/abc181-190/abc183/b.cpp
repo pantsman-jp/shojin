@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  double sx, sy, gx, gy;
+  cin >> sx >> sy >> gx >> gy;
+  cout << fixed << setprecision(10) << sx + (gx - sx) * sy / (sy + gy) << endl;
 }

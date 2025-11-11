@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, x;
+  string s;
+  cin >> n >> x >> s;
+  for (char c : s)
+  {
+    if (c == 'o')
+      x++;
+    else if (c == 'x' and 0 < x)
+      x--;
+  }
+  cout << x << endl;
 }

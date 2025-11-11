@@ -10,4 +10,8 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll a, b, c, d;
+  cin >> a >> b >> c >> d;
+  vector<ll> prod = {a * c, a * d, b * c, b * d};
+  cout << *max_element(all(prod)) << endl;
 }

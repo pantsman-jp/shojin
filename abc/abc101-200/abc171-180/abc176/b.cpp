@@ -10,4 +10,13 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  int sum = 0;
+  for (char c : s)
+    sum += (int)(c - '0') % 9;
+  if (sum % 9 == 0)
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

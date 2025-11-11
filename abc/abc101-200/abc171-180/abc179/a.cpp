@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  if (s.back() == 's')
+    cout << s << "es" << endl;
+  else
+    cout << s << 's' << endl;
 }

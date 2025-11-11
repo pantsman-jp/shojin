@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> d1(n), d2(n);
+  rep(i, 0, n) cin >> d1[i] >> d2[i];
+  rep(i, 0, n - 2)
+  {
+    if (d1[i] == d2[i] and d1[i + 1] == d2[i + 1] and d1[i + 2] == d2[i + 2])
+    {
+      cout << "Yes" << endl;
+      return 0;
+    }
+  }
+  cout << "No" << endl;
 }

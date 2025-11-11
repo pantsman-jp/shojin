@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  char alph;
+  cin >> alph;
+  if (isupper(alph))
+    cout << 'A' << endl;
+  else
+    cout << 'a' << endl;
 }

@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  bool p = s[0] == 'R', q = s[1] == 'R', r = s[2] == 'R';
+  if (p and q and r)
+    cout << 3 << endl;
+  else if ((p and q) or (q and r))
+    cout << 2 << endl;
+  else if (p or q or r)
+    cout << 1 << endl;
+  else
+    cout << 0 << endl;
 }

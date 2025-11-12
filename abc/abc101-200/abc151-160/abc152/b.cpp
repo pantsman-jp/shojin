@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  char a, b;
+  cin >> a >> b;
+  vector<string> s = {string((int)(a - '0'), b), string((int)(b - '0'), a)};
+  sort(all(s));
+  cout << s[0] << endl;
 }

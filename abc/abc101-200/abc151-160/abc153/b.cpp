@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int h, n;
+  cin >> h >> n;
+  rep(_, 0, n)
+  {
+    int a;
+    cin >> a;
+    h -= a;
+  }
+  if (h <= 0)
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, r;
+  cin >> n >> r;
+  if (10 <= n)
+    cout << r << endl;
+  else
+    cout << r + 100 * (10 - n) << endl;
 }

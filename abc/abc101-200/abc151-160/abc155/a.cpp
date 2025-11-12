@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  set<int> s;
+  rep(i, 0, 3)
+  {
+    int a;
+    cin >> a;
+    s.insert(a);
+  }
+  if (s.size() == 2)
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

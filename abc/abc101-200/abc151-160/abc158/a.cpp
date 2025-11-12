@@ -10,4 +10,18 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  bool a = false, b = false;
+  rep(i, 0, 3)
+  {
+    if (s[i] == 'A')
+      a = true;
+    else
+      b = true;
+  }
+  if (a and b)
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  rep(_, 0, n)
+  {
+    int a;
+    cin >> a;
+    if (a % 2 == 0 and a % 3 != 0 and a % 5 != 0)
+    {
+      cout << "DENIED" << endl;
+      return 0;
+    }
+  }
+  cout << "APPROVED" << endl;
 }

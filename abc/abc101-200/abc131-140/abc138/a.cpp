@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a;
+  string s;
+  cin >> a >> s;
+  if (3200 <= a)
+    cout << s << endl;
+  else
+    cout << "red" << endl;
 }

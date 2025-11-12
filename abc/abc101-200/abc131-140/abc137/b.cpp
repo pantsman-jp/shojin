@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int k, x;
+  cin >> k >> x;
+  bool isTop = true;
+  rep(ans, -1e6, 1e6 + 1) if (abs(ans - x) < k) cout << ans << ' ';
+  cout << endl;
 }

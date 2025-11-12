@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  rep(i, 0, 3)
+  {
+    if (s[i] == s[i + 1])
+    {
+      cout << "Bad" << endl;
+      return 0;
+    }
+  }
+  cout << "Good" << endl;
 }

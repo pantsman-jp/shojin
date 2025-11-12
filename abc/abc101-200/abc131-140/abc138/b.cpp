@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  double sum = 0;
+  rep(_, 0, n)
+  {
+    double a;
+    cin >> a;
+    sum += 1.0 / a;
+  }
+  cout << fixed << setprecision(10) << 1.0 / sum << endl;
 }

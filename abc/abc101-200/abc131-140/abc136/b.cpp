@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  int ans = 0;
+  rep(i, 1, n + 1) if (to_string(i).size() % 2 != 0) ans++;
+  cout << ans << endl;
 }

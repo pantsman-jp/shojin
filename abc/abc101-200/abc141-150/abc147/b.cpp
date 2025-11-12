@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  int ans = 0;
+  rep(i, 0, s.size() / 2) if (s[i] != s[s.size() - i - 1]) ans++;
+  cout << ans << endl;
 }

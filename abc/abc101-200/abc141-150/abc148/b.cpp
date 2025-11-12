@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  string s, t;
+  cin >> n >> s >> t;
+  rep(i, 0, n) cout << s[i] << t[i];
+  cout << endl;
 }

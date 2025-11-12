@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  if (s == "Sunny")
+    cout << "Cloudy" << endl;
+  else if (s == "Cloudy")
+    cout << "Rainy" << endl;
+  else
+    cout << "Sunny" << endl;
 }

@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  int odd = 0;
+  rep(a, 1, n + 1) if (a % 2 != 0) odd++;
+  cout << fixed << setprecision(10) << odd * 1.0 / n * 1.0 << endl;
 }

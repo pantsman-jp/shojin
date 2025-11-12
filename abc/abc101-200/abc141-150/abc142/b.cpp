@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k, ans = 0;
+  cin >> n >> k;
+  rep(_, 0, n)
+  {
+    int h;
+    cin >> h;
+    if (k <= h)
+      ans++;
+  }
+  cout << ans << endl;
 }

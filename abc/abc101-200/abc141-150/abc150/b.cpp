@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  string s;
+  cin >> n >> s;
+  int ans = 0;
+  rep(i, 0, n - 2) if (s.substr(i, 3) == "ABC") ans++;
+  cout << ans << endl;
 }

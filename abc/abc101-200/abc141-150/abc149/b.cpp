@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll a, b, k;
+  cin >> a >> b >> k;
+  ll eat = min(a, k);
+  a -= eat, k -= eat;
+  b -= min(b, k);
+  cout << a << ' ' << b << endl;
 }

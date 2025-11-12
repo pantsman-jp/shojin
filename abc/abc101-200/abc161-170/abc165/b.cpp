@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll x, saving = 100, ans = 0;
+  cin >> x;
+  while (true)
+  {
+    if (x <= saving)
+    {
+      cout << ans << endl;
+      return 0;
+    }
+    saving += saving / 100, ans++;
+  }
 }

@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m, ans = 0;
+  cin >> n >> m;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  double threshold = reduce(all(a)) / (4 * m * 1.0);
+  rep(i, 0, n) if (threshold <= a[i]) ans++;
+  if (ans < m)
+    cout << "No" << endl;
+  else
+    cout << "Yes" << endl;
 }

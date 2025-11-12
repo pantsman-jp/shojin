@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int x, y;
+  cin >> x >> y;
+  rep(c, 0, x + 1)
+  {
+    int t = x - c;
+    if (2 * c + 4 * t == y)
+    {
+      cout << "Yes" << endl;
+      return 0;
+    }
+  }
+  cout << "No" << endl;
 }

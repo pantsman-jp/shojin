@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  int k;
+  cin >> k >> s;
+  if (s.size() <= k)
+    cout << s << endl;
+  else
+    cout << s.substr(0, k) << "..." << endl;
 }

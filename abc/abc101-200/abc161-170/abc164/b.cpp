@@ -10,4 +10,21 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b, c, d;
+  cin >> a >> b >> c >> d;
+  while (true)
+  {
+    c -= b;
+    if (c <= 0)
+    {
+      cout << "Yes" << endl;
+      return 0;
+    }
+    a -= d;
+    if (a <= 0)
+    {
+      cout << "No" << endl;
+      return 0;
+    }
+  }
 }

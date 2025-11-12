@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int s, w;
+  cin >> s >> w;
+  if (s <= w)
+    cout << "unsafe" << endl;
+  else
+    cout << "safe" << endl;
 }

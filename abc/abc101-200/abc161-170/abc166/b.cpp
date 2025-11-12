@@ -10,4 +10,22 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<bool> tricked(n, true);
+  rep(_, 0, k)
+  {
+    int d;
+    cin >> d;
+    rep(_, 0, d)
+    {
+      int a;
+      cin >> a;
+      a--;
+      tricked[a] = false;
+    }
+  }
+  int ans = 0;
+  rep(i, 0, n) if (tricked[i]) ans++;
+  cout << ans << endl;
 }

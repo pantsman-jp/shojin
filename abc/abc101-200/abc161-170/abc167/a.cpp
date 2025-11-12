@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s, t;
+  cin >> s >> t;
+  rep(i, 0, s.size())
+  {
+    if (s[i] != t[i])
+    {
+      cout << "No" << endl;
+      return 0;
+    }
+  }
+  cout << "Yes" << endl;
 }

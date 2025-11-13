@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  int ans = 1000;
+  rep(i, 0, s.size() - 2) ans = min(ans, abs(stoi(s.substr(i, 3)) - 753));
+  cout << ans << endl;
 }

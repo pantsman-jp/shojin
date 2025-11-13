@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  double t, x;
+  cin >> t >> x;
+  cout << fixed << setprecision(10) << t / x << endl;
 }

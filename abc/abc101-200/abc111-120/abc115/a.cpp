@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int d;
+  cin >> d;
+  d = 25 - d;
+  cout << "Christmas ";
+  rep(_, 0, d) cout << "Eve ";
+  cout << endl;
 }

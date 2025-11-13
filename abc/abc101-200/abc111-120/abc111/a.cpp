@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string n;
+  cin >> n;
+  rep(i, 0, 3)
+  {
+    if (n[i] == '1')
+      cout << '9';
+    else if (n[i] == '9')
+      cout << '1';
+  }
+  cout << endl;
 }

@@ -233,10 +233,9 @@ int main()
 ---
 
 ## 小数点数の標準出力
-### Last Updated : 2025-11-08
+### Last Updated : 2025-11-13
 ### 概要
 ```C++
-double ans;
 cout << fixed << setprecision(10) << ans << endl;
 ```
 ---

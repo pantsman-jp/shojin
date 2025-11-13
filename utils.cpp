@@ -12,10 +12,8 @@ bool is_prime(ll n)
   if (n < 2)
     return false;
   for (ll i = 2; i * i <= n; i++)
-  {
     if (n % i == 0)
       return false;
-  }
   return true;
 }
 
@@ -47,7 +45,7 @@ vector<ll> divisors(ll n)
     if (i != n / i)
       ans.push_back(n / i);
   }
-  sort(ans.begin(), ans.end());
+  sort(all(ans));
   return ans;
 }
 

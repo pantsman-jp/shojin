@@ -10,4 +10,23 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  map<int, int> like;
+  rep(_, 0, n)
+  {
+    int k;
+    cin >> k;
+    rep(_, 0, k)
+    {
+      int a;
+      cin >> a;
+      like[a]++;
+    }
+  }
+  int ans = 0;
+  for (auto [_, c] : like)
+    if (c == n)
+      ans++;
+  cout << ans << endl;
 }

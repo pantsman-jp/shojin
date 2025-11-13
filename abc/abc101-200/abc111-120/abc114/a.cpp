@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int x;
+  cin >> x;
+  if (x == 7 or x == 5 or x == 3)
+    cout << "YES" << endl;
+  else
+    cout << "NO" << endl;
 }

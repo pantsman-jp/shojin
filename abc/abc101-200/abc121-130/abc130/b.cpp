@@ -10,4 +10,13 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, x;
+  cin >> n >> x;
+  vector<int> l(n + 1), d(n + 1);
+  rep(i, 1, n + 1) cin >> l[i];
+  d[1] = 0;
+  rep(i, 2, n + 2) d[i] = d[i - 1] + l[i - 1];
+  int ans = 0;
+  rep(i, 1, n + 2) if (d[i] <= x) ans++;
+  cout << ans << endl;
 }

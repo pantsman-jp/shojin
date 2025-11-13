@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b, t;
+  cin >> a >> b >> t;
+  int ans = 0;
+  rep(i, 1, t + 1) if (i % a == 0) ans += b;
+  cout << ans << endl;
 }

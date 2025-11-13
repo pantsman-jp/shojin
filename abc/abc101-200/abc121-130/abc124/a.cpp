@@ -10,4 +10,13 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b, ans = 0;
+  cin >> a >> b;
+  rep(_, 0, 2)
+  {
+    if (a > b)
+      swap(a, b);
+    ans += b, b--;
+  }
+  cout << ans << endl;
 }

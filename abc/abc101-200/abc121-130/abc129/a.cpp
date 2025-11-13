@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int p, q, r;
+  cin >> p >> q >> r;
+  cout << min(p + q, min(q + r, r + p)) << endl;
 }

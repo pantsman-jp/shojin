@@ -10,4 +10,19 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<string> w(n);
+  rep(i, 0, n) cin >> w[i];
+  map<string, int> cnt;
+  rep(i, 1, n)
+  {
+    cnt[w[i - 1]]++;
+    if (cnt[w[i]] == 1 or w[i][0] != w[i - 1].back())
+    {
+      cout << "No" << endl;
+      return 0;
+    }
+  }
+  cout << "Yes" << endl;
 }

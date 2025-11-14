@@ -10,4 +10,13 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int N, M, X, Y;
+  cin >> N >> M >> X >> Y;
+  vector<int> x(N), y(M);
+  rep(i, 0, N) cin >> x[i];
+  rep(i, 0, M) cin >> y[i];
+  if (max(X + 1, *max_element(all(x)) + 1) <= min(Y, *min_element(all(y))))
+    cout << "No War" << endl;
+  else
+    cout << "War" << endl;
 }

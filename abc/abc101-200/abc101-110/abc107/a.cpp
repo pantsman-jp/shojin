@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, i;
+  cin >> n >> i;
+  cout << n - i + 1 << endl;
 }

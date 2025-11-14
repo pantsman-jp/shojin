@@ -10,4 +10,8 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector<int> d(3);
+  rep(i, 0, 3) cin >> d[i];
+  sort(all(d));
+  cout << d[0] + (d[1] + d[2] * 10) << endl;
 }

@@ -143,3 +143,20 @@ string to_base_k(ll n, int k)
   reverse(all(ans));
   return ans;
 }
+
+// 各桁の和
+int f(string n)
+{
+  int ans = 0;
+  for (char c : n)
+    ans += c - '0';
+  return ans;
+}
+
+// 4 近傍
+const vector<int> di = {-1, 0, 1, 0};
+const vector<int> dj = {0, -1, 0, 1};
+
+// 8 近傍
+const vector<int> di = {-1, -1, 0, 1, 1, 1, 0, -1};
+const vector<int> dj = {0, -1, -1, -1, 0, 1, 1, 1};

@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int x, t;
+  cin >> x >> t;
+  if (x < t)
+    cout << 0 << endl;
+  else
+    cout << x - t << endl;
 }

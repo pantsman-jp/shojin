@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  char x, y;
+  cin >> x >> y;
+  if (x < y)
+    cout << '<' << endl;
+  else if (x == y)
+    cout << '=' << endl;
+  else
+    cout << '>' << endl;
 }

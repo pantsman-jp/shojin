@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  vector<bool> alph(26, false);
+  rep(i, 0, 26) if (find(all(s), (char)(i + 'a')) != s.end()) alph[i] = true;
+  rep(i, 0, 26)
+  {
+    if (!alph[i])
+    {
+      cout << (char)(i + 'a') << endl;
+      return 0;
+    }
+  }
+  cout << "None" << endl;
 }

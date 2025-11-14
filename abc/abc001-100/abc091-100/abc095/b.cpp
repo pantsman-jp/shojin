@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, x;
+  cin >> n >> x;
+  vector<int> m(n);
+  rep(i, 0, n) cin >> m[i];
+  x -= reduce(all(m));
+  cout << n + x / *min_element(all(m)) << endl;
 }

@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b;
+  cin >> a >> b;
+  if (abs(a - b) <= 1)
+    cout << "Yay!" << endl;
+  else
+    cout << ":(" << endl;
 }

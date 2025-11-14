@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b, k;
+  cin >> a >> b >> k;
+  set<int> ans;
+  rep(i, 0, k)
+  {
+    if (a + i <= b)
+      ans.insert(a + i);
+    if (b - i >= a)
+      ans.insert(b - i);
+  }
+  for (int x : ans)
+    cout << x << endl;
 }

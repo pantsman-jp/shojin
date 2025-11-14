@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int d, n;
+  cin >> d >> n;
+  if (n == 100)
+    n++;
+  cout << n;
+  rep(i, 0, d) cout << "00";
+  cout << endl;
 }

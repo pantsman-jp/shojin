@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int m;
+  cin >> m;
+  cout << 48 - m << endl;
 }

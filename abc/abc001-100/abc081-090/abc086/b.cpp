@@ -6,8 +6,23 @@ using P = pair<int, int>;
 using ll = long long;
 const ll inf = 1LL << 60;
 
+bool is_square(int n)
+{
+  for (int i = 1; i * i <= n; i++)
+    if (i * i == n)
+      return true;
+  return false;
+}
+
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string a, b;
+  cin >> a >> b;
+  int n = stoi(a + b);
+  if (is_square(n))
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

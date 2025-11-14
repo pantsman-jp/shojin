@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector<string> c(3);
+  rep(i, 0, 3) cin >> c[i];
+  cout << c[0][0] << c[1][1] << c[2][2] << endl;
 }

@@ -10,4 +10,8 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b, c, x, ans = 0;
+  cin >> a >> b >> c >> x;
+  rep(i, 0, a + 1) rep(j, 0, b + 1) rep(k, 0, c + 1) if (500 * i + 100 * j + 50 * k == x) ans++;
+  cout << ans << endl;
 }

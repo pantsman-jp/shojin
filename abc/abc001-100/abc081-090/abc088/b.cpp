@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, alice = 0, bob = 0;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  sort(all(a), greater<int>());
+  rep(i, 0, n)
+  {
+    if (i % 2 == 0)
+      alice += a[i];
+    else
+      bob += a[i];
+  }
+  cout << alice - bob << endl;
 }

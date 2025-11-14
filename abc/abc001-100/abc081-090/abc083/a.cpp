@@ -10,4 +10,13 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b, c, d;
+  cin >> a >> b >> c >> d;
+  int l = a + b, r = c + d;
+  if (l > r)
+    cout << "Left" << endl;
+  else if (l == r)
+    cout << "Balanced" << endl;
+  else
+    cout << "Right" << endl;
 }

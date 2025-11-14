@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int r, g, b;
+  cin >> r >> g >> b;
+  if ((100 * r + 10 * g + b) % 4 == 0)
+    cout << "YES" << endl;
+  else
+    cout << "NO" << endl;
 }

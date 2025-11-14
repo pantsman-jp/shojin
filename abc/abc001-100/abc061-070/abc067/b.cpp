@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<int> l(n);
+  rep(i, 0, n) cin >> l[i];
+  sort(all(l), greater<int>());
+  int ans = 0;
+  rep(i, 0, k) ans += l[i];
+  cout << ans << endl;
 }

@@ -10,4 +10,8 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector<int> bell(3);
+  rep(i, 0, 3) cin >> bell[i];
+  sort(all(bell));
+  cout << bell[0] + bell[1] << endl;
 }

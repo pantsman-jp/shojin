@@ -160,3 +160,11 @@ const vector<int> dj = {0, -1, 0, 1};
 // 8 近傍
 const vector<int> di = {-1, -1, 0, 1, 1, 1, 0, -1};
 const vector<int> dj = {0, -1, -1, -1, 0, 1, 1, 1};
+
+// 回文判定
+bool is_pali(string s)
+{
+  string t = s;
+  reverse(all(t));
+  return s == t;
+}

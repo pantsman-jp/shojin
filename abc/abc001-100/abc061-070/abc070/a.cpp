@@ -6,8 +6,21 @@ using P = pair<int, int>;
 using ll = long long;
 const ll inf = 1LL << 60;
 
+bool is_pali(string s)
+{
+  string t = s;
+  reverse(all(t));
+  return s == t;
+}
+
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string n;
+  cin >> n;
+  if (is_pali(n))
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

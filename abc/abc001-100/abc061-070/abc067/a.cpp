@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b;
+  cin >> a >> b;
+  if (a % 3 == 0 or b % 3 == 0 or (a + b) % 3 == 0)
+    cout << "Possible" << endl;
+  else
+    cout << "Impossible" << endl;
 }

@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int h, w;
+  cin >> h >> w;
+  vector<string> a(h);
+  rep(i, 0, h) cin >> a[i];
+  cout << string(w + 2, '#') << endl;
+  rep(i, 0, h) cout << '#' << a[i] << '#' << endl;
+  cout << string(w + 2, '#') << endl;
 }

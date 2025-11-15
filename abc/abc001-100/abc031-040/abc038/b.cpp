@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int h1, w1, h2, w2;
+  cin >> h1 >> w1 >> h2 >> w2;
+  if (h1 == h2 or h1 == w2 or w1 == h2 or w1 == w2)
+    cout << "YES" << endl;
+  else
+    cout << "NO" << endl;
 }

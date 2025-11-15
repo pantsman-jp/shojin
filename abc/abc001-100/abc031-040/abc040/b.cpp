@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, ans = inf;
+  cin >> n;
+  for (ll h = 1; h * h <= n; h++)
+  {
+    ll w = n / h;
+    ans = min(ans, abs(h - w) + n - h * w);
+  }
+  cout << ans << endl;
 }

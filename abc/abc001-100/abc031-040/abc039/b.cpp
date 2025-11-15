@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int x;
+  cin >> x;
+  for (int n = 1; n * n * n * n <= x; n++)
+    if (n * n * n * n == x)
+      cout << n << endl;
 }

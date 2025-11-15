@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int x;
+  cin >> x;
+  if (x < 1200)
+    cout << "ABC" << endl;
+  else
+    cout << "ARC" << endl;
 }

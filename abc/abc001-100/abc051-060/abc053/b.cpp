@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  int left = -1, right = -1;
+  rep(i, 0, s.size())
+  {
+    if (s[i] == 'A')
+      if (left == -1)
+        left = i;
+    if (s[i] == 'Z')
+      right = i;
+  }
+  cout << right - left + 1 << endl;
 }

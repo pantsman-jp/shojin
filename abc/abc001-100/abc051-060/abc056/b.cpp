@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int w, a, b;
+  cin >> w >> a >> b;
+  if (a > b)
+    swap(a, b);
+  if (b <= a + w)
+    cout << 0 << endl;
+  else
+    cout << b - (a + w) << endl;
 }

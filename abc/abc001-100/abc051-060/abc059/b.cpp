@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string a, b;
+  cin >> a >> b;
+  if (a.size() < b.size())
+    cout << "LESS" << endl;
+  else if (a.size() > b.size())
+    cout << "GREATER" << endl;
+  else if (a < b)
+    cout << "LESS" << endl;
+  else if (a > b)
+    cout << "GREATER" << endl;
+  else
+    cout << "EQUAL" << endl;
 }

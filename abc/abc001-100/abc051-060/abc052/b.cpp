@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  string s;
+  cin >> n >> s;
+  vector<int> x(n + 1);
+  rep(i, 0, n)
+  {
+    if (s[i] == 'I')
+      x[i + 1] = x[i] + 1;
+    else
+      x[i + 1] = x[i] - 1;
+  }
+  cout << *max_element(all(x)) << endl;
 }

@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string o, e;
+  cin >> o >> e;
+  int n = o.size(), m = e.size();
+  rep(i, 0, m) cout << o[i] << e[i];
+  if (n == m)
+    cout << endl;
+  else
+    cout << o.back() << endl;
 }

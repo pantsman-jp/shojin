@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int k, s;
+  cin >> k >> s;
+  int ans = 0;
+  rep(x, 0, k + 1) rep(y, 0, k + 1)
+  {
+    int z = s - x - y;
+    if (0 <= z and z <= k)
+      ans++;
+  }
+  cout << ans << endl;
 }

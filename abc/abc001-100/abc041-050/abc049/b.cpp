@@ -10,4 +10,13 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int h, w;
+  cin >> h >> w;
+  vector<string> c(h);
+  rep(i, 0, h) cin >> c[i];
+  rep(i, 0, 2 * h)
+  {
+    rep(j, 0, w) cout << c[i / 2][j];
+    cout << endl;
+  }
 }

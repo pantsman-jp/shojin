@@ -10,4 +10,18 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string w;
+  cin >> w;
+  map<char, int> cnt;
+  for (char c : w)
+    cnt[c]++;
+  for (auto [_, n] : cnt)
+  {
+    if (n % 2 != 0)
+    {
+      cout << "No" << endl;
+      return 0;
+    }
+  }
+  cout << "Yes" << endl;
 }

@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s, ans = "";
+  cin >> s;
+  for (char c : s)
+  {
+    if (c != 'B')
+      ans += c;
+    else
+      ans = ans.substr(0, ans.size() - 1);
+  }
+  cout << ans << endl;
 }

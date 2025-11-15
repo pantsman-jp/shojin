@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  set<int> color;
+  rep(_, 0, 3)
+  {
+    int x;
+    cin >> x;
+    color.insert(x);
+  }
+  cout << color.size() << endl;
 }

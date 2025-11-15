@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector<int> xs(3);
+  rep(i, 0, 3) cin >> xs[i];
+  sort(all(xs));
+  if (xs[0] == 5 and xs[1] == 5 and xs[2] == 7)
+    cout << "YES" << endl;
+  else
+    cout << "NO" << endl;
 }

@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  char c;
+  cin >> c;
+  if (c == 'a' or c == 'e' or c == 'i' or c == 'o' or c == 'u')
+    cout << "vowel" << endl;
+  else
+    cout << "consonant" << endl;
 }

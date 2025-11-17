@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  if (n % 3 == 0 or n % 10 == 3)
+    cout << "YES" << endl;
+  else
+    cout << "NO" << endl;
 }

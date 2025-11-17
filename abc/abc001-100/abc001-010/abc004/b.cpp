@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector<string> c(4);
+  rep(i, 0, 4) rep(j, 0, 4)
+  {
+    char ch;
+    cin >> ch;
+    c[3 - i] += ch;
+  }
+  rep(i, 0, 4)
+  {
+    reverse(all(c[i]));
+    rep(j, 0, 4) cout << c[i][j] << ' ';
+    cout << endl;
+  }
 }

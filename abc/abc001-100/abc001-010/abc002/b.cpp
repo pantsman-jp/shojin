@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string w;
+  cin >> w;
+  vector<char> vowel = {'a', 'i', 'u', 'e', 'o'};
+  for (char c : w)
+  {
+    if (find(all(vowel), c) != vowel.end())
+      continue;
+    else
+      cout << c;
+  }
+  cout << endl;
 }

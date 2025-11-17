@@ -10,4 +10,19 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  map<string, int> cnt;
+  rep(_, 0, n)
+  {
+    string s;
+    cin >> s;
+    cnt[s]++;
+  }
+  string ans;
+  int best = -1;
+  for (auto [s, c] : cnt)
+    if (best < c)
+      ans = s, best = c;
+  cout << ans << endl;
 }

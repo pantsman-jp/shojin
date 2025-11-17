@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int q;
+  cin >> q;
+  if (q == 1)
+    cout << "ABC" << endl;
+  else
+    cout << "chokudai" << endl;
 }

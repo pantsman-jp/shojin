@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b, c;
+  cin >> a >> b >> c;
+  vector<int> s = {a, b, c}, t = {a, b, c};
+  sort(all(s));
+  rep(i, 0, 3)
+  {
+    int ans = 0;
+    rep(j, 0, 3) if (t[i] <= s[j]) ans++;
+    cout << ans << endl;
+  }
 }

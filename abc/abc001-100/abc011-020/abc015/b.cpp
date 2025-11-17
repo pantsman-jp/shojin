@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  int sum = 0, cnt = 0;
+  rep(_, 0, n)
+  {
+    int a;
+    cin >> a;
+    if (a != 0)
+      sum += a, cnt++;
+  }
+  cout << (sum + cnt - 1) / cnt << endl;
 }

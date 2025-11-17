@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b, c;
+  cin >> a >> b >> c;
+  if (a + b == c and a - b == c)
+    cout << (char)'?' << endl;
+  else if (a + b == c)
+    cout << (char)'+' << endl;
+  else if (a - b == c)
+    cout << (char)'-' << endl;
+  else
+    cout << (char)'!' << endl;
 }

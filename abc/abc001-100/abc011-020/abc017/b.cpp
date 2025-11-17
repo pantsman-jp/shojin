@@ -10,4 +10,24 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string x;
+  cin >> x;
+  if (x == "")
+  {
+    cout << "YES" << endl;
+    return 0;
+  }
+  while (x.size() > 0)
+  {
+    if (x.size() >= 2 and x[0] == 'c' and x[1] == 'h')
+      x = x.substr(2);
+    else if (x[0] == 'o' or x[0] == 'k' or x[0] == 'u')
+      x = x.substr(1);
+    else
+    {
+      cout << "NO" << endl;
+      return 0;
+    }
+  }
+  cout << "YES" << endl;
 }

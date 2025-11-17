@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  int h = n / 3600, m = (n % 3600) / 60, s = n % 60;
+  string hh = to_string(h), mm = to_string(m), ss = to_string(s);
+  if (h < 10)
+    hh = '0' + hh;
+  if (m < 10)
+    mm = '0' + mm;
+  if (s < 10)
+    ss = '0' + ss;
+  cout << hh << ':' << mm << ':' << ss << endl;
 }

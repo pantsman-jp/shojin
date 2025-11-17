@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int ans = 0;
+  rep(_, 0, 3)
+  {
+    int s, e;
+    cin >> s >> e;
+    ans += s / 10 * e;
+  }
+  cout << ans << endl;
 }

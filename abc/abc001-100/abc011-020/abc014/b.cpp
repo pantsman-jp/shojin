@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, x;
+  cin >> n >> x;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  int ans = 0;
+  rep(i, 0, n) if (x & (1 << i)) ans += a[i];
+  cout << ans << endl;
 }

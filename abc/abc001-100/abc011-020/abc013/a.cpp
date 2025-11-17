@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  char x;
+  cin >> x;
+  cout << (int)(x - 'A') + 1 << endl;
 }

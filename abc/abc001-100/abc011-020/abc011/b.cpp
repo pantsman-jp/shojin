@@ -10,4 +10,18 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  if (isupper(s[0]))
+    cout << (char)s[0];
+  else
+    cout << (char)toupper(s[0]);
+  rep(i, 1, s.size())
+  {
+    if (islower(s[i]))
+      cout << (char)s[i];
+    else
+      cout << (char)tolower(s[i]);
+  }
+  cout << endl;
 }

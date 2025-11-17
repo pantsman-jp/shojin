@@ -168,3 +168,18 @@ bool is_pali(string s)
   reverse(all(t));
   return s == t;
 }
+
+// ラングレス圧縮
+string run_length(string s)
+{
+  int cnt = 1;
+  string ans;
+  for (int i = 0; i < s.size(); i++)
+  {
+    if (i + 1 < s.size() and s[i] == s[i + 1])
+      cnt++;
+    else
+      ans += string(1, s[i]) + to_string(cnt), cnt = 1;
+  }
+  return ans;
+}

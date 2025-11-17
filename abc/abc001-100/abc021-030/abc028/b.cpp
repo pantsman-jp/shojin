@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  map<char, int> cnt;
+  for (char c : s)
+    cnt[c]++;
+  for (char c : {'A', 'B', 'C', 'D', 'E', 'F'})
+    if (c == 'F')
+      cout << cnt[c];
+    else
+      cout << cnt[c] << ' ';
+  cout << endl;
 }

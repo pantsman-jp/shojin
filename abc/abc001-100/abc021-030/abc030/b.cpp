@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  cout << min(abs(n % 12 * 60 - 11 * m) % 720, 720 - abs(n % 12 * 60 - 11 * m) % 720) / 2.0 << endl;
 }

@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  double a, b, c, d;
+  cin >> a >> b >> c >> d;
+  if (b / a > d / c)
+    cout << "TAKAHASHI" << endl;
+  else if (b / a == d / c)
+    cout << "DRAW" << endl;
+  else
+    cout << "AOKI" << endl;
 }

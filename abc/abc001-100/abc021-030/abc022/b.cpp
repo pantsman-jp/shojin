@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  int ans = 0;
+  vector<bool> visited(n);
+  rep(j, 0, n) rep(i, j + 1, n) if (a[i] == a[j] and !visited[i]) ans++, visited[i] = true;
+  cout << ans << endl;
 }

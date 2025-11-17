@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a;
+  cin >> a;
+  int ans = -1;
+  rep(x, 1, a + 1) ans = max(ans, x * (a - x));
+  cout << ans << endl;
 }

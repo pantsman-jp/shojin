@@ -10,4 +10,13 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int ans = 0;
+  rep(_, 0, 12)
+  {
+    string s;
+    cin >> s;
+    if (find(all(s), 'r') != s.end())
+      ans++;
+  }
+  cout << ans << endl;
 }

@@ -169,17 +169,33 @@ bool is_pali(string s)
   return s == t;
 }
 
-// ラングレス圧縮
+// ラングレス圧縮（文字列）
 string run_length(string s)
 {
   int cnt = 1;
   string ans;
-  for (int i = 0; i < s.size(); i++)
+  rep(i, 0, s.size())
   {
     if (i + 1 < s.size() and s[i] == s[i + 1])
       cnt++;
     else
       ans += string(1, s[i]) + to_string(cnt), cnt = 1;
   }
+  return ans;
+}
+
+vector<pair<char, int>> run_length2(string s)
+{
+  vector<pair<char, int>> ans;
+  int cnt = 1;
+  char now = s[0];
+  rep(i, 1, s.size())
+  {
+    if (s[i] == now)
+      cnt++;
+    else
+      ans.push_back({now, cnt}), now = s[i], cnt = 1;
+  }
+  ans.push_back({now, cnt});
   return ans;
 }

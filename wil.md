@@ -60,10 +60,11 @@ C++ において、整数型は以下のようにまとめられる。
 
 
 ## bit 全探索
-### last updated : 2025-11-06
+### last updated : 2025-11-21
 ### 使用問題
-- 競プロ典型90題 - 002
+- 競プロ典型90題 002
 - ABC427 B
+- ABC321 C
 
 ### 概要
 部分集合のパターンを全列挙する際に用いる手法。
@@ -78,11 +79,7 @@ vector<int> array(n);
 rep(bit, 0, 1 << n)
 {
   int sum = 0;
-  rep(i, 0, n)
-  {
-    if (bit & (1 << i))
-      sum += array[i];
-  }
+  rep(i, 0, n) if (bit & (1 << i)) sum += array[i];
   cout << sum << endl;
 }
 ```
@@ -401,9 +398,10 @@ for (int i = 1; i < N; i++)
 ---
 
 ## Union Find
-### Last Updated : 2025-10-25
+### Last Updated : 2025-11-21
 ### 使用問題
 - ABC399 C
+- ABC325 C
 
 ### 概要
 Union-Find は、グループ分けを効率的に管理できるデータ構造である。

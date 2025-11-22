@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  cout << -1 << endl;
+  rep(i, 1, n)
+  {
+    int ans = -1;
+    rep(j, 0, i) if (a[i] < a[j]) ans = j + 1;
+    cout << ans << endl;
+  }
 }

@@ -3,7 +3,6 @@
 This repository contains my solutions to competitive programming problems solved on [AtCoder](https://atcoder.jp/).
 
 ## 🧑‍💻 My Profile
-
 | Item | Details |
 | :---: | :---: |
 | **AtCoder ID** | [pantsman](https://atcoder.jp/users/pantsman) |
@@ -32,6 +31,7 @@ This repository contains my solutions to competitive programming problems solved
 ├── adt
 │   ├── 2025-10-07
 │   │   ├── a.cpp
+│   │   ├── b.cpp
 │   │   └── ...
 │   ├── template
 │   └── makefile

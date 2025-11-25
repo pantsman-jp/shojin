@@ -1,4 +1,30 @@
-# Shojin (AtCoder Training Log)
+# Shojin
+
+This repository contains my solutions to competitive programming problems solved on [AtCoder](https://atcoder.jp/).
+
+## 🧑‍💻 My Profile
+
+| Item | Details |
+| :---: | :---: |
+| **AtCoder ID** | [pantsman](https://atcoder.jp/users/pantsman) |
+| **Rating** | [![pantsman](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman)](https://atcoder.jp/users/pantsman) |
+| **AtCoder Problems** | [My Personal Page](https://kenkoooo.com/atcoder/#/user/pantsman) |
+| **Languages Used** | C++ |
+
+## 📂 Repository Structure
+```
+.
+├── abc
+├── abs
+├── ac-library
+├── adt
+├── edpc
+├── math-algo
+├── typical90
+├── README.md
+├── utils.cpp
+└── wil.md
+```
 
 ## Abbreviation Explanation
 | folder name | URL |

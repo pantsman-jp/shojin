@@ -169,7 +169,7 @@ bool is_pali(string s)
   return s == t;
 }
 
-// ラングレス圧縮（文字列）
+// ラングレス圧縮
 string run_length(string s)
 {
   int cnt = 1;

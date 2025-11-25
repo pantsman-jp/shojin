@@ -15,18 +15,46 @@ This repository contains my solutions to competitive programming problems solved
 ```
 .
 ├── abc
+│   └── abc001-100
+│       ├── abc001-010
+│       │   ├── abc001
+│       │   │   ├── a.cpp
+│       │   │   ├── b.cpp
+│       │   │   └── ...
+│       │   └── ...
+│       ├── ...
+│       ├── template
+│       └── makefile
 ├── abs
+│   ├── abc049c.cpp
+│   └── ...
 ├── ac-library
 ├── adt
+│   ├── 2025-10-07
+│   │   ├── a.cpp
+│   │   └── ...
+│   ├── template
+│   └── makefile
 ├── edpc
+│   ├── a.cpp
+│   ├── b.cpp
+│   └── ...
 ├── math-algo
+│   ├── p001.cpp
+│   ├── p002.cpp
+│   └── ...
 ├── typical90
+│   ├── p001.cpp
+│   ├── p002.cpp
+│   └── ...
+├── .gitignore
+├── LICENSE
 ├── README.md
 ├── utils.cpp
 └── wil.md
 ```
 
-## Abbreviation Explanation
+## Explanation of Abbreviation
 | folder name | URL |
 | :---: | :---: |
 | abc | [AtCoder Beginner Contest](https://atcoder.jp/contests/archive?ratedType=1&category=0&keyword=) |

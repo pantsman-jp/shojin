@@ -183,15 +183,18 @@ ll floor(ll a, ll b)
 ---
 
 ## 順位付け
-### Last Updated : 2025-11-10
+### Last Updated : 2025-11-26
 ### 使用問題
 - ABC323 B
 - ABC213 B
+- ABC308 C
+
 ### 概要
 1,…,N の番号のついた N 人の選手がゲームを行い、選手 i のスコアは Ai であるとする。
 ポイントが大きいほど上位であるとすれば、順位は以下で得られる。
 
 第 i + 1 位は配列の i 番目にあり、ペアを {p1, p2} とすれば、得点は p1 点で、それは人 p2 である。
+同点の場合は、人の番号を昇順とする。
 
 ```C++
 int main()
@@ -207,7 +210,12 @@ int main()
     cin >> x;
     a.push_back(make_pair(x, i + 1));
   }
-  sort(all(a), greater<pair<int, int>>());
+  sort(all(ans), [](const pair<int, int> &p1, const pair<int, int> &p2)
+       {
+      if (p1.first != p2.first) {
+          return p1.first > p2.first;
+      }
+      return p1.second < p2.second; });
 }
 ```
 ---

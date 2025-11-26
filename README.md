@@ -71,3 +71,7 @@ This repository contains my solutions to competitive programming problems solved
 | edpc | [Educational DP Contest](https://atcoder.jp/contests/dp) |
 | math-algo | [アルゴリズムと数学　演習問題集](https://atcoder.jp/contests/math-and-algorithm?lang=ja) |
 | typicall90 | [競プロ典型 90 問](https://atcoder.jp/contests/typical90) |
+
+## Tools
+- [AtCoder Replay](https://atcoder-replay.kakira.dev)
+- [AtCoder Rating Estimator](https://atcoder-rating-estimator.pages.dev)

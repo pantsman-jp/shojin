@@ -2,7 +2,7 @@
 
 This repository contains my solutions to competitive programming problems solved on [AtCoder](https://atcoder.jp/).
 
-## 🧑‍💻 My Profile
+## My Profile
 | Item | Details |
 | :---: | :---: |
 | **AtCoder ID** | [pantsman](https://atcoder.jp/users/pantsman) |
@@ -10,7 +10,7 @@ This repository contains my solutions to competitive programming problems solved
 | **AtCoder Problems** | [My Personal Page](https://kenkoooo.com/atcoder/#/user/pantsman) |
 | **Languages Used** | C++ |
 
-## 📂 Repository Structure
+## Repository Structure
 ```
 .
 ├── abc

@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int w, b;
+  cin >> w >> b;
+  cout << 1000 * w / b + 1 << endl;
 }

@@ -199,3 +199,16 @@ vector<pair<char, int>> run_length2(string s)
   ans.push_back({now, cnt});
   return ans;
 }
+
+// 移動
+void move(int x, int y, char c)
+{
+  if (c == 'R')
+    x++;
+  else if (c == 'L')
+    x--;
+  else if (c == 'U')
+    y++;
+  else
+    y--;
+}

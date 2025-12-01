@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  map<int, int> cnt;
+  rep(_, 0, n)
+  {
+    int a;
+    cin >> a;
+    cnt[a]++;
+  }
+  int ans = 0;
+  for (auto [_, c] : cnt)
+    ans += c / 2;
+  cout << ans << endl;
 }

@@ -3,10 +3,6 @@
 This repository contains my solutions to competitive programming problems solved on [AtCoder](https://atcoder.jp/).
 
 ## My Profile
-<div class="atcoder-widget" data-user="pantsman">
-  <script async src="https://cdn.jsdelivr.net/npm/atcoder-widget@0.0.3/dist/widget.js"></script>
-</div>
-
 | Item | Details |
 | :---: | :---: |
 | **AtCoder ID** | [pantsman](https://atcoder.jp/users/pantsman) |

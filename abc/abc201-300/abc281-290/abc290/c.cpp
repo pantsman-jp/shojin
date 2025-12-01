@@ -10,4 +10,22 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  set<int> s;
+  rep(i, 0, n)
+  {
+    int a;
+    cin >> a;
+    s.insert(a);
+  }
+  rep(i, 0, k)
+  {
+    if (s.find(i) == s.end())
+    {
+      cout << i << endl;
+      return 0;
+    }
+  }
+  cout << k << endl;
 }

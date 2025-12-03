@@ -10,4 +10,18 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  string s;
+  cin >> n >> s;
+  bool in = false;
+  for (char c : s)
+  {
+    if (c == '"')
+      in = !in;
+    if (c == ',' and !in)
+      cout << '.';
+    else
+      cout << c;
+  }
+  cout << endl;
 }

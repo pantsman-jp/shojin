@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> p(n);
+  rep(i, 0, n) cin >> p[i];
+  prev_permutation(all(p));
+  rep(i, 0, n) cout << p[i] << ' ';
+  cout << endl;
 }

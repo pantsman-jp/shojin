@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> p(n), cnt(n);
+  rep(i, 0, n) cin >> p[i];
+  rep(i, 0, n) rep(k, 0, 3) cnt[((p[i] - i - 1 + n) % n + k) % n]++;
+  cout << *max_element(all(cnt)) << endl;
 }

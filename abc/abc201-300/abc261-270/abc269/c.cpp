@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n;
+  cin >> n;
+  vector<ll> ans;
+  for (ll m = n;; m = (m - 1) & n)
+  {
+    ans.push_back(m);
+    if (m == 0)
+      break;
+  }
+  sort(all(ans));
+  for (ll m : ans)
+    cout << m << endl;
 }

@@ -132,7 +132,7 @@ bool is_square(ll n)
   return false;
 }
 
-// 進数変換
+// 進数変換 (10進->k進)
 string to_base_k(ll n, int k)
 {
   if (n == 0)

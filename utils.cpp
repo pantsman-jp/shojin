@@ -170,21 +170,21 @@ bool is_pali(string s)
 }
 
 // ラングレス圧縮
-string run_length(string s)
-{
-  int cnt = 1;
-  string ans;
-  rep(i, 0, s.size())
-  {
-    if (i + 1 < s.size() and s[i] == s[i + 1])
-      cnt++;
-    else
-      ans += string(1, s[i]) + to_string(cnt), cnt = 1;
-  }
-  return ans;
-}
+// string rl(string s)
+// {
+//   int cnt = 1;
+//   string ans;
+//   rep(i, 0, s.size())
+//   {
+//     if (i + 1 < s.size() and s[i] == s[i + 1])
+//       cnt++;
+//     else
+//       ans += string(1, s[i]) + to_string(cnt), cnt = 1;
+//   }
+//   return ans;
+// }
 
-vector<pair<char, int>> run_length2(string s)
+vector<pair<char, int>> rle(string s)
 {
   vector<pair<char, int>> ans;
   int cnt = 1;

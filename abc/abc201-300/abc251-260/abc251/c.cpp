@@ -10,4 +10,20 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  int best = -1, ans;
+  set<string> original;
+  rep(i, 1, n + 1)
+  {
+    string s;
+    int t;
+    cin >> s >> t;
+    if (original.count(s) != 0)
+      continue;
+    original.insert(s);
+    if (best < t)
+      best = t, ans = i;
+  }
+  cout << ans << endl;
 }

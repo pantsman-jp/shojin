@@ -10,4 +10,27 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int q;
+  cin >> q;
+  multiset<int> s;
+  rep(_, 0, q)
+  {
+    int t;
+    cin >> t;
+    if (t == 1)
+    {
+      int x;
+      cin >> x;
+      s.insert(x);
+    }
+    else if (t == 2)
+    {
+      int x, c;
+      cin >> x >> c;
+      while (c-- and s.find(x) != s.end())
+        s.erase(s.find(x));
+    }
+    else
+      cout << *s.rbegin() - *s.begin() << endl;
+  }
 }

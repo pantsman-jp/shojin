@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  int l = 0, r = s.size() - 1;
+  while (l < r and s[l] == 'a' and s[r] == 'a')
+    ++l, --r;
+  while (l < r and s[r] == 'a')
+    --r;
+  while (l < r and s[l] == s[r])
+    ++l, --r;
+  if (l >= r)
+    cout << "Yes" << endl;
+  else
+    cout << "No" << endl;
 }

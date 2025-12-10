@@ -6,8 +6,30 @@ using P = pair<int, int>;
 using ll = long long;
 const ll inf = 1LL << 60;
 
+string to_base_k(ll n, int k)
+{
+  if (n == 0)
+    return "0";
+  string ans = "";
+  while (n > 0)
+    ans += '0' + (n % k), n /= k;
+  reverse(all(ans));
+  return ans;
+}
+
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll k;
+  cin >> k;
+  string ans = to_base_k(k, 2);
+  for (char c : ans)
+  {
+    if (c == '1')
+      cout << '2';
+    else
+      cout << '0';
+  }
+  cout << endl;
 }

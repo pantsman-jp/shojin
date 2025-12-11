@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  int k;
+  cin >> s >> k;
+  sort(all(s));
+  while (k > 1)
+    next_permutation(all(s)), k--;
+  cout << s << endl;
 }

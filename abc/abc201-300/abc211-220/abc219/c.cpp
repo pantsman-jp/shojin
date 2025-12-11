@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string x;
+  int n;
+  cin >> x >> n;
+  vector<string> s(n);
+  rep(i, 0, n) cin >> s[i];
+  map<char, char> f, g;
+  rep(i, 0, 26) f[x[i]] = 'a' + i, g['a' + i] = x[i];
+  rep(i, 0, n) for (char &c : s[i]) c = f[c];
+  sort(all(s));
+  rep(i, 0, n) for (char &c : s[i]) c = g[c];
+  rep(i, 0, n) cout << s[i] << endl;
 }

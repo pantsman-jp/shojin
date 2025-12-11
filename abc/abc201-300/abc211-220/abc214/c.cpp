@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> s(n), t(n);
+  rep(i, 0, n) cin >> s[i];
+  rep(i, 0, n) cin >> t[i];
+  vector<int> dp = t;
+  rep(i, 0, 2 * n) dp[(i + 1) % n] = min(dp[(i + 1) % n], dp[i % n] + s[i % n]);
+  rep(i, 0, n) cout << dp[i] << endl;
 }

@@ -1,6 +1,6 @@
 # Shojin
 
-![my rating](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman)
+![[](https://atcoder.jp/users/pantsman)](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman)
 
 This is my solution to the [AtCoder](https://atcoder.jp/) problem.
 

@@ -1,14 +1,8 @@
 # Shojin
 
-This is my solution to the [AtCoder](https://atcoder.jp/) problem.
+![my rating](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman)
 
-## My Profile
-| Item | Details |
-| :---: | :---: |
-| **AtCoder ID** | [pantsman](https://atcoder.jp/users/pantsman) |
-| **Rating** | [![pantsman](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman)](https://atcoder.jp/users/pantsman) |
-| **AtCoder Problems** | [My Personal Page](https://kenkoooo.com/atcoder/#/user/pantsman) |
-| **Languages Used** | C++ |
+This is my solution to the [AtCoder](https://atcoder.jp/) problem.
 
 ## Repository Structure
 ```
@@ -72,9 +66,13 @@ This is my solution to the [AtCoder](https://atcoder.jp/) problem.
 | math-algo | [アルゴリズムと数学　演習問題集](https://atcoder.jp/contests/math-and-algorithm?lang=ja) |
 | typicall90 | [競プロ典型 90 問](https://atcoder.jp/contests/typical90) |
 
-## Tools
+## Tools I use
+- [AtCoder Problems](https://kenkoooo.com/atcoder)
 - [AtCoder Replay](https://atcoder-replay.kakira.dev)
 - [AtCoder Rating Estimator](https://atcoder-rating-estimator.pages.dev)
 - [AtCoder Graphs β](https://atcoder-graphs.vercel.app/#contributorGraph)
 - [Graph Editor](https://kentakom1213.github.io/graph-editor/)
 - [Grid Editor](https://paruma.github.io/grid-editor/)
+
+---
+Copyright © 2025 pantsman

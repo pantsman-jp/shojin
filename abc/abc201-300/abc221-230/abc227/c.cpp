@@ -10,4 +10,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, ans = 0;
+  cin >> n;
+  for (ll a = 1; a * a * a <= n; a++)
+  {
+    for (ll b = a; a * b * b <= n; b++)
+    {
+      ll m = n / (a * b);
+      if (m >= b)
+        ans += m - b + 1;
+    }
+  }
+  cout << ans << endl;
 }

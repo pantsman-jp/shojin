@@ -1,6 +1,6 @@
 # Shojin
 
-This repository contains my solutions to competitive programming problems solved on [AtCoder](https://atcoder.jp/).
+This is my solution to the [AtCoder](https://atcoder.jp/) problem.
 
 ## My Profile
 | Item | Details |

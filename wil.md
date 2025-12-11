@@ -28,14 +28,15 @@
 ---
 
 ## 解答雛形
-### Last Updated : 2025-12-01
+### Last Updated : 2025-12-11
 ```C++
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
 #define all(p) p.begin(), p.end()
-using P = pair<int, int>;
+#define yn(p) cout << (p ? "Yes" : "No") << '\n';
 using ll = long long;
+using P = pair<int, int>;
 const ll inf = 1LL << 60;
 
 int main()

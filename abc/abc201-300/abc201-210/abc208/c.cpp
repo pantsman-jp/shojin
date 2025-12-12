@@ -10,4 +10,19 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, k;
+  cin >> n >> k;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  ll cnt1 = k / n;
+  k %= n;
+  vector<int> b = a;
+  sort(all(b));
+  rep(i, 0, n)
+  {
+    if (a[i] < b[k])
+      cout << cnt1 + 1 << endl;
+    else
+      cout << cnt1 << endl;
+  }
 }

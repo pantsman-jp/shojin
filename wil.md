@@ -265,85 +265,44 @@ sum[i] = sum[i - 1] + a[i]  // (1 ≤ i ≤ n)
 ---
 
 ## 深さ優先探索
-### Last Updated : 2025-12-01
+### Last Updated : 2025-12-12
 ### 概要
-グラフが連結かどうかを探索して判定するプログラムを以下に示す。
-
-連結:どの頂点間も辺を辿って移動できること。
 ```C++
 vector<vector<int>> g;
-vector<bool> visited;
+vector<bool> seen;
 
 void dfs(ll v)
 {
-  visited[v] = true;
+  seen[v] = true;
   for (ll i : g[v])
-    if (!visited[i])
+    if (!seen[i])
       dfs(i);
-}
-
-int main()
-{
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
-  ll n, m;
-  cin >> n >> m;
-  g.assign(n, {});
-  visited.assign(n, false);
-  rep(i, 0, m)
-  {
-    ll a, b;
-    cin >> a >> b;
-    a--, b--;
-    g[a].push_back(b), g[b].push_back(a);
-  }
-  dfs(0);
-  for (bool b : visited)
-  {
-    if (!b)
-    {
-      cout << "The graph is not connected." << endl;
-      return 0;
-    }
-  }
-  cout << "The graph is connected." << endl;
 }
 ```
 ---
 
 ## 幅優先探索
-### Last Updated : 2025-12-01
+### Last Updated : 2025-12-12
 ### 概要
-頂点1からの最短経路長を探索により調べる方法を以下に示す。
 ```C++
-int main()
+vector<vector<int>> g;
+vector<bool> seen;
+
+void bfs(int v)
 {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
-  int n, m;
-  cin >> n >> m;
-  vector<vector<ll>> g(n + 1);
-  rep(i, 0, m)
-  {
-    int a, b;
-    cin >> a >> b;
-    g[a].push_back(b), g[b].push_back(a);
-  }
-  vector<ll> dist(n + 1, -1);
-  queue<ll> q;
-  q.push(1), dist[1] = 0;
+  queue<int> q;
+  q.push(v);
+  seen[v] = true;
   while (!q.empty())
   {
-    ll pos = q.front();
+    int v = q.front();
     q.pop();
-    rep(i, 0, g[pos].size())
+    for (int u : g[v])
     {
-      ll nex = g[pos][i];
-      if (dist[nex] == -1)
-        dist[nex] = dist[pos] + 1, q.push(nex);
+      if (!seen[u])
+        seen[u] = true, q.push(u);
     }
   }
-  rep(i, 1, n + 1) cout << dist[i] << endl;
 }
 ```
 ---

@@ -10,4 +10,22 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<int> c(n);
+  rep(i, 0, n) cin >> c[i];
+  map<int, int> nums;
+  int ans = 0;
+  rep(i, 0, n)
+  {
+    nums[c[i]]++;
+    if (i >= k)
+    {
+      nums[c[i - k]]--;
+      if (nums[c[i - k]] == 0)
+        nums.erase(c[i - k]);
+    }
+    ans = max(ans, (int)nums.size());
+  }
+  cout << ans << endl;
 }

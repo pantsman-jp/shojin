@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  string s;
+  cin >> n >> s;
+  rep(_, 0, n - s.size()) cout << 'o';
+  cout << s << endl;
 }

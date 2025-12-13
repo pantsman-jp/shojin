@@ -10,4 +10,19 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll r, x, y;
+  cin >> r >> x >> y;
+  ll d2 = x * x + y * y, ans = 1;
+  while (true)
+  {
+    if (r * r * ans * ans >= d2)
+      break;
+    ans++;
+  }
+  if (ans == 1)
+  {
+    if (r * r != d2)
+      ans = 2;
+  }
+  cout << ans << endl;
 }

@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, x = 1;
+  cin >> n;
+  while (stoll(to_string(x) + to_string(x)) <= n)
+    x++;
+  cout << x - 1 << endl;
 }

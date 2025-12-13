@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n;
+  cin >> n;
+  set<ll> ab;
+  for (ll a = 2; a * a <= n; a++)
+  {
+    ll m = a * a;
+    while (m <= n)
+      ab.insert(m), m *= a;
+  }
+  cout << n - ab.size() << endl;
 }

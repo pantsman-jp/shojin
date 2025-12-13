@@ -10,4 +10,9 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, x = 1000, ans = 0;
+  cin >> n;
+  while (n >= x)
+    ans += n - x + 1, x *= 1000;
+  cout << ans << endl;
 }

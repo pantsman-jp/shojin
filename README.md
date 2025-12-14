@@ -1,7 +1,10 @@
 # Shojin
 This repository contains my solutions to problems on [AtCoder](https://atcoder.jp/).
 
-My Rating : [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman)](https://atcoder.jp/users/pantsman)
+My Rating :
+<a href="https://atcoder.jp/users/pantsman">
+  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman" style="vertical-align: middle;">
+</a>
 
 ## Repository Structure
 ```

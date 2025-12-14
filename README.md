@@ -1,8 +1,7 @@
 # Shojin
+This repository contains my solutions to problems on [AtCoder](https://atcoder.jp/).
 
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman)](https://atcoder.jp/users/pantsman)
-
-This is my solution to the [AtCoder](https://atcoder.jp/) problem.
+My Rating : [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman)](https://atcoder.jp/users/pantsman)
 
 ## Repository Structure
 ```
@@ -63,7 +62,7 @@ This is my solution to the [AtCoder](https://atcoder.jp/) problem.
 | ac-library | [AC (AtCoder) Library](https://github.com/atcoder/ac-library) |
 | adt | [AtCoder Daily Training](https://atcoder.jp/contests/adt_top/) |
 | edpc | [Educational DP Contest](https://atcoder.jp/contests/dp) |
-| math-algo | [アルゴリズムと数学　演習問題集](https://atcoder.jp/contests/math-and-algorithm?lang=ja) |
+| math-algo | [アルゴリズムと数学　演習問題集](https://atcoder.jp/contests/math-and-algorithm) |
 | typicall90 | [競プロ典型 90 問](https://atcoder.jp/contests/typical90) |
 
 ## Tools I use

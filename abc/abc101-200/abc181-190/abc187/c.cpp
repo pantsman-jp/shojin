@@ -10,4 +10,18 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<string> s(n);
+  rep(i, 0, n) cin >> s[i];
+  set<string> s2(all(s));
+  rep(i, 0, n)
+  {
+    if (s2.count('!' + s[i]) != 0)
+    {
+      cout << s[i] << endl;
+      return 0;
+    }
+  }
+  cout << "satisfiable" << endl;
 }

@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  int n2 = 1 << n;
+  vector<int> a(n2);
+  rep(i, 0, n2) cin >> a[i];
+  vector<int> head = vector(a.begin(), a.begin() + n2 / 2);
+  vector<int> tail = vector(a.begin() + n2 / 2, a.end());
+  cout << find(all(a), min(*max_element(all(head)), *max_element(all(tail)))) - a.begin() + 1 << endl;
 }

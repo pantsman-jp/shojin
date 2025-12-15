@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, k;
+  cin >> n >> k;
+  cout << min(n % k, k - n % k) << endl;
 }

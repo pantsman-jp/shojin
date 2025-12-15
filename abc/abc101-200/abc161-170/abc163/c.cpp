@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> cnt(n);
+  rep(i, 1, n)
+  {
+    int a;
+    cin >> a;
+    cnt[a - 1]++;
+  }
+  rep(i, 0, n) cout << cnt[i] << endl;
 }

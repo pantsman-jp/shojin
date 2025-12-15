@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b;
+  cin >> a >> b;
+  rep(x, 1, 1e4 + 1)
+  {
+    if ((8 * x) / 100 == a and (10 * x) / 100 == b)
+    {
+      cout << x << endl;
+      return 0;
+    }
+  }
+  cout << -1 << endl;
 }

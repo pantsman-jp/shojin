@@ -10,4 +10,20 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  set<int> items;
+  rep(_, 0, n)
+  {
+    int a;
+    cin >> a;
+    if (items.count(a) == 0)
+      items.insert(a);
+    else
+    {
+      cout << "NO" << endl;
+      return 0;
+    }
+  }
+  cout << "YES" << endl;
 }

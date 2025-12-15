@@ -10,4 +10,11 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int k, n;
+  cin >> k >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  int ans = a[n - 1] - a[0];
+  rep(i, 1, n) ans = min(ans, k - a[i] + a[i - 1]);
+  cout << ans << endl;
 }

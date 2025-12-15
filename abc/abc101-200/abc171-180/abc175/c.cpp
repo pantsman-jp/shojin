@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll x, k, d;
+  cin >> x >> k >> d;
+  x = abs(x);
+  ll q = x / d, r = x % d, ans;
+  if (q >= k)
+    ans = x - d * k;
+  else if ((k - q) % 2 == 0)
+    ans = r;
+  else
+    ans = d - r;
+  cout << ans << endl;
 }

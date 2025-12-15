@@ -212,3 +212,17 @@ void move(int x, int y, char c)
   else
     y--;
 }
+
+// 文字列中の文字の出現回数
+int count_char(string s, char c)
+{
+  int ans = 0;
+  rep(i, 0, s.size()) if (s[i] == c) ans++;
+  return ans;
+}
+
+// i 番目のアルファベット (0-index)
+char ith_alph(int i)
+{
+  return 'a' + i;
+}

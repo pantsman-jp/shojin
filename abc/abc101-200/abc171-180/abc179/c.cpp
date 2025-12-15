@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  int ans = 0;
+  for (int a = 1; a * a < n; a++)
+    ans++;
+  for (int a = 1; a * a < n; a++)
+    ans += max((n - 1) / a - a, 0) * 2;
+  cout << ans << endl;
 }

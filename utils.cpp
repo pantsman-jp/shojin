@@ -109,14 +109,14 @@ ll ncr(ll n, ll r)
 }
 
 // 巨大素数の余りの計算(modpow は 繰り返し二乗法 pow(a,b)(mod m), div は a÷b(mod m) を計算する)
-ll modpow(ll a, ll b, ll m)
+ll modpow(ll a, ll b, ll mod)
 {
   ll ans = 1;
   while (b > 0)
   {
-    if (b & 1)
-      ans = (ans * a) % m;
-    a = (a * a) % m, b >>= 1;
+    if ((b & 1) != 0)
+      ans = ans * a % mod;
+    a = a * a % mod, b >>= 1;
   }
   return ans;
 }

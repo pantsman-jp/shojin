@@ -10,4 +10,18 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  map<string, ll> cnt;
+  rep(_, 0, n)
+  {
+    string s;
+    cin >> s;
+    sort(all(s));
+    cnt[s]++;
+  }
+  ll ans = 0;
+  for (auto [_, m] : cnt)
+    ans += m * (m - 1) / 2;
+  cout << ans << endl;
 }

@@ -85,11 +85,6 @@ ll gcd_all(vector<ll> xs)
 }
 
 // 最小公倍数（配列）
-ll lcm(ll a, ll b)
-{
-  return a / gcd(a, b) * b;
-}
-
 ll lcm_all(vector<ll> xs)
 {
   ll ans = xs[0];

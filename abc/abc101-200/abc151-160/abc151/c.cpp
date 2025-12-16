@@ -10,4 +10,23 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  int ac = 0, pena = 0;
+  map<int, int> wa;
+  map<int, bool> isac;
+  rep(_, 0, m)
+  {
+    int p;
+    string s;
+    cin >> p >> s;
+    if (s == "AC")
+    {
+      if (!isac[p])
+        ac++, pena += wa[p], isac[p] = true;
+    }
+    else
+      wa[p]++;
+  }
+  cout << ac << ' ' << pena << endl;
 }

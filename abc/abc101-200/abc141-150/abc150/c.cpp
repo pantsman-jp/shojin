@@ -10,4 +10,20 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> p(n), q(n), ns(n);
+  rep(i, 0, n) cin >> p[i];
+  rep(i, 0, n) cin >> q[i];
+  rep(i, 0, n) ns[i] = i + 1;
+  int a, b, i = 1;
+  do
+  {
+    if (p == ns)
+      a = i;
+    if (q == ns)
+      b = i;
+    i++;
+  } while (next_permutation(all(ns)));
+  cout << abs(a - b) << endl;
 }

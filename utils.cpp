@@ -69,6 +69,13 @@ ll gcd(ll a, ll b)
   return gcd(b, a % b);
 }
 
+// 最小公倍数
+ll lcm(ll a, ll b)
+{
+  return a / gcd(a, b) * b;
+}
+
+// 最大公約数（配列）
 ll gcd_all(vector<ll> xs)
 {
   ll ans = xs[0];
@@ -77,7 +84,7 @@ ll gcd_all(vector<ll> xs)
   return ans;
 }
 
-// 最小公倍数
+// 最小公倍数（配列）
 ll lcm(ll a, ll b)
 {
   return a / gcd(a, b) * b;
@@ -145,12 +152,18 @@ string to_base_k(ll n, int k)
 }
 
 // 各桁の和
-int f(string n)
+int f(ll n)
 {
   int ans = 0;
-  for (char c : n)
+  for (char c : to_string(n))
     ans += c - '0';
   return ans;
+}
+
+// 桁数
+int digit(ll n)
+{
+  return to_string(n).size();
 }
 
 // 4 近傍

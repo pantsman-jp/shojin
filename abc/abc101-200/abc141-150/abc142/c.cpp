@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<P> attend;
+  rep(i, 0, n)
+  {
+    int a;
+    cin >> a;
+    attend.push_back({a, i + 1});
+  }
+  sort(all(attend));
+  for (auto [_, ans] : attend)
+    cout << ans << ' ';
+  cout << endl;
 }

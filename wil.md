@@ -7,7 +7,6 @@
 - [解答雛形](#解答雛形)
 - [整数型](#整数型)
 - [整数除算の仕様](#整数除算の仕様)
-- [小数点数の標準出力](#小数点数の標準出力)
 - [配列の定義方法の違い](#配列の定義方法の違い)
 
 ### アルゴリズムと探索
@@ -28,16 +27,24 @@
 ---
 
 ## 解答雛形
-### Last Updated : 2025-12-11
+### Last Updated : 2025-12-17
 ```C++
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
 #define all(p) p.begin(), p.end()
-#define yn(p) cout << (p ? "Yes" : "No") << '\n';
+#define rall(p) p.rbegin(), p.rend()
+#define chmax(a, b) a = max(a, b)
+#define chmin(a, b) a = min(a, b)
+#define yn(p) cout << (p ? "Yes\n" : "No\n");
+#define dout(f) cout << fixed << setprecision(10) << f << '\n';
 using ll = long long;
+using ld = long double;
 using P = pair<int, int>;
-const ll inf = 1LL << 60;
+const int inf = 1 << 30;
+const ll INF = 1LL << 60;
+// const ll mod =;
 
 int main()
 {
@@ -232,14 +239,6 @@ int main()
 | 安全性 | 大きいとスタックオーバーフローの可能性あり | ヒープ確保なので安全 |
 | 便利機能 | なし | `size()`, `begin()`, `end()`, `push_back()` など利用可能 |
 | 使用例 | 小さく固定の配列向き | 大きな配列や動的配列向き |
----
-
-## 小数点数の標準出力
-### Last Updated : 2025-11-13
-### 概要
-```C++
-cout << fixed << setprecision(10) << ans << endl;
-```
 ---
 
 ## 累積和

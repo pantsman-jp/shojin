@@ -1,13 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
 #define all(p) p.begin(), p.end()
-using P = pair<int, int>;
+#define rall(p) p.rbegin(), p.rend()
+#define chmax(a, b) a = max(a, b)
+#define chmin(a, b) a = min(a, b)
+#define yn(p) cout << (p ? "Yes\n" : "No\n");
+#define dout(f) cout << fixed << setprecision(10) << f << '\n';
 using ll = long long;
-const ll inf = 1LL << 60;
+using ld = long double;
+using P = pair<int, int>;
+const int inf = 1 << 30;
+const ll INF = 1LL << 60;
+// const ll mod =;
 
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  int left = 0, right = n + 1;
+  rep(_, 0, m)
+  {
+    int l, r;
+    cin >> l >> r;
+    chmax(left, l), chmin(right, r);
+  }
+  cout << max(0, right - left + 1) << endl;
 }

@@ -234,3 +234,10 @@ char ith_alph(int i)
 {
   return 'a' + i;
 }
+
+// x 桁になるまで自然数 n を 文字 c で埋める
+string pad(int x, int n, char c)
+{
+  string s = to_string(n);
+  return string(max(0, x - (int)s.size()), c) + s;
+}

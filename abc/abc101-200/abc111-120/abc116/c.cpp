@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> h(n + 1), diff(n);
+  rep(i, 0, n) cin >> h[i + 1];
+  rep(i, 0, n) diff[i] = h[i + 1] - h[i];
+  int ans = 0;
+  rep(i, 0, n) if (diff[i] > 0) ans += diff[i];
+  cout << ans << endl;
 }

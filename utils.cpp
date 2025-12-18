@@ -1,10 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
 #define all(p) p.begin(), p.end()
-using P = pair<int, int>;
+#define rall(p) p.rbegin(), p.rend()
+#define chmax(a, b) a = max(a, b)
+#define chmin(a, b) a = min(a, b)
+#define yn(p) cout << (p ? "Yes\n" : "No\n");
+#define dout(f) cout << fixed << setprecision(10) << f << '\n';
 using ll = long long;
-const ll inf = 1LL << 60;
+using ld = long double;
+using P = pair<int, int>;
+const int inf = 1 << 30;
+const ll INF = 1LL << 60;
 
 // 素数判定
 bool is_prime(ll n)
@@ -101,6 +109,7 @@ ll npr(ll n, ll r)
   return ans;
 }
 
+// 組み合わせ
 ll ncr(ll n, ll r)
 {
   if (r > n - r)
@@ -161,13 +170,32 @@ int digit(ll n)
   return to_string(n).size();
 }
 
-// 4 近傍
+// 4 近傍（時計回り）
 const vector<int> di = {-1, 0, 1, 0};
-const vector<int> dj = {0, -1, 0, 1};
+const vector<int> dj = {0, 1, 0, -1};
 
-// 8 近傍
+// 8 近傍（時計回り）
 const vector<int> di = {-1, -1, 0, 1, 1, 1, 0, -1};
-const vector<int> dj = {0, -1, -1, -1, 0, 1, 1, 1};
+const vector<int> dj = {0, 1, 1, 1, 0, -1, -1, -1};
+
+// グリッド内判定（0-index）
+bool is_in(int i, int j, int h, int w)
+{
+  return -1 < i and i < h and -1 < j and j < w;
+}
+
+// 移動
+void move(int x, int y, char c)
+{
+  if (c == 'R')
+    x++;
+  else if (c == 'L')
+    x--;
+  else if (c == 'U')
+    y++;
+  else
+    y--;
+}
 
 // 回文判定
 bool is_pali(string s)
@@ -206,19 +234,6 @@ vector<pair<char, int>> rle(string s)
   }
   ans.push_back({now, cnt});
   return ans;
-}
-
-// 移動
-void move(int x, int y, char c)
-{
-  if (c == 'R')
-    x++;
-  else if (c == 'L')
-    x--;
-  else if (c == 'U')
-    y++;
-  else
-    y--;
 }
 
 // 文字列中の文字の出現回数

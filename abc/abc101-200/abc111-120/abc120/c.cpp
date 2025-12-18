@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  int zero = 0, one = 0;
+  rep(i, 0, s.size())
+  {
+    if (s[i] == '0')
+      zero++;
+    else
+      one++;
+  }
+  cout << min(zero, one) * 2 << endl;
 }

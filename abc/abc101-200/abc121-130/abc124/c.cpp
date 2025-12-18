@@ -10,4 +10,25 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  int n = s.size(), head0 = 0, head1 = 0;
+  rep(i, 0, n)
+  {
+    if (i % 2 == 0)
+    {
+      if (s[i] == '0')
+        head1++;
+      else
+        head0++;
+    }
+    else
+    {
+      if (s[i] == '0')
+        head0++;
+      else
+        head1++;
+    }
+  }
+  cout << min(head0, head1) << endl;
 }

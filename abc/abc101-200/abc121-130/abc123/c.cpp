@@ -10,4 +10,8 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, a, b, c, d, e;
+  cin >> n >> a >> b >> c >> d >> e;
+  ll mini = min(a, min(b, min(c, min(d, e))));
+  cout << (n + mini - 1) / mini + 4 << endl;
 }

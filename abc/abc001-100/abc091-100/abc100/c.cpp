@@ -10,4 +10,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  ll ans = 0;
+  rep(_, 0, n)
+  {
+    int a;
+    cin >> a;
+    while (a % 2 == 0)
+      a /= 2, ans++;
+  }
+  cout << ans << endl;
 }

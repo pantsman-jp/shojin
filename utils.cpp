@@ -183,9 +183,9 @@ const vector<int> di = {-1, -1, 0, 1, 1, 1, 0, -1};
 const vector<int> dj = {0, 1, 1, 1, 0, -1, -1, -1};
 
 // グリッド内判定（0-index）
-bool is_in(int i, int j, int h, int w)
+bool out(int i, int j, int h, int w)
 {
-  return -1 < i and i < h and -1 < j and j < w;
+  return i < 0 or h - 1 < i or j < 0 or w - 1 < j;
 }
 
 // 移動

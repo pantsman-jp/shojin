@@ -10,4 +10,17 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<ll> cnt(k);
+  rep(i, 1, n + 1) cnt[i % k]++;
+  ll ans = 0;
+  rep(a, 0, k)
+  {
+    int b = (k - a) % k, c = (k - a) % k;
+    if ((b + c) % k != 0)
+      continue;
+    ans += cnt[a] * cnt[b] * cnt[c];
+  }
+  cout << ans << endl;
 }

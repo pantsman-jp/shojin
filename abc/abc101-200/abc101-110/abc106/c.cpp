@@ -10,4 +10,19 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  ll k;
+  cin >> s >> k;
+  ll cnt = 0;
+  for (char c : s)
+  {
+    if (c == '1')
+      cnt++;
+    else
+      break;
+  }
+  if (cnt >= k)
+    cout << 1 << endl;
+  else
+    cout << s[cnt] << endl;
 }

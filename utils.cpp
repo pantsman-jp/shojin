@@ -20,8 +20,10 @@ bool is_prime(ll n)
   if (n < 2)
     return false;
   for (ll i = 2; i * i <= n; i++)
+  {
     if (n % i == 0)
       return false;
+  }
   return true;
 }
 
@@ -31,9 +33,13 @@ vector<ll> primes(ll n)
   vector<bool> prime(n + 2, true);
   prime[0] = prime[1] = false;
   for (ll i = 2; i * i <= n; i++)
+  {
     if (prime[i])
+    {
       for (ll x = i * i; x <= n; x += i)
         prime[x] = false;
+    }
+  }
   vector<ll> ans;
   for (ll i = 2; i <= n; i++)
     if (prime[i])
@@ -87,8 +93,7 @@ ll lcm(ll a, ll b)
 ll gcd_all(vector<ll> xs)
 {
   ll ans = xs[0];
-  for (ll i = 1; i < xs.size(); i++)
-    ans = gcd(ans, xs[i]);
+  rep(i, 1, xs.size()) ans = gcd(ans, xs[i]);
   return ans;
 }
 
@@ -96,8 +101,7 @@ ll gcd_all(vector<ll> xs)
 ll lcm_all(vector<ll> xs)
 {
   ll ans = xs[0];
-  for (ll i = 1; i < xs.size(); i++)
-    ans = lcm(ans, xs[i]);
+  rep(i, 1, xs.size()) ans = lcm(ans, xs[i]);
   return ans;
 }
 

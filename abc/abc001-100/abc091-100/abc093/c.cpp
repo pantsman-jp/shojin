@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int a, b, c;
+  cin >> a >> b >> c;
+  int sum = a + b + c, m = max(a, max(b, c)), x = m;
+  while ((3 * x - sum) % 2 != 0)
+    x++;
+  cout << (3 * x - sum) / 2 << endl;
 }

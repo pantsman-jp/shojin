@@ -260,3 +260,15 @@ string pad(int x, int n, char c)
   string s = to_string(n);
   return string(max(0, x - (int)s.size()), c) + s;
 }
+
+// ユークリッド距離の二乗
+ll eudistance(ll x1, ll y1, ll x2, ll y2)
+{
+  return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+}
+
+// マンハッタン距離
+ll mandistance(ll x1, ll y1, ll x2, ll y2)
+{
+  return abs(x1 - x2) + abs(y1 - y2);
+}

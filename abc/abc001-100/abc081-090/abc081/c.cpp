@@ -10,4 +10,23 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  map<int, int> cnt;
+  rep(_, 0, n)
+  {
+    int a;
+    cin >> a;
+    cnt[a]++;
+  }
+  int ans = 0;
+  if (cnt.size() > k)
+  {
+    vector<int> v;
+    for (auto [_, c] : cnt)
+      v.push_back(c);
+    sort(all(v));
+    rep(i, 0, cnt.size() - k) ans += v[i];
+  }
+  cout << ans << endl;
 }

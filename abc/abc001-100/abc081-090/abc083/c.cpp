@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll x, y;
+  cin >> x >> y;
+  ll ans = 0, n = x;
+  while (n <= y)
+    ans++, n *= 2;
+  cout << ans << endl;
 }

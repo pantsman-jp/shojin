@@ -101,7 +101,7 @@ ll gcd_all(vector<ll> xs)
 ll lcm_all(vector<ll> xs)
 {
   ll ans = xs[0];
-  rep(i, 1, xs.size()) ans = lcm(ans, xs[i]);
+  rep(i, 1, xs.size()) ans = ans / gcd(ans, xs[i]) * xs[i];
   return ans;
 }
 

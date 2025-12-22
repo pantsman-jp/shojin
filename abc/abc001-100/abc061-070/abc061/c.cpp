@@ -10,4 +10,19 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  ll k;
+  cin >> n >> k;
+  vector<pair<ll, ll>> ab(n);
+  rep(i, 0, n) cin >> ab[i].first >> ab[i].second;
+  sort(all(ab));
+  for (auto [a, b] : ab)
+  {
+    k -= b;
+    if (k <= 0)
+    {
+      cout << a << endl;
+      return 0;
+    }
+  }
 }

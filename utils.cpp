@@ -105,6 +105,15 @@ ll lcm_all(vector<ll> xs)
   return ans;
 }
 
+// 階乗
+ll fact(ll n, ll mod)
+{
+  ll ans = 1;
+  for (ll m = 1; m <= n; m++)
+    ans = ans * m % mod;
+  return ans;
+}
+
 // 順列
 ll npr(ll n, ll r)
 {

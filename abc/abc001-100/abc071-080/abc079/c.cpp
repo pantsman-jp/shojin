@@ -10,4 +10,25 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string abcd;
+  cin >> abcd;
+  int a = abcd[0] - '0', b = abcd[1] - '0', c = abcd[2] - '0', d = abcd[3] - '0';
+  string op = "";
+  if (a + b + c + d == 7)
+    op = "+++";
+  else if (a + b + c - d == 7)
+    op = "++-";
+  else if (a + b - c + d == 7)
+    op = "+-+";
+  else if (a + b - c - d == 7)
+    op = "+--";
+  else if (a - b + c + d == 7)
+    op = "-++";
+  else if (a - b + c - d == 7)
+    op = "-+-";
+  else if (a - b - c + d == 7)
+    op = "--+";
+  else if (a - b - c - d == 7)
+    op = "---";
+  cout << a << op[0] << b << op[1] << c << op[2] << d << "=7" << endl;
 }

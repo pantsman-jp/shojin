@@ -10,4 +10,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, m;
+  cin >> n >> m;
+  cout << (1900 * m + 100 * (n - m)) * (1 << m) << endl;
 }

@@ -10,4 +10,27 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s, t;
+  cin >> s >> t;
+  string ans = "UNRESTORABLE";
+  rep(i, 0, s.size() - t.size() + 1)
+  {
+    bool ok = true;
+    string tmp = s;
+    rep(j, 0, t.size())
+    {
+      if (s[i + j] != '?' and s[i + j] != t[j])
+        ok = false;
+      tmp[i + j] = t[j];
+    }
+    if (ok)
+    {
+      rep(j, 0, tmp.size()) if (tmp[j] == '?') tmp[j] = 'a';
+      if (ans == "UNRESTORABLE")
+        ans = tmp;
+      else
+        ans = min(ans, tmp);
+    }
+  }
+  cout << ans << endl;
 }

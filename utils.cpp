@@ -42,8 +42,10 @@ vector<ll> primes(ll n)
   }
   vector<ll> ans;
   for (ll i = 2; i <= n; i++)
+  {
     if (prime[i])
       ans.push_back(i);
+  }
   return ans;
 }
 

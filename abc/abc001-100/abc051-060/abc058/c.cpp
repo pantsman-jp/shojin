@@ -10,4 +10,22 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector cnt(n, vector<int>(26));
+  rep(i, 0, n)
+  {
+    string s;
+    cin >> s;
+    for (char c : s)
+      cnt[i][c - 'a']++;
+  }
+  string ans = "";
+  rep(i, 0, 26)
+  {
+    int m = cnt[0][i];
+    rep(j, 0, n) m = min(m, cnt[j][i]);
+    ans += string(m, 'a' + i);
+  }
+  cout << ans << endl;
 }

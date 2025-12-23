@@ -10,4 +10,14 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int x;
+  cin >> x;
+  rep(i, 1, x + 1)
+  {
+    if (i * (i + 1) / 2 >= x)
+    {
+      cout << i << endl;
+      return 0;
+    }
+  }
 }

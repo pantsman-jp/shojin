@@ -10,4 +10,23 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, q;
+  cin >> n >> q;
+  vector<int> a(n + 1);
+  rep(_, 0, q)
+  {
+    int l, r;
+    cin >> l >> r;
+    l--, r--;
+    a[l]++, a[r + 1]--;
+  }
+  rep(i, 0, n - 1) a[i + 1] += a[i];
+  rep(i, 0, n)
+  {
+    if (a[i] % 2 == 0)
+      cout << 0;
+    else
+      cout << 1;
+  }
+  cout << endl;
 }

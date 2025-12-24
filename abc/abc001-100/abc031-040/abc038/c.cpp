@@ -10,4 +10,18 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  ll ans = 0, len = 1;
+  rep(i, 0, n - 1)
+  {
+    if (a[i] < a[i + 1])
+      len++;
+    else
+      ans += len * (len + 1) / 2, len = 1;
+  }
+  ans += len * (len + 1) / 2;
+  cout << ans << endl;
 }

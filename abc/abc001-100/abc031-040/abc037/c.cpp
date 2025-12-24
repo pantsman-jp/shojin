@@ -10,4 +10,13 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  vector<ll> sum(n + 1);
+  rep(i, 0, n) sum[i + 1] = sum[i] + a[i];
+  ll ans = 0;
+  rep(i, 0, n - k + 1) ans += sum[i + k] - sum[i];
+  cout << ans << endl;
 }

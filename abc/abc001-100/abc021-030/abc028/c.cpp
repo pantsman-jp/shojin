@@ -10,4 +10,10 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector<int> num(5);
+  rep(i, 0, 5) cin >> num[i];
+  vector<int> sum;
+  rep(i, 0, 5) rep(j, i + 1, 5) rep(k, j + 1, 5) sum.push_back(num[i] + num[j] + num[k]);
+  sort(all(sum));
+  cout << sum[sum.size() - 3] << endl;
 }

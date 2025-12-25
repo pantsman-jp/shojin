@@ -10,4 +10,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  int m = 2025 - n;
+  rep(i, 1, 10)
+  {
+    if (m % i == 0 and m / i < 10)
+      cout << i << " x " << m / i << endl;
+  }
 }

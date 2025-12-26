@@ -13,7 +13,6 @@ using ld = long double;
 using P = pair<int, int>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
-// const ll mod =;
 
 int main()
 {

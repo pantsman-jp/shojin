@@ -13,10 +13,18 @@ using ld = long double;
 using P = pair<int, int>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
-// const ll mod =;
+const ll mod = 1e9 + 7;
 
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  string s;
+  cin >> n >> s;
+  vector<ll> dp(8);
+  dp[0] = 1;
+  for (char c : s)
+    rrep(j, 7, 0) if (c == "atcoder"[j]) dp[j + 1] = (dp[j + 1] + dp[j]) % mod;
+  cout << dp[7] << endl;
 }

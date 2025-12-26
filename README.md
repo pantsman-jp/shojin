@@ -44,6 +44,7 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 │   ├── p001.cpp
 │   ├── p002.cpp
 │   └── ...
+├── other
 ├── typical90
 │   ├── p001.cpp
 │   ├── p002.cpp
@@ -64,6 +65,7 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 | adt | [AtCoder Daily Training](https://atcoder.jp/contests/adt_top/) |
 | edpc | [Educational DP Contest](https://atcoder.jp/contests/dp) |
 | math-algo | [アルゴリズムと数学　演習問題集](https://atcoder.jp/contests/math-and-algorithm) |
+| other | [レッドコーダーが教える、競プロ・AtCoder上達のガイドライン【中級編：目指せ水色コーダー！】](https://qiita.com/e869120/items/eb50fdaece12be418faa) |
 | typical90 | [競プロ典型 90 問](https://atcoder.jp/contests/typical90) |
 
 ## Tools I use

@@ -1,67 +1,46 @@
 #include <bits/stdc++.h>
 using namespace std;
-#include <atcoder/all>
-using namespace atcoder;
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
+#define all(p) p.begin(), p.end()
+#define rall(p) p.rbegin(), p.rend()
+#define chmax(a, b) a = max(a, b)
+#define chmin(a, b) a = min(a, b)
+#define yn(p) cout << (p ? "Yes\n" : "No\n");
+#define dout(f) cout << fixed << setprecision(10) << f << '\n';
 using ll = long long;
-const ll inf = 1LL << 60;
-
-void print(__int128 n)
-{
-  if (n == 0)
-  {
-    cout << 0;
-    return;
-  }
-  if (n < 0)
-  {
-    cout << '-';
-    n = -n;
-  }
-  string s;
-  while (n > 0)
-  {
-    s += '0' + n % 10;
-    n /= 10;
-  }
-  reverse(s.begin(), s.end());
-  cout << s;
-}
+using ld = long double;
+using P = pair<int, int>;
+const int inf = 1 << 30;
+const ll INF = 1LL << 60;
+// const ll mod =;
 
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  ll n, m;
-  int c;
+  int n, c;
+  ll m;
   cin >> n >> m >> c;
   vector<ll> a(n);
-  rep(i, 0, n) cin >> a[i];
-  sort(a.begin(), a.end());
-  vector<ll> u, cnt;
-  rep(i, 0, n)
+  map<ll, int> cnt;
+  rep(i, 0, n) cin >> a[i], cnt[a[i]]++;
+  vector<pair<ll, int>> d;
+  for (auto p : cnt)
+    d.emplace_back(p);
+  for (auto [p, q] : cnt)
+    d.emplace_back(p + m, q);
+  ll px = d[cnt.size() - 1].first - m;
+  int r = 0, now = 0;
+  ll ans = 0;
+  rep(l, 0, cnt.size())
   {
-    ll j = i;
-    while (j < n and a[j] == a[i])
-      j++;
-    u.push_back(a[i]), cnt.push_back(j - i);
-    i = j - 1;
+    while (now < c)
+      now += d[r].second, r++;
+    auto [x, num] = d[l];
+    ans += (x - px) * now;
+    px = x;
+    now -= num;
   }
-  int k = u.size();
-  vector<ll> sum(2 * k + 1, 0);
-  rep(i, 0, 2 * k) sum[i + 1] = sum[i] + cnt[i % k];
-  __int128 ans = 0;
-  if (k == 1)
-    ans = m;
-  else
-  {
-    rep(i, 0, k)
-    {
-      ll base = sum[i];
-      auto j = lower_bound(sum.begin() + i + 1, sum.begin() + i + k + 1, base + c);
-      ans += ((__int128)(u[i] - u[(i - 1 + k) % k] + m) % m) * (sum[j - sum.begin()] - base);
-    }
-  }
-  print(ans);
-  cout << endl;
+  cout << ans << endl;
 }

@@ -19,4 +19,16 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n;
+  cin >> n;
+  vector<ll> cnt(n + 1);
+  for (ll x = 1; x * x <= n; x++)
+    for (ll y = x + 1; x * x + y * y <= n; y++)
+      cnt[x * x + y * y]++;
+  vector<ll> ans;
+  rep(i, 1, n + 1) if (cnt[i] == 1) ans.push_back(i);
+  cout << ans.size() << endl;
+  for (int a : ans)
+    cout << a << ' ';
+  cout << endl;
 }

@@ -19,4 +19,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  cout << pow(2, n) - 2 * n << endl;
 }

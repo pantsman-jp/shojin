@@ -19,4 +19,20 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> a;
+  rep(i, 0, n)
+  {
+    int ai;
+    cin >> ai;
+    a.push_back(ai);
+    if (a.size() >= 4)
+    {
+      int m = a.size();
+      if (a[m - 1] == a[m - 2] and a[m - 2] == a[m - 3] and a[m - 3] == a[m - 4])
+        rep(_, 0, 4) a.pop_back();
+    }
+  }
+  cout << a.size() << endl;
 }

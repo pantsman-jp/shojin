@@ -19,4 +19,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  string s, t;
+  cin >> n >> m >> s >> t;
+  int ans = inf;
+  rep(i, 0, n - m + 1)
+  {
+    int tmp = 0;
+    rep(j, 0, m) tmp += ((s[i + j] - '0') - (t[j] - '0') + 10) % 10;
+    chmin(ans, tmp);
+  }
+  cout << ans << endl;
 }

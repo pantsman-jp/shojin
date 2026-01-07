@@ -1,30 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
 #define all(p) p.begin(), p.end()
+#define rall(p) p.rbegin(), p.rend()
+#define chmax(a, b) a = max(a, b)
+#define chmin(a, b) a = min(a, b)
+#define yn(p) cout << (p ? "Yes\n" : "No\n");
+#define dout(f) cout << fixed << setprecision(10) << f << '\n';
 using ll = long long;
-const ll inf = 1LL << 60;
+using ld = long double;
+using P = pair<int, int>;
+const int inf = 1 << 30;
+const ll INF = 1LL << 60;
+// const ll mod =;
 
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  ll n, k;
+  int n, k;
   cin >> n >> k;
-  vector<ll> a(n), b(n);
+  vector<int> a(n), b(n);
   rep(i, 0, n) cin >> a[i];
   rep(i, 0, n) cin >> b[i];
-  long long diff = 0;
+  int diff = 0;
   rep(i, 0, n) diff += abs(a[i] - b[i]);
-  if (diff > k)
-  {
-    cout << "No" << endl;
-    return 0;
-  }
-  if (diff % 2 != k % 2)
-  {
-    cout << "No" << endl;
-    return 0;
-  }
-  cout << "Yes" << endl;
+  yn(diff <= k and (k - diff) % 2 == 0);
 }

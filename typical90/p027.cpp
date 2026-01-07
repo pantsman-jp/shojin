@@ -1,23 +1,19 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
+#define all(p) p.begin(), p.end()
+#define rall(p) p.rbegin(), p.rend()
+#define chmax(a, b) a = max(a, b)
+#define chmin(a, b) a = min(a, b)
+#define yn(p) cout << (p ? "Yes\n" : "No\n");
+#define dout(f) cout << fixed << setprecision(10) << f << '\n';
 using ll = long long;
-const ll inf = 1LL << 60;
-
-map<string, bool> signup;
-int day = 1;
-
-void solve()
-{
-  string s;
-  cin >> s;
-  if (!signup[s])
-  {
-    signup[s] = true;
-    cout << day << endl;
-  }
-  day++;
-}
+using ld = long double;
+using P = pair<int, int>;
+const int inf = 1 << 30;
+const ll INF = 1LL << 60;
+// const ll mod =;
 
 int main()
 {
@@ -25,5 +21,13 @@ int main()
   cin.tie(nullptr);
   int n;
   cin >> n;
-  rep(sq, 0, n) solve();
+  set<string> user;
+  rep(i, 1, n + 1)
+  {
+    string s;
+    cin >> s;
+    if (user.count(s) == 0)
+      cout << i << endl;
+    user.insert(s);
+  }
 }

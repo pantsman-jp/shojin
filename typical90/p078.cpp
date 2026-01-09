@@ -8,20 +8,21 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  ll n, m;
+  int n, m;
   cin >> n >> m;
-  vector<vector<ll>> g(n + 1);
-  rep(i, 0, m)
+  vector<vector<int>> g(n);
+  rep(_, 0, m)
   {
     ll a, b;
     cin >> a >> b;
+    a--, b--;
     g[a].push_back(b), g[b].push_back(a);
   }
   int ans = 0;
-  rep(i, 1, n + 1)
+  rep(i, 0, n)
   {
     int cnt = 0;
-    for (ll x : g[i])
+    for (int x : g[i])
     {
       if (x < i)
         cnt++;

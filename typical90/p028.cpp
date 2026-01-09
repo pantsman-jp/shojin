@@ -19,4 +19,19 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector cnt(1001, vector<int>(1001));
+  rep(_, 0, n)
+  {
+    int lx, ly, rx, ry;
+    cin >> lx >> ly >> rx >> ry;
+    cnt[ly][lx]++, cnt[ly][rx]--;
+    cnt[ry][lx]--, cnt[ry][rx]++;
+  }
+  rep(i, 0, 1001) rep(j, 1, 1001) cnt[i][j] += cnt[i][j - 1];
+  rep(i, 1, 1001) rep(j, 0, 1001) cnt[i][j] += cnt[i - 1][j];
+  vector<int> ans(n + 1);
+  rep(i, 0, 1001) rep(j, 0, 1001) ans[cnt[i][j]]++;
+  rep(i, 1, n + 1) cout << ans[i] << endl;
 }

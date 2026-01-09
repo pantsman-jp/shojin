@@ -15,13 +15,13 @@ const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 // const ll mod =;
 
-int n, k, l;
+int n, l, k;
 vector<int> a;
 
-bool ok(int x)
+bool check(int mid)
 {
-  int last = 0, cnt = 0;
-  rep(i, 0, n) if (a[i] - last >= x and l - a[i] >= x) cnt++, last = a[i];
+  int cnt = 0, pre = 0;
+  rep(i, 0, n) if (a[i] - pre >= mid and l - a[i] >= mid) cnt += 1, pre = a[i];
   return cnt >= k;
 }
 
@@ -32,11 +32,11 @@ int main()
   cin >> n >> l >> k;
   a.resize(n);
   rep(i, 0, n) cin >> a[i];
-  int left = 0, right = l + 1;
-  while (left + 1 < right)
+  int left = -1, right = l + 1;
+  while (1 < right - left)
   {
     int mid = (left + right) / 2;
-    if (ok(mid))
+    if (check(mid))
       left = mid;
     else
       right = mid;

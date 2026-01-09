@@ -18,29 +18,27 @@ const ll INF = 1LL << 60;
 int n;
 vector<vector<int>> g;
 
-P bfs(int start)
+pair<int, int> bfs(int start)
 {
   vector<int> dist(n, -1);
   queue<int> q;
-  q.push(start);
   dist[start] = 0;
-  int farthest = start;
+  q.push(start);
   while (!q.empty())
   {
     int v = q.front();
     q.pop();
-    for (int u : g[v])
+    for (int w : g[v])
     {
-      if (dist[u] == -1)
-      {
-        dist[u] = dist[v] + 1;
-        q.push(u);
-        if (dist[u] > dist[farthest])
-          farthest = u;
-      }
+      if (dist[w] != -1)
+        continue;
+      dist[w] = dist[v] + 1;
+      q.push(w);
     }
   }
-  return {farthest, dist[farthest]};
+  int far = start;
+  rep(i, 0, n) if (dist[i] > dist[far]) far = i;
+  return {far, dist[far]};
 }
 
 int main()

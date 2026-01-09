@@ -25,6 +25,6 @@ int main()
   vector<ll> dp(8);
   dp[0] = 1;
   for (char c : s)
-    rrep(j, 7, 0) if (c == "atcoder"[j]) dp[j + 1] = (dp[j + 1] + dp[j]) % mod;
+    rrep(i, 7, 0) if (c == "atcoder"[i]) dp[i + 1] = (dp[i + 1] + dp[i]) % mod;
   cout << dp[7] << endl;
 }

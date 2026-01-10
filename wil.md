@@ -73,7 +73,7 @@ C++ において、整数型は以下のようにまとめられる。
 
 
 ## bit 全探索
-### last updated : 2025-12-01
+### last updated : 2026-01-10
 ### 使用問題
 - 競プロ典型90題 002
 - ABC427 B
@@ -91,7 +91,7 @@ vector<int> array(n);
 rep(bit, 0, 1 << n)
 {
   int sum = 0;
-  rep(i, 0, n) if (bit & (1 << i)) sum += array[i];
+  rep(i, 0, n) if ((bit & (1 << i)) != 0) sum += array[i];
   cout << sum << endl;
 }
 ```

@@ -19,4 +19,37 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int h, w;
+  cin >> h >> w;
+  vector p(h, vector<int>(w));
+  rep(i, 0, h) rep(j, 0, w) cin >> p[i][j];
+  int ans = 0;
+  rep(bit, 0, 1 << h)
+  {
+    unordered_map<int, int> cnt;
+    rep(j, 0, w)
+    {
+      int v = -1;
+      bool ok = true;
+      rep(i, 0, h)
+      {
+        if ((bit & (1 << i)) != 0)
+        {
+          if (v == -1)
+            v = p[i][j];
+          else if (v != p[i][j])
+          {
+            ok = false;
+            break;
+          }
+        }
+      }
+      if (ok)
+        cnt[v]++;
+    }
+    int rows = __builtin_popcount(bit);
+    for (auto [_, n] : cnt)
+      chmax(ans, rows * n);
+  }
+  cout << ans << endl;
 }

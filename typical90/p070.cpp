@@ -19,4 +19,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<ll> x(n), y(n);
+  rep(i, 0, n) cin >> x[i] >> y[i];
+  sort(all(x)), sort(all(y));
+  ll medx = x[n / 2], medy = y[n / 2], ans = 0;
+  rep(i, 0, n) ans += abs(medx - x[i]) + abs(medy - y[i]);
+  cout << ans << endl;
 }

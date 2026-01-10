@@ -19,4 +19,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll k;
+  cin >> k;
+  ll ans = 0;
+  for (ll a = 1; a * a * a <= k; a++)
+    for (ll b = a; a * b * b <= k; b++)
+      if (k % (a * b) == 0)
+        ans++;
+  cout << ans << endl;
 }

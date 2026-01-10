@@ -15,8 +15,36 @@ const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 // const ll mod =;
 
+void solve()
+{
+  int n, w;
+  cin >> n >> w;
+  vector<ll> c(n);
+  rep(i, 0, n) cin >> c[i];
+  int mod = 2 * w;
+  vector<ll> cost(mod * 2);
+  rep(i, 0, n)
+  {
+    int j = (i + 1) % mod;
+    cost[j] += c[i];
+    cost[j + mod] += c[i];
+  }
+  ll now = 0;
+  rep(i, 0, w) now += cost[i];
+  ll ans = now;
+  rep(i, 1, mod)
+  {
+    now += cost[i + w - 1] - cost[i - 1];
+    chmin(ans, now);
+  }
+  cout << ans << endl;
+}
+
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t;
+  cin >> t;
+  rep(_, 0, t) solve();
 }

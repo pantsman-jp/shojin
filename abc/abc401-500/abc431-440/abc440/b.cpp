@@ -19,4 +19,15 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<P> t(n);
+  rep(i, 0, n)
+  {
+    cin >> t[i].first;
+    t[i].second = i + 1;
+  }
+  sort(all(t));
+  rep(i, 0, 3) cout << t[i].second << " ";
+  cout << endl;
 }

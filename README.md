@@ -79,4 +79,4 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 - [Grid Editor](https://paruma.github.io/grid-editor/)
 
 ---
-Copyright © 2025 pantsman
+Copyright © 2025-2026 pantsman

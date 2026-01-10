@@ -171,11 +171,11 @@ string to_base_k(ll n, int k)
 }
 
 // 各桁の和
-int f(ll n)
+int digit_sum(ll n)
 {
   int ans = 0;
-  for (char c : to_string(n))
-    ans += c - '0';
+  while (n > 0)
+    ans += n % 10, n /= 10;
   return ans;
 }
 

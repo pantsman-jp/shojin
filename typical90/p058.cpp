@@ -13,10 +13,38 @@ using ld = long double;
 using P = pair<int, int>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
-// const ll mod =;
+const int mod = 1e5;
+
+int y(int n)
+{
+  int ans = 0;
+  while (n > 0)
+    ans += n % 10, n /= 10;
+  return ans;
+}
+
+int a(int x)
+{
+  return (x + y(x)) % mod;
+}
 
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  ll k;
+  cin >> n >> k;
+  vector<int> seq, pos(mod, -1);
+  while (pos[n] == -1)
+  {
+    pos[n] = seq.size();
+    seq.push_back(n);
+    n = a(n);
+  }
+  ll start = pos[n], cycle = seq.size() - start;
+  if (k < seq.size())
+    cout << seq[k] << endl;
+  else
+    cout << seq[(k - start) % cycle + start] << endl;
 }

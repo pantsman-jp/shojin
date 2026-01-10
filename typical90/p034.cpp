@@ -19,4 +19,25 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  int l = 0, r = 0, ans = 0, kind = 0;
+  map<int, int> cnt;
+  while (r < n)
+  {
+    if (cnt[a[r]] == 0)
+      kind++;
+    cnt[a[r]]++, r++;
+    while (kind > k)
+    {
+      cnt[a[l]]--;
+      if (cnt[a[l]] == 0)
+        kind--;
+      l++;
+    }
+    chmax(ans, r - l);
+  }
+  cout << ans << endl;
 }

@@ -13,10 +13,19 @@ using ld = long double;
 using P = pair<int, int>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
-// const ll mod =;
+const ll mod = 1e9 + 7;
 
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int k;
+  cin >> k;
+  vector<ll> dp(k + 1);
+  dp[0] = 1;
+  rep(i, 1, k + 1) rep(j, 1, min(i, 9) + 1) dp[i] = (dp[i] + dp[i - j]) % mod;
+  if (k % 9 == 0)
+    cout << dp[k] << endl;
+  else
+    cout << 0 << endl;
 }

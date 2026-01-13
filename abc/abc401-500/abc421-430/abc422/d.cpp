@@ -19,4 +19,24 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<int> ans = {k};
+  rep(i, 0, n)
+  {
+    vector<int> nxt;
+    for (int x : ans)
+    {
+      nxt.push_back(x / 2);
+      nxt.push_back(x - x / 2);
+    }
+    ans = nxt;
+  }
+  int u = 1;
+  if (k % (1 << n) == 0)
+    u = 0;
+  cout << u << endl;
+  for (int x : ans)
+    cout << x << ' ';
+  cout << endl;
 }

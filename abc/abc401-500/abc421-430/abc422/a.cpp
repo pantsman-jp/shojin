@@ -19,4 +19,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  int i = s[0] - '0', j = s[2] - '0';
+  if (j < 8)
+    j++;
+  else if (i < 8 and j == 8)
+    i++, j = 1;
+  cout << i << '-' << j << endl;
 }

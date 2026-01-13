@@ -19,4 +19,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t;
+  cin >> t;
+  rep(_, 0, t)
+  {
+    ll na, nb, nc;
+    cin >> na >> nb >> nc;
+    cout << min(na, min(nc, (na + nb + nc) / 3)) << endl;
+  }
 }

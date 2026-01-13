@@ -19,4 +19,22 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  string s;
+  cin >> n >> s;
+  vector<int> a, b;
+  rep(i, 0, 2 * n)
+  {
+    if (s[i] == 'A')
+      a.push_back(i);
+    else
+      b.push_back(i);
+  }
+  ll x = 0, y = 0;
+  rep(i, 0, n)
+  {
+    x += abs(a[i] - (2 * i)) + abs(b[i] - (2 * i + 1));
+    y += abs(b[i] - (2 * i)) + abs(a[i] - (2 * i + 1));
+  }
+  cout << min(x, y) / 2 << endl;
 }

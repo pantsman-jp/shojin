@@ -15,8 +15,21 @@ const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 // const ll mod =;
 
+ll f(ll x)
+{
+  string s = to_string(x);
+  reverse(all(s));
+  return stoll(s);
+}
+
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll x, y;
+  cin >> x >> y;
+  vector<ll> a(10);
+  a[0] = x, a[1] = y;
+  rep(i, 2, 10) a[i] = f(a[i - 1] + a[i - 2]);
+  cout << a[9] << endl;
 }

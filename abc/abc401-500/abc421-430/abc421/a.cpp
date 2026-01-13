@@ -19,4 +19,12 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  map<int, string> s;
+  rep(i, 1, n + 1) cin >> s[i];
+  int x;
+  string y;
+  cin >> x >> y;
+  yn(s[x] == y);
 }

@@ -27,7 +27,7 @@
 ---
 
 ## 解答雛形
-### Last Updated : 2025-12-17
+### Last Updated : 2026-01-15
 ```C++
 #include <bits/stdc++.h>
 using namespace std;
@@ -44,7 +44,8 @@ using ld = long double;
 using P = pair<int, int>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
-// const ll mod =;
+// const ll mod = 998244353;
+// const ll mod = 1e9 + 7;
 
 int main()
 {
@@ -73,13 +74,16 @@ C++ において、整数型は以下のようにまとめられる。
 
 
 ## bit 全探索
-### last updated : 2026-01-10
+### last updated : 2026-01-15
 ### 使用問題
 - 競プロ典型90題 002
 - ABC427 B
 - ABC321 C
+- ABC404 D
 
 ### 概要
+[ABC404 D](abc/abc401-500/abc401-410/abc404/d.cpp) がわかりやすい。
+
 部分集合のパターンを全列挙する際に用いる手法。
 具体的には、大きさ `n` の集合から `i` (0 <= i < n) 番目の要素を選ぶか、選ばないかは `2^n` 通りある。
 `n <= 20` であれば十分高速である。
@@ -512,4 +516,4 @@ rep(i, 0, a.size()) ans[i] = lower_bound(all(b), a[i]) - b.begin();
 --- -->
 
 ---
-Copyright © 2025 pantsman
+Copyright © 2025-2026 pantsman

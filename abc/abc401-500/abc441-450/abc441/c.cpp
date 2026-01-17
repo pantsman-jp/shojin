@@ -20,4 +20,26 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  ll x;
+  cin >> n >> k >> x;
+  vector<ll> a(n), sum(n + 1);
+  rep(i, 0, n) cin >> a[i];
+  sort(all(a));
+  sum[0] = 0;
+  rep(i, 0, n) sum[i + 1] = sum[i] + a[i];
+  rep(m, 1, n + 1)
+  {
+    int t = max(0, k - (n - m));
+    if (t > m)
+      continue;
+    int l = n - m;
+    int r = l + t;
+    if (sum[r] - sum[l] >= x)
+    {
+      cout << m << endl;
+      return 0;
+    }
+  }
+  cout << -1 << endl;
 }

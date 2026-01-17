@@ -20,4 +20,7 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int p, q, x, y;
+  cin >> p >> q >> x >> y;
+  yn((p <= x and x < p + 100) and (q <= y and y < q + 100));
 }

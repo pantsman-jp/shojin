@@ -20,4 +20,31 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m, q;
+  string s, t;
+  cin >> n >> m >> s >> t >> q;
+  vector<bool> in_s(26, false), in_t(26, false);
+  for (char c : s)
+    in_s[c - 'a'] = true;
+  for (char c : t)
+    in_t[c - 'a'] = true;
+  rep(_, 0, q)
+  {
+    string w;
+    cin >> w;
+    bool takahashi = true, aoki = true;
+    for (char c : w)
+    {
+      if (!in_s[c - 'a'])
+        takahashi = false;
+      if (!in_t[c - 'a'])
+        aoki = false;
+    }
+    if (takahashi and !aoki)
+      cout << "Takahashi" << endl;
+    else if (!takahashi and aoki)
+      cout << "Aoki" << endl;
+    else
+      cout << "Unknown" << endl;
+  }
 }

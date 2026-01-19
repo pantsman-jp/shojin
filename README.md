@@ -77,6 +77,10 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 - [AtCoder Graphs β](https://atcoder-graphs.vercel.app/#contributorGraph)
 - [Graph Editor](https://kentakom1213.github.io/graph-editor/)
 - [Grid Editor](https://paruma.github.io/grid-editor/)
+- [AtCoder Novisteps](https://atcoder-novisteps.vercel.app)
+- [AtCoder Charts](https://atcoder-charts.netlify.app/#/)
+- [AtCoder Rating Comparer](https://atcoderratingcomparer.onrender.com)
+- [AtCoder Clans](https://kato-hiro.github.io/AtCoderClans/)
 
 ---
 Copyright © 2025-2026 pantsman

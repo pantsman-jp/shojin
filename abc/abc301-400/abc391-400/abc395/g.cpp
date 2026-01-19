@@ -16,37 +16,8 @@ const ll INF = 1LL << 60;
 // const ll mod = 998244353;
 // const ll mod = 1000000007;
 
-int n, m;
-vector<vector<pair<int, ll>>> g;
-vector<bool> seen;
-ll ans = INF;
-
-void dfs(int u, ll val)
-{
-  seen[u] = true;
-  if (u == n - 1)
-    chmin(ans, val);
-  for (auto [v, w] : g[u])
-    if (!seen[v])
-      dfs(v, val ^ w);
-  seen[u] = false;
-}
-
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  cin >> n >> m;
-  g.resize(n), seen.resize(n);
-  rep(_, 0, m)
-  {
-    int u, v;
-    ll w;
-    cin >> u >> v >> w;
-    u--, v--;
-    g[u].push_back({v, w});
-    g[v].push_back({u, w});
-  }
-  dfs(0, 0);
-  cout << ans << endl;
 }

@@ -16,37 +16,37 @@ const ll INF = 1LL << 60;
 // const ll mod = 998244353;
 // const ll mod = 1000000007;
 
-int n, m;
-vector<vector<pair<int, ll>>> g;
-vector<bool> seen;
-ll ans = INF;
-
-void dfs(int u, ll val)
-{
-  seen[u] = true;
-  if (u == n - 1)
-    chmin(ans, val);
-  for (auto [v, w] : g[u])
-    if (!seen[v])
-      dfs(v, val ^ w);
-  seen[u] = false;
-}
-
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  cin >> n >> m;
-  g.resize(n), seen.resize(n);
-  rep(_, 0, m)
+  int n, q;
+  cin >> n >> q;
+  vector<int> p2b(n), b2h(n), h2b(n);
+  rep(i, 0, n) p2b[i] = i, b2h[i] = i, h2b[i] = i;
+  rep(_, 0, q)
   {
-    int u, v;
-    ll w;
-    cin >> u >> v >> w;
-    u--, v--;
-    g[u].push_back({v, w});
-    g[v].push_back({u, w});
+    int t, a, b;
+    cin >> t;
+    if (t == 1)
+    {
+      cin >> a >> b;
+      a--, b--;
+      p2b[a] = h2b[b];
+    }
+    else if (t == 2)
+    {
+      cin >> a >> b;
+      a--, b--;
+      swap(h2b[a], h2b[b]);
+      b2h[h2b[a]] = a;
+      b2h[h2b[b]] = b;
+    }
+    else
+    {
+      cin >> a;
+      a--;
+      cout << b2h[p2b[a]] + 1 << endl;
+    }
   }
-  dfs(0, 0);
-  cout << ans << endl;
 }

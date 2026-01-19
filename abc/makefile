@@ -24,7 +24,7 @@ range:
 	fi
 
 # make solo n=***
-# create abc*** from atcoder/abc
+# create abc*** from template
 solo:
 	@if [ -z "$(n)" ]; then \
 		echo "Usage: make solo n=***"; \
@@ -36,14 +36,6 @@ solo:
 		rsync -a --exclude 'Makefile' template/ "abc$(n)"; \
 		echo "abc$(n) created"; \
 	fi
-
-CXX = g++-12
-
-run:
-	$(CXX) $(CXXFLAGS) $(word 3,$(MAKECMDGOALS)).cpp -o $(word 2,$(MAKECMDGOALS))/$(word 3,$(MAKECMDGOALS)) && ./$(word 2,$(MAKECMDGOALS))/$(word 3,$(MAKECMDGOALS))
-
-clean:
-	rm -f $(word 2,$(MAKECMDGOALS))/$(word 3,$(MAKECMDGOALS))
 
 %:
 	@:

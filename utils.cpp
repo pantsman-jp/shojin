@@ -147,7 +147,10 @@ ll modpow(ll a, ll b, ll mod)
   return ans;
 }
 
-ll div(ll a, ll b, ll m) { return (a * modpow(b, m - 2, m)) % m; }
+ll div(ll a, ll b, ll mod)
+{
+  return (a * modpow(b, mod - 2, mod)) % mod;
+}
 
 // 平方数判別
 bool is_square(ll n)

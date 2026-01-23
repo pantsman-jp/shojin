@@ -283,3 +283,29 @@ ll mandistance(ll x1, ll y1, ll x2, ll y2)
 {
   return abs(x1 - x2) + abs(y1 - y2);
 }
+
+// ダイクストラ法
+vector<ll> dijkstra(const vector<vector<pair<int, ll>>> &g, int s)
+{
+  priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>> pq;
+  vector<ll> dist(g.size(), INF);
+  dist[s] = 0;
+  pq.push({0, s});
+  while (!pq.empty())
+  {
+    auto [d, u] = pq.top();
+    pq.pop();
+    if (d != dist[u])
+      continue;
+    for (auto [v, w] : g[u])
+    {
+      ll nd = d + w;
+      if (nd < dist[v])
+      {
+        dist[v] = nd;
+        pq.push({nd, v});
+      }
+    }
+  }
+  return dist;
+}

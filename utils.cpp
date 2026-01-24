@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
+#include <atcoder/all>
 using namespace std;
+using namespace atcoder;
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
 #define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
 #define all(p) p.begin(), p.end()
@@ -13,6 +15,9 @@ using ld = long double;
 using P = pair<int, int>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
+const ld pi = acosl(-1.0L);
+// const ll mod = 998244353;
+// const ll mod = 1000000007;
 
 // 素数判定
 bool is_prime(ll n)

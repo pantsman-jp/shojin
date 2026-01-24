@@ -2,7 +2,6 @@
 #include <atcoder/segtree>
 using namespace std;
 using namespace atcoder;
-
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
 #define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
 #define all(p) p.begin(), p.end()
@@ -11,7 +10,6 @@ using namespace atcoder;
 #define chmin(a, b) a = min(a, b)
 #define yn(p) cout << (p ? "Yes\n" : "No\n");
 #define dout(f) cout << fixed << setprecision(10) << f << '\n';
-
 using ll = long long;
 using ld = long double;
 using P = pair<int, int>;

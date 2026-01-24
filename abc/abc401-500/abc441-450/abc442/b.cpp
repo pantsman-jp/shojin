@@ -20,4 +20,20 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int q;
+  cin >> q;
+  int vol = 0;
+  bool play = false;
+  rep(_, 0, q)
+  {
+    int a;
+    cin >> a;
+    if (a == 1)
+      vol++;
+    else if (a == 2)
+      vol = max(0, vol - 1);
+    else
+      play = !play;
+    yn(play and vol > 2);
+  }
 }

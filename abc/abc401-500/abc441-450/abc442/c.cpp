@@ -20,4 +20,24 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<int> deg(n);
+  rep(_, 0, m)
+  {
+    int a, b;
+    cin >> a >> b;
+    a--, b--;
+    deg[a]++, deg[b]++;
+  }
+  rep(i, 0, n)
+  {
+    ll cnt = n - 1 - deg[i];
+    if (cnt < 3)
+      cout << 0;
+    else
+      cout << cnt * (cnt - 1) * (cnt - 2) / 6;
+    cout << " ";
+  }
+  cout << endl;
 }

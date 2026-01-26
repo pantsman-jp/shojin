@@ -16,43 +16,30 @@ using P = pair<int, int>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 
-ll op(ll a, ll b)
-{
-  return a + b;
-}
-
-ll e()
-{
-  return 0;
-}
-
 int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  vector<ll> a(n);
+  vector<int> a(n);
   rep(i, 0, n) cin >> a[i];
-  segtree<ll, op, e> seg(a);
+  vector<int> sum(n + 1);
+  rep(i, 0, n) sum[i + 1] = sum[i] + a[i];
   rep(_, 0, q)
   {
-    int t;
+    int t, x, l, r;
     cin >> t;
     if (t == 1)
     {
-      int x;
       cin >> x;
-      x--;
-      ll v1 = seg.get(x), v2 = seg.get(x + 1);
-      seg.set(x, v2), seg.set(x + 1, v1);
+      sum[x] += a[x] - a[x - 1];
+      swap(a[x - 1], a[x]);
     }
-    else
+    if (t == 2)
     {
-      int l, r;
       cin >> l >> r;
-      l--;
-      cout << seg.prod(l, r) << endl;
+      cout << sum[r] - sum[l - 1] << endl;
     }
   }
 }

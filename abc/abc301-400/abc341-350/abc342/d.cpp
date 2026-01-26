@@ -1,12 +1,56 @@
-#include <iostream>
-#include <vector>
-#include <map>
-#include <set>
-#include <algorithm>
-#include <string>
-#include <cmath>
+#include <bits/stdc++.h>
+#include <atcoder/all>
 using namespace std;
+using namespace atcoder;
+#define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
+#define all(p) p.begin(), p.end()
+#define rall(p) p.rbegin(), p.rend()
+#define chmax(a, b) a = max(a, b)
+#define chmin(a, b) a = min(a, b)
+#define yn(p) cout << (p ? "Yes\n" : "No\n");
+#define dout(f) cout << fixed << setprecision(10) << f << '\n';
+using ll = long long;
+using ld = long double;
+using P = pair<int, int>;
+const int inf = 1 << 30;
+const ll INF = 1LL << 60;
+const ld pi = acosl(-1.0L);
+// const ll mod = 998244353;
+// const ll mod = 1000000007;
+
+ll nc2(ll n)
+{
+  return n * (n - 1) / 2;
+}
 
 int main()
 {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int n;
+  cin >> n;
+  map<int, ll> root;
+  rep(_, 0, n)
+  {
+    int a;
+    cin >> a;
+    for (int j = 2; j * j <= a; j++)
+      while (a % (j * j) == 0)
+        a /= j * j;
+    root[a]++;
+  }
+  ll ans = 0;
+  if (root.count(0) != 0)
+  {
+    ll zero = root[0];
+    ans += nc2(zero) + zero * (n - zero);
+  }
+  for (auto [r, cnt] : root)
+  {
+    if (r == 0)
+      continue;
+    ans += nc2(cnt);
+  }
+  cout << ans << endl;
 }

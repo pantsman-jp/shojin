@@ -27,18 +27,18 @@
 ---
 
 ## 解答雛形
-### Last Updated : 2026-01-26
+### Last Updated : 2026-01-27
 ```C++
 #include <bits/stdc++.h>
 #include <atcoder/all>
 using namespace std;
 using namespace atcoder;
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
-#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
+#define rep(i, l, r) for (int i = (l); i < (r); i++)
+#define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(a, b) a = max(a, b)
-#define chmin(a, b) a = min(a, b)
+#define chmax(x, y) x = max(x, y)
+#define chmin(x, y) x = min(x, y)
 #define yn(p) cout << (p ? "Yes\n" : "No\n");
 #define dout(f) cout << fixed << setprecision(10) << f << '\n';
 using ll = long long;

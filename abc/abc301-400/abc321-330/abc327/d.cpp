@@ -19,19 +19,23 @@ const ld pi = acosl(-1.0L);
 // const ll mod = 998244353;
 // const ll mod = 1000000007;
 
-vector<vector<int>> g;
-vector<int> label;
-
-bool dfs(int u, int l)
+bool is_bipartite(const vector<vector<int>> &g, vector<int> &label)
 {
-  label[u] = l;
-  for (int v : g[u])
+  int n = g.size();
+  label.assign(n, -1);
+  function<bool(int, int)> dfs = [&](int u, int l)
   {
-    if (label[v] == l)
-      return false;
-    if (label[v] == -1 and !dfs(v, (l + 1) % 2))
-      return false;
-  }
+    label[u] = l;
+    for (int v : g[u])
+    {
+      if (label[v] == l)
+        return false;
+      if (label[v] == -1 and !dfs(v, l ^ 1))
+        return false;
+    }
+    return true;
+  };
+  rep(i, 0, n) if (label[i] == -1 and !dfs(i, 0)) return false;
   return true;
 }
 
@@ -44,12 +48,12 @@ int main()
   vector<int> a(m), b(m);
   rep(i, 0, m) cin >> a[i], a[i]--;
   rep(i, 0, m) cin >> b[i], b[i]--;
-  g.resize(n);
+  vector<vector<int>> g(n);
   rep(i, 0, m)
   {
     g[a[i]].push_back(b[i]);
     g[b[i]].push_back(a[i]);
   }
-  label.resize(n, -1);
-  yn(dfs(0, 0));
+  vector<int> label(n, -1);
+  yn(is_bipartite(g, label));
 }

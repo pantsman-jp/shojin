@@ -308,3 +308,24 @@ vector<ll> dijkstra(const vector<vector<pair<int, ll>>> &g, int s)
   }
   return dist;
 }
+
+// 二部グラフ判定（label の初期値は -1）
+bool is_bipartite(const vector<vector<int>> &g, vector<int> &label)
+{
+  int n = g.size();
+  label.assign(n, -1);
+  function<bool(int, int)> dfs = [&](int u, int l)
+  {
+    label[u] = l;
+    for (int v : g[u])
+    {
+      if (label[v] == l)
+        return false;
+      if (label[v] == -1 and !dfs(v, l ^ 1))
+        return false;
+    }
+    return true;
+  };
+  rep(i, 0, n) if (label[i] == -1 and !dfs(i, 0)) return false;
+  return true;
+}

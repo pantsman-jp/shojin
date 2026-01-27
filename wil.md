@@ -255,19 +255,19 @@ sum[i] = sum[i - 1] + a[i]  // (1 ≤ i ≤ n)
 ---
 
 ## 深さ優先探索
-### Last Updated : 2026-01-21
+### Last Updated : 2026-01-27
 ### 概要
 ```C++
 vector<vector<int>> g;
 vector<bool> seen;
 
-void dfs(int v)
+void dfs(int u)
 {
-  seen[v] = true;
-  for (int i : g[v])
-    if (!seen[i])
-      dfs(i);
-  seen[v] = false;
+  seen[u] = true;
+  for (int v : g[u])
+    if (!seen[v])
+      dfs(v);
+  seen[u] = false;
 }
 ```
 

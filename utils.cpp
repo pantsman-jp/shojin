@@ -82,20 +82,6 @@ vector<ll> factorization(ll n)
   return ans;
 }
 
-// 最大公約数
-ll gcd(ll a, ll b)
-{
-  if (b == 0)
-    return a;
-  return gcd(b, a % b);
-}
-
-// 最小公倍数
-ll lcm(ll a, ll b)
-{
-  return a / gcd(a, b) * b;
-}
-
 // 最大公約数（配列）
 ll gcd_all(vector<ll> xs)
 {
@@ -137,6 +123,11 @@ ll ncr(ll n, ll r)
   ll ans = 1;
   rep(i, 0, r) ans = ans * (n - i) / (i + 1);
   return ans;
+}
+
+ll nc2(ll n)
+{
+  return n * (n - 1) / 2;
 }
 
 // 巨大素数の余りの計算(modpow は 繰り返し二乗法 pow(a,b)(mod m), div は a÷b(mod m) を計算する)

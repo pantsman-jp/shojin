@@ -10,4 +10,25 @@ int main()
 {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, q;
+  cin >> n >> q;
+  set<int> called;
+  int last = 0;
+  rep(_, 0, q)
+  {
+    int t, x;
+    cin >> t;
+    if (t == 1)
+    {
+      last++;
+      called.insert(last);
+    }
+    else if (t == 2)
+    {
+      cin >> x;
+      called.erase(x);
+    }
+    else
+      cout << *begin(called) << endl;
+  }
 }

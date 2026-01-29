@@ -32,6 +32,22 @@ bool is_prime(ll n)
   return true;
 }
 
+// 素数判定配列
+vector<bool> era(ll n)
+{
+  vector<bool> is_prime(n + 2, true);
+  is_prime[0] = is_prime[1] = false;
+  for (ll i = 2; i * i <= n; i++)
+  {
+    if (is_prime[i])
+    {
+      for (ll j = i * i; j <= n; j += i)
+        is_prime[j] = false;
+    }
+  }
+  return is_prime;
+}
+
 // 素数列挙
 vector<ll> primes(ll n)
 {

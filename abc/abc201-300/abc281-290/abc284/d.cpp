@@ -23,5 +23,21 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t;
+  cin >> t;
+  rep(_, 0, t) {
+    ll n;
+    cin >> n;
+    for (ll m = 2; m * m * m <= n; m++) {
+      ll p2 = m * m;
+      if (n % p2 == 0) {
+        cout << m << " " << n / p2 << endl;
+        break;
+      } else if (n % m == 0) {
+        cout << (ll)sqrt(n / m) << " " << m << endl;
+        break;
+      }
+    }
+  }
   return 0;
 }

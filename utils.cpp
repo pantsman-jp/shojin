@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
-#include <atcoder/all>
 using namespace std;
+#include <atcoder/all>
 using namespace atcoder;
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
 #define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
@@ -20,185 +20,134 @@ const ld pi = acosl(-1.0L);
 // const ll mod = 1000000007;
 
 // 素数判定
-bool is_prime(ll n)
-{
-  if (n < 2)
-    return false;
+bool is_prime(ll n) {
+  if (n < 2) return false;
   for (ll i = 2; i * i <= n; i++)
-  {
-    if (n % i == 0)
-      return false;
-  }
+    if (n % i == 0) return false;
   return true;
 }
 
 // 素数判定配列
-vector<bool> era(ll n)
-{
+vector<bool> era(ll n) {
   vector<bool> is_prime(n + 2, true);
   is_prime[0] = is_prime[1] = false;
-  for (ll i = 2; i * i <= n; i++)
-  {
+  for (ll i = 2; i * i <= n; i++) {
     if (is_prime[i])
-    {
-      for (ll j = i * i; j <= n; j += i)
-        is_prime[j] = false;
-    }
+      for (ll j = i * i; j <= n; j += i) is_prime[j] = false;
   }
   return is_prime;
 }
 
 // 素数列挙
-vector<ll> primes(ll n)
-{
+vector<ll> primes(ll n) {
   vector<bool> prime(n + 2, true);
   prime[0] = prime[1] = false;
-  for (ll i = 2; i * i <= n; i++)
-  {
+  for (ll i = 2; i * i <= n; i++) {
     if (prime[i])
-    {
-      for (ll x = i * i; x <= n; x += i)
-        prime[x] = false;
-    }
+      for (ll x = i * i; x <= n; x += i) prime[x] = false;
   }
   vector<ll> ans;
   for (ll i = 2; i <= n; i++)
-  {
-    if (prime[i])
-      ans.push_back(i);
-  }
+    if (prime[i]) ans.push_back(i);
   return ans;
 }
 
 // 約数列挙
-vector<ll> divisors(ll n)
-{
+vector<ll> divisors(ll n) {
   vector<ll> ans;
-  for (ll i = 1; i * i <= n; i++)
-  {
-    if (n % i != 0)
-      continue;
+  for (ll i = 1; i * i <= n; i++) {
+    if (n % i != 0) continue;
     ans.push_back(i);
-    if (i != n / i)
-      ans.push_back(n / i);
+    if (i != n / i) ans.push_back(n / i);
   }
   sort(all(ans));
   return ans;
 }
 
 // 素因数分解
-vector<ll> factorization(ll n)
-{
+vector<ll> factorization(ll n) {
   vector<ll> ans;
   for (ll i = 2; i * i <= n; i++)
-    while (n % i == 0)
-      ans.push_back(i), n /= i;
-  if (n > 1)
-    ans.push_back(n);
+    while (n % i == 0) ans.push_back(i), n /= i;
+  if (n > 1) ans.push_back(n);
   return ans;
 }
 
 // 最大公約数（配列）
-ll gcd_all(vector<ll> xs)
-{
+ll gcd_all(vector<ll> xs) {
   ll ans = xs[0];
   rep(i, 1, xs.size()) ans = gcd(ans, xs[i]);
   return ans;
 }
 
 // 最小公倍数（配列）
-ll lcm_all(vector<ll> xs)
-{
+ll lcm_all(vector<ll> xs) {
   ll ans = xs[0];
   rep(i, 1, xs.size()) ans = ans / gcd(ans, xs[i]) * xs[i];
   return ans;
 }
 
 // 階乗
-ll fact(ll n, ll mod)
-{
+ll fact(ll n, ll mod) {
   ll ans = 1;
-  for (ll m = 1; m <= n; m++)
-    ans = ans * m % mod;
+  for (ll m = 1; m <= n; m++) ans = ans * m % mod;
   return ans;
 }
 
 // 順列
-ll npr(ll n, ll r)
-{
+ll npr(ll n, ll r) {
   ll ans = 1;
   rep(i, 0, r) ans *= (n - i);
   return ans;
 }
 
 // 組み合わせ
-ll ncr(ll n, ll r)
-{
-  if (r > n - r)
-    r = n - r;
+ll ncr(ll n, ll r) {
+  if (r > n - r) r = n - r;
   ll ans = 1;
   rep(i, 0, r) ans = ans * (n - i) / (i + 1);
   return ans;
 }
 
-ll nc2(ll n)
-{
-  return n * (n - 1) / 2;
-}
+ll nc2(ll n) { return n * (n - 1) / 2; }
 
-// 巨大素数の余りの計算(modpow は 繰り返し二乗法 pow(a,b)(mod m), div は a÷b(mod m) を計算する)
-ll modpow(ll a, ll b, ll mod)
-{
+// 余りの計算(modpow は pow(a,b)(mod m), div は a÷b (mod m) を計算する)
+ll modpow(ll a, ll b, ll mod) {
   ll ans = 1;
-  while (b > 0)
-  {
-    if ((b & 1) != 0)
-      ans = ans * a % mod;
+  while (b > 0) {
+    if ((b & 1) != 0) ans = ans * a % mod;
     a = a * a % mod, b >>= 1;
   }
   return ans;
 }
 
-ll div(ll a, ll b, ll mod)
-{
-  return (a * modpow(b, mod - 2, mod)) % mod;
-}
+ll div(ll a, ll b, ll mod) { return (a * modpow(b, mod - 2, mod)) % mod; }
 
 // 平方数判別
-bool is_square(ll n)
-{
+bool is_square(ll n) {
   for (ll i = 1; i * i <= n; i++)
-    if (i * i == n)
-      return true;
+    if (i * i == n) return true;
   return false;
 }
 
 // 進数変換 (10進->k進)
-string to_base_k(ll n, int k)
-{
-  if (n == 0)
-    return "0";
+string to_base_k(ll n, int k) {
+  if (n == 0) return "0";
   string ans = "";
-  while (n > 0)
-    ans += '0' + (n % k), n /= k;
+  while (n > 0) ans += '0' + (n % k), n /= k;
   reverse(all(ans));
   return ans;
 }
 
 // 各桁の和
-int digit_sum(ll n)
-{
+int digit_sum(ll n) {
   int ans = 0;
-  while (n > 0)
-    ans += n % 10, n /= 10;
+  while (n > 0) ans += n % 10, n /= 10;
   return ans;
 }
 
 // 桁数
-int digit(ll n)
-{
-  return to_string(n).size();
-}
+int digit(ll n) { return to_string(n).size(); }
 
 // 4 近傍（時計回り）
 const vector<int> di = {-1, 0, 1, 0};
@@ -209,14 +158,12 @@ const vector<int> di = {-1, -1, 0, 1, 1, 1, 0, -1};
 const vector<int> dj = {0, 1, 1, 1, 0, -1, -1, -1};
 
 // グリッド内判定（0-index）
-bool out(int i, int j, int h, int w)
-{
+bool out(int i, int j, int h, int w) {
   return i < 0 or h - 1 < i or j < 0 or w - 1 < j;
 }
 
 // 移動
-void move(int x, int y, char c)
-{
+void move(int x, int y, char c) {
   if (c == 'R')
     x++;
   else if (c == 'L')
@@ -228,8 +175,7 @@ void move(int x, int y, char c)
 }
 
 // 回文判定
-bool is_pali(string s)
-{
+bool is_pali(string s) {
   string t = s;
   reverse(all(t));
   return s == t;
@@ -250,13 +196,11 @@ bool is_pali(string s)
 //   return ans;
 // }
 
-vector<pair<char, int>> rle(string s)
-{
+vector<pair<char, int>> rle(string s) {
   vector<pair<char, int>> ans;
   int cnt = 1;
   char now = s[0];
-  rep(i, 1, s.size())
-  {
+  rep(i, 1, s.size()) {
     if (s[i] == now)
       cnt++;
     else
@@ -267,56 +211,45 @@ vector<pair<char, int>> rle(string s)
 }
 
 // 文字列中の文字の出現回数
-int count_char(string s, char c)
-{
+int count_char(string s, char c) {
   int ans = 0;
   rep(i, 0, s.size()) if (s[i] == c) ans++;
   return ans;
 }
 
 // i 番目のアルファベット (0-index)
-char ith_alph(int i)
-{
-  return 'a' + i;
-}
+char ith_alph(int i) { return 'a' + i; }
 
 // x 桁になるまで自然数 n を 文字 c で埋める
-string pad(int x, int n, char c)
-{
+string pad(int x, int n, char c) {
   string s = to_string(n);
   return string(max(0, x - (int)s.size()), c) + s;
 }
 
 // ユークリッド距離の二乗
-ll eudistance(ll x1, ll y1, ll x2, ll y2)
-{
+ll eudistance(ll x1, ll y1, ll x2, ll y2) {
   return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
 }
 
 // マンハッタン距離
-ll mandistance(ll x1, ll y1, ll x2, ll y2)
-{
+ll mandistance(ll x1, ll y1, ll x2, ll y2) {
   return abs(x1 - x2) + abs(y1 - y2);
 }
 
 // ダイクストラ法
-vector<ll> dijkstra(const vector<vector<pair<int, ll>>> &g, int s)
-{
-  priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>> pq;
+vector<ll> dijkstra(const vector<vector<pair<int, ll>>>& g, int s) {
+  priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>>
+      pq;
   vector<ll> dist(g.size(), INF);
   dist[s] = 0;
   pq.push({0, s});
-  while (!pq.empty())
-  {
+  while (!pq.empty()) {
     auto [d, u] = pq.top();
     pq.pop();
-    if (d != dist[u])
-      continue;
-    for (auto [v, w] : g[u])
-    {
+    if (d != dist[u]) continue;
+    for (auto [v, w] : g[u]) {
       ll nd = d + w;
-      if (nd < dist[v])
-      {
+      if (nd < dist[v]) {
         dist[v] = nd;
         pq.push({nd, v});
       }
@@ -326,22 +259,48 @@ vector<ll> dijkstra(const vector<vector<pair<int, ll>>> &g, int s)
 }
 
 // 二部グラフ判定（label の初期値は -1）
-bool is_bipartite(const vector<vector<int>> &g, vector<int> &label)
-{
+bool is_bipartite(const vector<vector<int>>& g, vector<int>& label) {
   int n = g.size();
   label.assign(n, -1);
-  function<bool(int, int)> dfs = [&](int u, int l)
-  {
+  function<bool(int, int)> dfs = [&](int u, int l) {
     label[u] = l;
-    for (int v : g[u])
-    {
-      if (label[v] == l)
-        return false;
-      if (label[v] == -1 and !dfs(v, l ^ 1))
-        return false;
+    for (int v : g[u]) {
+      if (label[v] == l) return false;
+      if (label[v] == -1 and !dfs(v, l ^ 1)) return false;
     }
     return true;
   };
   rep(i, 0, n) if (label[i] == -1 and !dfs(i, 0)) return false;
+  return true;
+}
+
+// サイクル検出（無向グラフ）
+bool has_cycle(vector<vector<int>> g) {
+  int n = g.size();
+  dsu uf(n);
+  rep(u, 0, n) {
+    for (int v : g[u]) {
+      if (u >= v) continue;
+      if (uf.same(u, v)) return true;
+      uf.merge(u, v);
+    }
+  }
+  return false;
+}
+
+// DAG 判定
+bool is_dag(vector<vector<int>> g) {
+  int n = g.size();
+  vector<int> state(n, 0);
+  auto dfs = [&](auto self, int u) -> bool {
+    state[u] = 1;
+    for (int v : g[u]) {
+      if (state[v] == 1) return false;
+      if (state[v] == 0 and !self(self, v)) return false;
+    }
+    state[u] = 2;
+    return true;
+  };
+  rep(i, 0, n) if (state[i] == 0 and !dfs(dfs, i)) return false;
   return true;
 }

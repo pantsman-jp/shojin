@@ -4,59 +4,6 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 ## My Rating (Algorithm)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman)](https://atcoder.jp/users/pantsman)
 
-## Repository Structure
-```
-.
-├── abc
-│   └── abc001-100
-│       ├── abc001-010
-│       │   ├── abc001
-│       │   │   ├── a.cpp
-│       │   │   ├── b.cpp
-│       │   │   └── ...
-│       │   └── ...
-│       ├── ...
-│       ├── template
-│       │   ├── a.cpp
-│       │   ├── b.cpp
-│       │   └── ...
-│       └── makefile
-├── abs
-│   ├── abc049c.cpp
-│   ├── abc081a.cpp
-│   └── ...
-├── ac-library
-├── adt
-│   ├── 2025-10-07
-│   │   ├── a.cpp
-│   │   ├── b.cpp
-│   │   └── ...
-│   ├── template
-│   │   ├── a.cpp
-│   │   ├── b.cpp
-│   │   └── ...
-│   └── makefile
-├── ahc
-├── edpc
-│   ├── a.cpp
-│   ├── b.cpp
-│   └── ...
-├── math-algo
-│   ├── p001.cpp
-│   ├── p002.cpp
-│   └── ...
-├── other
-├── typical90
-│   ├── p001.cpp
-│   ├── p002.cpp
-│   └── ...
-├── .gitignore
-├── LICENSE
-├── README.md
-├── utils.cpp
-└── wil.md
-```
-
 ## Explanation of Abbreviation
 | folder name | URL |
 | :---: | :---: |
@@ -75,7 +22,7 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 - [AtCoder Replay](https://atcoder-replay.kakira.dev)
 - [AtCoder Rating Estimator](https://atcoder-rating-estimator.pages.dev)
 - [AtCoder Graphs β](https://atcoder-graphs.vercel.app/#contributorGraph)
-- [Graph Editor](https://kentakom1213.github.io/graph-editor/)
+- [Graph Editor](https://hello-world-494ec.firebaseapp.com)
 - [Grid Editor](https://paruma.github.io/grid-editor/)
 - [AtCoder Novisteps](https://atcoder-novisteps.vercel.app)
 - [AtCoder Charts](https://atcoder-charts.netlify.app/#/)

@@ -65,11 +65,15 @@ vector<ll> divisors(ll n) {
 }
 
 // 素因数分解
-vector<ll> factorization(ll n) {
-  vector<ll> ans;
-  for (ll i = 2; i * i <= n; i++)
-    while (n % i == 0) ans.push_back(i), n /= i;
-  if (n > 1) ans.push_back(n);
+vector<pair<ll, ll>> factorization(ll n) {
+  vector<pair<ll, ll>> ans;
+  for (ll p = 2; p * p <= n; p++) {
+    if (n % p != 0) continue;
+    ll e = 0;
+    while (n % p == 0) n /= p, ++e;
+    ans.push_back({p, e});
+  }
+  if (n != 1) ans.emplace_back(n, 1);
   return ans;
 }
 

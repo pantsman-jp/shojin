@@ -23,7 +23,7 @@
 ---
 
 ## 解答雛形
-### Last Updated : 2026-01-30
+### Last Updated : 2026-01-31
 ```C++
 #include <bits/stdc++.h>
 using namespace std;
@@ -35,12 +35,13 @@ using namespace atcoder;
 #define rall(p) p.rbegin(), p.rend()
 #define chmax(x, y) x = max(x, y)
 #define chmin(x, y) x = min(x, y)
-#define yn(p) cout << (p ? "Yes\n" : "No\n");
-#define dout(f) cout << fixed << setprecision(10) << f << '\n';
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n");
+#define dout(x) cout << fixed << setprecision(10) << x << "\n";
 using ll = long long;
-using ld = long double;
 using ull = unsigned long long;
-using P = pair<int, int>;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);

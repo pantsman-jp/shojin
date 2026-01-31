@@ -24,5 +24,18 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, t;
+  cin >> n >> t;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  ll ans = 0, now = 0;
+  rep(i, 0, n) {
+    if (now >= t) break;
+    if (a[i] <= now) continue;
+    ans += min(a[i], t) - now;
+    now = a[i] + 100;
+  }
+  if (now < t) ans += t - now;
+  cout << ans << endl;
   return 0;
 }

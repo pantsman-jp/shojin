@@ -244,8 +244,8 @@ ll mandistance(ll x1, ll y1, ll x2, ll y2) {
 
 // ダイクストラ法
 vector<ll> dijkstra(const vector<vector<pair<int, ll>>>& g, int s) {
-  priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>>
-      pq;
+  using pli = pair<ll, int>;
+  priority_queue<pli, vector<pli>, greater<pli>> pq;
   vector<ll> dist(g.size(), INF);
   dist[s] = 0;
   pq.push({0, s});

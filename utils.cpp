@@ -310,3 +310,24 @@ bool is_dag(vector<vector<int>> g) {
   rep(i, 0, n) if (state[i] == 0 and !dfs(dfs, i)) return false;
   return true;
 }
+
+// 0-indexed DAG トポロジカルソート（辞書順最小）
+vector<int> topo_sort(vector<vector<int>> g) {
+  int n = g.size();
+  vector<int> indeg(n, 0);
+  rep(u, 0, n) for (int v : g[u]) indeg[v]++;
+  priority_queue<int, vector<int>, greater<int>> q;
+  rep(u, 0, n) if (indeg[u] == 0) q.push(u);
+  vector<int> ans;
+  while (!q.empty()) {
+    int u = q.top();
+    q.pop();
+    ans.push_back(u);
+    for (int v : g[u]) {
+      indeg[v]--;
+      if (indeg[v] == 0) q.push(v);
+    }
+  }
+  if (ans.size() != n) return {};
+  return ans;
+}

@@ -4,7 +4,7 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 ## My Rating (Algorithm)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman)](https://atcoder.jp/users/pantsman)
 
-## Explanation of Abbreviation
+## URL
 | folder name | URL |
 | :---: | :---: |
 | abc | [AtCoder Beginner Contest](https://atcoder.jp/contests/archive?ratedType=1&category=0&keyword=) |

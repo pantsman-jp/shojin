@@ -6,7 +6,7 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 
 ## URL
 | folder name | URL |
-| :---: | :---: |
+| --- | --- |
 | abc | [AtCoder Beginner Contest](https://atcoder.jp/contests/archive?ratedType=1&category=0&keyword=) |
 | abs | [AtCoder Beginners Selection](https://atcoder.jp/contests/abs) |
 | ac-library | [AtCoder Library](https://github.com/atcoder/ac-library) |
@@ -29,4 +29,4 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 - [AtCoder Clans](https://kato-hiro.github.io/AtCoderClans/)
 
 ---
-Copyright © 2025-2026 pantsman
+Copyright © 2025-2026 [@pantsman](https://github.com/pantsman-jp)

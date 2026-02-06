@@ -1,13 +1,60 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
+#include <atcoder/all>
+using namespace atcoder;
+#define rep(i, l, r) for (int i = (l); i < (r); i++)
+#define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
-using P = pair<int, int>;
+#define rall(p) p.rbegin(), p.rend()
+#define chmax(x, y) x = max(x, y)
+#define chmin(x, y) x = min(x, y)
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n");
+#define dout(x) cout << fixed << setprecision(10) << x << "\n";
 using ll = long long;
-const ll inf = 1LL << 60;
+using ull = unsigned long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+const int inf = 1 << 30;
+const ll INF = 1LL << 60;
+const ld pi = acosl(-1.0L);
+// using mint = modint998244353;
+// using mint = modint1000000007;
 
-int main()
-{
+ll ncr(ll n, ll r) {
+  if (r > n - r) r = n - r;
+  ll ans = 1;
+  rep(i, 0, r) ans = ans * (n - i) / (i + 1);
+  return ans;
+}
+
+int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll a, b, k;
+  cin >> a >> b >> k;
+  string ans = "";
+  while (a != 0 or b != 0) {
+    if (a == 0) {
+      ans += 'b';
+      b--;
+      continue;
+    }
+    if (b == 0) {
+      ans += 'a';
+      a--;
+      continue;
+    }
+    ll cnt = ncr(a + b - 1, a - 1);
+    if (k <= cnt) {
+      ans += 'a';
+      a--;
+    } else {
+      ans += 'b';
+      k -= cnt;
+      b--;
+    }
+  }
+  cout << ans << endl;
+  return 0;
 }

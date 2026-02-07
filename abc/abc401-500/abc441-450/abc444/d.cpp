@@ -24,6 +24,23 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-
+  int n, m = 210101;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  vector<ll> digit(m);
+  for (int x : a) {
+    digit[1]++;
+    digit[x + 1]--;
+  }
+  rep(i, 1, m) digit[i] += digit[i - 1];
+  rep(i, 1, m) {
+    digit[i + 1] += digit[i] / 10;
+    digit[i] %= 10;
+  }
+  int pos = m - 1;
+  while (pos > 1 and digit[pos] == 0) pos--;
+  rrep(i, 1, pos + 1) cout << digit[i];
+  cout << endl;
   return 0;
 }

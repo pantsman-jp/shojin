@@ -21,9 +21,47 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+vector<ll> divisors(ll n) {
+  vector<ll> ans;
+  for (ll i = 1; i * i <= n; i++) {
+    if (n % i != 0) continue;
+    ans.push_back(i);
+    if (i != n / i) ans.push_back(n / i);
+  }
+  sort(all(ans));
+  return ans;
+}
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-
+  int n;
+  cin >> n;
+  vector<ll> a(n);
+  ll sum = 0, sup = -INF;
+  rep(i, 0, n) {
+    cin >> a[i];
+    sum += a[i];
+    chmax(sup, a[i]);
+  }
+  sort(all(a));
+  for (ll l : divisors(sum)) {
+    if (l < sup) continue;
+    int left = 0, right = n - 1;
+    bool ok = true;
+    while (left <= right) {
+      if (a[right] == l) {
+        right--;
+      } else {
+        if (a[left] + a[right] != l) {
+          ok = false;
+          break;
+        }
+        left++, right--;
+      }
+    }
+    if (ok) cout << l << " ";
+  }
+  cout << endl;
   return 0;
 }

@@ -21,9 +21,19 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+int digit_sum(ll n) {
+  int ans = 0;
+  while (n > 0) ans += n % 10, n /= 10;
+  return ans;
+}
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-
+  int n, k;
+  cin >> n >> k;
+  int ans = 0;
+  rep(i, 1, n + 1) if (digit_sum(i) == k) ans++;
+  cout << ans << endl;
   return 0;
 }

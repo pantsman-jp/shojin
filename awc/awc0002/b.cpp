@@ -24,6 +24,20 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-
+  int n, m, k;
+  cin >> n >> m >> k;
+  vector<int> a(n), b(m);
+  rep(i, 0, n) cin >> a[i];
+  rep(i, 0, m) cin >> b[i], b[i]--;
+  sort(all(b));
+  ll sum = 0;
+  int cnt = 0;
+  rep(i, 0, n) {
+    if (a[i] < k and binary_search(all(b), i)) {
+      cnt++;
+      sum += a[i];
+    }
+  }
+  cout << cnt << " " << sum << endl;
   return 0;
 }

@@ -24,6 +24,24 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-
+  int n, m;
+  cin >> n >> m;
+  vector<int> c(n);
+  multiset<int> r;
+  rep(i, 0, n) cin >> c[i];
+  rep(i, 0, m) {
+    int x;
+    cin >> x;
+    r.insert(x);
+  };
+  sort(all(c));
+  int ans = 0;
+  for (ll x : c) {
+    auto it = r.lower_bound(x);
+    if (it == r.end()) break;
+    ans++;
+    r.erase(it);
+  }
+  cout << ans << endl;
   return 0;
 }

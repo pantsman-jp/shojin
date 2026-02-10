@@ -11,6 +11,7 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 | abs | [AtCoder Beginners Selection](https://atcoder.jp/contests/abs) |
 | ac-library | [AtCoder Library](https://github.com/atcoder/ac-library) |
 | adt | [AtCoder Daily Training](https://atcoder.jp/contests/adt_top/) |
+| awc | [AtCoder Weekday Contest](https://atcoder.jp/contests/archive?ratedType=0&category=20&keyword=) |
 | edpc | [Educational DP Contest](https://atcoder.jp/contests/dp) |
 | math-algo | [アルゴリズムと数学　演習問題集](https://atcoder.jp/contests/math-and-algorithm) |
 | other | [レッドコーダーが教える、競プロ・AtCoder上達のガイドライン【中級編：目指せ水色コーダー！】](https://qiita.com/e869120/items/eb50fdaece12be418faa) |

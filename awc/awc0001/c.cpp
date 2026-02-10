@@ -24,5 +24,13 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<int> d(n);
+  rep(i, 0, n) cin >> d[i];
+  sort(all(d));
+  ll ans = 0;
+  rep(i, 0, n - k) ans += d[i];
+  cout << ans << endl;
   return 0;
 }

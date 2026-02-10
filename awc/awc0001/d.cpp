@@ -24,5 +24,20 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m, k;
+  cin >> n >> m >> k;
+  vector<int> a(n), b(n);
+  rep(i, 0, n) cin >> a[i] >> b[i];
+  vector dp(n + 1, vector<ll>(m + 1, -INF));
+  rep(i, 0, n) {
+    if (b[i] <= m) dp[i][b[i]] = a[i];
+    rep(t, max(0, i - k), i) rep(j, 0, m - b[i] + 1) {
+      if (dp[t][j] == -INF) continue;
+      chmax(dp[i][j + b[i]], dp[t][j] + a[i]);
+    }
+  }
+  ll ans = 0;
+  rep(i, 0, n) rep(j, 0, m + 1) chmax(ans, dp[i][j]);
+  cout << ans << endl;
   return 0;
 }

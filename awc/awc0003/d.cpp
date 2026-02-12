@@ -24,5 +24,18 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  ll m;
+  cin >> n >> k >> m;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  int r = 0;
+  ll ans = 0;
+  rep(l, 0, n) {
+    while (r < n and m > 0) m -= a[r++];
+    if (m <= 0) ans += max(0, n - max(r, l + k) + 1);
+    m += a[l];
+  }
+  cout << ans << endl;
   return 0;
 }

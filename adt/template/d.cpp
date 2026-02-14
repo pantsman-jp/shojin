@@ -8,8 +8,8 @@ using namespace atcoder;
 #define rall(p) p.rbegin(), p.rend()
 #define chmax(x, y) x = max(x, y)
 #define chmin(x, y) x = min(x, y)
-#define yn(tf) cout << (tf ? "Yes\n" : "No\n");
-#define dout(x) cout << fixed << setprecision(10) << x << "\n";
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define dout(x) cout << fixed << setprecision(10) << x << "\n"
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;

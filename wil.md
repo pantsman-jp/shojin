@@ -14,6 +14,7 @@
 - [Union-Find](#union-find)
 - [尺取り法](#尺取り法)
 - [座標圧縮](#座標圧縮)
+- [二分探索](#二分探索)
 
 ### 計算
 - [インクリメント](#インクリメント)
@@ -392,6 +393,49 @@ vector<int> ans(a.size());
 rep(i, 0, a.size()) ans[i] = lower_bound(all(b), a[i]) - b.begin();
 
 // ans = {1, 4, 3, 3, 3, 2, 0, 5,}
+```
+
+[先頭に戻る](#what-i-learned)
+
+---
+
+## 二分探索
+### Last Updated : 2026-02-14
+### 概要
+#### 最小値の最大化
+数軸上で、条件は `[True, True, True, False, False]` のように並ぶ。  
+`l` は `True` を追い越して `False` の領域で止まる。
+`r` は `False` 側から下がってきて 最後の `True` で止まる。
+だから `r` が答え。
+
+```C++
+ll l = 1, r = INF;
+while (l <= r) {
+    ll mid = l + (r - l) / 2;
+    if (check(mid))   // 条件を満たす（成功）
+      l = mid + 1;    // もっと大きくできるかも？
+    else              // 条件を満たさない（失敗）
+      r = mid - 1;    // 大きすぎたので下げる
+}
+cout << r << endl; // 最後に残った r が最大値
+```
+
+#### 最大値の最小化
+数軸上で、条件は `[False, False, True, True, True]` のように並ぶ。  
+`r` は `True` を追い越して `False` の領域で止まる。
+`l` は `False` から上がってきて、最初の `True` で止まる。
+だから `l` が答え。
+
+```C++
+ll l = 1, r = INF;
+while (l <= r) {
+    ll mid = l + (r - l) / 2;
+    if (check(mid)) // 条件を満たす（成功）
+      r = mid - 1;  // もっと小さくできるかも？
+    else            // 条件を満たさない（失敗）
+      l = mid + 1;  // 小さすぎたので上げる
+}
+cout << l << endl; // 最後に残った l が最小値
 ```
 
 [先頭に戻る](#what-i-learned)

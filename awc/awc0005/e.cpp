@@ -21,8 +21,22 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+int op(int a, int b) { return max(a, b); }
+
+int e() { return 0; }
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, q;
+  cin >> n >> q;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  segtree<int, op, e> st(a);
+  rep(_, 0, q) {
+    int l, r;
+    cin >> l >> r;
+    cout << st.prod(l - 1, r) << endl;
+  }
   return 0;
 }

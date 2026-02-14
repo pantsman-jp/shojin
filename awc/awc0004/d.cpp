@@ -24,5 +24,21 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<vector<int>> car(n + 1);
+  rep(_, 0, m) {
+    int l, r;
+    cin >> l >> r;
+    car[l].push_back(r);
+  }
+  priority_queue<int, vector<int>, greater<int>> q;
+  int cnt = 0;
+  rep(i, 0, n + 1) {
+    for (int r : car[i]) q.push(r);
+    while (!q.empty() and q.top() < i) q.pop();
+    if (!q.empty()) q.pop(), cnt++;
+  }
+  yn(cnt == m);
   return 0;
 }

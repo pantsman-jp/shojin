@@ -24,5 +24,15 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  ll t;
+  cin >> n >> t;
+  ll ans = 0;
+  rep(_, 0, n) {
+    ll a, b;
+    cin >> a >> b;
+    ans += max(a - b * t, 0ll);
+  }
+  cout << ans << endl;
   return 0;
 }

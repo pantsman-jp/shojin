@@ -18,8 +18,12 @@ using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);
-// using mint = modint998244353;
+using mint = modint998244353;
 // using mint = modint1000000007;
+
+mint op(ll a, ll b) { return lcm(a, b); }
+
+mint e() { return 1; }
 
 int main() {
   ios::sync_with_stdio(false);

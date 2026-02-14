@@ -24,6 +24,18 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-
+  int n;
+  cin >> n;
+  vector<string> s(n);
+  int m = 0;
+  rep(i, 0, n) cin >> s[i], chmax(m, (int)s[i].size());
+  rep(i, 0, n) {
+    int l = s[i].size();
+    int cnt = (m - l) / 2;
+    rep(_, 0, cnt) cout << '.';
+    cout << s[i];
+    rep(_, 0, cnt) cout << '.';
+    cout << endl;
+  }
   return 0;
 }

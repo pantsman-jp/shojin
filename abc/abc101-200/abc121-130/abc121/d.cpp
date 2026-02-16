@@ -1,13 +1,38 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
+#include <atcoder/all>
+using namespace atcoder;
+#define rep(i, l, r) for (int i = (l); i < (r); i++)
+#define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
-using P = pair<int, int>;
+#define rall(p) p.rbegin(), p.rend()
+#define chmax(x, y) x = max(x, y)
+#define chmin(x, y) x = min(x, y)
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define dout(x) cout << fixed << setprecision(10) << x << "\n"
 using ll = long long;
-const ll inf = 1LL << 60;
+using ull = unsigned long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+const int inf = 1 << 30;
+const ll INF = 1LL << 60;
+const ld pi = acosl(-1.0L);
+// using mint = modint998244353;
+// using mint = modint1000000007;
 
-int main()
-{
+ll aux(ll a) { return ((a + 1) / 2) % 2; }
+
+ll solve(ll a) {
+  if (a % 2 == 1) return aux(a);
+  return aux(a + 1) ^ (a + 1);
+}
+
+int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll a, b;
+  cin >> a >> b;
+  cout << (solve(b) ^ solve(a - 1)) << endl;
+  return 0;
 }

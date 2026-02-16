@@ -57,10 +57,10 @@ vector<ll> primes(ll n) {
 // 約数列挙
 vector<ll> divisors(ll n) {
   vector<ll> ans;
-  for (ll i = 1; i * i <= n; i++) {
-    if (n % i != 0) continue;
-    ans.push_back(i);
-    if (i != n / i) ans.push_back(n / i);
+  for (ll m = 1; m * m <= n; m++) {
+    if (n % m != 0) continue;
+    ans.push_back(m);
+    if (m != n / m) ans.push_back(n / m);
   }
   sort(all(ans));
   return ans;

@@ -1,22 +1,48 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
-#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
+#include <atcoder/all>
+using namespace atcoder;
+#define rep(i, l, r) for (int i = (l); i < (r); i++)
+#define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(a, b) a = max(a, b)
-#define chmin(a, b) a = min(a, b)
-#define yn(p) cout << (p ? "Yes\n" : "No\n");
-#define dout(f) cout << fixed << setprecision(10) << f << '\n';
+#define chmax(x, y) x = max(x, y)
+#define chmin(x, y) x = min(x, y)
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define dout(x) cout << fixed << setprecision(10) << x << "\n"
 using ll = long long;
+using ull = unsigned long long;
 using ld = long double;
-using P = pair<int, int>;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
-// const ll mod =;
+const ld pi = acosl(-1.0L);
+// using mint = modint998244353;
+// using mint = modint1000000007;
 
-int main()
-{
+int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<pii> ab;
+  rep(_, 0, n) {
+    int a, b;
+    cin >> a >> b;
+    ab.emplace_back(-a, b);
+  }
+  sort(rall(ab));
+  vector<int> b(n);
+  rep(i, 0, n) b[i] = ab[i].second;
+  vector<int> dp(n + 1, inf);
+  dp[0] = -1;
+  int ans = 0;
+  for (int y : b) {
+    int i = lower_bound(all(dp), y) - dp.begin();
+    dp[i] = y;
+    chmax(ans, i);
+  }
+  cout << ans << endl;
+  return 0;
 }

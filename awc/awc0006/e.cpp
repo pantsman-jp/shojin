@@ -21,8 +21,34 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+ll op(ll a, ll b) { return a + b; }
+
+ll e() { return 0; }
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, q;
+  cin >> n >> q;
+  segtree<ll, op, e> st(n);
+  rep(i, 0, n) {
+    ll s;
+    cin >> s;
+    st.set(i, s);
+  }
+  rep(_, 0, q) {
+    int t;
+    cin >> t;
+    if (t == 1) {
+      int l, r;
+      cin >> l >> r;
+      cout << st.prod(l - 1, r) << endl;
+    } else {
+      int x;
+      ll v;
+      cin >> x >> v;
+      st.set(x - 1, v);
+    }
+  }
   return 0;
 }

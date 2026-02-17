@@ -24,5 +24,25 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<pii> lr(m);
+  rep(i, 0, m) cin >> lr[i].first >> lr[i].second;
+  sort(all(lr));
+  int i = 0, r = 0, ans = 0;
+  while (r < n) {
+    int best = r;
+    while (i < m and lr[i].first <= r + 1) {
+      chmax(best, lr[i].second);
+      i++;
+    }
+    if (best == r) {
+      cout << -1 << endl;
+      return 0;
+    }
+    r = best;
+    ans++;
+  }
+  cout << ans << endl;
   return 0;
 }

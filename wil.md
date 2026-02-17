@@ -16,6 +16,9 @@
 - [座標圧縮](#座標圧縮)
 - [二分探索](#二分探索)
 
+### データ構造
+- [セグメントツリー](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)
+
 ### 計算
 - [インクリメント](#インクリメント)
 - [整数型](#整数型)

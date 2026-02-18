@@ -24,5 +24,24 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<set<string>> w(n);
+  rep(i, 0, n) {
+    int m;
+    cin >> m;
+    rep(_, 0, m) {
+      string s;
+      cin >> s;
+      w[i].insert(s);
+    }
+  }
+  int ans = 0;
+  rep(i, 0, n) rep(j, i + 1, n) {
+    vector<string> common;
+    set_intersection(all(w[i]), all(w[j]), back_inserter(common));
+    if (common.size() >= k) ans++;
+  }
+  cout << ans << endl;
   return 0;
 }

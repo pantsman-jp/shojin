@@ -24,5 +24,33 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, a, b;
+  cin >> n >> a >> b;
+  vector tkh(n + 1, vector<int>(n + 1)), aok(n + 1, vector<int>(n + 1));
+  rep(_, 0, a) {
+    int r1, c1, r2, c2;
+    cin >> r1 >> c1 >> r2 >> c2;
+    r1--, c1--, r2--, c2--;
+    tkh[r1][c1]++, tkh[r1][c2 + 1]--;
+    tkh[r2 + 1][c1]--, tkh[r2 + 1][c2 + 1]++;
+  }
+  rep(_, 0, b) {
+    int r1, c1, r2, c2;
+    cin >> r1 >> c1 >> r2 >> c2;
+    r1--, c1--, r2--, c2--;
+    aok[r1][c1]++, aok[r1][c2 + 1]--;
+    aok[r2 + 1][c1]--, aok[r2 + 1][c2 + 1]++;
+  }
+  rep(i, 0, n) rep(j, 0, n) {
+    tkh[i][j + 1] += tkh[i][j];
+    aok[i][j + 1] += aok[i][j];
+  }
+  rep(j, 0, n) rep(i, 0, n) {
+    tkh[i + 1][j] += tkh[i][j];
+    aok[i + 1][j] += aok[i][j];
+  }
+  int ans = 0;
+  rep(i, 0, n) rep(j, 0, n) if (tkh[i][j] > 0 and aok[i][j] > 0) ans++;
+  cout << ans << endl;
   return 0;
 }

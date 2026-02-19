@@ -24,5 +24,20 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n, m;
+  cin >> n >> m;
+  vector<ll> f(n), d(n);
+  rep(i, 0, n) cin >> f[i] >> d[i];
+  priority_queue<pll> q;
+  rep(i, 0, n) q.push({f[i], i});
+  ll ans = 0;
+  for (ll cnt = 0; cnt < m and !q.empty(); cnt++) {
+    auto [val, idx] = q.top();
+    q.pop();
+    ans += val;
+    ll nxt = val - d[idx];
+    if (nxt > 0) q.push({nxt, idx});
+  }
+  cout << ans << endl;
   return 0;
 }

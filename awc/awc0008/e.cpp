@@ -24,5 +24,17 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  fenwick_tree<ll> fw(n);
+  ll ans = 0;
+  rep(i, 0, n) {
+    int v = a[i] - 1;
+    ans += i - fw.sum(0, v);
+    fw.add(v, 1);
+  }
+  cout << ans << endl;
   return 0;
 }

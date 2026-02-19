@@ -24,5 +24,19 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  ll sum = 0;
+  rep(i, 0, k) sum += a[i];
+  int ans = 0;
+  if (sum <= 0) ans++;
+  rep(i, 1, n - k + 1) {
+    sum += a[i + k - 1];
+    sum -= a[i - 1];
+    if (sum <= 0) ans++;
+  }
+  cout << ans << endl;
   return 0;
 }

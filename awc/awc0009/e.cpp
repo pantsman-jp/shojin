@@ -21,8 +21,30 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+pii op(pii a, pii b) {
+  auto [x, y] = a;
+  auto [z, w] = b;
+  return {max(x, z), min(y, w)};
+}
+
+pii e() { return {-inf, inf}; }
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, q;
+  cin >> n >> q;
+  segtree<pii, op, e> seg(n);
+  rep(i, 0, n) {
+    int a;
+    cin >> a;
+    seg.set(i, {a, a});
+  }
+  rep(_, 0, q) {
+    int l, r;
+    cin >> l >> r;
+    auto [mx, mn] = seg.prod(l - 1, r);
+    cout << mx - mn << endl;
+  }
   return 0;
 }

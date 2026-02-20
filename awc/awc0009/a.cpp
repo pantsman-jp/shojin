@@ -24,5 +24,14 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int k, m;
+  cin >> k >> m;
+  int sum = 0;
+  rep(_, 0, k) {
+    int l;
+    cin >> l;
+    sum += l;
+  }
+  cout << sum % m << endl;
   return 0;
 }

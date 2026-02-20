@@ -24,5 +24,15 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  ll t, k;
+  cin >> n >> t >> k;
+  vector<ll> h(n);
+  ll mn = INF;
+  rep(i, 0, n) cin >> h[i], chmin(mn, h[i]);
+  ll d = mn - 1;
+  int ans = 0;
+  rep(i, 0, n) if (h[i] <= t + k + d) ans++;
+  cout << ans << endl;
   return 0;
 }

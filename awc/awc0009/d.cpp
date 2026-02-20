@@ -24,5 +24,31 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n;
+  int m;
+  cin >> n >> m;
+  vector<pll> lr(m);
+  rep(i, 0, m) cin >> lr[i].first >> lr[i].second;
+  sort(all(lr));
+  vector<pll> seg;
+  rep(i, 0, m) {
+    if (seg.empty() or seg.back().second < lr[i].first - 1)
+      seg.push_back(lr[i]);
+    else
+      chmax(seg.back().second, lr[i].second);
+  }
+  ll now = 1;
+  for (auto [l, r] : seg) {
+    if (now < l) {
+      ll len = l - now;
+      if (n <= len) {
+        cout << now + n - 1 << "\n";
+        return 0;
+      }
+      n -= len;
+    }
+    now = r + 1;
+  }
+  cout << now + n - 1 << endl;
   return 0;
 }

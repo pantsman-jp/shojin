@@ -24,5 +24,30 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<int> p(n);
+  rep(i, 0, n) p[i] = i;
+  vector c(n, vector<ll>(n));
+  rep(i, 0, n) rep(j, 0, n) cin >> c[i][j];
+  ll ans = 0;
+  do {
+    int cnt = 0;
+    vector<bool> seen(n);
+    rep(i, 0, n) if (!seen[i]) {
+      cnt++;
+      int now = i;
+      while (!seen[now]) {
+        seen[now] = true;
+        now = p[now];
+      }
+    }
+    if (n - cnt <= k) {
+      ll sum = 0;
+      rep(i, 0, n) sum += c[p[i]][p[(i + 1) % n]];
+      chmax(ans, sum);
+    }
+  } while (next_permutation(all(p)));
+  cout << ans << endl;
   return 0;
 }

@@ -24,5 +24,16 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k, q;
+  cin >> n >> k >> q;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  dsu uf(n);
+  rep(i, 0, n - 1) if (abs(a[i] - a[i + 1]) <= k) uf.merge(i, i + 1);
+  rep(_, 0, q) {
+    int l, r;
+    cin >> l >> r;
+    yn(uf.same(l - 1, r - 1));
+  }
   return 0;
 }

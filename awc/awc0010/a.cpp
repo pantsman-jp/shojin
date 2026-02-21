@@ -24,5 +24,10 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  yn(accumulate(all(a), 0ll) >= m);
   return 0;
 }

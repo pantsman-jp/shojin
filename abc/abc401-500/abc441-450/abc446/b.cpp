@@ -24,5 +24,22 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<bool> used(m + 1);
+  rep(_, 0, n) {
+    int l;
+    cin >> l;
+    int ans = 0;
+    rep(_, 0, l) {
+      int x;
+      cin >> x;
+      if (!used[x] and ans == 0) {
+        used[x] = true;
+        ans = x;
+      }
+    }
+    cout << ans << endl;
+  }
   return 0;
 }

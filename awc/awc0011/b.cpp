@@ -24,5 +24,15 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int h, w, k;
+  cin >> h >> w >> k;
+  char c1, c2;
+  cin >> c1 >> c2;
+  vector<string> s(h);
+  rep(i, 0, h) cin >> s[i];
+  rep(i, 0, h) rep(x, 0, k) {
+    rep(j, 0, w) rep(y, 0, k) cout << (s[i][j] == '#' ? c1 : c2);
+    cout << endl;
+  }
   return 0;
 }

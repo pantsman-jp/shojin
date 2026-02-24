@@ -24,5 +24,27 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<int> a(n + 1);
+  vector<ll> b(n + 1);
+  rep(i, 1, n + 1) cin >> a[i] >> b[i];
+  vector pre(n + 2, vector<ll>(m + 1));
+  vector suf(n + 2, vector<ll>(m + 1));
+  rep(i, 1, n + 1) {
+    rep(w, 0, m + 1) pre[i][w] = pre[i - 1][w];
+    rep(w, a[i], m + 1) chmax(pre[i][w], pre[i - 1][w - a[i]] + b[i]);
+  }
+  rrep(i, 1, n + 1) {
+    rep(w, 0, m + 1) suf[i][w] = suf[i + 1][w];
+    rep(w, a[i], m + 1) suf[i][w] = max(suf[i][w], suf[i + 1][w - a[i]] + b[i]);
+  }
+  ll best = 0;
+  rep(w, 0, m + 1) chmax(best, pre[n][w]);
+  rep(i, 1, n + 1) {
+    ll mx = 0;
+    rep(w, 0, m - a[i] + 1) chmax(mx, pre[i - 1][w] + suf[i + 1][m - a[i] - w]);
+    yn(mx + b[i] == best);
+  }
   return 0;
 }

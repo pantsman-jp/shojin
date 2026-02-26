@@ -24,5 +24,16 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  k--;
+  vector<int> s(n);
+  int pt;
+  rep(i, 0, n) {
+    cin >> s[i];
+    if (i == k) pt = s[k];
+  }
+  sort(all(s));
+  cout << lower_bound(all(s), pt) - s.begin() << '\n';
   return 0;
 }

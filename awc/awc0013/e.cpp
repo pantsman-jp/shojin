@@ -22,7 +22,33 @@ const ld pi = acosl(-1.0L);
 // using mint = modint1000000007;
 
 int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<vector<int>> c(n);
+  rep(i, 0, n) {
+    int k;
+    cin >> k;
+    c[i].resize(k);
+    rep(j, 0, k) cin >> c[i][j], c[i][j]--;
+  }
+  vector<int> match(m, -1);
+  vector<bool> seen(m);
+  auto dfs = [&](auto dfs, int u) -> bool {
+    for (int v : c[u]) {
+      if (seen[v]) continue;
+      seen[v] = true;
+      if (match[v] == -1 or dfs(dfs, match[v])) {
+        match[v] = u;
+        return true;
+      }
+    }
+    return false;
+  };
+  int ans = 0;
+  rep(i, 0, n) {
+    seen.assign(m, false);
+    if (dfs(dfs, i)) ans++;
+  }
+  cout << ans << '\n';
   return 0;
 }

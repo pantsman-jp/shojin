@@ -24,5 +24,20 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  set<pii> s;
+  vector<pii> ab(m);
+  rep(i, 0, m) {
+    int a, b;
+    cin >> a >> b;
+    a--, b--;
+    ab[i] = {a, b};
+    s.insert({a, b});
+  }
+  int ans = 0;
+  for (auto [a, b] : ab)
+    if (a < b and s.count({b, a})) ans++;
+  cout << ans << '\n';
   return 0;
 }

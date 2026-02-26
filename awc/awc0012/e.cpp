@@ -24,5 +24,20 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  vector<ll> dp(n, -INF);
+  dp[0] = a[0];
+  deque<int> q;
+  q.push_back(0);
+  rep(i, 1, n) {
+    while (!q.empty() and q.front() < i - k) q.pop_front();
+    dp[i] = a[i] + dp[q.front()];
+    while (!q.empty() and dp[i] >= dp[q.back()]) q.pop_back();
+    q.push_back(i);
+  }
+  cout << dp[n - 1] << '\n';
   return 0;
 }

@@ -24,5 +24,13 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll g, m, d, k, v;
+  cin >> g >> m >> d >> k >> v;
+  bool ok;
+  if (d * k >= g)
+    ok = ((__int128)g * v <= (__int128)(m - g) * d);
+  else
+    ok = ((g - d * k + k) * v <= (m - g));
+  yn(ok);
   return 0;
 }

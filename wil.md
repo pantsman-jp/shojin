@@ -17,7 +17,8 @@
 - [二分探索](#二分探索)
 
 ### データ構造
-- [セグメントツリー](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)
+- [セグメント木](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)
+- [遅延セグメント木](https://github.com/atcoder/ac-library/blob/master/document_ja/lazysegtree.md)
 
 ### 計算
 - [インクリメント](#インクリメント)

@@ -24,5 +24,23 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s, t;
+  cin >> s >> t;
+  int n = s.size(), m = t.size();
+  int i = 0, j = 0;
+  ll ans = 0;
+  while (true) {
+    ll cnts = 0, cntt = 0;
+    while (i < n and s[i] == 'A') cnts++, i++;
+    while (j < m and t[j] == 'A') cntt++, j++;
+    ans += abs(cnts - cntt);
+    if (i == n and j == m) break;
+    if (i == n or j == m or s[i] != t[j]) {
+      cout << -1 << '\n';
+      return 0;
+    }
+    i++, j++;
+  }
+  cout << ans << '\n';
   return 0;
 }

@@ -24,5 +24,17 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  vector<int> cnt(26);
+  for (char c : s) cnt[c - 'a']++;
+  int mx = 0;
+  rep(i, 0, 26) chmax(mx, cnt[i]);
+  vector<bool> remove(26);
+  rep(i, 0, 26) if (cnt[i] == mx) remove[i] = true;
+  string ans = "";
+  for (char c : s)
+    if (!remove[c - 'a']) ans += c;
+  cout << ans << '\n';
   return 0;
 }

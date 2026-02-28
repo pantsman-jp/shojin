@@ -24,5 +24,17 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  int a = 0, ab = 0, ans = 0;
+  for (char c : s) {
+    if (c == 'A')
+      a++;
+    else if (c == 'B' and a > 0)
+      a--, ab++;
+    else if (c == 'C' and ab > 0)
+      ab--, ans++;
+  }
+  cout << ans << '\n';
   return 0;
 }

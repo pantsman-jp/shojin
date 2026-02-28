@@ -24,5 +24,30 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, q;
+  cin >> n >> q;
+  vector<int> p(n);
+  rep(i, 0, n) cin >> p[i], p[i]--;
+  vector<tuple<int, int, int>> qs(q);
+  rep(i, 0, q) {
+    int l, r;
+    cin >> l >> r;
+    qs[i] = {r, l - 1, i};
+  }
+  ranges::sort(qs);
+  fenwick_tree<int> fw(n);
+  vector<int> ans(q), prev(n, -1);
+  int now = 0;
+  for (auto [r, l, idx] : qs) {
+    while (now < r) {
+      int x = p[now];
+      if (prev[x] != -1) fw.add(prev[x], -1);
+      fw.add(now, 1);
+      prev[x] = now;
+      now++;
+    }
+    ans[idx] = fw.sum(l, r);
+  }
+  rep(i, 0, q) cout << ans[i] << '\n';
   return 0;
 }

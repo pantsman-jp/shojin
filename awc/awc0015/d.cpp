@@ -24,5 +24,24 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  ll c;
+  cin >> n >> m >> c;
+  vector<int> a(n), b(m);
+  rep(i, 0, n) cin >> a[i];
+  rep(i, 0, m) cin >> b[i];
+  sort(rall(a)), sort(rall(b));
+  int i = 0;
+  ll ans = 0;
+  for (int x : a) {
+    while (i < m and x < b[i]) i++;
+    if (i < m) {
+      ans += c;
+      i++;
+    } else {
+      break;
+    }
+  }
+  cout << ans << '\n';
   return 0;
 }

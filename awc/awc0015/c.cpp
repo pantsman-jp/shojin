@@ -24,5 +24,17 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  map<int, int> pcnt;
+  map<pii, int> qcnt;
+  ll ans = 0;
+  rep(_, 0, n) {
+    int p, q;
+    cin >> p >> q;
+    ans += pcnt[p] - qcnt[{p, q}];
+    pcnt[p]++, qcnt[{p, q}]++;
+  }
+  cout << ans << '\n';
   return 0;
 }

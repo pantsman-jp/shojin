@@ -24,5 +24,24 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, q;
+  ll k;
+  cin >> n >> k >> q;
+  vector<ll> a(n + 1);
+  rep(i, 1, n + 1) cin >> a[i];
+  vector<ll> suma(n + 1);
+  rep(i, 1, n + 1) suma[i] = suma[i - 1] + a[i];
+  vector<ll> f(n + 1);
+  rep(i, 1, n + 1) {
+    int idx = upper_bound(all(suma), suma[i - 1] + k) - suma.begin();
+    idx == n + 1 ? f[i] = n : f[i] = idx;
+  }
+  vector<ll> sumf(n + 1);
+  rep(i, 1, n + 1) sumf[i] = sumf[i - 1] + f[i];
+  rep(_, 0, q) {
+    int l, r;
+    cin >> l >> r;
+    cout << sumf[r] - sumf[l - 1] << '\n';
+  }
   return 0;
 }

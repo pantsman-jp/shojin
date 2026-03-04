@@ -24,5 +24,19 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  rep(_, 0, m) {
+    int b;
+    cin >> b;
+    b--;
+    a[b]++;
+    if (0 <= b - 1) a[b - 1]++;
+    if (b + 1 <= n - 1) a[b + 1]++;
+  }
+  for (int ans : a) cout << ans << " ";
+  cout << '\n';
   return 0;
 }

@@ -22,7 +22,29 @@ const ld pi = acosl(-1.0L);
 // using mint = modint1000000007;
 
 int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<ll> x(n), y(n);
+  rep(i, 0, n) cin >> x[i] >> y[i];
+  auto dist = [&](int i, int j) {
+    ll dx = x[i] - x[j];
+    ll dy = y[i] - y[j];
+    return dx * dx + dy * dy;
+  };
+  const ll inf = (1LL << 62);
+  vector dp(1 << (n - 1), vector<ll>(n, inf));
+  rep(i, 0, n - 1) dp[1 << i][i + 1] = dist(0, i + 1);
+  rep(s, 0, 1 << (n - 1)) {
+    rep(u, 1, n) {
+      if (!(s & (1 << (u - 1))) or dp[s][u] == inf) continue;
+      rep(v, 1, n) {
+        if (s & (1 << (v - 1))) continue;
+        chmin(dp[s | (1 << (v - 1))][v], dp[s][u] + dist(u, v));
+      }
+    }
+  }
+  ll ans = INF;
+  rep(i, 1, n) chmin(ans, dp[(1 << (n - 1)) - 1][i] + dist(i, 0));
+  cout << ans << '\n';
   return 0;
 }

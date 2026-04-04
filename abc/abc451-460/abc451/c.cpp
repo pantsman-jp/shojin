@@ -24,5 +24,17 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int q;
+  cin >> q;
+  priority_queue<int, vector<int>, greater<int>> pq;
+  rep(_, 0, q) {
+    int t, h;
+    cin >> t >> h;
+    if (t == 1)
+      pq.push(h);
+    else
+      while (!pq.empty() and pq.top() <= h) pq.pop();
+    cout << pq.size() << '\n';
+  }
   return 0;
 }

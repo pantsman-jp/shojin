@@ -24,5 +24,33 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  ll n;
+  cin >> n;
+  vector<ll> pow2;
+  for (ll x = 1; x <= 1000000000; x *= 2) pow2.push_back(x);
+  priority_queue<ll, vector<ll>, greater<ll>> pq;
+  unordered_set<ll> used;
+  for (auto x : pow2) {
+    pq.push(x);
+    used.insert(x);
+  }
+  ll cnt = 0;
+  while (!pq.empty()) {
+    ll now = pq.top();
+    pq.pop();
+    cnt++;
+    if (cnt == n) {
+      cout << now << '\n';
+      return 0;
+    }
+    for (auto x : pow2) {
+      string s = to_string(now) + to_string(x);
+      if (s.size() > 10) continue;
+      ll nxt = stoll(s);
+      if (nxt > 1000000000 or used.count(nxt)) continue;
+      used.insert(nxt);
+      pq.push(nxt);
+    }
+  }
   return 0;
 }

@@ -24,5 +24,9 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int m, d;
+  cin >> m >> d;
+  yn((m == 1 and d == 7) or (m == 3 and d == 3) or (m == 5 and d == 5) or
+     (m == 7 and d == 7) or (m == 9 and d == 9));
   return 0;
 }

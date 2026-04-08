@@ -24,5 +24,27 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> a(n), b(n);
+  rep(i, 0, n) cin >> a[i] >> b[i], b[i]--;
+  int m;
+  cin >> m;
+  vector<string> s(m);
+  rep(i, 0, m) cin >> s[i];
+  vector exist(11, vector(11, vector<bool>(26)));
+  for (string t : s) {
+    int ts = t.size();
+    rep(i, 0, ts) exist[ts][i][t[i] - 'a'] = true;
+  }
+  for (string t : s) {
+    if (t.size() != n) {
+      yn(false);
+      continue;
+    }
+    bool ok = true;
+    rep(i, 0, n) ok = ok and exist[a[i]][b[i]][t[i] - 'a'];
+    yn(ok);
+  }
   return 0;
 }

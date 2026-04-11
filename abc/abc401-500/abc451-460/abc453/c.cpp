@@ -21,8 +21,26 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+int solve(int i, double now, int n, vector<int>& l) {
+  if (i == n) return 0;
+  int ans = 0;
+  for (int pm : {1, -1}) {
+    double nxt = now + (pm * l[i]);
+    int pass = 0;
+    if (now * nxt < 0) pass = 1;
+    chmax(ans, pass + solve(i + 1, nxt, n, l));
+  }
+  return ans;
+}
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> array(n);
+  vector<int> l(n);
+  rep(i, 0, n) cin >> l[i];
+  cout << solve(0, 0.5, n, l) << '\n';
   return 0;
 }

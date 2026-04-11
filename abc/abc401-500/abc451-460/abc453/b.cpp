@@ -24,5 +24,16 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t, x;
+  cin >> t >> x;
+  int past = 0;
+  rep(i, 0, t + 1) {
+    int a;
+    cin >> a;
+    if (i == 0 or abs(a - past) >= x) {
+      cout << i << " " << a << '\n';
+      past = a;
+    }
+  }
   return 0;
 }

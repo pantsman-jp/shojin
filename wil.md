@@ -300,7 +300,7 @@ rep(i, 1, n) a[i] += a[i - 1];
 
 ---
 
-## Union Find
+## [Union Find](https://atcoder.github.io/ac-library/production/document_ja/dsu.html)
 ### Last Updated : 2026-01-30
 ### 使用問題
 - ABC399 C
@@ -459,4 +459,4 @@ cout << l << endl; // 最後に残った l が最小値
 --- -->
 
 ---
-Copyright © 2025-2026 pantsman
+Copyright © 2025-2026 [@pantsman](https://github.com/pantsman-jp)

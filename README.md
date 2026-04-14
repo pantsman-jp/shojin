@@ -28,6 +28,7 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 - [AtCoder Charts](https://atcoder-charts.netlify.app/#/)
 - [AtCoder Rating Comparer](https://atcoderratingcomparer.onrender.com)
 - [AtCoder Clans](https://kato-hiro.github.io/AtCoderClans/)
+- [AtCoder Algorithm Lectures](https://info.atcoder.jp/entry/algorithm_lectures/index)
 
 ---
 Copyright © 2025-2026 [@pantsman](https://github.com/pantsman-jp)

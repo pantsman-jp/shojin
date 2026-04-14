@@ -24,5 +24,18 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s, t;
+  cin >> s >> t;
+  int n = s.size(), m = t.size();
+  vector is(26, vector<int>(n + 2, n + 1));
+  rep(i, 0, n) is[s[i] - 'a'][i] = i + 1;
+  rep(c, 0, 26) rrep(i, 0, n + 1) chmin(is[c][i], is[c][i + 1]);
+  ll ans = 0;
+  rep(l, 0, n) {
+    int r = l;
+    for (char c : t) r = is[c - 'a'][r];
+    ans += r - l - 1;
+  }
+  cout << ans << '\n';
   return 0;
 }

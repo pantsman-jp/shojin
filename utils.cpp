@@ -343,10 +343,7 @@ vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
   int n = g.size();
   vector<vector<ll>> dist(n, vector<ll>(n, INF));
   rep(i, 0, n) dist[i][i] = 0;
-  rep(i, 0, n) {
-    for (const auto& e : g[i])
-      dist[i][e.first] = min(dist[i][e.first], e.second);
-  }
+  rep(i, 0, n) for (const auto& e : g[i]) chmin(dist[i][e.first], e.second);
   rep(k, 0, n) rep(i, 0, n) {
     if (dist[i][k] < INF) {
       rep(j, 0, n) {

@@ -318,7 +318,7 @@ bool is_dag(vector<vector<int>> g) {
 }
 
 // 0-indexed DAG トポロジカルソート（辞書順最小）
-vector<int> topo_sort(vector<vector<int>> g) {
+vector<int> topo_sort(vector<vector<int>>& g) {
   int n = g.size();
   vector<int> indeg(n, 0);
   rep(u, 0, n) for (int v : g[u]) indeg[v]++;

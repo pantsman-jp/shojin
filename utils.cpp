@@ -212,7 +212,7 @@ bool is_pali(string s) {
   return s == t;
 }
 
-// ラングレス圧縮
+// ランレングス圧縮（文字列）
 vector<pair<char, int>> rle(string s) {
   vector<pair<char, int>> ans;
   int cnt = 1;
@@ -222,6 +222,20 @@ vector<pair<char, int>> rle(string s) {
       cnt++;
     else
       ans.push_back({now, cnt}), now = s[i], cnt = 1;
+  }
+  ans.push_back({now, cnt});
+  return ans;
+}
+
+// ランレングス圧縮（整数配列）
+vector<pii> rle2(vector<int> xs) {
+  vector<pii> ans;
+  int cnt = 1, now = xs[0];
+  rep(i, 1, xs.size()) {
+    if (xs[i] == now)
+      cnt++;
+    else
+      ans.push_back({now, cnt}), now = xs[i], cnt = 1;
   }
   ans.push_back({now, cnt});
   return ans;

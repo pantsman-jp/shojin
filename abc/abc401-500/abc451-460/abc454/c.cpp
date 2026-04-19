@@ -24,5 +24,31 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<vector<int>> g(n);
+  rep(_, 0, m) {
+    int a, b;
+    cin >> a >> b;
+    g[a - 1].push_back(b - 1);
+  }
+  queue<int> q;
+  vector<bool> seen(n);
+  q.push(0);
+  seen[0] = true;
+  while (!q.empty()) {
+    int u = q.front();
+    q.pop();
+    for (int v : g[u]) {
+      if (!seen[v]) {
+        seen[v] = true;
+        q.push(v);
+      }
+    }
+  }
+  int ans = 0;
+  for (bool p : seen)
+    if (p) ans++;
+  cout << ans << '\n';
   return 0;
 }

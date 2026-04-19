@@ -24,5 +24,21 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m;
+  cin >> n >> m;
+  vector<int> cnt(m);
+  rep(_, 0, n) {
+    int f;
+    cin >> f;
+    f--;
+    cnt[f]++;
+  }
+  bool one = true, two = true;
+  rep(i, 0, m) {
+    if (cnt[i] > 1) one = false;
+    if (cnt[i] == 0) two = false;
+  }
+  yn(one);
+  yn(two);
   return 0;
 }

@@ -24,5 +24,84 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t;
+  cin >> t;
+  rep(_, 0, t) {
+    int n, a, b;
+    cin >> n >> a >> b;
+    if (n % 2 == 1 or (a + b) % 2 == 0) {
+      yn(false);
+      continue;
+    }
+    yn(true);
+    string ans = "";
+    int i = 1, j = 1, band = (b + 1) / 2;
+    rep(k, 1, n / 2 + 1) {
+      int c1 = 2 * k - 1, c2 = 2 * k;
+      if (k < band) {
+        while (i < n) {
+          i++;
+          ans += 'D';
+        }
+        ans += 'R';
+        j = c2;
+        while (i > 1) {
+          i--;
+          ans += 'U';
+        }
+        if (k < n / 2) {
+          ans += 'R';
+          j++;
+        }
+      } else if (k == band) {
+        while (!(i == n and (j == c1 or j == c2))) {
+          if (j == c1 and !(i == a and c2 == b)) {
+            j = c2;
+            ans += 'R';
+          } else if (j == c2 and !(i == a and c1 == b)) {
+            j = c1;
+            ans += 'L';
+          }
+          if (i < n) {
+            i++;
+            ans += 'D';
+          } else
+            break;
+        }
+        if (j == c1) {
+          ans += 'R';
+          j = c2;
+        }
+        if (k < n / 2) {
+          ans += 'R';
+          j++;
+        }
+      } else {
+        while (i < n) {
+          i++;
+          ans += 'D';
+        }
+        ans += 'R';
+        j++;
+        while (i > 1) {
+          i--;
+          ans += 'U';
+        }
+        if (k < n / 2) {
+          ans += 'R';
+          j++;
+        }
+      }
+    }
+    while (i < n) {
+      i++;
+      ans += 'D';
+    }
+    while (j < n) {
+      j++;
+      ans += 'R';
+    }
+    cout << ans << '\n';
+  }
   return 0;
 }

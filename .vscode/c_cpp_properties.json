@@ -1,34 +1,29 @@
 {
     "configurations": [
         {
-            "name": "Win32",
+            "name": "WSL-GCC15",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/Users/MizKen/Desktop/shojin/ac-library"
+                "~/repos/shojin/ac-library"
             ],
-            "compilerPath": "C:/msys64/mingw64/bin/g++.exe",
+            "compilerPath": "/usr/bin/g++-15",
+            "cStandard": "c17",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/local/opt/gcc@12/include/c++/12",
+                "/usr/local/opt/gcc@12/include/c++/12/x86_64-apple-darwin21",
+                "/usr/local/opt/gcc@12/include/c++/12/backward"
+            ],
+            "compilerPath": "/usr/local/bin/g++-12",
             "cStandard": "c17",
             "cppStandard": "c++20",
-            "intelliSenseMode": "windows-gcc-x64"
+            "intelliSenseMode": "macos-gcc-x64"
         }
     ],
     "version": 4
 }
-// for macOS
-// {
-//     "configurations": [
-//         {
-//             "name": "Mac",
-//             "includePath": [
-//                 "${workspaceFolder}/**",
-//                 "/usr/local/opt/gcc@12/include/c++/12",
-//                 "/usr/local/opt/gcc@12/include/c++/12/x86_64-apple-darwin21",
-//                 "/usr/local/opt/gcc@12/include/c++/12/backward"
-//             ],
-//             "compilerPath": "/usr/local/bin/g++-12",
-//             "cStandard": "c17",
-//             "cppStandard": "c++20",
-//             "intelliSenseMode": "macos-gcc-x64"
-//         }
-//     ]
-// }

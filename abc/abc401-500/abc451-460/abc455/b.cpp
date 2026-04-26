@@ -24,5 +24,21 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int h, w;
+  cin >> h >> w;
+  vector<string> s(h);
+  rep(i, 0, h) cin >> s[i];
+  int ans = 0;
+  rep(h1, 0, h) rep(h2, h1, h) rep(w1, 0, w) rep(w2, w1, w) {
+    bool ok = true;
+    rep(i, h1, h2 + 1) rep(j, w1, w2 + 1) {
+      if (s[i][j] != s[h1 + h2 - i][w1 + w2 - j]) {
+        ok = false;
+        break;
+      }
+    }
+    if (ok) ans++;
+  }
+  cout << ans << '\n';
   return 0;
 }

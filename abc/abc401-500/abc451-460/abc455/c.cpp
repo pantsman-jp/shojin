@@ -24,5 +24,20 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k;
+  cin >> n >> k;
+  map<ll, ll> cnt;
+  ll sum = 0;
+  rep(i, 0, n) {
+    ll a;
+    cin >> a;
+    cnt[a]++;
+    sum += a;
+  }
+  vector<ll> minus;
+  for (auto const& [a, c] : cnt) minus.push_back(a * c);
+  sort(rall(minus));
+  rep(i, 0, min(k, (int)minus.size())) sum -= minus[i];
+  cout << sum << '\n';
   return 0;
 }

@@ -4,7 +4,7 @@
             "name": "WSL-GCC15",
             "includePath": [
                 "${workspaceFolder}/**",
-                "~/repos/shojin/ac-library"
+                "/home/pantsman/repos/shojin/ac-library"
             ],
             "compilerPath": "/usr/bin/g++-15",
             "cStandard": "c17",

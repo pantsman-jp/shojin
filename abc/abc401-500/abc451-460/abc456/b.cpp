@@ -24,5 +24,19 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector a(3, vector<int>(6));
+  rep(i, 0, 3) rep(j, 0, 6) cin >> a[i][j];
+  int cnt = 0;
+  rep(i, 0, 6) rep(j, 0, 6) rep(k, 0, 6) {
+    if ((a[0][i] == 4 && a[1][j] == 5 && a[2][k] == 6) ||
+        (a[0][i] == 4 && a[1][j] == 6 && a[2][k] == 5) ||
+        (a[0][i] == 5 && a[1][j] == 4 && a[2][k] == 6) ||
+        (a[0][i] == 5 && a[1][j] == 6 && a[2][k] == 4) ||
+        (a[0][i] == 6 && a[1][j] == 4 && a[2][k] == 5) ||
+        (a[0][i] == 6 && a[1][j] == 5 && a[2][k] == 4)) {
+      cnt++;
+    }
+  }
+  dout(cnt / 216.0);
   return 0;
 }

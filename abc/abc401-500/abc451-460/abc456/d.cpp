@@ -18,11 +18,18 @@ using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);
-// using mint = modint998244353;
+using mint = modint998244353;
 // using mint = modint1000000007;
 
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  map<char, mint> dp;
+  for (char c : s) dp[c] = dp['a'] + dp['b'] + dp['c'] + 1;
+  mint ans = 0;
+  for (auto [_, v] : dp) ans += v;
+  cout << ans.val() << endl;
   return 0;
 }

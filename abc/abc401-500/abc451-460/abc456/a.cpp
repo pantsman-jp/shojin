@@ -24,5 +24,8 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int x;
+  cin >> x;
+  yn(3 <= x and x <= 18);
   return 0;
 }

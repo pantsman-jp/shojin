@@ -367,3 +367,6 @@ vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
   }
   return dist;
 }
+
+// 切り上げの割り算 ceil(a/b)
+ll divceil(ll a, ll b) { return (a + b - 1) / b; }

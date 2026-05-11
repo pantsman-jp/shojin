@@ -21,8 +21,33 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+ll divceil(ll a, ll b) { return (a + b - 1) / b; }
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  ll k;
+  cin >> n >> k;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  auto judge = [&](ll x) {
+    ll rem = k;
+    rep(i, 0, n) {
+      if (x <= a[i]) continue;
+      rem -= divceil(x - a[i], i + 1);
+      if (rem < 0) return false;
+    }
+    return true;
+  };
+  ll l = 1, r = ll(2e18) + 1;
+  while (r - l > 1) {
+    ll mid = (l + r) / 2;
+    if (judge(mid))
+      l = mid;
+    else
+      r = mid;
+  }
+  cout << l << endl;
   return 0;
 }

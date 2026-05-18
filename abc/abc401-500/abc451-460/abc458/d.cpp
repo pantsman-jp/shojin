@@ -24,5 +24,23 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int x, q;
+  cin >> x >> q;
+  multiset<int> s;
+  auto mid = s.insert(x);
+  rep(i, 0, q) {
+    int a, b;
+    cin >> a >> b;
+    s.insert(a);
+    s.insert(b);
+    int cnt = 0;
+    if (a < *mid) cnt++;
+    if (b < *mid) cnt++;
+    if (cnt == 2)
+      mid--;
+    else if (cnt == 0)
+      mid++;
+    cout << *mid << '\n';
+  }
   return 0;
 }

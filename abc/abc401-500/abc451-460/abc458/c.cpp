@@ -24,5 +24,16 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  cin >> s;
+  int n = s.size();
+  ll ans = 0;
+  rep(i, 0, n) {
+    if (s[i] == 'C') {
+      ans++;
+      ans += min(i, n - 1 - i);
+    }
+  }
+  cout << ans << '\n';
   return 0;
 }

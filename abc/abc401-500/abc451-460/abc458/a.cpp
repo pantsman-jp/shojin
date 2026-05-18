@@ -24,5 +24,10 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  string s;
+  int n;
+  cin >> s >> n;
+  rep(i, n, s.size() - n) cout << (char)s[i];
+  cout << '\n';
   return 0;
 }

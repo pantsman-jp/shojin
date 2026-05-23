@@ -24,5 +24,32 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, q;
+  cin >> n >> q;
+  vector<int> cnt(n);
+  fenwick_tree<int> ft(q + 2);
+  ft.add(0, n);
+  int offset = 0;
+  rep(_, 0, q) {
+    int t, x, y;
+    cin >> t;
+    if (t == 1) {
+      cin >> x;
+      x--;
+      ft.add(cnt[x], -1);
+      cnt[x]++;
+      ft.add(cnt[x], 1);
+      if (ft.sum(offset, offset + 1) == 0) {
+        offset++;
+      }
+    } else {
+      cin >> y;
+      if (y + offset > q + 1) {
+        cout << 0 << '\n';
+      } else {
+        cout << n - ft.sum(0, y + offset) << '\n';
+      }
+    }
+  }
   return 0;
 }

@@ -254,6 +254,11 @@ string padding(int x, int n, char c) {
   return string(max(0, x - (int)s.size()), c) + s;
 }
 
+// x 桁になるまで文字列 s を 文字 c で埋める
+string padding(int x, string s, char c) {
+  return string(max(0, x - (int)s.size()), c) + s;
+}
+
 // ユークリッド距離の二乗
 ll eudist(ll x1, ll y1, ll x2, ll y2) {
   return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);

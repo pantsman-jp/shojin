@@ -173,6 +173,18 @@ string to_base_k(ll n, int k) {
   return ans;
 }
 
+// 進数変換 (k進->10進)
+ll to_base_10(string n, int k) {
+  ll ans = 0;
+  reverse(all(n));
+  ll powk = 1;
+  for (char c : n) {
+    ans += (ll)(c - '0') * powk;
+    powk *= k;
+  }
+  return ans;
+}
+
 // 各桁の和
 int digit_sum(ll n) {
   int ans = 0;

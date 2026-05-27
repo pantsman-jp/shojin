@@ -118,7 +118,7 @@ ll ncr(ll n, ll r) {
 ll nc2(ll n) { return n * (n - 1) / 2; }
 
 // 余りの計算
-// pow(a,b) % mod
+/// pow(a,b) % mod
 mint modpow(ll a, ll b) {
   mint x = a, ans = 1;
   while (b > 0) {
@@ -128,24 +128,24 @@ mint modpow(ll a, ll b) {
   return ans;
 }
 
-// (a÷b) % mod
+/// (a÷b) % mod
 mint modiv(ll a, ll b) { return mint(a) * mint(b).inv(); }
 
-// 階乗: n!
+/// 階乗: n!
 mint modfact(int n) {
   mint ans = 1;
   rep(i, 1, n + 1) ans *= i;
   return ans;
 }
 
-// 順列: nPr
+/// 順列: nPr
 mint modnpr(ll n, ll r) {
   mint ans = 1;
   rep(i, 0, r) ans *= (n - i);
   return ans;
 }
 
-// 組み合わせ: nCr
+/// 組み合わせ: nCr
 mint modncr(ll n, ll r) {
   if (r < 0 or r > n) return 0;
   if (r > n - r) r = n - r;
@@ -154,7 +154,7 @@ mint modncr(ll n, ll r) {
   return num / den;
 }
 
-// 組み合わせ: nC2
+/// 組み合わせ: nC2
 mint modnc2(ll n) { return mint(n) * (n - 1) / 2; }
 
 // 平方数判別

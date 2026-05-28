@@ -118,7 +118,7 @@ ll ncr(ll n, ll r) {
 ll nc2(ll n) { return n * (n - 1) / 2; }
 
 // 余りの計算
-/// pow(a,b) % mod
+/// pow(a,b) % mod （繰り返し二乗法）
 mint modpow(ll a, ll b) {
   mint x = a, ans = 1;
   while (b > 0) {

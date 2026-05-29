@@ -1,11 +1,11 @@
 # What I Learned
 
-**注）特に断りがなければ、示されているコードの言語は C++**
-
 ## 目次
+
 ### [解答雛形](#解答雛形)
 
 ### アルゴリズム
+
 - [bit 全探索](#bit-全探索)
 - [累積和](#累積和)
 - [いもす法（累積和の応用）](#いもすimos法)
@@ -16,11 +16,25 @@
 - [二分探索](#二分探索)
 - [尺取り法](#尺取り法)
 
-### データ構造
+### [AC-Library](https://atcoder.github.io/ac-library/production/document_ja/)
+
+#### データ構造
+
+- [フェニック木](https://atcoder.github.io/ac-library/production/document_ja/fenwicktree.html)
 - [セグメント木](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)
 - [遅延セグメント木](https://github.com/atcoder/ac-library/blob/master/document_ja/lazysegtree.md)
+- [文字列](https://atcoder.github.io/ac-library/production/document_ja/string.html)
+
+#### 数学
+
+- [modint](https://atcoder.github.io/ac-library/production/document_ja/modint.html)
+
+#### グラフ
+
+- [DSU](https://atcoder.github.io/ac-library/production/document_ja/dsu.html)
 
 ### 計算
+
 - [インクリメント](#インクリメント)
 - [整数型](#整数型)
 - [整数除算](#整数除算の仕様)
@@ -30,7 +44,9 @@
 ---
 
 ## 解答雛形
+
 ### Last Updated : 2026-02-14
+
 ```C++
 #include <bits/stdc++.h>
 using namespace std;
@@ -67,9 +83,13 @@ int main() {
 ---
 
 ## 整数型
+
 ### Last Updated : 2026-01-30
+
 ### 概要
+
 C++ において、整数型は以下のようにまとめられる。
+
 | 整数型 | 記法 | 10 進法でのおおよその桁数 | 範囲 |
 | :---: | :---: | :---: | :---: |
 | 32 ビット整数（符号付き） | `int` | 10 | $-2^{31}$ ~ $2^{31} - 1$ |
@@ -82,14 +102,11 @@ C++ において、整数型は以下のようにまとめられる。
 
 
 ## bit 全探索
+
 ### last updated : 2026-01-15
-### 使用問題
-- 競プロ典型90題 002
-- ABC427 B
-- ABC321 C
-- ABC404 D
 
 ### 概要
+
 [ABC404 D](abc/abc401-500/abc401-410/abc404/d.cpp) がわかりやすい。
 
 部分集合のパターンを全列挙する際に用いる手法。
@@ -123,11 +140,15 @@ rep(bit, 0, 1 << n) {
 ---
 
 ## インクリメント
+
 ### Last Updated : 2026-01-30
+
 ### 概要
+
 インクリメントには二種類あり、`前置インクリメント` と `後置インクリメント` である。
 
 #### 前置インクリメント
+
 ```C++
 int i = 0;
 int var = ++i; // var = 1, i = 1
@@ -139,6 +160,7 @@ int var = ++i; // var = 1, i = 1
 3. 2.の評価値を `var` に代入 (`var = 1`)
 
 #### 後置インクリメント
+
 ```C++
 int i = 0;
 int var = i++; // var = 0, i = 1
@@ -155,13 +177,13 @@ int var = i++; // var = 0, i = 1
 ---
 
 ## 整数除算の仕様
+
 ### Last Updated : 2025-11-10
-### 使用問題
-- ABC334 B
-- ABC239 B
 
 ### 概要
+
 #### C++ の場合
+
 整数型 a, b について、`a / b` は **0に向かう丸め**、**少数部分を無視した数学的な商** として定義される。
 すなわち、`a / b` は **a ÷ b の小数部分を切り捨てる** 動作となる。
 C++ の整数除算では、「割られる数が負である」 + 「余りが発生している」場合に本来切り捨てられるべき部分が切り上げられてしまう。
@@ -187,7 +209,9 @@ ll floor(ll a, ll b)
 ```
 
 #### Python3 の場合
+
 ##### `/` 演算子
+
 常に少数点数を返す。
 
 例
@@ -197,6 +221,7 @@ ll floor(ll a, ll b)
 ```
 
 ##### `//` 演算子
+
 結果を floor に丸める。すなわち、負の無限大方向に切り下げる。
 ```Python
 7 // 3   # 2
@@ -208,9 +233,13 @@ ll floor(ll a, ll b)
 ---
 
 ## 累積和
+
 ### Last Updated : 2026-01-30
+
 ### 概要
+
 #### 0-index の場合
+
 配列 `a[0..n-1]` に対して
 
 ```C++
@@ -222,6 +251,7 @@ rep(i, 0, n) sum[i + 1] = sum[i] + a[i];
 区間 [l, r] の和を `sum[r+1] - sum[l]` で計算する。
 
 #### 1-index の場合
+
 配列 `a[1..n]` に対して
 
 ```C++
@@ -237,8 +267,11 @@ rep(i, 1, n + 1) sum[i] = sum[i - 1] + a[i];
 ---
 
 ## 深さ優先探索
+
 ### Last Updated : 2026-01-30
+
 ### 概要
+
 ```C++
 vector<vector<int>> g;
 vector<bool> seen;
@@ -256,8 +289,11 @@ void dfs(int u) {
 ---
 
 ## 幅優先探索
+
 ### Last Updated : 2026-01-30
+
 ### 概要
+
 ```C++
 vector<vector<int>> g;
 vector<bool> seen;
@@ -277,11 +313,11 @@ while (!q.empty())
 ---
 
 ## いもす（Imos）法
+
 ### Last Updated : 2026-01-30
-### 使用問題
-- ABC408 C
 
 ### 概要
+
 長さ `n + 1` の配列 `a` について、区間 `[l, r]` に値 `x` を加えたいとする。
 このとき、以下のような記録をすれば良い。
 
@@ -301,46 +337,9 @@ rep(i, 1, n) a[i] += a[i - 1];
 
 ---
 
-## [Union Find](https://atcoder.github.io/ac-library/production/document_ja/dsu.html)
-### Last Updated : 2026-01-30
-### 使用問題
-- ABC399 C
-- ABC325 C
-
-### 概要
-Union-Find は、グループ分けを効率的に管理できるデータ構造である。
-
-ある要素 `a` と `b` について、これらをグループに併合し（`merge(a, b)`）、
-`a` と `b` が同じグループに属するかを調べたり（`same(a, b)`）、
-要素 `a` の所属するグループのサイズを調べたり（`size(a)`）できる。
-
-AtCoder Library を用いて以下のように実行できる。
-
-```C++
-#include <bits/stdc++.h>
-using namespace std;
-#include <atcoder/all>
-using namespace atcoder;
-
-int main() {
-  int n = 5;
-  dsu uf(n);
-  uf.merge(0, 1);
-  uf.merge(1, 2);
-  if (uf.same(0, 2))
-    cout << "0 と 2 は同じグループです" << endl;
-  cout << "0 のグループサイズ: " << uf.size(0) << endl;
-}
-```
-
-[先頭に戻る](#what-i-learned)
-
----
-
 ## 尺取り法
+
 ### Last Updated : 2026-05-27
-### 使用問題
-- ABC430 C
 
 ### 概要
 
@@ -355,7 +354,7 @@ int main() {
 
 `l` と `r` はともに一方向にしか進まないため，全体で $O(N)$ となる。
 
-## 一般的な雛形
+### 一般的な雛形
 
 ```C++
 int l = 0;
@@ -380,8 +379,11 @@ rep(r, 0, n) {
 ---
 
 ## 天井関数の床関数による言い換え
+
 ### Last Updated : 2025-11-12
+
 ### 概要
+
 ```C++
 ceil(a / b) = (a + b - 1) / b
 ```
@@ -391,8 +393,11 @@ ceil(a / b) = (a + b - 1) / b
 ---
 
 ## 座標圧縮
+
 ### Last Updated : 2025-12-24
+
 ### 概要
+
 数列のそれぞれの要素が **全体で何番目に小さいか** を求める。
 
 例:
@@ -427,9 +432,13 @@ rep(i, 0, a.size()) ans[i] = lower_bound(all(b), a[i]) - b.begin();
 ---
 
 ## 二分探索
+
 ### Last Updated : 2026-02-14
+
 ### 概要
+
 #### 最小値の最大化
+
 数軸上で、条件は `[True, True, True, False, False]` のように並ぶ。  
 `l` は `True` を追い越して `False` の領域で止まる。
 `r` は `False` 側から下がってきて 最後の `True` で止まる。
@@ -448,6 +457,7 @@ cout << r << endl; // 最後に残った r が最大値
 ```
 
 #### 最大値の最小化
+
 数軸上で、条件は `[False, False, True, True, True]` のように並ぶ。  
 `r` は `True` を追い越して `False` の領域で止まる。
 `l` は `False` から上がってきて、最初の `True` で止まる。
@@ -631,10 +641,15 @@ __builtin_clzll(x)
 ---
 
 <!-- ## 
+
 ### Last Updated : 
+
 ### 使用問題
+
 - 
+
 ### 概要
+
 
 
 [先頭に戻る](#what-i-learned)

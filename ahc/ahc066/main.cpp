@@ -61,7 +61,7 @@ vector<int> get_best_path(Point start, int start_dir, Point goal,
     if (s.y == goal.y && s.x == goal.x) continue;
     if (can_move(s.y, s.x, s.dir)) {
       int ny = s.y + dy[s.dir], nx = s.x + dx[s.dir];
-      int ncost = s.cost + 10;
+      int ncost = s.cost + 1;  // 前進コストを10から1に修正
       if (ncost < dist[ny][nx][s.dir]) {
         dist[ny][nx][s.dir] = ncost;
         prev[ny][nx][s.dir] = {s.y, s.x, s.dir};
@@ -170,10 +170,16 @@ int main() {
             .count() /
         1000.0;
     if (elapsed > 1.7) break;
+    bool is_swap = (rng() % 2 == 0);
     int u = rng() % M;
     int v_idx = rng() % M;
     if (u == v_idx) continue;
-    swap(current_order[u], current_order[v_idx]);
+    if (is_swap) {
+      swap(current_order[u], current_order[v_idx]);
+    } else {
+      if (u > v_idx) swap(u, v_idx);
+      reverse(current_order.begin() + u, current_order.begin() + v_idx + 1);
+    }
     int new_score = calc_score(current_order);
     double temp = temp_start + (temp_end - temp_start) * (elapsed / 1.7);
     if (new_score < current_score ||
@@ -184,7 +190,11 @@ int main() {
         best_order = current_order;
       }
     } else {
-      swap(current_order[u], current_order[v_idx]);
+      if (is_swap) {
+        swap(current_order[u], current_order[v_idx]);
+      } else {
+        reverse(current_order.begin() + u, current_order.begin() + v_idx + 1);
+      }
     }
   }
   string raw_ops = "";
@@ -219,7 +229,8 @@ int main() {
   int L = raw_ops.length();
   string best_sub = "";
   int max_saved = 0;
-  for (int len = 3; len <= 100; len++) {
+  int max_len_to_check = L / 2;
+  for (int len = 3; len <= max_len_to_check; len++) {
     unordered_map<string, int> cnt;
     for (int i = 0; i <= L - len; i++) {
       cnt[raw_ops.substr(i, len)]++;

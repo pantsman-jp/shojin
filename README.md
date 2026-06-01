@@ -1,10 +1,19 @@
 # Shojin
+
 This repository contains my solutions to problems on [AtCoder](https://atcoder.jp/).
 
-## My Rating (Algorithm)
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fpantsman)](https://atcoder.jp/users/pantsman)
+## My Rating
+
+### Algorithm
+
+[![Rating](https://badgen.org/img/atcoder/pantsman/rating/algorithm?style=flat)](https://atcoder.jp/users/pantsman?contestType=algo)
+
+### Heuristic
+
+[![Rating(Heuristic)](https://badgen.org/img/atcoder/pantsman/rating/heuristic?style=flat)](https://atcoder.jp/users/pantsman?contestType=heuristic)
 
 ## URL
+
 | folder name | URL |
 | ---: | --- |
 | abc | [AtCoder Beginner Contest](https://atcoder.jp/contests/archive?ratedType=1&category=0&keyword=) |
@@ -18,6 +27,7 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 | typical90 | [競プロ典型 90 問](https://atcoder.jp/contests/typical90) |
 
 ## Tools I use
+
 - [AtCoder Problems](https://kenkoooo.com/atcoder)
 - [AtCoder Replay](https://atcoder-replay.kakira.dev)
 - [AtCoder Rating Estimator](https://atcoder-rating-estimator.pages.dev)

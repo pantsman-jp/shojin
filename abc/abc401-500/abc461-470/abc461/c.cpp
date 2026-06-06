@@ -24,5 +24,28 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, k, m;
+  cin >> n >> k >> m;
+  vector<vector<ll>> gems(n + 1);
+  rep(i, 0, n) {
+    int c;
+    ll v;
+    cin >> c >> v;
+    gems[c].push_back(v);
+  }
+  vector<ll> mxs, rest;
+  rep(i, 1, n + 1) {
+    if (gems[i].empty()) continue;
+    sort(rall(gems[i]));
+    mxs.push_back(gems[i][0]);
+    rep(j, 1, gems[i].size()) rest.push_back(gems[i][j]);
+  }
+  sort(rall(mxs));
+  ll ans = 0;
+  rep(i, 0, m) ans += mxs[i];
+  rep(i, m, mxs.size()) rest.push_back(mxs[i]);
+  sort(rall(rest));
+  rep(i, 0, k - m) ans += rest[i];
+  cout << ans << '\n';
   return 0;
 }

@@ -24,5 +24,13 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<int> a(n), b(n);
+  rep(i, 0, n) cin >> a[i], a[i]--;
+  rep(i, 0, n) cin >> b[i], b[i]--;
+  bool ok = true;
+  rep(i, 0, n) if (i != b[a[i]]) ok = false;
+  yn(ok);
   return 0;
 }

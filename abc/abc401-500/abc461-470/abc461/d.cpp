@@ -24,5 +24,26 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int h, w, k;
+  cin >> h >> w >> k;
+  vector<string> s(h);
+  rep(i, 0, h) cin >> s[i];
+  vector a(h, vector<int>(w));
+  rep(i, 0, h) rep(j, 0, w) a[i][j] = s[i][j] - '0';
+  vector sum(h + 1, vector<int>(w + 1));
+  rep(i, 0, h) rep(j, 0, w) {
+    sum[i + 1][j + 1] = sum[i][j + 1] + sum[i + 1][j] - sum[i][j] + a[i][j];
+  }
+  ll ans = 0;
+  rep(i1, 0, h) rep(i2, i1 + 1, h + 1) {
+    vector<int> cnt(h * w + 1);
+    rep(j, 0, w + 1) {
+      int nowsum = sum[i2][j] - sum[i1][j];
+      int target = nowsum - k;
+      if (0 <= target and target <= h * w) ans += cnt[target];
+      if (nowsum <= h * w) cnt[nowsum]++;
+    }
+  }
+  cout << ans << '\n';
   return 0;
 }

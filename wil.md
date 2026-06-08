@@ -268,7 +268,7 @@ rep(i, 1, n + 1) sum[i] = sum[i - 1] + a[i];
 
 ## 深さ優先探索
 
-### Last Updated : 2026-01-30
+### Last Updated : 2026-06-08
 
 ### 概要
 
@@ -282,6 +282,21 @@ void dfs(int u) {
     if (!seen[v]) dfs(v);
   seen[u] = false;
 }
+```
+
+ラムダ式の場合。
+
+```C++
+vector<vector<int>> g;
+vector<bool> seen;
+
+auto dfs = [&](auto self, int u) -> void {
+  seen[u] = true;
+  for (int v : g[u]) {
+    if (!seen[v]) self(self, v);
+  }
+  seen[u] = false;
+};
 ```
 
 [先頭に戻る](#what-i-learned)

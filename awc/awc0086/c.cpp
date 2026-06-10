@@ -24,5 +24,22 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, m, q;
+  cin >> n >> m >> q;
+  vector<int> b(m);
+  rep(i, 0, m) cin >> b[i];
+  vector<int> query;
+  rep(_, 0, q) {
+    int l, r;
+    cin >> l >> r;
+    query.push_back(l);
+    query.push_back(r + 1);
+  }
+  sort(all(query));
+  int ans = 0;
+  rep(i, 0, m) {
+    if ((upper_bound(all(query), b[i]) - query.begin()) % 2 == 1) ans++;
+  }
+  cout << ans << '\n';
   return 0;
 }

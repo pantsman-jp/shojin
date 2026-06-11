@@ -12,20 +12,6 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 
 [![Rating(Heuristic)](https://badgen.org/img/atcoder/pantsman/rating/heuristic?style=flat)](https://atcoder.jp/users/pantsman?contestType=heuristic)
 
-## URL
-
-| folder name | URL |
-| ---: | --- |
-| abc | [AtCoder Beginner Contest](https://atcoder.jp/contests/archive?ratedType=1&category=0&keyword=) |
-| abs | [AtCoder Beginners Selection](https://atcoder.jp/contests/abs) |
-| ac-library | [AtCoder Library](https://github.com/atcoder/ac-library) |
-| adt | [AtCoder Daily Training](https://atcoder.jp/contests/adt_top/) |
-| awc | [AtCoder Weekday Contest](https://atcoder.jp/contests/archive?ratedType=0&category=20&keyword=) |
-| edpc | [Educational DP Contest](https://atcoder.jp/contests/dp) |
-| math-algo | [アルゴリズムと数学　演習問題集](https://atcoder.jp/contests/math-and-algorithm) |
-| other | [レッドコーダーが教える、競プロ・AtCoder上達のガイドライン【中級編：目指せ水色コーダー！】](https://qiita.com/e869120/items/eb50fdaece12be418faa) |
-| typical90 | [競プロ典型 90 問](https://atcoder.jp/contests/typical90) |
-
 ## Tools I use
 
 - [AtCoder Problems](https://kenkoooo.com/atcoder)
@@ -41,4 +27,5 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 - [AtCoder Algorithm Lectures](https://info.atcoder.jp/entry/algorithm_lectures/index)
 
 ---
+
 Copyright © 2025-2026 [@pantsman](https://github.com/pantsman-jp)

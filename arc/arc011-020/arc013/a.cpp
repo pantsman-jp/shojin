@@ -24,5 +24,16 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  vector<int> box(3), load(3);
+  rep(i, 0, 3) cin >> box[i];
+  rep(i, 0, 3) cin >> load[i];
+  sort(all(load));
+  int ans = 0;
+  do {
+    int cnt = 1;
+    rep(i, 0, 3) cnt *= box[i] / load[i];
+    chmax(ans, cnt);
+  } while (next_permutation(all(load)));
+  cout << ans << '\n';
   return 0;
 }

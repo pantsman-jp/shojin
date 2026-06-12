@@ -24,5 +24,16 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  return 0;
+  int c;
+  cin >> c;
+  ll nmx = 0, mmx = 0, lmx = 0;
+  rep(_, 0, c) {
+    vector<ll> a(3);
+    rep(i, 0, 3) cin >> a[i];
+    sort(all(a));
+    chmax(nmx, a[0]);
+    chmax(mmx, a[1]);
+    chmax(lmx, a[2]);
+  }
+  cout << nmx * mmx * lmx << '\n';
 }

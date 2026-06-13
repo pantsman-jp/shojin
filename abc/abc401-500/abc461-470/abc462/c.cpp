@@ -24,5 +24,17 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<pii> pts(n);
+  rep(i, 0, n) cin >> pts[i].first >> pts[i].second;
+  sort(all(pts));
+  int ans = 0;
+  int min_y = inf;
+  rep(i, 0, n) {
+    if (pts[i].second < min_y) ans++;
+    chmin(min_y, pts[i].second);
+  }
+  cout << ans << '\n';
   return 0;
 }

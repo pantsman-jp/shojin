@@ -24,5 +24,12 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t;
+  cin >> t;
+  rep(_, 0, t) {
+    ll a, b, x, y;
+    cin >> a >> b >> x >> y;
+    x = abs(x), y = abs(y);
+  }
   return 0;
 }

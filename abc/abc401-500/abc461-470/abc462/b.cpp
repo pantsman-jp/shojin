@@ -24,5 +24,22 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n;
+  cin >> n;
+  vector<vector<int>> gifted(n + 1);
+  rep(i, 1, n + 1) {
+    int k;
+    cin >> k;
+    rep(_, 0, k) {
+      int a;
+      cin >> a;
+      gifted[a].push_back(i);
+    }
+  }
+  rep(i, 1, n + 1) {
+    cout << gifted[i].size();
+    for (int ans : gifted[i]) cout << ' ' << ans;
+    cout << '\n';
+  }
   return 0;
 }

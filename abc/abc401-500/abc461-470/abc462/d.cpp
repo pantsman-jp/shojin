@@ -21,8 +21,29 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+ll nc2(ll n) { return n * (n - 1) / 2; }
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int n, d;
+  cin >> n >> d;
+  int m = 1000001;
+  vector<int> sum(m);
+  rep(_, 0, n) {
+    int s, t;
+    cin >> s >> t;
+    int limit = t - d;
+    if (s <= limit) {
+      sum[s]++;
+      sum[limit + 1]--;
+    }
+  }
+  ll ans = 0, now = 0;
+  rep(x, 1, m) {
+    now += sum[x];
+    if (now >= 2) ans += nc2(now);
+  }
+  cout << ans << '\n';
   return 0;
 }

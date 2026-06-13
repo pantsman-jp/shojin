@@ -31,23 +31,24 @@ int main() {
   cin >> n >> k;
   vector<ll> a(n);
   rep(i, 0, n) cin >> a[i];
-  auto judge = [&](ll x) {
-    ll rem = k;
+  auto check = [&](ll x) -> bool {
+    ll cnt = 0;
     rep(i, 0, n) {
-      if (x <= a[i]) continue;
-      rem -= divceil(x - a[i], i + 1);
-      if (rem < 0) return false;
+      if (a[i] >= x) continue;
+      ll needed = divceil(x - a[i], i + 1);
+      if (k - cnt < needed) return false;
+      cnt += needed;
     }
     return true;
   };
-  ll l = 1, r = ll(2e18) + 1;
-  while (r - l > 1) {
-    ll mid = (l + r) / 2;
-    if (judge(mid))
-      l = mid;
+  ll l = 1, r = 3e18 + 1;
+  while (l <= r) {
+    ll mid = l + (r - l) / 2;
+    if (check(mid))
+      l = mid + 1;
     else
-      r = mid;
+      r = mid - 1;
   }
-  cout << l << endl;
+  cout << r << endl;
   return 0;
 }

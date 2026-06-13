@@ -26,21 +26,28 @@ int main() {
   cin.tie(nullptr);
   int x, q;
   cin >> x >> q;
-  multiset<int> s;
-  auto mid = s.insert(x);
-  rep(i, 0, q) {
-    int a, b;
-    cin >> a >> b;
-    s.insert(a);
-    s.insert(b);
-    int cnt = 0;
-    if (a < *mid) cnt++;
-    if (b < *mid) cnt++;
-    if (cnt == 2)
-      mid--;
-    else if (cnt == 0)
-      mid++;
-    cout << *mid << '\n';
+  priority_queue<int> l;
+  priority_queue<int, vector<int>, greater<int>> r;
+  rep(_, 0, q) {
+    rep(__, 0, 2) {
+      int a;
+      cin >> a;
+      if (a < x)
+        l.push(a);
+      else
+        r.push(a);
+    }
+    while (l.size() > r.size()) {
+      r.push(x);
+      x = l.top();
+      l.pop();
+    }
+    while (r.size() > l.size()) {
+      l.push(x);
+      x = r.top();
+      r.pop();
+    }
+    cout << x << '\n';
   }
   return 0;
 }

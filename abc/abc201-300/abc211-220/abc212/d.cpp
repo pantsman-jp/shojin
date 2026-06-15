@@ -8,8 +8,8 @@ using namespace atcoder;
 #define rall(p) p.rbegin(), p.rend()
 #define chmax(x, y) x = max(x, y)
 #define chmin(x, y) x = min(x, y)
-#define yn(tf) cout << (tf ? "Yes\n" : "No\n");
-#define dout(x) cout << fixed << setprecision(10) << x << "\n";
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -24,23 +24,23 @@ const ld pi = acosl(-1.0L);
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  int Q;
-  cin >> Q;
+  int q;
+  cin >> q;
+  priority_queue<ll, vector<ll>, greater<ll>> pq;
   ll diff = 0;
-  priority_queue<ll, vector<ll>, greater<ll>> q;
-  rep(_, 0, Q) {
+  rep(_, 0, q) {
     int p;
     ll x;
     cin >> p;
     if (p == 1) {
       cin >> x;
-      q.push(x - diff);
+      pq.push(x - diff);
     } else if (p == 2) {
       cin >> x;
       diff += x;
     } else {
-      cout << q.top() + diff << endl;
-      q.pop();
+      cout << pq.top() + diff << '\n';
+      pq.pop();
     }
   }
   return 0;

@@ -8,8 +8,8 @@ using namespace atcoder;
 #define rall(p) p.rbegin(), p.rend()
 #define chmax(x, y) x = max(x, y)
 #define chmin(x, y) x = min(x, y)
-#define yn(tf) cout << (tf ? "Yes\n" : "No\n");
-#define dout(x) cout << fixed << setprecision(10) << x << "\n";
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -26,34 +26,39 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  queue<int> q;
-  vector<queue<int>> a(m);
-  vector<vector<int>> mem(n);
+  vector<vector<int>> a(m), pos(n);
   rep(i, 0, m) {
     int k;
     cin >> k;
-    rep(_, 0, k) {
-      int aij;
-      cin >> aij;
-      a[i].push(aij - 1);
+    a[i] = vector<int>(k);
+    rep(j, 0, k) cin >> a[i][j];
+    rep(j, 0, k) {
+      a[i][j]--;
+      pos[a[i][j]].push_back(i);
     }
-    mem[a[i].front()].push_back(i);
   }
-  rep(i, 0, n) if (mem[i].size() == 2) q.push(i);
-  while (!q.empty()) {
-    int now = q.front();
+  vector<int> cnt(n);
+  queue<int> q;
+  rep(i, 0, m) {
+    int t = a[i].back();
+    cnt[t]++;
+  }
+  rep(i, 0, n) if (cnt[i] == 2) q.push(i);
+  int take = 0;
+  while (q.size()) {
+    int x = q.front();
     q.pop();
-    for (auto p : mem[now]) {
-      a[p].pop();
-      if (!a[p].empty()) {
-        mem[a[p].front()].push_back(p);
-        if (mem[a[p].front()].size() == 2) q.push(a[p].front());
+    take++;
+    rep(i, 0, 2) {
+      int p = pos[x][i];
+      a[p].pop_back();
+      if (a[p].size()) {
+        int t = a[p].back();
+        cnt[t]++;
+        if (cnt[t] == 2) q.push(t);
       }
     }
   }
-  bool ok = true;
-  for (auto p : a)
-    if (!p.empty()) ok = false;
-  yn(ok);
+  yn(take == n);
   return 0;
 }

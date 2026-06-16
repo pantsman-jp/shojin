@@ -106,23 +106,6 @@ vector<pll> factorization(ll n) {
   return ans;
 }
 
-// 最大公約数（配列）
-ll gcd_all(vector<ll> xs) {
-  ll ans = xs[0];
-  rep(i, 1, xs.size()) ans = gcd(ans, xs[i]);
-  return ans;
-}
-
-// 最小公倍数
-ll lcm(ll x, ll y) { return x / gcd(x, y) * y; }
-
-// 最小公倍数（配列）
-ll lcm_all(vector<ll> xs) {
-  ll ans = xs[0];
-  rep(i, 1, xs.size()) ans = ans / gcd(ans, xs[i]) * xs[i];
-  return ans;
-}
-
 // 階乗
 ll fact(ll n, ll mod) {
   ll ans = 1;
@@ -159,7 +142,7 @@ mint modpow(ll a, ll b) {
 }
 
 /// (a÷b) % mod
-mint modiv(ll a, ll b) { return mint(a) * mint(b).inv(); }
+mint modinv(ll a, ll b) { return mint(a) * mint(b).inv(); }
 
 /// 階乗: n!
 mint modfact(int n) {
@@ -414,6 +397,3 @@ vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
   }
   return dist;
 }
-
-// 切り上げの割り算 ceil(a/b)
-ll divceil(ll a, ll b) { return (a + b - 1) / b; }

@@ -8,8 +8,8 @@ using namespace atcoder;
 #define rall(p) p.rbegin(), p.rend()
 #define chmax(x, y) x = max(x, y)
 #define chmin(x, y) x = min(x, y)
-#define yn(tf) cout << (tf ? "Yes\n" : "No\n");
-#define dout(x) cout << fixed << setprecision(10) << x << "\n";
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -26,21 +26,22 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  set<pii> pos;
+  vector<pii> pos(n);
+  set<pii> s;
   rep(i, 0, n) {
     int x, y;
     cin >> x >> y;
-    pos.insert({x, y});
+    s.insert({x, y});
+    pos[i] = {x, y};
   }
-  int ans = 0;
-  for (auto [x1, y1] : pos) {
-    for (auto [x2, y2] : pos) {
-      if (x1 >= x2 or y1 >= y2) continue;
-      if (pos.find({x1, y2}) == pos.end()) continue;
-      if (pos.find({x2, y1}) == pos.end()) continue;
-      ans++;
+  ll ans = 0;
+  rep(i, 0, n) rep(j, i + 1, n) {
+    auto [x1, y1] = pos[i];
+    auto [x2, y2] = pos[j];
+    if (x1 != x2 and y1 != y2) {
+      if (s.count({x1, y2}) == 1 and s.count({x2, y1}) == 1) ans++;
     }
   }
-  cout << ans << endl;
+  cout << ans / 2 << '\n';
   return 0;
 }

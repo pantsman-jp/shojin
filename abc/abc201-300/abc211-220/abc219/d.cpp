@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 #include <atcoder/all>
@@ -9,8 +8,8 @@ using namespace atcoder;
 #define rall(p) p.rbegin(), p.rend()
 #define chmax(x, y) x = max(x, y)
 #define chmin(x, y) x = min(x, y)
-#define yn(tf) cout << (tf ? "Yes\n" : "No\n");
-#define dout(x) cout << fixed << setprecision(10) << x << "\n";
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -29,14 +28,16 @@ int main() {
   cin >> n >> x >> y;
   vector dp(x + 1, vector<int>(y + 1, inf));
   dp[0][0] = 0;
-  rep(_, 0, n) {
+  rep(i, 0, n) {
     int a, b;
     cin >> a >> b;
-    rrep(j, 0, x + 1) rrep(k, 0, y + 1) {
-      chmin(dp[min(j + a, x)][min(k + b, y)], dp[j][k] + 1);
+    vector p(x + 1, vector<int>(y + 1, inf));
+    swap(dp, p);
+    rep(j, 0, x + 1) rep(k, 0, y + 1) {
+      chmin(dp[j][k], p[j][k]);
+      chmin(dp[min(j + a, x)][min(k + b, y)], p[j][k] + 1);
     }
   }
-  int ans = dp[x][y];
-  if (ans == inf) ans = -1;
-  cout << ans << endl;
+  cout << (dp[x][y] == inf ? -1 : dp[x][y]) << '\n';
+  return 0;
 }

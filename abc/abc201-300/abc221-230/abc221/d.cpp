@@ -6,10 +6,37 @@ using namespace atcoder;
 #define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(x, y) x = max(x, y)
-#define chmin(x, y) x = min(x, y)
-#define yn(tf) cout << (tf ? "Yes\n" : "No\n");
-#define dout(x) cout << fixed << setprecision(10) << x << "\n";
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / std::gcd(a, b)) * b;
+}
+template <typename T>
+inline T ceil(T a, T b) {
+  return (a + (b - 1)) / b;
+}
+template <typename T>
+inline T floor(T a, T b) {
+  return a / b;
+}
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -26,21 +53,21 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  map<int, int> mp;
-  rep(i, 0, n) {
+  vector<pii> event;
+  rep(_, 0, n) {
     int a, b;
     cin >> a >> b;
-    mp[a]++;
-    mp[a + b]--;
+    event.emplace_back(a, 1);
+    event.emplace_back(a + b, -1);
   }
-  int pre = -1, now = 0;
+  sort(all(event));
   vector<int> ans(n + 1);
-  for (auto [t, x] : mp) {
-    ans[now] += t - pre;
-    now += x;
-    pre = t;
+  int cnt = 0, prev = 0;
+  rep(i, 0, 2 * n - 1) {
+    cnt += event[i].second;
+    ans[cnt] += event[i + 1].first - event[i].first;
   }
-  rep(i, 1, n + 1) cout << ans[i] << " ";
-  cout << endl;
+  rep(i, 1, n + 1) cout << ans[i] << ' ';
+  cout << '\n';
   return 0;
 }

@@ -31,7 +31,7 @@ inline T lcm(T a, T b) {
 }
 template <typename T>
 inline T ceil(T a, T b) {
-  return (a + (b - 1)) / b;
+  return (a + b - 1) / b;
 }
 using ll = long long;
 using ull = unsigned long long;

@@ -6,10 +6,33 @@ using namespace atcoder;
 #define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(x, y) x = max(x, y)
-#define chmin(x, y) x = min(x, y)
-#define yn(tf) cout << (tf ? "Yes\n" : "No\n");
-#define dout(x) cout << fixed << setprecision(10) << x << "\n";
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / gcd(a, b)) * b;
+}
+template <typename T>
+inline T ceil(T a, T b) {
+  return (a + b - 1) / b;
+}
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -21,7 +44,7 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
-vector<int> topo_sort(vector<vector<int>> g) {
+vector<int> topo_sort(vector<vector<int>>& g) {
   int n = g.size();
   vector<int> indeg(n, 0);
   rep(u, 0, n) for (int v : g[u]) indeg[v]++;
@@ -50,15 +73,14 @@ int main() {
   rep(_, 0, m) {
     int a, b;
     cin >> a >> b;
-    a--, b--;
-    g[a].push_back(b);
+    g[a - 1].push_back(b - 1);
   }
   vector<int> ans = topo_sort(g);
-  if (ans.size() < n)
-    cout << -1 << endl;
-  else {
-    for (auto x : ans) cout << x + 1 << " ";
-    cout << endl;
+  if (ans.empty()) {
+    cout << -1 << '\n';
+  } else {
+    rep(i, 0, n) cout << ans[i] + 1 << ' ';
+    cout << '\n';
   }
   return 0;
 }

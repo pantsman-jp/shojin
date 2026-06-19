@@ -30,14 +30,24 @@ inline T lcm(T a, T b) {
   return (a / std::gcd(a, b)) * b;
 }
 template <typename T>
-inline T ceil(T a, T b) {
+inline T ceildiv(T a, T b) {
   return (a + b - 1) / b;
 }
+template <typename T>
+using vc = vector<T>;
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
+using vi = vector<int>;
+using vvi = vector<vector<int>>;
+using vll = vector<ll>;
+using vvll = vector<vector<ll>>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);
@@ -55,4 +65,21 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vi a(n);
+  rep(i, 0, n) cin >> a[i];
+  sort(all(a));
+  int q;
+  cin >> q;
+  rep(_, 0, q) {
+    int b;
+    cin >> b;
+    int i = lower_bound(all(a), b) - a.begin();
+    if (i == 0)
+      cout << abs(b - a[i]) << '\n';
+    else
+      cout << min(abs(b - a[i - 1]), abs(b - a[i])) << '\n';
+  }
+}

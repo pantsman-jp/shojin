@@ -30,11 +30,9 @@ inline T lcm(T a, T b) {
   return (a / std::gcd(a, b)) * b;
 }
 template <typename T>
-inline T ceildiv(T a, T b) {
+inline T divceil(T a, T b) {
   return (a + b - 1) / b;
 }
-template <typename T>
-using vc = vector<T>;
 template <typename T>
 using pq = priority_queue<T>;
 template <typename T>
@@ -44,10 +42,6 @@ using ull = unsigned long long;
 using ld = long double;
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
-using vi = vector<int>;
-using vvi = vector<vector<int>>;
-using vll = vector<ll>;
-using vvll = vector<vector<ll>>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);
@@ -63,8 +57,8 @@ bool is_prime(ll n) {
 }
 
 // 素数判定配列
-vc<bool> era(ll n) {
-  vc<bool> is_prime(n + 2, true);
+vector<bool> era(ll n) {
+  vector<bool> is_prime(n + 2, true);
   is_prime[0] = is_prime[1] = false;
   for (ll i = 2; i * i <= n; i++) {
     if (is_prime[i])
@@ -74,22 +68,22 @@ vc<bool> era(ll n) {
 }
 
 // 素数列挙
-vll primes(ll n) {
-  vc<bool> prime(n + 2, true);
+vector<ll> primes(ll n) {
+  vector<bool> prime(n + 2, true);
   prime[0] = prime[1] = false;
   for (ll i = 2; i * i <= n; i++) {
     if (prime[i])
       for (ll x = i * i; x <= n; x += i) prime[x] = false;
   }
-  vll ans;
+  vector<ll> ans;
   for (ll i = 2; i <= n; i++)
     if (prime[i]) ans.push_back(i);
   return ans;
 }
 
 // 約数列挙
-vll divisors(ll n) {
-  vll ans;
+vector<ll> divisors(ll n) {
+  vector<ll> ans;
   for (ll m = 1; m * m <= n; m++) {
     if (n % m != 0) continue;
     ans.push_back(m);
@@ -100,8 +94,8 @@ vll divisors(ll n) {
 }
 
 // 素因数分解
-vc<pll> factorization(ll n) {
-  vc<pll> ans;
+vector<pll> factorization(ll n) {
+  vector<pll> ans;
   for (ll p = 2; p * p <= n; p++) {
     if (n % p != 0) continue;
     ll e = 0;
@@ -212,12 +206,12 @@ int digit_sum(ll n) {
 }
 
 // 4 近傍（時計回り）
-const vi di = {-1, 0, 1, 0};
-const vi dj = {0, 1, 0, -1};
+const vector<int> di = {-1, 0, 1, 0};
+const vector<int> dj = {0, 1, 0, -1};
 
 // 8 近傍（時計回り）
-const vi di = {-1, -1, 0, 1, 1, 1, 0, -1};
-const vi dj = {0, 1, 1, 1, 0, -1, -1, -1};
+const vector<int> di = {-1, -1, 0, 1, 1, 1, 0, -1};
+const vector<int> dj = {0, 1, 1, 1, 0, -1, -1, -1};
 
 // グリッド内判定（0-index）
 bool out(int i, int j, int h, int w) {
@@ -244,8 +238,8 @@ bool is_pali(string s) {
 }
 
 // ランレングス圧縮（文字列）
-vc<pair<char, int>> rle(string s) {
-  vc<pair<char, int>> ans;
+vector<pair<char, int>> rle(string s) {
+  vector<pair<char, int>> ans;
   int cnt = 1;
   char now = s[0];
   rep(i, 1, s.size()) {
@@ -259,8 +253,8 @@ vc<pair<char, int>> rle(string s) {
 }
 
 // ランレングス圧縮（整数配列）
-vc<pii> rle2(vi xs) {
-  vc<pii> ans;
+vector<pii> rle2(vector<int> xs) {
+  vector<pii> ans;
   int cnt = 1, now = xs[0];
   rep(i, 1, xs.size()) {
     if (xs[i] == now)
@@ -299,10 +293,10 @@ ll eudist(ll x1, ll y1, ll x2, ll y2) {
 ll mandist(ll x1, ll y1, ll x2, ll y2) { return abs(x1 - x2) + abs(y1 - y2); }
 
 // ダイクストラ法
-vll dijkstra(const vc<vc<pair<int, ll>>>& g, int s) {
+vector<ll> dijkstra(const vector<vector<pair<int, ll>>>& g, int s) {
   using pli = pair<ll, int>;
   rpq<pli> q;
-  vll dist(g.size(), INF);
+  vector<ll> dist(g.size(), INF);
   dist[s] = 0;
   q.push({0, s});
   while (!q.empty()) {
@@ -321,7 +315,7 @@ vll dijkstra(const vc<vc<pair<int, ll>>>& g, int s) {
 }
 
 // 二部グラフ判定（label の初期値は -1）
-bool is_bipartite(const vvi& g, vi& label) {
+bool is_bipartite(const vector<vector<int>>& g, vector<int>& label) {
   int n = g.size();
   label.assign(n, -1);
   function<bool(int, int)> dfs = [&](int u, int l) {
@@ -337,7 +331,7 @@ bool is_bipartite(const vvi& g, vi& label) {
 }
 
 // サイクル検出（無向グラフ）
-bool has_cycle(vvi& g) {
+bool has_cycle(vector<vector<int>>& g) {
   int n = g.size();
   dsu uf(n);
   rep(u, 0, n) {
@@ -351,9 +345,9 @@ bool has_cycle(vvi& g) {
 }
 
 // DAG 判定
-bool is_dag(vvi& g) {
+bool is_dag(vector<vector<int>>& g) {
   int n = g.size();
-  vi state(n, 0);
+  vector<int> state(n, 0);
   auto dfs = [&](auto self, int u) -> bool {
     state[u] = 1;
     for (int v : g[u]) {
@@ -368,13 +362,13 @@ bool is_dag(vvi& g) {
 }
 
 // 0-indexed DAG トポロジカルソート（辞書順最小）
-vi topo_sort(vvi& g) {
+vector<int> topo_sort(vector<vector<int>>& g) {
   int n = g.size();
-  vi indeg(n, 0);
+  vector<int> indeg(n, 0);
   rep(u, 0, n) for (int v : g[u]) indeg[v]++;
   rpq<int> q;
   rep(u, 0, n) if (indeg[u] == 0) q.push(u);
-  vi ans;
+  vector<int> ans;
   while (!q.empty()) {
     int u = q.top();
     q.pop();
@@ -389,9 +383,9 @@ vi topo_sort(vvi& g) {
 }
 
 // ワーシャルフロイド法
-vvll warshall_floyd(const vc<vc<pair<int, ll>>>& g) {
+vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
   int n = g.size();
-  vvll dist(n, vll(n, INF));
+  vector<vector<ll>> dist(n, vector<ll>(n, INF));
   rep(i, 0, n) dist[i][i] = 0;
   rep(i, 0, n) for (const auto& e : g[i]) chmin(dist[i][e.first], e.second);
   rep(k, 0, n) rep(i, 0, n) {
@@ -406,9 +400,9 @@ vvll warshall_floyd(const vc<vc<pair<int, ll>>>& g) {
 
 // ans[i][c] := i 文字目以降で最初に文字 c が登場する index
 // 存在しないときは N
-vvi calc_next(const string& s) {
+vector<vector<int>> calc_next(const string& s) {
   int n = (int)s.size();
-  vvi ans(n + 1, vi(26, n));
+  vector<vector<int>> ans(n + 1, vector<int>(26, n));
   rrep(i, 0, n) {
     ans[i] = ans[i + 1];
     ans[i][s[i] - 'a'] = i;

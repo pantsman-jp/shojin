@@ -30,18 +30,24 @@ inline T lcm(T a, T b) {
   return (a / std::gcd(a, b)) * b;
 }
 template <typename T>
-inline T ceil(T a, T b) {
-  return (a + (b - 1)) / b;
+inline T ceildiv(T a, T b) {
+  return (a + b - 1) / b;
 }
 template <typename T>
-inline T floor(T a, T b) {
-  return a / b;
-}
+using vc = vector<T>;
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
+using vi = vector<int>;
+using vvi = vector<vector<int>>;
+using vll = vector<ll>;
+using vvll = vector<vector<ll>>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);
@@ -57,8 +63,8 @@ bool is_prime(ll n) {
 }
 
 // 素数判定配列
-vector<bool> era(ll n) {
-  vector<bool> is_prime(n + 2, true);
+vc<bool> era(ll n) {
+  vc<bool> is_prime(n + 2, true);
   is_prime[0] = is_prime[1] = false;
   for (ll i = 2; i * i <= n; i++) {
     if (is_prime[i])
@@ -68,22 +74,22 @@ vector<bool> era(ll n) {
 }
 
 // 素数列挙
-vector<ll> primes(ll n) {
-  vector<bool> prime(n + 2, true);
+vll primes(ll n) {
+  vc<bool> prime(n + 2, true);
   prime[0] = prime[1] = false;
   for (ll i = 2; i * i <= n; i++) {
     if (prime[i])
       for (ll x = i * i; x <= n; x += i) prime[x] = false;
   }
-  vector<ll> ans;
+  vll ans;
   for (ll i = 2; i <= n; i++)
     if (prime[i]) ans.push_back(i);
   return ans;
 }
 
 // 約数列挙
-vector<ll> divisors(ll n) {
-  vector<ll> ans;
+vll divisors(ll n) {
+  vll ans;
   for (ll m = 1; m * m <= n; m++) {
     if (n % m != 0) continue;
     ans.push_back(m);
@@ -94,8 +100,8 @@ vector<ll> divisors(ll n) {
 }
 
 // 素因数分解
-vector<pll> factorization(ll n) {
-  vector<pll> ans;
+vc<pll> factorization(ll n) {
+  vc<pll> ans;
   for (ll p = 2; p * p <= n; p++) {
     if (n % p != 0) continue;
     ll e = 0;
@@ -124,7 +130,7 @@ ll npr(ll n, ll r) {
 ll ncr(ll n, ll r) {
   if (r > n - r) r = n - r;
   ll ans = 1;
-  rep(i, 0, r) ans = ans * (n - i) / (i + 1);
+  rep(i, 0, r) ans *= (n - i) / (i + 1);
   return ans;
 }
 
@@ -206,12 +212,12 @@ int digit_sum(ll n) {
 }
 
 // 4 近傍（時計回り）
-const vector<int> di = {-1, 0, 1, 0};
-const vector<int> dj = {0, 1, 0, -1};
+const vi di = {-1, 0, 1, 0};
+const vi dj = {0, 1, 0, -1};
 
 // 8 近傍（時計回り）
-const vector<int> di = {-1, -1, 0, 1, 1, 1, 0, -1};
-const vector<int> dj = {0, 1, 1, 1, 0, -1, -1, -1};
+const vi di = {-1, -1, 0, 1, 1, 1, 0, -1};
+const vi dj = {0, 1, 1, 1, 0, -1, -1, -1};
 
 // グリッド内判定（0-index）
 bool out(int i, int j, int h, int w) {
@@ -238,8 +244,8 @@ bool is_pali(string s) {
 }
 
 // ランレングス圧縮（文字列）
-vector<pair<char, int>> rle(string s) {
-  vector<pair<char, int>> ans;
+vc<pair<char, int>> rle(string s) {
+  vc<pair<char, int>> ans;
   int cnt = 1;
   char now = s[0];
   rep(i, 1, s.size()) {
@@ -253,8 +259,8 @@ vector<pair<char, int>> rle(string s) {
 }
 
 // ランレングス圧縮（整数配列）
-vector<pii> rle2(vector<int> xs) {
-  vector<pii> ans;
+vc<pii> rle2(vi xs) {
+  vc<pii> ans;
   int cnt = 1, now = xs[0];
   rep(i, 1, xs.size()) {
     if (xs[i] == now)
@@ -293,21 +299,21 @@ ll eudist(ll x1, ll y1, ll x2, ll y2) {
 ll mandist(ll x1, ll y1, ll x2, ll y2) { return abs(x1 - x2) + abs(y1 - y2); }
 
 // ダイクストラ法
-vector<ll> dijkstra(const vector<vector<pair<int, ll>>>& g, int s) {
+vll dijkstra(const vc<vc<pair<int, ll>>>& g, int s) {
   using pli = pair<ll, int>;
-  priority_queue<pli, vector<pli>, greater<pli>> pq;
-  vector<ll> dist(g.size(), INF);
+  rpq<pli> q;
+  vll dist(g.size(), INF);
   dist[s] = 0;
-  pq.push({0, s});
-  while (!pq.empty()) {
-    auto [d, u] = pq.top();
-    pq.pop();
+  q.push({0, s});
+  while (!q.empty()) {
+    auto [d, u] = q.top();
+    q.pop();
     if (d != dist[u]) continue;
     for (auto [v, w] : g[u]) {
       ll nd = d + w;
       if (nd < dist[v]) {
         dist[v] = nd;
-        pq.push({nd, v});
+        q.push({nd, v});
       }
     }
   }
@@ -315,7 +321,7 @@ vector<ll> dijkstra(const vector<vector<pair<int, ll>>>& g, int s) {
 }
 
 // 二部グラフ判定（label の初期値は -1）
-bool is_bipartite(const vector<vector<int>>& g, vector<int>& label) {
+bool is_bipartite(const vvi& g, vi& label) {
   int n = g.size();
   label.assign(n, -1);
   function<bool(int, int)> dfs = [&](int u, int l) {
@@ -331,7 +337,7 @@ bool is_bipartite(const vector<vector<int>>& g, vector<int>& label) {
 }
 
 // サイクル検出（無向グラフ）
-bool has_cycle(vector<vector<int>> g) {
+bool has_cycle(vvi& g) {
   int n = g.size();
   dsu uf(n);
   rep(u, 0, n) {
@@ -345,9 +351,9 @@ bool has_cycle(vector<vector<int>> g) {
 }
 
 // DAG 判定
-bool is_dag(vector<vector<int>> g) {
+bool is_dag(vvi& g) {
   int n = g.size();
-  vector<int> state(n, 0);
+  vi state(n, 0);
   auto dfs = [&](auto self, int u) -> bool {
     state[u] = 1;
     for (int v : g[u]) {
@@ -362,13 +368,13 @@ bool is_dag(vector<vector<int>> g) {
 }
 
 // 0-indexed DAG トポロジカルソート（辞書順最小）
-vector<int> topo_sort(vector<vector<int>>& g) {
+vi topo_sort(vvi& g) {
   int n = g.size();
-  vector<int> indeg(n, 0);
+  vi indeg(n, 0);
   rep(u, 0, n) for (int v : g[u]) indeg[v]++;
-  priority_queue<int, vector<int>, greater<int>> q;
+  rpq<int> q;
   rep(u, 0, n) if (indeg[u] == 0) q.push(u);
-  vector<int> ans;
+  vi ans;
   while (!q.empty()) {
     int u = q.top();
     q.pop();
@@ -383,9 +389,9 @@ vector<int> topo_sort(vector<vector<int>>& g) {
 }
 
 // ワーシャルフロイド法
-vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
+vvll warshall_floyd(const vc<vc<pair<int, ll>>>& g) {
   int n = g.size();
-  vector<vector<ll>> dist(n, vector<ll>(n, INF));
+  vvll dist(n, vll(n, INF));
   rep(i, 0, n) dist[i][i] = 0;
   rep(i, 0, n) for (const auto& e : g[i]) chmin(dist[i][e.first], e.second);
   rep(k, 0, n) rep(i, 0, n) {
@@ -400,9 +406,9 @@ vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
 
 // ans[i][c] := i 文字目以降で最初に文字 c が登場する index
 // 存在しないときは N
-vector<vector<int>> calc_next(const string& s) {
+vvi calc_next(const string& s) {
   int n = (int)s.size();
-  vector<vector<int>> ans(n + 1, vector<int>(26, n));
+  vvi ans(n + 1, vi(26, n));
   rrep(i, 0, n) {
     ans[i] = ans[i + 1];
     ans[i][s[i] - 'a'] = i;

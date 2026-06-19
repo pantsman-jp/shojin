@@ -44,8 +44,15 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+void solve();
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t = 1;
+  // cin >> t;
+  rep(i, 0, t) solve();
   return 0;
 }
+
+void solve() {}

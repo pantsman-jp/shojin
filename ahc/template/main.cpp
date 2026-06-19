@@ -27,7 +27,7 @@ inline bool chmin(T& x, const U& y) {
 }
 template <typename T>
 inline T lcm(T a, T b) {
-  return (a / gcd(a, b)) * b;
+  return (a / std::gcd(a, b)) * b;
 }
 template <typename T>
 inline T ceil(T a, T b) {

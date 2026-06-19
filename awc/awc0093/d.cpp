@@ -65,4 +65,49 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m, k;
+  cin >> n >> m >> k;
+  vi h(n);
+  rep(i, 0, n) cin >> h[i];
+  vvi g(n);
+  rep(i, 0, m) {
+    int u, v;
+    cin >> u >> v;
+    u--, v--;
+    g[u].push_back(v);
+    g[v].push_back(u);
+  }
+  auto check = [&](int x) -> bool {
+    if (h[0] > x || h[n - 1] > x) return false;
+    vi dist(n, inf);
+    queue<int> q;
+    dist[0] = 0;
+    q.push(0);
+    while (!q.empty()) {
+      int u = q.front();
+      q.pop();
+      for (int v : g[u]) {
+        if (h[v] > x) continue;
+        if (dist[v] != inf) continue;
+        dist[v] = dist[u] + 1;
+        q.push(v);
+      }
+    }
+    return dist[n - 1] != inf && dist[n - 1] + 1 <= k;
+  };
+  int mx = *max_element(all(h));
+  if (!check(mx)) {
+    cout << -1 << '\n';
+    return;
+  }
+  int l = max(h[0], h[n - 1]), r = mx;
+  while (l <= r) {
+    int mid = l + (r - l) / 2;
+    if (check(mid))
+      r = mid - 1;
+    else
+      l = mid + 1;
+  }
+  cout << l << '\n';
+}

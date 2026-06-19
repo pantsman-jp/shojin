@@ -1,45 +1,75 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
-#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
+#include <atcoder/all>
+using namespace atcoder;
+#define rep(i, l, r) for (int i = (l); i < (r); i++)
+#define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(a, b) a = max(a, b)
-#define chmin(a, b) a = min(a, b)
-#define yn(p) cout << (p ? "Yes\n" : "No\n");
-#define dout(f) cout << fixed << setprecision(10) << f << '\n';
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / gcd(a, b)) * b;
+}
+template <typename T>
+inline T ceil(T a, T b) {
+  return (a + b - 1) / b;
+}
 using ll = long long;
+using ull = unsigned long long;
 using ld = long double;
-using P = pair<int, int>;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
-// const ll mod =;
+const ld pi = acosl(-1.0L);
+// using mint = modint998244353;
+// using mint = modint1000000007;
 
-int n, l, k;
-vector<int> a;
-
-bool check(int mid)
-{
-  int cnt = 0, pre = 0;
-  rep(i, 0, n) if (a[i] - pre >= mid and l - a[i] >= mid) cnt += 1, pre = a[i];
-  return cnt >= k;
-}
-
-int main()
-{
+int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  cin >> n >> l >> k;
-  a.resize(n);
-  rep(i, 0, n) cin >> a[i];
-  int left = -1, right = l + 1;
-  while (1 < right - left)
-  {
-    int mid = (left + right) / 2;
+  int N, L, K;
+  cin >> N >> L >> K;
+  vector<int> a(N);
+  rep(i, 0, N) cin >> a[i];
+  auto check = [&](int x) -> bool {
+    int cnt = 0, prev = 0;
+    rep(i, 0, N) {
+      if (a[i] - prev >= x) {
+        cnt++;
+        prev = a[i];
+      }
+    }
+    if (L - prev >= x) ++cnt;
+    return cnt >= K + 1;
+  };
+  int l = 1, r = L + 1;
+  while (l <= r) {
+    ll mid = l + (r - l) / 2;
     if (check(mid))
-      left = mid;
+      l = mid + 1;
     else
-      right = mid;
+      r = mid - 1;
   }
-  cout << left << endl;
+  cout << r << '\n';
+  return 0;
 }

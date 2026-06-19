@@ -397,3 +397,15 @@ vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
   }
   return dist;
 }
+
+// ans[i][c] := i 文字目以降で最初に文字 c が登場する index
+// 存在しないときは N
+vector<vector<int>> calc_next(const string& s) {
+  int n = (int)s.size();
+  vector<vector<int>> ans(n + 1, vector<int>(26, n));
+  rrep(i, 0, n) {
+    ans[i] = ans[i + 1];
+    ans[i][s[i] - 'a'] = i;
+  }
+  return ans;
+}

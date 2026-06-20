@@ -30,9 +30,13 @@ inline T lcm(T a, T b) {
   return (a / std::gcd(a, b)) * b;
 }
 template <typename T>
-inline T ceil(T a, T b) {
+inline T divceil(T a, T b) {
   return (a + b - 1) / b;
 }
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;

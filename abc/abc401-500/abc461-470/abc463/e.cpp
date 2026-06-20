@@ -59,4 +59,47 @@ int main() {
   return 0;
 }
 
-void solve() {}
+vector<ll> dijkstra(const vector<vector<pair<int, ll>>>& g, int s) {
+  using pli = pair<ll, int>;
+  rpq<pli> q;
+  vector<ll> dist(g.size(), INF);
+  dist[s] = 0;
+  q.push({0, s});
+  while (!q.empty()) {
+    auto [d, u] = q.top();
+    q.pop();
+    if (d != dist[u]) continue;
+    for (auto [v, w] : g[u]) {
+      ll nd = d + w;
+      if (nd < dist[v]) {
+        dist[v] = nd;
+        q.push({nd, v});
+      }
+    }
+  }
+  return dist;
+}
+
+void solve() {
+  int n, m;
+  ll y;
+  cin >> n >> m >> y;
+  vector<vector<pair<int, ll>>> g(n + 1);
+  rep(_, 0, m) {
+    int u, v;
+    ll t;
+    cin >> u >> v >> t;
+    u--, v--;
+    g[u].emplace_back(v, t);
+    g[v].emplace_back(u, t);
+  }
+  vector<ll> x(n);
+  rep(i, 0, n) cin >> x[i];
+  rep(i, 0, n) {
+    g[i].emplace_back(n, x[i]);
+    g[n].emplace_back(i, x[i] + y);
+  }
+  vector<ll> dist = dijkstra(g, 0);
+  rep(k, 1, n) cout << dist[k] << ' ';
+  cout << '\n';
+}

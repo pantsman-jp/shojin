@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  char x;
+  cin >> n >> x;
+  vector<string> s(n);
+  rep(i, 0, n) cin >> s[i];
+  int j = x - 'A';
+  bool ok = false;
+  rep(i, 0, n) if (s[i][j] == 'o') ok = true;
+  yn(ok);
+}

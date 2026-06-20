@@ -59,4 +59,19 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> h(n), l(n);
+  rep(i, 0, n) cin >> h[i] >> l[i];
+  vector<int> suf(n);
+  suf[n - 1] = h[n - 1];
+  rrep(i, 0, n - 1) suf[i] = max(suf[i + 1], h[i]);
+  int q;
+  cin >> q;
+  rep(_, 0, q) {
+    int t;
+    cin >> t;
+    cout << suf[lower_bound(all(l), t + 1) - l.begin()] << '\n';
+  }
+}

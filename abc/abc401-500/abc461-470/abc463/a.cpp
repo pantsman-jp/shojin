@@ -59,4 +59,8 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int x, y;
+  cin >> x >> y;
+  yn(9 * x == 16 * y);
+}

@@ -59,4 +59,34 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  vector<pii> rl;
+  rep(i, 0, n) {
+    int l, r;
+    cin >> l >> r;
+    rl.emplace_back(r, l);
+  }
+  sort(all(rl));
+  auto check = [&](int w) {
+    int r_max = -inf, cnt = 0;
+    for (auto [r, l] : rl) {
+      r += w;
+      if (r_max <= l) {
+        cnt++;
+        r_max = r;
+      }
+    }
+    return cnt >= k;
+  };
+  int l = 0, r = inf;
+  while (l + 1 < r) {
+    int wj = (l + r) / 2;
+    if (check(wj))
+      l = wj;
+    else
+      r = wj;
+  }
+  cout << (l == 0 ? -1 : l) << endl;
+}

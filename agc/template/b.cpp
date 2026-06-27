@@ -30,11 +30,9 @@ inline T lcm(T a, T b) {
   return (a / std::gcd(a, b)) * b;
 }
 template <typename T>
-inline T ceildiv(T a, T b) {
+inline T divceil(T a, T b) {
   return (a + b - 1) / b;
 }
-template <typename T>
-using vc = vector<T>;
 template <typename T>
 using pq = priority_queue<T>;
 template <typename T>
@@ -44,10 +42,6 @@ using ull = unsigned long long;
 using ld = long double;
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
-using vi = vector<int>;
-using vvi = vector<vector<int>>;
-using vll = vector<ll>;
-using vvll = vector<vector<ll>>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);

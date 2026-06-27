@@ -65,4 +65,25 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, l, q;
+  cin >> n >> l >> q;
+  vector<ull> bits(n + 1);
+  rep(i, 1, n + 1) {
+    string s;
+    cin >> s;
+    rep(j, 0, l) if (s[j] == '1') bits[i] |= 1ull << (l - 1 - j);
+  }
+  rep(_, 0, q) {
+    int m;
+    cin >> m;
+    ull res = 0;
+    rep(i, 0, m) {
+      int c;
+      cin >> c;
+      res |= bits[c];
+    }
+    rrep(i, 0, l) cout << ((res >> i) & 1);
+    cout << '\n';
+  }
+}

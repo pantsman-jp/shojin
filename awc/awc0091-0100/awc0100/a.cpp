@@ -65,4 +65,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  ll ans = 0;
+  rep(_, 0, n) {
+    ll a, t;
+    cin >> a >> t;
+    ans += a * t;
+  }
+  cout << ans << '\n';
+}

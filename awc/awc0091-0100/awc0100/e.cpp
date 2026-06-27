@@ -65,4 +65,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> a(n), b(n);
+  rep(i, 0, n) {
+    cin >> a[i];
+    b[i] = a[i];
+  }
+  sort(all(b));
+  rep(i, 0, n) cout << n - (upper_bound(all(b), a[i]) - b.begin()) << ' ';
+  cout << '\n';
+}

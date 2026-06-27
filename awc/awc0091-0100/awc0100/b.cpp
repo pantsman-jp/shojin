@@ -65,4 +65,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  int mx = 0, ans = 0;
+  rep(i, 1, n + 1) {
+    int a, b;
+    cin >> a >> b;
+    if (mx <= a + b) mx = a + b, ans = i;
+  }
+  cout << ans << '\n';
+}

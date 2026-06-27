@@ -65,4 +65,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<ll> a(n), sum(n + 1);
+  rep(i, 0, n) {
+    cin >> a[i];
+    sum[i + 1] = sum[i] + a[i];
+  }
+  ll ans = INF;
+  rep(i, 1, n) chmin(ans, abs(sum[i] - (sum[n] - sum[i])));
+  cout << ans << '\n';
+}

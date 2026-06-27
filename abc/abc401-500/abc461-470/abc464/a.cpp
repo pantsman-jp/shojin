@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  string s;
+  cin >> s;
+  int w = 0, e = 0;
+  for (char c : s) {
+    if (c == 'E')
+      e++;
+    else
+      w++;
+  }
+  cout << (e > w ? "East" : "West") << '\n';
+}

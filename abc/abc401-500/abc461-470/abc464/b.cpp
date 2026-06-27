@@ -59,4 +59,23 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int h, w;
+  cin >> h >> w;
+  vector<string> c(h);
+  rep(i, 0, h) cin >> c[i];
+  int top = h, bottom = -1;
+  int left = w, right = -1;
+  rep(i, 0, h) rep(j, 0, w) {
+    if (c[i][j] == '#') {
+      chmin(top, i);
+      chmax(bottom, i);
+      chmin(left, j);
+      chmax(right, j);
+    }
+  }
+  rep(i, top, bottom + 1) {
+    rep(j, left, right + 1) cout << c[i][j];
+    cout << '\n';
+  }
+}

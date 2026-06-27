@@ -59,4 +59,18 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int h, w, q;
+  cin >> h >> w >> q;
+  vector<int> r(q), c(q);
+  vector<char> x(q);
+  rep(i, 0, q) cin >> r[i] >> c[i] >> x[i];
+  vector<string> ans(h, string(w, 'A'));
+  vector<int> m(h);
+  rrep(i, 0, q) rrep(j, 0, r[i]) {
+    if (m[j] >= c[i]) break;
+    rep(k, m[j], c[i]) ans[j][k] = x[i];
+    m[j] = c[i];
+  }
+  rep(i, 0, h) cout << ans[i] << '\n';
+}

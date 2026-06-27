@@ -59,4 +59,31 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> cnt(n + 1);
+  vector<vector<pii>> event(m + 1);
+  rep(i, 0, n) {
+    int a, d, b;
+    cin >> a >> d >> b;
+    if (d == 1) {
+      cnt[b]++;
+    } else {
+      cnt[a]++;
+      if (a != b) event[d].push_back({a, b});
+    }
+  }
+  int ans = 0;
+  rep(c, 1, n + 1) if (cnt[c] > 0) ans++;
+  cout << ans << '\n';
+  rep(day, 2, m + 1) {
+    for (auto [a, b] : event[day]) {
+      cnt[a]--;
+      if (cnt[a] == 0) ans--;
+      if (cnt[b] == 0) ans++;
+      cnt[b]++;
+    }
+    cout << ans << '\n';
+  }
+}

@@ -54,9 +54,25 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   int t = 1;
-  // cin >> t;
+  cin >> t;
   rep(i, 0, t) solve();
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  string s;
+  cin >> s;
+  vector<ll> x(n), y(n - 1);
+  rep(i, 0, n) cin >> x[i];
+  rep(i, 0, n - 1) cin >> y[i];
+  vector dp(n, vector<ll>(2, -INF));
+  rep(j, 0, 2) dp[0][j] = ((s[0] == 'S') == (j == 1) ? 0 : -x[0]);
+  rep(i, 0, n - 1) rep(from, 0, 2) rep(to, 0, 2) {
+    ll cost = ((s[i + 1] == 'S') == (to == 1) ? 0 : -x[i + 1]);
+    if (from == 0 and to == 1) cost += y[i];
+    chmax(dp[i + 1][to], dp[i][from] + cost);
+  }
+  cout << max(dp[n - 1][0], dp[n - 1][1]) << '\n';
+}

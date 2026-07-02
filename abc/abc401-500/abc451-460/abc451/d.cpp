@@ -6,10 +6,37 @@ using namespace atcoder;
 #define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(x, y) x = max(x, y)
-#define chmin(x, y) x = min(x, y)
 #define yn(tf) cout << (tf ? "Yes\n" : "No\n")
-#define dout(x) cout << fixed << setprecision(10) << x << "\n"
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / std::gcd(a, b)) * b;
+}
+template <typename T>
+inline T divceil(T a, T b) {
+  return (a + b - 1) / b;
+}
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -21,36 +48,34 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+void solve();
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  ll n;
-  cin >> n;
-  vector<ll> pow2;
-  for (ll x = 1; x <= 1000000000; x *= 2) pow2.push_back(x);
-  priority_queue<ll, vector<ll>, greater<ll>> pq;
-  unordered_set<ll> used;
-  for (auto x : pow2) {
-    pq.push(x);
-    used.insert(x);
-  }
-  ll cnt = 0;
-  while (!pq.empty()) {
-    ll now = pq.top();
-    pq.pop();
-    cnt++;
-    if (cnt == n) {
-      cout << now << '\n';
-      return 0;
-    }
-    for (auto x : pow2) {
-      string s = to_string(now) + to_string(x);
-      if (s.size() > 10) continue;
-      ll nxt = stoll(s);
-      if (nxt > 1000000000 or used.count(nxt)) continue;
-      used.insert(nxt);
-      pq.push(nxt);
-    }
-  }
+  int t = 1;
+  // cin >> t;
+  rep(i, 0, t) solve();
   return 0;
+}
+
+void solve() {
+  int n;
+  cin >> n;
+  const int M = 9;
+  vector<string> pow2;
+  for (int i = 1; i < 1e9; i *= 2) pow2.push_back(to_string(i));
+  vector<int> good;
+  auto dfs = [&](auto dfs, string s) -> void {
+    for (string b : pow2) {
+      string new_s = s + b;
+      if (new_s.size() > M) break;
+      good.push_back(stoi(new_s));
+      dfs(dfs, new_s);
+    }
+  };
+  dfs(dfs, "");
+  sort(all(good));
+  good.erase(unique(all(good)), good.end());
+  cout << good[n - 1] << '\n';
 }

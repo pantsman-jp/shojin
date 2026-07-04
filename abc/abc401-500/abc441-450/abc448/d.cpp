@@ -6,10 +6,37 @@ using namespace atcoder;
 #define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(x, y) x = max(x, y)
-#define chmin(x, y) x = min(x, y)
 #define yn(tf) cout << (tf ? "Yes\n" : "No\n")
-#define dout(x) cout << fixed << setprecision(10) << x << "\n"
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / std::gcd(a, b)) * b;
+}
+template <typename T>
+inline T divceil(T a, T b) {
+  return (a + b - 1) / b;
+}
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -21,46 +48,50 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
-int n;
-vector<int> a;
-vector<vector<int>> g;
-int cnt = 0;
-set<int> s;
-vector<int> ans;
-
-void dfs(int v, int pv) {
-  int del = 0;
-  if (s.find(a[v]) != s.end())
-    del = 1;
-  else
-    s.insert(a[v]);
-  cnt += del;
-  if (cnt > 0)
-    ans[v] = 1;
-  else
-    ans[v] = 0;
-  for (auto& nx : g[v]) {
-    if (nx == pv) continue;
-    dfs(nx, v);
-  }
-  cnt -= del;
-  if (del == 0) s.erase(a[v]);
-}
+void solve();
 
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t = 1;
+  // cin >> t;
+  rep(i, 0, t) solve();
+  return 0;
+}
+
+void solve() {
+  int n;
   cin >> n;
-  a.resize(n), g.resize(n);
+  vector<int> a(n);
   rep(i, 0, n) cin >> a[i];
+  vector<vector<int>> g(n);
   rep(_, 0, n - 1) {
     int u, v;
     cin >> u >> v;
     u--, v--;
-    g[u].push_back(v), g[v].push_back(u);
+    g[u].push_back(v);
+    g[v].push_back(u);
   }
-  ans.resize(n);
-  dfs(0, -1);
-  for (int x : ans) yn(x != 0);
-  return 0;
+  vector<bool> ans(n);
+  map<int, int> cnt;
+  int dup_cnt = 0;
+  auto add = [&](int x) {
+    cnt[x]++;
+    if (cnt[x] == 2) dup_cnt++;
+  };
+  auto del = [&](int x) {
+    if (cnt[x] == 2) dup_cnt--;
+    cnt[x]--;
+  };
+  auto dfs = [&](auto dfs, int v, int p) -> void {
+    add(a[v]);
+    ans[v] = dup_cnt > 0;
+    for (int u : g[v]) {
+      if (u == p) continue;
+      dfs(dfs, u, v);
+    }
+    del(a[v]);
+  };
+  dfs(dfs, 0, -1);
+  for (bool tf : ans) yn(tf);
 }

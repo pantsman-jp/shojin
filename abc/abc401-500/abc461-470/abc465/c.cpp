@@ -59,4 +59,29 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  string s;
+  cin >> n >> s;
+  bool rev = false;
+  deque<int> ans;
+  rep(i, 0, n) {
+    if (rev)
+      ans.push_front(i + 1);
+    else
+      ans.push_back(i + 1);
+    if (s[i] == 'o') rev ^= 1;
+  }
+  if (!rev) {
+    while (!ans.empty()) {
+      cout << ans.front() << ' ';
+      ans.pop_front();
+    }
+  } else {
+    while (!ans.empty()) {
+      cout << ans.back() << ' ';
+      ans.pop_back();
+    }
+  }
+  cout << '\n';
+}

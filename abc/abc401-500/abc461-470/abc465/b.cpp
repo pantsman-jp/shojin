@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll x, y, l, r, a, b;
+  cin >> x >> y >> l >> r >> a >> b;
+  ll ans = 0;
+  rep(i, a, b) {
+    if (l <= i and i < r)
+      ans += x;
+    else
+      ans += y;
+  }
+  cout << ans << '\n';
+}

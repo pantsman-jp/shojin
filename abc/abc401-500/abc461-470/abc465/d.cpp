@@ -54,9 +54,38 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   int t = 1;
-  // cin >> t;
+  cin >> t;
   rep(i, 0, t) solve();
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll x, y, k;
+  cin >> x >> y >> k;
+  auto depth = [&](ll n) {
+    int ret = 0;
+    while (n != 0) {
+      n /= k;
+      ret++;
+    }
+    return ret;
+  };
+  int dx = depth(x), dy = depth(y);
+  ll ans = 0;
+  while (dx > dy) {
+    x /= k;
+    dx--;
+    ans++;
+  }
+  while (dy > dx) {
+    y /= k;
+    dy--;
+    ans++;
+  }
+  while (x != y) {
+    x /= k;
+    y /= k;
+    ans += 2;
+  }
+  cout << ans << '\n';
+}

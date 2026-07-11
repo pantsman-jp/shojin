@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+bool ask(int i, int j) {
+  cout << "? " << i << ' ' << j << endl;
+  string reply;
+  cin >> reply;
+  return reply == "Yes";
+}
+
+void solve() {
+  int n;
+  cin >> n;
+  ll ans = 0;
+  int r = 1;
+  rep(l, 1, n) {
+    chmax(r, l);
+    while (r + 1 <= n and ask(l, r + 1)) r++;
+    ans += r - l;
+  }
+  cout << "! " << ans << endl;
+}

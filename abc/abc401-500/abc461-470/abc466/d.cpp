@@ -59,4 +59,23 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<pii> rc(m);
+  rep(i, 0, m) {
+    int r, c;
+    cin >> r >> c;
+    r--, c--;
+    rc[i] = {r, c};
+  }
+  reverse(all(rc));
+  vector<bool> seen_r(n), seen_c(n);
+  int ans = 0;
+  for (auto [r, c] : rc) {
+    if (!seen_r[r] and !seen_c[c]) ans++;
+    seen_r[r] = true;
+    seen_c[c] = true;
+  }
+  cout << ans << '\n';
+}

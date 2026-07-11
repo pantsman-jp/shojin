@@ -59,4 +59,23 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  vector<ll> a(n), b(n), diff(n);
+  rep(i, 0, n) {
+    cin >> a[i] >> b[i];
+    diff[i] = b[i] - a[i];
+  }
+  vector dp(n + 1, vector(k + 1, vector<ll>(2, -INF)));
+  dp[0][0][0] = accumulate(all(a), 0ll);
+  rep(i, 0, n) rep(j, 0, k + 1) {
+    chmax(dp[i + 1][j][0], dp[i][j][0]);
+    if (j < k) chmax(dp[i + 1][j + 1][1], dp[i][j][0] + diff[i]);
+    chmax(dp[i + 1][j][1], dp[i][j][1] + diff[i]);
+    chmax(dp[i + 1][j][0], dp[i][j][1]);
+  }
+  ll ans = -INF;
+  rep(j, 0, k + 1) chmax(ans, max(dp[n][j][0], dp[n][j][1]));
+  cout << ans << '\n';
+}

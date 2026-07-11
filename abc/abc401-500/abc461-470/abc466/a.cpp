@@ -59,4 +59,10 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> x(n);
+  rep(i, 0, n) cin >> x[i];
+  yn(*max_element(all(x)) < 0);
+}

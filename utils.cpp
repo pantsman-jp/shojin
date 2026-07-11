@@ -344,6 +344,19 @@ bool has_cycle(vector<vector<int>>& g) {
   return false;
 }
 
+// サイクル検出（有効グラフ）
+vector<int> detect_cycle(const vector<int>& g) {
+  int v = 0;
+  rep(i, 0, g.size()) v = g[v];
+  vector<int> ans;
+  int s = v;
+  do {
+    ans.push_back(v);
+    v = g[v];
+  } while (v != s);
+  return ans;
+}
+
 // DAG 判定
 bool is_dag(vector<vector<int>>& g) {
   int n = g.size();

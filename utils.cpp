@@ -253,7 +253,7 @@ vector<pair<char, int>> rle(string s) {
 }
 
 // ランレングス圧縮（整数配列）
-vector<pii> rle2(vector<int> xs) {
+vector<pii> rle(vector<int> xs) {
   vector<pii> ans;
   int cnt = 1, now = xs[0];
   rep(i, 1, xs.size()) {

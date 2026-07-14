@@ -64,4 +64,19 @@ void solve() {
   cin >> n;
   vector<ll> a(n);
   rep(i, 0, n) cin >> a[i];
+  auto calc = [&](int x) {
+    ll cur = 0, ans = 0;
+    rep(i, 0, n) {
+      cur += a[i];
+      if (i % 2 == x) {
+        ans += max(0ll, 1 - cur);
+        if (cur <= 0) cur = 1;
+      } else {
+        ans += max(0ll, 1 + cur);
+        if (cur >= 0) cur = -1;
+      }
+    }
+    return ans;
+  };
+  cout << min(calc(0), calc(1)) << '\n';
 }

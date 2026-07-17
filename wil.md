@@ -21,8 +21,8 @@
 #### データ構造
 
 - [フェニック木](https://atcoder.github.io/ac-library/production/document_ja/fenwicktree.html)
-- [セグメント木](https://github.com/atcoder/ac-library/blob/master/document_ja/segtree.md)
-- [遅延セグメント木](https://github.com/atcoder/ac-library/blob/master/document_ja/lazysegtree.md)
+- [セグメント木](https://atcoder.github.io/ac-library/production/document_ja/segtree.html)
+- [遅延セグメント木](https://atcoder.github.io/ac-library/production/document_ja/lazysegtree.html)
 - [文字列](https://atcoder.github.io/ac-library/production/document_ja/string.html)
 
 #### 数学

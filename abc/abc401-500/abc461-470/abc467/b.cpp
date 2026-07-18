@@ -59,4 +59,20 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  int x = 10000, y = 10000;
+  rep(_, 0, n) {
+    int a, b;
+    string s;
+    cin >> a >> b >> s;
+    if (s == "take") {
+      x += b - a;
+      y += b - a;
+    } else {
+      y += b - a;
+    }
+  }
+  cout << y - x << '\n';
+}

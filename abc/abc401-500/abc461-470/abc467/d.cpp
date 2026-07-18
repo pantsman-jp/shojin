@@ -54,9 +54,23 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   int t = 1;
-  // cin >> t;
+  cin >> t;
   rep(i, 0, t) solve();
   return 0;
 }
 
-void solve() {}
+void solve() {
+  vector<ll> p(2), q(2), r(2), s(2);
+  rep(i, 0, 2) cin >> p[i];
+  rep(i, 0, 2) cin >> q[i];
+  rep(i, 0, 2) cin >> r[i];
+  rep(i, 0, 2) cin >> s[i];
+  vector<ll> pq = {q[0] - p[0], q[1] - p[1]};
+  vector<ll> rs = {s[0] - r[0], s[1] - r[1]};
+  if (pq[0] * rs[1] - pq[1] * rs[0] == 0) {
+    vector<ll> d = {p[0] + q[0] - r[0] - s[0], p[1] + q[1] - r[1] - s[1]};
+    yn(d[0] * pq[0] + d[1] * pq[1] == 0);
+  } else {
+    yn(true);
+  }
+}

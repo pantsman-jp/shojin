@@ -59,4 +59,10 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> a(n), b(n - 1);
+  rep(i, 0, n) cin >> a[i];
+  rep(i, 0, n - 1) cin >> b[i];
+}

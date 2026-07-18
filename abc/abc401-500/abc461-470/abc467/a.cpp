@@ -59,4 +59,8 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ld h, w;
+  cin >> h >> w;
+  yn(w / (h / 100) / (h / 100) >= 25.0);
+}

@@ -6,10 +6,37 @@ using namespace atcoder;
 #define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(x, y) x = max(x, y)
-#define chmin(x, y) x = min(x, y)
 #define yn(tf) cout << (tf ? "Yes\n" : "No\n")
-#define dout(x) cout << fixed << setprecision(10) << x << "\n"
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / std::gcd(a, b)) * b;
+}
+template <typename T>
+inline T divceil(T a, T b) {
+  return (a + b - 1) / b;
+}
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -18,11 +45,48 @@ using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);
-// using mint = modint998244353;
+using mint = modint998244353;
 // using mint = modint1000000007;
+
+void solve();
 
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t = 1;
+  // cin >> t;
+  rep(i, 0, t) solve();
   return 0;
+}
+
+mint modncr(ll n, ll r) {
+  if (r < 0 or r > n) return 0;
+  if (r > n - r) r = n - r;
+  mint num = 1, den = 1;
+  rep(i, 0, r) num *= (n - i), den *= (i + 1);
+  return num / den;
+}
+
+void solve() {
+  int n;
+  cin >> n;
+  vector<vector<int>> g(n);
+  rep(i, 0, n - 1) {
+    int p;
+    cin >> p;
+    g[p - 1].push_back(i + 1);
+  }
+  vector<ll> c(n), d(n);
+  rep(i, 0, n) cin >> c[i];
+  rep(i, 0, n) cin >> d[i];
+  mint ans = 1;
+  auto f = [&](auto f, int u) -> ll {
+    ll num = c[u];
+    for (int v : g[u]) num += f(f, v);
+    ans *= modncr(num, d[u]);
+    num -= d[u];
+    return num;
+  };
+  f(f, 0);
+  cout << ans.val() << '\n';
 }

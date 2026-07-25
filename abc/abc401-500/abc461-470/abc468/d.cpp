@@ -59,4 +59,26 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  string s;
+  cin >> s;
+  int n = s.size();
+  ll ans = 0;
+  rep(i, 0, n) {
+    int cnt = 0;
+    for (int l = i, r = i; l >= 0 and r < n; l--, r++) {
+      if (s[l] != s[r]) cnt++;
+      if (cnt > 1) break;
+      ans++;
+    }
+  }
+  rep(i, 0, n - 1) {
+    int cnt = 0;
+    for (int l = i, r = i + 1; l >= 0 and r < n; l--, r++) {
+      if (s[l] != s[r]) cnt++;
+      if (cnt > 1) break;
+      ans++;
+    }
+  }
+  cout << ans << '\n';
+}

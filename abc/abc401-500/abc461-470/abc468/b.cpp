@@ -59,4 +59,17 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int m, d;
+  string s;
+  cin >> m >> d >> s;
+  vector<bool> ok(m);
+  rep(i, 0, m) {
+    if (s[i] == 'G') {
+      rep(j, max(0, i - d), min(m, i + d + 1)) ok[j] = true;
+    }
+  }
+  int ans = 0;
+  rep(i, 0, m) if (!ok[i]) ans++;
+  cout << ans << '\n';
+}

@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> p(n), q(n), xs(n);
+  rep(i, 0, n) cin >> p[i];
+  rep(i, 0, n) cin >> q[i];
+  rep(i, 0, n) xs[i] = i + 1;
+  int ans = 0;
+  do {
+    if (p < xs and xs < q) ans++;
+  } while (next_permutation(all(xs)));
+  cout << ans << '\n';
+}

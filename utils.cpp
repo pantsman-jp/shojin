@@ -422,3 +422,18 @@ vector<vector<int>> calc_next(const string& s) {
   }
   return ans;
 }
+
+// 文字列 s は文字列 t を部分列として持つか？
+bool has_subsequence(string& s, string& t) {
+  int pos = 0, n = s.size(), m = t.size();
+  rep(i, 0, m) {
+    while (pos < n and s[pos] != t[i]) {
+      pos++;
+    }
+    if (pos == n) {
+      return false;
+    }
+    pos++;
+  }
+  return true;
+}

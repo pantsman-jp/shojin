@@ -94,6 +94,7 @@ vector<ll> divisors(ll n) {
 }
 
 // 素因数分解
+/// vector<pll>
 vector<pll> factorization(ll n) {
   vector<pll> ans;
   for (ll p = 2; p * p <= n; p++) {
@@ -103,6 +104,19 @@ vector<pll> factorization(ll n) {
     ans.push_back({p, e});
   }
   if (n != 1) ans.emplace_back(n, 1);
+  return ans;
+}
+
+/// vector<ll>
+vector<ll> facts(ll n) {
+  vector<ll> ans;
+  for (ll p = 2; p * p <= n; p++) {
+    if (n % p != 0) continue;
+    ll e = 0;
+    while (n % p == 0) n /= p, ++e;
+    rep(_, 0, e) ans.push_back(p);
+  }
+  if (n != 1) ans.push_back(n);
   return ans;
 }
 

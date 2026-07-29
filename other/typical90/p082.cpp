@@ -1,61 +1,77 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
-using ull = unsigned long long;
+#include <atcoder/all>
+using namespace atcoder;
+#define rep(i, l, r) for (int i = (l); i < (r); i++)
+#define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
+#define all(p) p.begin(), p.end()
+#define rall(p) p.rbegin(), p.rend()
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / std::gcd(a, b)) * b;
+}
+template <typename T>
+inline T divceil(T a, T b) {
+  return (a + b - 1) / b;
+}
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
-const ll mod = 1000000007;
-ull L, R;
-ull power10[22];
+using ull = unsigned long long;
+using ld = long double;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+const int inf = 1 << 30;
+const ll INF = 1LL << 60;
+const ld pi = acosl(-1.0L);
+// using mint = modint998244353;
+using mint = modint1000000007;
 
-ll modpow(ll a, ll b, ll m)
-{
-  ll p = 1, q = a;
-  for (int i = 0; i < 30; i++)
-  {
-    if ((b & (1LL << i)) != 0)
-    {
-      p *= q;
-      p %= m;
+void solve();
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int t = 1;
+  // cin >> t;
+  rep(i, 0, t) solve();
+  return 0;
+}
+
+void solve() {
+  ll l, r;
+  cin >> l >> r;
+  mint ans = 0;
+  ll p = 1;
+  rep(d, 1, 20) {
+    ll left = max(l, p);
+    ll right = min(r, p * 10 - 1);
+    if (d == 19) right = r;
+    if (left <= right) {
+      ans += mint(d) * mint(right - left + 1) * mint(left + right) / 2;
     }
-    q *= q;
-    q %= m;
+    if (p <= (ll)1e17) p *= 10;
   }
-  return p;
-}
-
-ll Div(ll a, ll b, ll m)
-{
-  return (a * modpow(b, m - 2, m)) % m;
-}
-
-void init()
-{
-  power10[0] = 1;
-  for (int i = 1; i <= 19; i++)
-    power10[i] = (10ULL * power10[i - 1]);
-}
-
-ll f(ll X)
-{
-  ll v1 = X % mod;
-  ll v2 = (X + 1) % mod;
-  ll v = v1 * v2 % mod;
-  return Div(v, 2, mod);
-}
-
-int main()
-{
-  init();
-  cin >> L >> R;
-  ll ans = 0;
-  for (int i = 1; i <= 19; i++)
-  {
-    ull vl = max(L, power10[i - 1]), vr = min(R, power10[i] - 1ULL);
-    if (vl > vr)
-      continue;
-    ll val = (f(vr) - f(vl - 1) + mod) % mod;
-    ans += 1LL * i * val;
-    ans %= mod;
-  }
-  cout << ans << endl;
+  cout << ans.val() << '\n';
 }

@@ -4,8 +4,7 @@ using namespace std;
 using ll = long long;
 const ll inf = 1LL << 60;
 
-int main()
-{
+int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
 }

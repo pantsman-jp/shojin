@@ -1,72 +1,94 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
-#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
+#include <atcoder/all>
+using namespace atcoder;
+#define rep(i, l, r) for (int i = (l); i < (r); i++)
+#define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(a, b) a = max(a, b)
-#define chmin(a, b) a = min(a, b)
-#define yn(p) cout << (p ? "Yes\n" : "No\n");
-#define dout(f) cout << fixed << setprecision(10) << f << '\n';
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / std::gcd(a, b)) * b;
+}
+template <typename T>
+inline T divceil(T a, T b) {
+  return (a + b - 1) / b;
+}
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
+using ull = unsigned long long;
 using ld = long double;
-using P = pair<int, int>;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
-// const ll mod =;
+const ld pi = acosl(-1.0L);
+// using mint = modint998244353;
+// using mint = modint1000000007;
 
-int h, w;
-vector<string> c;
-vector<vector<bool>> seen;
+void solve();
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int t = 1;
+  // cin >> t;
+  rep(i, 0, t) solve();
+  return 0;
+}
 
 const vector<int> di = {-1, 0, 1, 0};
 const vector<int> dj = {0, 1, 0, -1};
 
-bool out(int i, int j, int h, int w)
-{
+bool out(int i, int j, int h, int w) {
   return i < 0 or h - 1 < i or j < 0 or w - 1 < j;
 }
 
-int dfs(int sx, int sy, int px, int py, int dist)
-{
-  int ans = -inf;
-  rep(d, 0, 4)
-  {
-    int nx = px + di[d], ny = py + dj[d];
-    if (out(nx, ny, h, w) or c[nx][ny] == '#')
-      continue;
-    if (nx == sx and ny == sy)
-    {
-      if (dist >= 3)
-        chmax(ans, dist);
-      continue;
-    }
-    if (seen[nx][ny])
-      continue;
-    seen[nx][ny] = true;
-    int res = dfs(sx, sy, nx, ny, dist + 1);
-    if (res != -inf)
-      chmax(ans, res);
-    seen[nx][ny] = false;
-  }
-  return ans;
-}
-
-int main()
-{
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
+void solve() {
+  int h, w;
   cin >> h >> w;
-  c.resize(h), seen.resize(h, vector<bool>(w, false));
+  vector<string> c(h);
   rep(i, 0, h) cin >> c[i];
-  int ans = -1;
-  rep(i, 0, h) rep(j, 0, w)
-  {
-    if (c[i][j] == '#')
-      continue;
+  vector seen(h, vector<bool>(w));
+  auto dfs = [&](auto self, int si, int sj, int i, int j, int dist) -> int {
+    int res = -1;
     seen[i][j] = true;
-    chmax(ans, dfs(i, j, i, j, 1));
+    rep(d, 0, 4) {
+      int ni = i + di[d], nj = j + dj[d];
+      if (out(ni, nj, h, w) or c[ni][nj] == '#') continue;
+      if (ni == si and nj == sj and dist >= 2) {
+        chmax(res, dist + 1);
+        continue;
+      }
+      if (seen[ni][nj]) continue;
+      chmax(res, self(self, si, sj, ni, nj, dist + 1));
+    }
     seen[i][j] = false;
-  }
-  cout << ans << endl;
+    return res;
+  };
+  int ans = -1;
+  rep(i, 0, h) rep(j, 0, h) chmax(ans, dfs(dfs, i, j, i, j, 0));
+  cout << ans << '\n';
 }

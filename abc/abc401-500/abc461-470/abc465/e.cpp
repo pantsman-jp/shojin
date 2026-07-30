@@ -45,7 +45,7 @@ using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);
-// using mint = modint998244353;
+using mint = modint998244353;
 // using mint = modint1000000007;
 
 void solve();
@@ -59,4 +59,36 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  string N;
+  cin >> N;
+  using tiii = tuple<int, int, int>;
+  map<tiii, mint> dp;
+  dp[tiii(0, 0, 0)] = 1;
+  for (char c : N) {
+    c -= '0';
+    map<tiii, mint> old;
+    swap(old, dp);
+    for (auto [t, x] : old) {
+      auto [j, k, s] = t;
+      rep(d, 0, 10) {
+        int nj = j, nk = (k * 10 + d) % 3, ns = s | 1 << d;
+        if (nj == 0 and d > c) continue;
+        if (d < c) nj = 1;
+        if (s == 0 and d == 0) ns = 0;
+        dp[tiii(nj, nk, ns)] += x;
+      }
+    }
+  }
+  mint ans;
+  for (auto [t, x] : dp) {
+    auto [j, k, s] = t;
+    int cnt = 0;
+    if (k == 0) cnt++;
+    if (s >> 3 & 1) cnt++;
+    if (__builtin_popcount(s) == 3) cnt++;
+    if (cnt == 1) ans += x;
+  }
+  ans -= 1;
+  cout << ans.val() << '\n';
+}

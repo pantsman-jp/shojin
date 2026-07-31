@@ -18,7 +18,7 @@ Run this command below on `shojin/`.
 
 ex)
 ```bash
-g++ -std=c++17 other/typical90/p085.cpp -I ac-library -o a
+g++ -std=c++17 other/tessoku/a/a05.cpp -I ac-library -o a
 ```
 
 ## Tools I use

@@ -59,4 +59,12 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  if (a + b == 9 or a - b == 9 or a * b == 9 or a == b * 9) {
+    cout << "Nine\n";
+  } else {
+    cout << "Nein\n";
+  }
+}

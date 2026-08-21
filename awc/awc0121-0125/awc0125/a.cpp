@@ -59,4 +59,10 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, d, s;
+  cin >> n >> d >> s;
+  vector<int> t(n);
+  rep(i, 0, n) cin >> t[i];
+  cout << ((n - 1) + min(s - 1, n - s)) * d + accumulate(all(t), 0ll) << '\n';
+}

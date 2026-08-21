@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, m, d, k;
+  cin >> n >> m >> d >> k;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  rep(i, 0, n) a[i] = max(0ll, a[i] - d * m);
+  sort(rall(a));
+  rep(i, 0, min(m, k)) a[i] = 0;
+  int cnt = 0;
+  rep(i, 0, n) if (a[i] == 0) cnt++;
+  cout << n - cnt << '\n';
+}

@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+string lowize(string s) {
+  string ret = "";
+  for (char c : s) ret += tolower(c);
+  return ret;
+}
+
+void solve() {
+  int n;
+  cin >> n;
+  map<string, int> cnt;
+  rep(_, 0, n) {
+    string s;
+    cin >> s;
+    cnt[lowize(s)]++;
+  }
+  int ans = 0;
+  for (auto [_, c] : cnt) chmax(ans, c);
+  cout << ans << '\n';
+}

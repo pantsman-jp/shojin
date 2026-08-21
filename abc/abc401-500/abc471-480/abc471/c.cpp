@@ -59,4 +59,37 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<ll> l, r;
+  rep(i, 0, n) {
+    ll a;
+    cin >> a;
+    if (a < 0) {
+      l.push_back(a);
+    } else {
+      r.push_back(a);
+    }
+  }
+  sort(rall(l));
+  sort(all(r));
+  queue<ll> ql, qr;
+  for (int x : l) ql.push(x);
+  for (int x : r) qr.push(x);
+  ql.push(-INF);
+  qr.push(INF);
+  ll now = 0, ans = 0;
+  rep(k, 0, n) {
+    if (now - ql.front() <= qr.front() - now) {
+      ans += now - ql.front();
+      now = ql.front();
+      ql.pop();
+    } else {
+      ans += qr.front() - now;
+      now = qr.front();
+      qr.pop();
+    }
+  }
+  cout << ans << '\n';
+}

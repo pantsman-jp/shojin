@@ -59,4 +59,27 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int Q;
+  ll V;
+  cin >> Q >> V;
+  pq<ll> q;
+  rep(_, 0, Q) {
+    int type, t;
+    cin >> type >> t;
+    if (type == 1) {
+      ll w;
+      cin >> w;
+      q.push(w - t);
+    }
+    if (type == 2) {
+      if (q.size() == 0) {
+        cout << -1 << '\n';
+      } else {
+        ll ans = q.top() + t;
+        q.pop();
+        cout << min(ans, V) << '\n';
+      }
+    }
+  }
+}

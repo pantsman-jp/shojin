@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  ll k;
+  cin >> n >> m >> k;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  ll sum = 0;
+  vector<bool> ate(n);
+  rep(i, 0, n) {
+    if (i >= m and ate[i - m]) {
+      sum -= a[i - m];
+    }
+    if (sum + a[i] <= k) {
+      sum += a[i];
+      ate[i] = true;
+    }
+    yn(ate[i]);
+  }
+}

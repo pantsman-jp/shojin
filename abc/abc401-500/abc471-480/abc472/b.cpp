@@ -59,4 +59,19 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> l(n);
+  int all = 0;
+  rep(i, 0, n) {
+    cin >> l[i];
+    all += l[i];
+  }
+  int sum = 0, ans = all;
+  rep(i, 0, n - 1) {
+    sum += l[i];
+    chmin(ans, abs((all - sum) - sum));
+  }
+  cout << ans << '\n';
+}

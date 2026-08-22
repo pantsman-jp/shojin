@@ -59,4 +59,11 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  string s;
+  cin >> s;
+  for (char c : s) {
+    cout << (c != 'A' ? '.' : c);
+  }
+  cout << '\n';
+}

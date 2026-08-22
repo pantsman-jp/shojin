@@ -59,4 +59,49 @@ int main() {
   return 0;
 }
 
-void solve() {}
+const vector<int> di = {-1, 0, 1, 0};
+const vector<int> dj = {0, 1, 0, -1};
+
+bool out(int i, int j, int h, int w) {
+  return i < 0 or h - 1 < i or j < 0 or w - 1 < j;
+}
+
+void solve() {
+  int h, w, k;
+  cin >> h >> w >> k;
+  vector<string> s(h);
+  rep(i, 0, h) cin >> s[i];
+  vector<bool> row(h), col(w);
+  rep(i, 0, h) rep(j, 0, w) {
+    if (s[i][j] == '#') {
+      row[i] = true;
+      col[j] = true;
+    }
+  }
+  vector dist(h, vector<int>(w, inf));
+  queue<pii> q;
+  rep(i, 0, h) rep(j, 0, w) {
+    if (!row[i] and !col[j]) {
+      dist[i][j] = 0;
+      q.push({i, j});
+    }
+  }
+  while (!q.empty()) {
+    auto [i, j] = q.front();
+    q.pop();
+    rep(d, 0, 4) {
+      int ni = i + di[d], nj = j + dj[d];
+      if (!out(ni, nj, h, w) and s[ni][nj] == '.' and dist[ni][nj] == inf) {
+        dist[ni][nj] = dist[i][j] + 1;
+        q.push({ni, nj});
+      }
+    }
+  }
+  int ans = 0;
+  rep(i, 0, h) rep(j, 0, w) {
+    if (dist[i][j] <= k) {
+      ans++;
+    }
+  }
+  cout << ans << '\n';
+}

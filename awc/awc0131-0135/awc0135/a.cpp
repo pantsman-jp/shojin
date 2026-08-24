@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  ll r;
+  cin >> n >> r;
+  vector<ll> a(n);
+  rep(i, 0, n) {
+    cin >> a[i];
+    a[i] += r;
+  }
+  ll mn = *min_element(all(a)), ans = 0;
+  rep(i, 0, n) ans += a[i] - mn;
+  cout << ans << '\n';
+}

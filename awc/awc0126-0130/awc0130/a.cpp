@@ -59,4 +59,32 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  string s;
+  cin >> n >> m >> s;
+  vector<bool> tkhs(n);
+  int cnt = 0;
+  rep(i, 0, n) {
+    if (s[i] == 'T') {
+      tkhs[i] = true;
+      cnt++;
+    }
+  }
+  rep(i, 1, m + 1) {
+    int r;
+    cin >> r;
+    r--;
+    if (tkhs[r]) {
+      cnt--;
+    } else {
+      cnt++;
+    }
+    tkhs[r] = !tkhs[r];
+    if (cnt == 0 or cnt == n) {
+      cout << i << '\n';
+      return;
+    }
+  }
+  cout << -1 << '\n';
+}

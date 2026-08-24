@@ -59,4 +59,23 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<string> a, b;
+  rep(_, 0, n) {
+    string s, r;
+    cin >> s >> r;
+    if (r == "teacher" or r == "doctor") {
+      a.emplace_back(s + " sensei");
+    } else {
+      b.emplace_back(s + " san");
+    }
+  }
+  for (string ans : a) {
+    cout << ans << '\n';
+  }
+  for (string ans : b) {
+    cout << ans << '\n';
+  }
+}

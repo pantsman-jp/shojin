@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  ll d;
+  cin >> n >> d;
+  int ans = 0;
+  rep(_, 0, n) {
+    ll x, y;
+    cin >> x >> y;
+    if (x * x + y * y > d * d) ans++;
+  }
+  cout << ans << '\n';
+}

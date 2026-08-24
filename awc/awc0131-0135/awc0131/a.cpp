@@ -59,4 +59,18 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  int now = n, ans = 0;
+  rep(_, 0, n) {
+    int f;
+    cin >> f;
+    now = max(0, now - f);
+    if (now > 0) {
+      now--;
+      ans++;
+    }
+  }
+  cout << ans << '\n';
+}

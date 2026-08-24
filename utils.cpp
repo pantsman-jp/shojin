@@ -51,8 +51,9 @@ using mint = modint998244353;
 // 素数判定
 bool is_prime(ll n) {
   if (n < 2) return false;
-  for (ll i = 2; i * i <= n; i++)
+  for (ll i = 2; i * i <= n; i++) {
     if (n % i == 0) return false;
+  }
   return true;
 }
 
@@ -61,8 +62,9 @@ vector<bool> era(ll n) {
   vector<bool> is_prime(n + 2, true);
   is_prime[0] = is_prime[1] = false;
   for (ll i = 2; i * i <= n; i++) {
-    if (is_prime[i])
+    if (is_prime[i]) {
       for (ll j = i * i; j <= n; j += i) is_prime[j] = false;
+    }
   }
   return is_prime;
 }
@@ -72,12 +74,14 @@ vector<ll> primes(ll n) {
   vector<bool> prime(n + 2, true);
   prime[0] = prime[1] = false;
   for (ll i = 2; i * i <= n; i++) {
-    if (prime[i])
+    if (prime[i]) {
       for (ll x = i * i; x <= n; x += i) prime[x] = false;
+    }
   }
   vector<ll> ans;
-  for (ll i = 2; i <= n; i++)
+  for (ll i = 2; i <= n; i++) {
     if (prime[i]) ans.push_back(i);
+  }
   return ans;
 }
 
@@ -186,8 +190,9 @@ mint modnc2(ll n) { return mint(n) * (n - 1) / 2; }
 
 // 平方数判別
 bool is_square(ll n) {
-  for (ll i = 1; i * i <= n; i++)
+  for (ll i = 1; i * i <= n; i++) {
     if (i * i == n) return true;
+  }
   return false;
 }
 
@@ -234,14 +239,15 @@ bool out(int i, int j, int h, int w) {
 
 // 移動
 void move(int x, int y, char c) {
-  if (c == 'R')
+  if (c == 'R') {
     x++;
-  else if (c == 'L')
+  } else if (c == 'L') {
     x--;
-  else if (c == 'U')
+  } else if (c == 'U') {
     y++;
-  else
+  } else {
     y--;
+  }
 }
 
 // 回文判定
@@ -257,13 +263,16 @@ vector<pair<char, int>> rle(string s) {
   int cnt = 1;
   char now = s[0];
   rep(i, 1, s.size()) {
-    if (s[i] == now)
+    if (s[i] == now) {
       cnt++;
-    else
-      ans.push_back({now, cnt}), now = s[i], cnt = 1;
+    } else {
+      ans.push_back({now, cnt});
+      now = s[i];
+      cnt = 1;
+    }
+    ans.push_back({now, cnt});
+    return ans;
   }
-  ans.push_back({now, cnt});
-  return ans;
 }
 
 // ランレングス圧縮（整数配列）
@@ -271,10 +280,13 @@ vector<pii> rle(vector<int> xs) {
   vector<pii> ans;
   int cnt = 1, now = xs[0];
   rep(i, 1, xs.size()) {
-    if (xs[i] == now)
+    if (xs[i] == now) {
       cnt++;
-    else
-      ans.push_back({now, cnt}), now = xs[i], cnt = 1;
+    } else {
+      ans.push_back({now, cnt});
+      now = xs[i];
+      cnt = 1;
+    }
   }
   ans.push_back({now, cnt});
   return ans;

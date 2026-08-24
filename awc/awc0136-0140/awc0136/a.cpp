@@ -59,4 +59,26 @@ int main() {
   return 0;
 }
 
-void solve() {}
+vector<pii> rle(vector<int> xs) {
+  vector<pii> ans;
+  int cnt = 1, now = xs[0];
+  rep(i, 1, xs.size()) {
+    if (xs[i] == now) {
+      cnt++;
+    } else {
+      ans.push_back({now, cnt});
+      now = xs[i];
+      cnt = 1;
+    }
+  }
+  ans.push_back({now, cnt});
+  return ans;
+}
+
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  for (auto [ans, _] : rle(a)) cout << ans << '\n';
+}

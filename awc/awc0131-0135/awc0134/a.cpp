@@ -59,4 +59,20 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  map<int, vector<ll>> cl;
+  rep(_, 0, n) {
+    int c;
+    ll l;
+    cin >> c >> l;
+    cl[c].push_back(l);
+  }
+  ll ans = 0;
+  for (auto [_, l] : cl) {
+    int m = l.size();
+    rep(i, 0, m) rep(j, i + 1, m) ans += abs(l[i] - l[j]);
+  }
+  cout << ans << '\n';
+}

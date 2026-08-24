@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<ll> sum(n);
+  rep(_, 0, m) {
+    int u, v;
+    cin >> u >> v;
+    sum[u - 1] += v;
+    sum[v - 1] += u;
+  }
+  cout << *max_element(all(sum)) << '\n';
+}

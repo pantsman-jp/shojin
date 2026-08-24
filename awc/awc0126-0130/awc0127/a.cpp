@@ -59,4 +59,18 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  vector<ll> ok;
+  rep(_, 0, n) {
+    ll s;
+    cin >> s;
+    if (s >= k) ok.push_back(s);
+  }
+  if (ok.empty()) {
+    cout << -1 << '\n';
+  } else {
+    dout(accumulate(all(ok), 0ll) * 1.0 / ok.size());
+  }
+}

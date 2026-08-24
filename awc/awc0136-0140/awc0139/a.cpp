@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  map<int, int> cnt;
+  rep(_, 0, n) {
+    int a;
+    cin >> a;
+    cnt[a]++;
+  }
+  int ans = 0;
+  rep(i, 1, n + 1) if (cnt[i] > cnt[0]) ans++;
+  cout << ans << '\n';
+}

@@ -59,4 +59,20 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  ll k;
+  cin >> n >> m >> k;
+  vector<ll> t(n);
+  rep(i, 0, n) cin >> t[i];
+  vector<bool> ok(n, true);
+  rep(_, 0, m) {
+    int d;
+    cin >> d;
+    d--;
+    ok[d] = false;
+  }
+  ll ans = 0;
+  rep(i, 0, n) if (ok[i]) ans += t[i] / k;
+  cout << ans << '\n';
+}

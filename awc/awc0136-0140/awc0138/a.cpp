@@ -59,4 +59,19 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<string> s(n);
+  rep(i, 0, n) cin >> s[i];
+  int u = n, d = -1, l = m, r = -1;
+  rep(i, 0, n) rep(j, 0, m) {
+    if (s[i][j] == '#') {
+      chmin(u, i);
+      chmax(d, i);
+      chmin(l, j);
+      chmax(r, j);
+    }
+  }
+  cout << (r - l + 1) * (d - u + 1) << '\n';
+}

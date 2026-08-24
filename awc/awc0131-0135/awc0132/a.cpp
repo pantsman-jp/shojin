@@ -59,4 +59,20 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  ll p;
+  cin >> n >> p;
+  int ans = 0;
+  rep(_, 0, n) {
+    ll h;
+    cin >> h;
+    if (p >= h) {
+      p -= h;
+      ans++;
+    } else {
+      p += h;
+    }
+  }
+  cout << ans << '\n';
+}

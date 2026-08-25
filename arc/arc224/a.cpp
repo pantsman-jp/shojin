@@ -54,9 +54,19 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   int t = 1;
-  // cin >> t;
+  cin >> t;
   rep(i, 0, t) solve();
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll k;
+  cin >> k;
+  rep(i, 1, 101) {
+    string s = to_string(k * i);
+    if (s.contains("00")) {
+      cout << s << '\n';
+      return;
+    }
+  }
+}

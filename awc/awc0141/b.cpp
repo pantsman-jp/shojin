@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  vector<pii> pts;
+  rep(i, 1, n + 1) {
+    int s;
+    cin >> s;
+    pts.emplace_back(-s, i);
+  }
+  sort(all(pts));
+  cout << pts[k - 1].second << '\n';
+}

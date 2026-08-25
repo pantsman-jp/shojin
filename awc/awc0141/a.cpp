@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, k, s, e;
+  cin >> n >> k >> s >> e;
+  ll ans = 0;
+  rep(_, 0, n) {
+    ll t, h, b;
+    cin >> t >> h >> b;
+    if ((s <= t and t <= e) and k <= h) ans += b;
+  }
+  cout << ans << '\n';
+}

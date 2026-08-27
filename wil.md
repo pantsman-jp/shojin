@@ -80,13 +80,13 @@ inline T lcm(T a, T b) {
   return (a / std::gcd(a, b)) * b;
 }
 template <typename T>
-inline T ceil(T a, T b) {
-  return (a + (b - 1)) / b;
+inline T divceil(T a, T b) {
+  return (a + b - 1) / b;
 }
 template <typename T>
-inline T floor(T a, T b) {
-  return a / b;
-}
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -98,11 +98,18 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+void solve();
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t = 1;
+  // cin >> t;
+  rep(i, 0, t) solve();
   return 0;
 }
+
+void solve() {}
 ```
 
 [先頭に戻る](#what-i-learned)

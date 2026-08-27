@@ -12,17 +12,14 @@
             "intelliSenseMode": "linux-gcc-x64"
         },
         {
-            "name": "Mac",
+            "name": "Mac-GCC16",
             "includePath": [
-                "${workspaceFolder}/**",
-                "/usr/local/opt/gcc@12/include/c++/12",
-                "/usr/local/opt/gcc@12/include/c++/12/x86_64-apple-darwin21",
-                "/usr/local/opt/gcc@12/include/c++/12/backward"
+                "${workspaceFolder}/**"
             ],
-            "compilerPath": "/usr/local/bin/g++-12",
+            "compilerPath": "/opt/homebrew/bin/g++-16",
             "cStandard": "c17",
-            "cppStandard": "c++20",
-            "intelliSenseMode": "macos-gcc-x64"
+            "cppStandard": "c++23",
+            "intelliSenseMode": "macos-gcc-arm64"
         }
     ],
     "version": 4

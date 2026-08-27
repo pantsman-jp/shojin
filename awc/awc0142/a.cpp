@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  int ans = 0;
+  rep(_, 0, n) {
+    ld t;
+    cin >> t;
+    ans += max(static_cast<int>(round(10 * t)), 370) - 370;
+  }
+  cout << ans << endl;
+}

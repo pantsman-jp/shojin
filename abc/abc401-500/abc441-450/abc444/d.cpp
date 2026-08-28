@@ -6,10 +6,37 @@ using namespace atcoder;
 #define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(x, y) x = max(x, y)
-#define chmin(x, y) x = min(x, y)
-#define yn(tf) cout << (tf ? "Yes\n" : "No\n");
-#define dout(x) cout << fixed << setprecision(10) << x << "\n";
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / std::gcd(a, b)) * b;
+}
+template <typename T>
+inline T divceil(T a, T b) {
+  return (a + b - 1) / b;
+}
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
@@ -21,26 +48,39 @@ const ld pi = acosl(-1.0L);
 // using mint = modint998244353;
 // using mint = modint1000000007;
 
+void solve();
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  int n, m = 210101;
+  int t = 1;
+  // cin >> t;
+  rep(i, 0, t) solve();
+  return 0;
+}
+
+void solve() {
+  int n;
   cin >> n;
-  vector<int> a(n);
-  rep(i, 0, n) cin >> a[i];
-  vector<ll> digit(m);
-  for (int x : a) {
-    digit[1]++;
-    digit[x + 1]--;
+  const int m = 3e5;
+  vector<int> digit(m);
+  rep(_, 0, n) {
+    int a;
+    cin >> a;
+    digit[0]++;
+    digit[a]--;
   }
-  rep(i, 1, m) digit[i] += digit[i - 1];
-  rep(i, 1, m) {
+  rep(i, 0, m - 1) digit[i + 1] += digit[i];
+  rep(i, 0, m - 1) {
     digit[i + 1] += digit[i] / 10;
     digit[i] %= 10;
   }
-  int pos = m - 1;
-  while (pos > 1 and digit[pos] == 0) pos--;
-  rrep(i, 1, pos + 1) cout << digit[i];
-  cout << endl;
-  return 0;
+  string ans;
+  rep(i, 0, m) ans += char('0' + digit[m - 1 - i]);
+  auto pos = ans.find_first_not_of('0');
+  if (pos == string::npos) {
+    cout << "0\n";
+  } else {
+    cout << ans.substr(pos) << '\n';
+  }
 }

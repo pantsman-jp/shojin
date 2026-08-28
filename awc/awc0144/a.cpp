@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  int mn = inf;
+  rep(_, 0, n) {
+    int l;
+    cin >> l;
+    chmin(mn, l);
+  }
+  int ans = 0;
+  rep(_, 0, m) {
+    int s;
+    cin >> s;
+    if (s <= mn) {
+      ans++;
+    }
+  }
+  cout << ans << '\n';
+}

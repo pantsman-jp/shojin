@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  ll sum = 0;
+  rep(i, 0, n) {
+    ll a;
+    cin >> a;
+    if (i >= n / 2) sum += a;
+  }
+  cout << sum << '\n';
+}

@@ -59,4 +59,18 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  map<int, int> cnt;
+  rep(_, 0, n) {
+    int a;
+    cin >> a;
+    cnt[a]++;
+  }
+  ll ans = 0;
+  for (auto [num, c] : cnt) {
+    if (c % 2 == 1) ans += num;
+  }
+  cout << ans << '\n';
+}

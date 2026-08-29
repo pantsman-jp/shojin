@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  vector<int> cnt(k);
+  rep(i, 0, n) {
+    int a;
+    cin >> a;
+    cnt[a - 1]++;
+  }
+  int mx = *max_element(all(cnt));
+  cout << count(all(cnt), mx) + count(all(cnt), mx - 1) << '\n';
+}

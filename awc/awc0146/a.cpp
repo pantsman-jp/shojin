@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m, q;
+  cin >> n >> m >> q;
+  vector suf(n, vector<int>(3));
+  rep(i, 0, n) rep(j, 0, 3) cin >> suf[i][j];
+  rep(_, 0, q) {
+    int d;
+    char c;
+    cin >> d >> c;
+    d--;
+    int s = suf[d][0], u = suf[d][1], f = suf[d][2];
+    if (c == '+') {
+      suf[d] = {s + 1, 7 - f, u};
+    } else {
+      suf[d] = {s - 1, f, 7 - u};
+    }
+  }
+  rep(i, 0, n) cout << suf[i][0] << ' ' << suf[i][1] << '\n';
+}

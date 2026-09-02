@@ -59,4 +59,17 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int h, w;
+  cin >> h >> w;
+  vector g(h, vector<int>(w));
+  rep(i, 0, h) rep(j, 0, w) cin >> g[i][j];
+  vector<ll> row(h), col(w);
+  rep(i, 0, h) rep(j, 0, w) {
+    row[i] += g[i][j];
+    col[j] += g[i][j];
+  }
+  ll ans = -INF;
+  rep(i, 0, h) rep(j, 0, w) chmax(ans, col[j] + row[i] - g[i][j]);
+  cout << ans << '\n';
+}

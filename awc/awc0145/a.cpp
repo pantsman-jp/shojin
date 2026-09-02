@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m, p;
+  cin >> n >> m >> p;
+  ll sum = 0;
+  rep(_, 0, n) {
+    int d, v;
+    cin >> d >> v;
+    if (d <= m) sum += v;
+  }
+  cout << sum * (100 - p) / 100 << '\n';
+}

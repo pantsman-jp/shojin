@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<ll> a(n);
+  ll sum = 0;
+  rep(i, 0, n) {
+    cin >> a[i];
+    sum += a[i];
+  }
+  sort(rall(a));
+  ll now = 0;
+  rep(i, 0, n) {
+    now += a[i];
+    if (2 * now >= sum) {
+      cout << i + 1 << '\n';
+      break;
+    }
+  }
+}

@@ -59,4 +59,32 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m, s, k;
+  cin >> n >> m >> s >> k;
+  vector<vector<int>> g(n);
+  rep(_, 0, m) {
+    int u, v;
+    cin >> u >> v;
+    u--, v--;
+    g[u].push_back(v);
+    g[v].push_back(u);
+  }
+  vector<int> dist(n, inf);
+  queue<int> q;
+  q.push(s - 1);
+  dist[s - 1] = 0;
+  while (!q.empty()) {
+    int u = q.front();
+    q.pop();
+    for (int v : g[u]) {
+      if (dist[v] == inf) {
+        dist[v] = dist[u] + 1;
+        q.push(v);
+      }
+    }
+  }
+  int ans = 0;
+  rep(i, 0, n) if (dist[i] <= k) ans++;
+  cout << ans << '\n';
+}

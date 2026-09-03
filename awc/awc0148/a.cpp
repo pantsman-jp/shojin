@@ -59,4 +59,27 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, d, k;
+  cin >> n >> d >> k;
+  map<int, int> cnt;
+  rep(i, 0, d) {
+    int m;
+    cin >> m;
+    rep(j, 0, m) {
+      int s;
+      cin >> s;
+      cnt[s]++;
+    }
+  }
+  vector<int> ans;
+  for (auto [x, y] : cnt) {
+    if (y >= k) ans.push_back(x);
+  }
+  if (ans.empty()) {
+    cout << -1 << '\n';
+  } else {
+    for (int x : ans) cout << x << ' ';
+    cout << '\n';
+  }
+}

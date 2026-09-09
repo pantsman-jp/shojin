@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m, s, t;
+  cin >> n >> m >> s >> t;
+  if (s > t) swap(s, t);
+  ll ans = 0;
+  rep(_, 0, m) {
+    int p, v;
+    cin >> p >> v;
+    if (s <= p and p <= t) ans += v;
+  }
+  cout << ans << '\n';
+}

@@ -59,4 +59,30 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> p(m);
+  rep(i, 0, m) cin >> p[i];
+  map<int, vector<int>> mp;
+  rep(i, 0, n) {
+    string s;
+    cin >> s;
+    int total = 0;
+    rep(j, 0, m) {
+      if (s[j] == 'o') {
+        total += p[j];
+      }
+    }
+    mp[-total].push_back(i);
+  }
+  vector<int> ans(n);
+  int rank = 1;
+  for (auto [_, xs] : mp) {
+    for (auto x : xs) {
+      ans[x] = rank;
+    }
+    rank += xs.size();
+  }
+  rep(i, 0, n) cout << ans[i] << '\n';
+}

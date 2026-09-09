@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int H, W, R, C;
+  cin >> H >> W >> R >> C;
+  vector<string> ans(H, string(W, '.')), S(R);
+  rep(i, 0, R) cin >> S[i];
+  int N;
+  cin >> N;
+  rep(_, 0, N) {
+    int r, c;
+    cin >> r >> c;
+    r--, c--;
+    rep(i, 0, R) rep(j, 0, C) {
+      int ni = r + i, nj = c + j;
+      if (!(0 <= ni and ni < H) or !(0 <= nj and nj < W)) continue;
+      if (S[i][j] == '#') ans[ni][nj] = '#';
+    }
+  }
+  rep(i, 0, H) cout << ans[i] << '\n';
+}

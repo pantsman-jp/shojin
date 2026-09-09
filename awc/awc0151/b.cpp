@@ -59,4 +59,18 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> cnt(n);
+  int mx = 0, ans = 0;
+  rep(_, 0, m) {
+    int p;
+    cin >> p;
+    p--;
+    cnt[p]++;
+    chmax(mx, cnt[p]);
+    if (p == 1 and mx > cnt[p]) ans++;
+  }
+  cout << ans << '\n';
+}

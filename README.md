@@ -12,15 +12,6 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 
 [![Rating(Heuristic)](https://badgen.org/img/atcoder/pantsman/rating/heuristic?style=flat)](https://atcoder.jp/users/pantsman?contestType=heuristic)
 
-## How To Compile
-
-Run this command below on `shojin/`.
-
-ex)
-```bash
-g++ -std=c++17 other/tessoku/a/a05.cpp -I ac-library -o a
-```
-
 ## Tools I use
 
 - [AtCoder Problems](https://kenkoooo.com/atcoder)

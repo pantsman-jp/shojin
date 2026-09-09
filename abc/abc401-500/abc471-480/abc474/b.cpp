@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  rep(i, 0, n) {
+    int p;
+    cin >> p;
+    if (i / 10 != (p - 1) / 10) {
+      yn(false);
+      return;
+    }
+  }
+  yn(true);
+}

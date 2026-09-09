@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, q;
+  cin >> n >> q;
+  vector<int> p(n);
+  rep(i, 0, n) cin >> p[i];
+  vector<int> idx(n + 1);
+  rep(i, 0, n) idx[p[i]] = i;
+  rep(_, 0, q) {
+    int a;
+    cin >> a;
+    p[idx[a]] = -1;
+    idx[a] = p.size();
+    p.push_back(a);
+  }
+  for (int x : p) {
+    if (x != -1) cout << x << ' ';
+  }
+  cout << endl;
+}

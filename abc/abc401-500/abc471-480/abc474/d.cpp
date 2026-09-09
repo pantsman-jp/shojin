@@ -59,4 +59,21 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<ll> a(n), b(n);
+  rep(i, 0, n) cin >> a[i];
+  rep(i, 0, n) cin >> b[i];
+  vector<ll> w(n, 1);
+  rep(i, 0, n) {
+    if (a[i] > b[i]) {
+      w[i] = 1e18;
+      cout << "Yes\n";
+      rep(j, 0, n) cout << w[j] << ' ';
+      cout << '\n';
+      return;
+    }
+  }
+  cout << "No\n";
+}

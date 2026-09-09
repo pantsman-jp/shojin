@@ -59,4 +59,8 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int x;
+  cin >> x;
+  cout << (x + 1) % 3 + 1 << '\n';
+}

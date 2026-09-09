@@ -59,4 +59,26 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<bool> space(m);
+  rep(_, 0, n) {
+    int p;
+    cin >> p;
+    p--;
+    if (space[p]) {
+      rep(i, p + 1, m) {
+        if (!space[i]) {
+          space[i] = true;
+          break;
+        }
+      }
+    } else {
+      space[p] = true;
+    }
+  }
+  int ans = 0;
+  rep(i, 0, m) if (space[i]) ans++;
+  cout << ans << '\n';
+}

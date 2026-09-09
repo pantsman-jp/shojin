@@ -59,4 +59,18 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, q, t;
+  cin >> n >> q >> t;
+  vector<ll> a(n), sum(n + 1);
+  rep(i, 0, n) {
+    cin >> a[i];
+    sum[i + 1] = sum[i] + a[i];
+  }
+  rep(_, 0, q) {
+    int l, r;
+    cin >> l >> r;
+    l--, r--;
+    yn(sum[r + 1] - sum[l] > t);
+  }
+}

@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, q;
+  cin >> n >> q;
+  dsu uf(n);
+  rep(_, 0, q) {
+    int t;
+    cin >> t;
+    if (t == 1) {
+      int a, b;
+      cin >> a >> b;
+      a--, b--;
+      uf.merge(a, b);
+    } else {
+      int x;
+      cin >> x;
+      cout << uf.size(x - 1) << '\n';
+    }
+  }
+}

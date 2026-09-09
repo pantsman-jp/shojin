@@ -59,4 +59,18 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k, q;
+  cin >> n >> k >> q;
+  vector<string> s(n);
+  rep(i, 0, n) cin >> s[i];
+  vector<string> t(k, string(k, '0'));
+  rep(_, 0, q) {
+    int r, c;
+    cin >> r >> c;
+    r--, c--;
+    rep(i, 0, k) rep(j, 0, k) t[j][k - 1 - i] = s[r + i][c + j];
+    rep(i, 0, k) rep(j, 0, k) s[r + i][c + j] = t[i][j];
+  }
+  rep(i, 0, n) cout << s[i] << '\n';
+}

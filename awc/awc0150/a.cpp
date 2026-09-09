@@ -59,4 +59,4 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() { cout << 0 << '\n'; }

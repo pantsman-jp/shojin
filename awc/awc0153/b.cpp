@@ -59,4 +59,17 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> x(n), p(m);
+  rep(i, 0, n) cin >> x[i];
+  rep(i, 0, m) cin >> p[i];
+  rep(i, 0, n) {
+    auto it = lower_bound(all(p), x[i]);
+    int ans = inf;
+    if (it != p.end()) chmin(ans, abs(x[i] - *it));
+    if (it != p.begin()) chmin(ans, abs(x[i] - *prev(it)));
+    cout << ans << '\n';
+  }
+}

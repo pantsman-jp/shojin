@@ -59,4 +59,19 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m, k;
+  cin >> n >> m >> k;
+  vector<ll> a(n), diff(n + 1);
+  rep(i, 0, n) cin >> a[i];
+  rep(_, 0, m) {
+    int l, r;
+    cin >> l >> r;
+    l--, r--;
+    diff[l]++, diff[r + 1]--;
+  }
+  rep(i, 0, n) diff[i + 1] += diff[i];
+  int ans = 0;
+  rep(i, 0, n) if (a[i] + diff[i] >= k) ans++;
+  cout << ans << '\n';
+}

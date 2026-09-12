@@ -59,4 +59,41 @@ int main() {
   return 0;
 }
 
-void solve() {}
+bool is_prime(ll n) {
+  if (n < 2) return false;
+  for (ll i = 2; i * i <= n; i++) {
+    if (n % i == 0) return false;
+  }
+  return true;
+}
+
+void solve() {
+  string s;
+  cin >> s;
+  int n = s.size();
+  vector<int> mp(26, -1);
+  vector<bool> used(10, false);
+  auto dfs = [&](auto self, int idx, ll x) -> bool {
+    if (idx == n) {
+      if (is_prime(x)) {
+        cout << x << '\n';
+        return true;
+      }
+      return false;
+    }
+    int c = s[idx] - 'a';
+    if (mp[c] != -1) {
+      return self(self, idx + 1, x * 10 + mp[c]);
+    }
+    rep(d, 0, 10) {
+      if (used[d] or (idx == 0 and d == 0)) continue;
+      mp[c] = d;
+      used[d] = true;
+      if (self(self, idx + 1, x * 10 + d)) return true;
+      mp[c] = -1;
+      used[d] = false;
+    }
+    return false;
+  };
+  if (!dfs(dfs, 0, 0)) cout << -1 << '\n';
+}

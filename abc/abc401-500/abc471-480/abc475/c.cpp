@@ -59,4 +59,25 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, s, l;
+  cin >> n >> s >> l;
+  s--;
+  vector<ll> a(n - 1);
+  rep(i, 0, n - 1) cin >> a[i];
+  vector<ll> dist(n);
+  dist[s] = 0;
+  rrep(i, 0, s) dist[i] = dist[i + 1] + a[i];
+  rep(i, s, n - 1) dist[i + 1] = dist[i] + a[i];
+  ll ans = 0;
+  rep(left, 0, n) {
+    if (left > s) continue;
+    rep(right, s, n) {
+      ll left_dist = dist[left] - dist[s];
+      ll right_dist = dist[right] - dist[s];
+      ll cost = min(2 * left_dist + right_dist, left_dist + 2 * right_dist);
+      if (cost <= l) chmax(ans, right - left + 1);
+    }
+  }
+  cout << ans << '\n';
+}

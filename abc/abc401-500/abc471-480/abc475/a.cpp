@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  string s;
+  cin >> s;
+  int n = s.size();
+  rep(i, 0, n) {
+    if (i == n - 1) {
+      cout << s[i];
+    } else {
+      cout << s[i] << 'o';
+    }
+  }
+  cout << '\n';
+}

@@ -59,4 +59,19 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  int hundred = 0, ten = 0, one = 0;
+  rep(_, 0, n) {
+    int a;
+    cin >> a;
+    int change = divceil(a, 1000) * 1000 - a;
+    hundred += change / 100;
+    change %= 100;
+    ten += change / 10;
+    change %= 10;
+    one += change;
+  }
+  cout << one << ' ' << ten << ' ' << hundred << '\n';
+}

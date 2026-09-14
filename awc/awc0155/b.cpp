@@ -59,4 +59,13 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, d, s;
+  cin >> n >> d >> s;
+  s--;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  ll ans = d / n * accumulate(all(a), 0ll);
+  rep(i, 0, d % n) ans += a[(s + i) % n];
+  cout << ans << '\n';
+}

@@ -59,4 +59,19 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  int ans = 1, mx = 0;
+  rep(i, 1, n + 1) {
+    string s;
+    cin >> s;
+    int m = s.size(), cnt = 0;
+    rep(j, 0, m - 7) if (s.substr(j, 8) == "tanabata") cnt++;
+    if (cnt > mx) {
+      ans = i;
+      mx = cnt;
+    }
+  }
+  cout << ans << '\n';
+}

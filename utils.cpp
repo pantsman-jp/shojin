@@ -426,7 +426,7 @@ vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
   int n = g.size();
   vector<vector<ll>> dist(n, vector<ll>(n, INF));
   rep(i, 0, n) dist[i][i] = 0;
-  rep(i, 0, n) for (const auto& e : g[i]) chmin(dist[i][e.first], e.second);
+  rep(i, 0, n) for (const auto& [v, w] : g[i]) chmin(dist[i][v], w);
   rep(k, 0, n) rep(i, 0, n) {
     if (dist[i][k] < INF) {
       rep(j, 0, n) {
@@ -439,6 +439,7 @@ vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
 
 // ans[i][c] := i 文字目以降で最初に文字 c が登場する index
 // 存在しないときは N
+// https://drken1215.hatenablog.com/entry/2021/10/10/195200
 vector<vector<int>> calc_next(const string& s) {
   int n = (int)s.size();
   vector<vector<int>> ans(n + 1, vector<int>(26, n));
@@ -462,4 +463,13 @@ bool has_subsequence(string& s, string& t) {
     pos++;
   }
   return true;
+}
+
+// floor(sqrt(x))
+// https://atcoder.jp/contests/awc0154/editorial/25333
+ll sqrt_floor(ll x) {
+  ll ans = sqrt((ld)x);
+  while (ans * ans < x) ans++;
+  while (ans * ans > x) ans--;
+  return ans;
 }

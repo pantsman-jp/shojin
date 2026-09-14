@@ -59,4 +59,20 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, k, q;
+  cin >> n >> k >> q;
+  vector<ll> c(n);
+  rep(i, 0, n) cin >> c[i];
+  vector<ll> diff(n + 1);
+  rep(_, 0, q) {
+    int l, r;
+    cin >> l >> r;
+    l--, r--;
+    diff[l] += k;
+    diff[r + 1] -= k;
+  }
+  rep(i, 0, n) diff[i + 1] += diff[i];
+  rep(i, 0, n) cout << c[i] + diff[i] << ' ';
+  cout << '\n';
+}

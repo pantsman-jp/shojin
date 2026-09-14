@@ -59,4 +59,17 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  ld p;
+  cin >> n >> p;
+  ld ans = 0.0;
+  rep(_, 0, n) {
+    ld x, v;
+    cin >> x >> v;
+    if (x != p) {
+      ans += v / abs(x - p);
+    }
+  }
+  dout(ans);
+}

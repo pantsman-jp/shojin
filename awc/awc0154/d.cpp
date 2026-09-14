@@ -59,4 +59,40 @@ int main() {
   return 0;
 }
 
-void solve() {}
+vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
+  int n = g.size();
+  vector<vector<ll>> dist(n, vector<ll>(n, INF));
+  rep(i, 0, n) dist[i][i] = 0;
+  rep(i, 0, n) for (const auto& e : g[i]) chmin(dist[i][e.first], e.second);
+  rep(k, 0, n) rep(i, 0, n) {
+    if (dist[i][k] < INF) {
+      rep(j, 0, n) {
+        if (dist[k][j] < INF) chmin(dist[i][j], dist[i][k] + dist[k][j]);
+      }
+    }
+  }
+  return dist;
+}
+
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<vector<pair<int, ll>>> g(n);
+  rep(_, 0, m) {
+    int u, v;
+    ll w;
+    cin >> u >> v >> w;
+    g[u - 1].emplace_back(v - 1, w);
+  }
+  vector<vector<ll>> d = warshall_floyd(g);
+  vector<int> ans(n);
+  rep(k, 0, n) rep(i, 0, n) {
+    if (i == k) continue;
+    rep(j, 0, n) {
+      if (j == i or j == k) continue;
+      if (d[i][j] == d[i][k] + d[k][j]) ans[k]++;
+    }
+  }
+  rep(i, 0, n) cout << ans[i] << ' ';
+  cout << '\n';
+}

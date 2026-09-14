@@ -59,4 +59,32 @@ int main() {
   return 0;
 }
 
-void solve() {}
+ll eudist(ll x1, ll y1, ll x2, ll y2) {
+  return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+}
+
+ll sqrt_floor(ll x) {
+  ll ans = sqrt((ld)x);
+  while (ans * ans < x) ans++;
+  while (ans * ans > x) ans--;
+  return ans;
+}
+
+void solve() {
+  ll n, q;
+  cin >> n >> q;
+  vector<ll> x(n), y(n);
+  rep(i, 0, n) cin >> x[i] >> y[i];
+  vector<ll> ans(n, 0);
+  rep(i, 0, n) rep(j, i + 1, n) {
+    ll dist = sqrt_floor(eudist(x[i], y[i], x[j], y[j]));
+    ans[i] += dist;
+    ans[j] += dist;
+  }
+  rep(_, 0, q) {
+    ll c;
+    cin >> c;
+    c--;
+    cout << ans[c] << '\n';
+  }
+}

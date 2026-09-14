@@ -384,7 +384,7 @@ vector<int> detect_cycle(const vector<int>& g) {
 }
 
 // DAG 判定
-bool is_dag(vector<vector<int>>& g) {
+bool is_dag(const vector<vector<int>>& g) {
   int n = g.size();
   vector<int> state(n, 0);
   auto dfs = [&](auto self, int u) -> bool {
@@ -401,7 +401,7 @@ bool is_dag(vector<vector<int>>& g) {
 }
 
 // 0-indexed DAG トポロジカルソート（辞書順最小）
-vector<int> topo_sort(vector<vector<int>>& g) {
+vector<int> topo_sort(const vector<vector<int>>& g) {
   int n = g.size();
   vector<int> indeg(n, 0);
   rep(u, 0, n) for (int v : g[u]) indeg[v]++;
@@ -451,23 +451,24 @@ vector<vector<int>> calc_next(const string& s) {
 }
 
 // 文字列 s は文字列 t を部分列として持つか？
-bool has_subsequence(string& s, string& t) {
+bool has_subsequence(const string& s, const string& t) {
   int pos = 0, n = s.size(), m = t.size();
   rep(i, 0, m) {
-    while (pos < n and s[pos] != t[i]) {
-      pos++;
-    }
-    if (pos == n) {
-      return false;
-    }
+    while (pos < n and s[pos] != t[i]) pos++;
+    if (pos == n) return false;
     pos++;
   }
   return true;
 }
 
+// 文字列 s は文字列 t を部分文字列として持つか？
+bool has_substring(const string& s, const string& t) {
+  return s.find(t) != string::npos;
+}
+
 // floor(sqrt(x))
 // https://atcoder.jp/contests/awc0154/editorial/25333
-ll sqrt_floor(ll x) {
+ll sqrt_floor(const ll& x) {
   ll ans = sqrt((ld)x);
   while (ans * ans < x) ans++;
   while (ans * ans > x) ans--;

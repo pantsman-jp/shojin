@@ -59,4 +59,17 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  rep(_, 0, m) {
+    int b, c;
+    cin >> b >> c;
+    b--;
+    if (a[b] >= c) a[b] -= c;
+  }
+  rep(i, 0, n) cout << a[i] << ' ';
+  cout << '\n';
+}

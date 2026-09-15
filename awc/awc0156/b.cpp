@@ -59,4 +59,17 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  vector<ll> dp(n);
+  dp[0] = 0;
+  dp[1] = max(a[1] - a[0], 0);
+  rep(i, 2, n) {
+    dp[i] = min(dp[i - 1] + max(a[i] - a[i - 1], 0),
+                dp[i - 2] + max(a[i] - a[i - 2], 0));
+  }
+  cout << dp[n - 1] << '\n';
+}

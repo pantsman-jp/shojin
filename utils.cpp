@@ -467,10 +467,12 @@ bool has_substring(const string& s, const string& t) {
 }
 
 // floor(sqrt(x))
-// https://atcoder.jp/contests/awc0154/editorial/25333
 ll sqrt_floor(const ll& x) {
   ll ans = sqrt((ld)x);
-  while (ans * ans < x) ans++;
-  while (ans * ans > x) ans--;
+  while ((ans + 1) <= x / (ans + 1)) ans++;
+  while (ans > x / ans) ans--;
   return ans;
 }
+
+// 区間 [l,r] の平方数の個数
+ll cnt_sqr(ll l, ll r) { return sqrt_floor(r) - sqrt_floor(l - 1); }

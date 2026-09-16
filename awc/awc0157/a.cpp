@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> cnt(n);
+  rep(_, 0, n) {
+    int t;
+    cin >> t;
+    cnt[t - 1]++;
+  }
+  int ans = 0;
+  rep(i, 0, n) if (cnt[i] == 0) ans++;
+  cout << ans << '\n';
+}

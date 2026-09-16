@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  ll ans = 0, now = 0;
+  rep(_, 0, n) {
+    int a, b;
+    cin >> a >> b;
+    now += a - b;
+    chmax(ans, -now);
+  }
+  cout << ans << '\n';
+}

@@ -1,52 +1,82 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
-#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
+#include <atcoder/all>
+using namespace atcoder;
+#define rep(i, l, r) for (int i = (l); i < (r); i++)
+#define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(a, b) a = max(a, b)
-#define chmin(a, b) a = min(a, b)
-#define ans(p) cout << (p ? "Alice\n" : "Bob\n");
-#define dout(f) cout << fixed << setprecision(10) << f << '\n';
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / std::gcd(a, b)) * b;
+}
+template <typename T>
+inline T divceil(T a, T b) {
+  return (a + b - 1) / b;
+}
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
+using ull = unsigned long long;
 using ld = long double;
-using P = pair<int, int>;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
-// const ll mod =;
+const ld pi = acosl(-1.0L);
+// using mint = modint998244353;
+// using mint = modint1000000007;
 
-void solve()
-{
+void solve();
+
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int t = 1;
+  cin >> t;
+  rep(i, 0, t) solve();
+  return 0;
+}
+
+void solve() {
   int n, m, k;
   string s;
   cin >> n >> m >> k >> s;
   vector<vector<int>> g(n);
-  rep(i, 0, m)
-  {
+  rep(_, 0, m) {
     int u, v;
     cin >> u >> v;
     u--, v--;
     g[u].push_back(v);
   }
-  vector dp(2 * k + 1, vector<bool>(n));
-  rep(v, 0, n) dp[2 * k][v] = (s[v] == 'A');
-  rrep(i, 2 * k, 0) rep(v, 0, n)
-  {
+  vector dp(2 * k + 1, vector<int>(n));
+  rep(v, 0, n) dp[2 * k][v] = (s[v] == 'A' ? 1 : 0);
+  rrep(i, 0, 2 * k) rep(v, 0, n) {
     dp[i][v] = 0;
-    for (int u : g[v])
-    {
-      if (!dp[i + 1][u])
-        dp[i][v] = true;
+    for (int u : g[v]) {
+      if (dp[i + 1][u] == 0) dp[i][v] = 1;
     }
   }
-  ans(dp[0][0]);
-}
-
-int main()
-{
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
-  int t;
-  cin >> t;
-  rep(_, 0, t) solve();
+  cout << (dp[0][0] == 1 ? "Alice" : "Bob") << '\n';
 }

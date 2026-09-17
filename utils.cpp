@@ -258,7 +258,7 @@ bool is_pali(string s) {
 }
 
 // ランレングス圧縮（文字列）
-vector<pair<char, int>> rle(string s) {
+vector<pair<char, int>> rle(const string& s) {
   vector<pair<char, int>> ans;
   int cnt = 1;
   char now = s[0];
@@ -270,13 +270,13 @@ vector<pair<char, int>> rle(string s) {
       now = s[i];
       cnt = 1;
     }
-    ans.push_back({now, cnt});
-    return ans;
   }
+  ans.push_back({now, cnt});
+  return ans;
 }
 
 // ランレングス圧縮（整数配列）
-vector<pii> rle(vector<int> xs) {
+vector<pii> rle(const vector<int>& xs) {
   vector<pii> ans;
   int cnt = 1, now = xs[0];
   rep(i, 1, xs.size()) {
@@ -293,7 +293,7 @@ vector<pii> rle(vector<int> xs) {
 }
 
 // 文字列中の文字の出現回数
-int count_char(string s, char c) {
+int count_char(const string& s, const char& c) {
   int ans = 0;
   rep(i, 0, s.size()) if (s[i] == c) ans++;
   return ans;

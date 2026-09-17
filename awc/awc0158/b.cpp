@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, l, r;
+  cin >> n >> l >> r;
+  vector<ll> t(n);
+  rep(i, 0, n) cin >> t[i];
+  ll now = 0, ans = -INF;
+  rep(i, 0, n) {
+    ll x = l <= t[i] and t[i] <= r ? 1 : -1;
+    now = max(now + x, x);
+    chmax(ans, now);
+  }
+  cout << ans << '\n';
+}

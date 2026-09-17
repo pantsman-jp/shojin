@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, s, c;
+  cin >> n >> s >> c;
+  ll sum = 0;
+  rep(_, 0, n) {
+    ll r;
+    cin >> r;
+    sum += r;
+  }
+  cout << max((sum - s) * c, 0ll) << '\n';
+}

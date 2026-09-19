@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  string s, t;
+  cin >> n >> s >> t;
+  rep(i, 0, n) {
+    if (t[i] == '*') continue;
+    if (s[i] != t[i]) {
+      yn(false);
+      return;
+    }
+  }
+  yn(true);
+}

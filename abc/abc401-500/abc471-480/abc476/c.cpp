@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> top(3);
+  rep(i, 0, n) {
+    int a;
+    cin >> a;
+    top.push_back(a);
+    sort(rall(top));
+    top.pop_back();
+    if (i >= 2) cout << top[2] << '\n';
+  }
+}

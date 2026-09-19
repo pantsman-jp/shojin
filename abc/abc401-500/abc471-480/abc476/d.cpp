@@ -59,4 +59,26 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, m, k, x, y;
+  cin >> n >> m >> k >> x >> y;
+  vector<ll> a(n), b(m);
+  rep(i, 0, n) cin >> a[i];
+  rep(i, 0, m) cin >> b[i];
+  sort(all(a)), sort(all(b));
+  vector<ll> suma(n + 1), sumb(m + 1), need(m + 1);
+  rep(i, 0, n) suma[i + 1] = suma[i] + a[i];
+  rep(i, 0, m) {
+    sumb[i + 1] = sumb[i] + b[i];
+    need[i + 1] = need[i] + divceil(b[i], k);
+  }
+  ll all = x + k * y, ans = 0;
+  rep(i, 0, m + 1) {
+    if (need[i] > y) break;
+    ll rest = all - sumb[i];
+    if (rest >= 0) {
+      chmax(ans, (ll)(i + (upper_bound(all(suma), rest) - suma.begin() - 1)));
+    }
+  }
+  cout << ans << '\n';
+}

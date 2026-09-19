@@ -59,4 +59,35 @@ int main() {
   return 0;
 }
 
-void solve() {}
+pii op_min(pii a, pii b) { return min(a, b); }
+
+pii e_min() { return {inf, inf}; }
+
+pii op_max(pii a, pii b) { return max(a, b); }
+
+pii e_max() { return {-inf, -inf}; }
+
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> p(n);
+  rep(i, 0, n) cin >> p[i];
+  vector<pii> a(n);
+  rep(i, 0, n) a[i] = {p[i], i};
+  segtree<pii, op_min, e_min> seg_min(a);
+  segtree<pii, op_max, e_max> seg_max(a);
+  rep(_, 0, m) {
+    int l, r;
+    cin >> l >> r;
+    l--;
+    auto [foo, i] = seg_min.prod(l, r);
+    auto [bar, j] = seg_max.prod(l, r);
+    swap(p[i], p[j]);
+    seg_min.set(i, {p[i], i});
+    seg_min.set(j, {p[j], j});
+    seg_max.set(i, {p[i], i});
+    seg_max.set(j, {p[j], j});
+  }
+  rep(i, 0, n) cout << p[i] << ' ';
+  cout << '\n';
+}

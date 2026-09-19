@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  string s;
+  cin >> s;
+  int n = s.size();
+  cout << s;
+  if (s[n - 1] == 'e') {
+    cout << 'r' << '\n';
+  } else {
+    cout << "er" << '\n';
+  }
+}

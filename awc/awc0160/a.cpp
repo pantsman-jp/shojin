@@ -59,4 +59,20 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  int ans = 0, now = 0;
+  rep(i, 1, n + 1) {
+    vector<int> s(m);
+    rep(j, 0, m) cin >> s[j];
+    sort(all(s));
+    int sum = 0;
+    rep(j, 1, m - 1) sum += s[j];
+    if (sum > now) {
+      ans = i;
+      now = sum;
+    }
+  }
+  cout << ans << '\n';
+}

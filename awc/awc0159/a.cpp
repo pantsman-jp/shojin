@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m, k;
+  cin >> n >> m >> k;
+  vector<string> ans(n, (m, string(m, '#')));
+  rep(_, 0, k) {
+    int r, c;
+    cin >> r >> c;
+    ans[r - 1][c - 1] = '.';
+  }
+  for (string s : ans) cout << s << '\n';
+}

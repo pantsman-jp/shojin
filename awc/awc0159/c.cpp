@@ -59,4 +59,30 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m, k;
+  cin >> n >> m >> k;
+  vector<int> sw(m);
+  rep(i, 0, m) {
+    int c;
+    cin >> c;
+    rep(_, 0, c) {
+      int s;
+      cin >> s;
+      sw[i] |= 1 << (s - 1);
+    }
+  }
+  int ans = inf;
+  rep(i, 0, 1 << m) {
+    int now = 0, cnt = 0;
+    rep(j, 0, m) {
+      if ((i & (1 << j)) != 0) {
+        now ^= sw[j];
+        cnt++;
+      }
+    }
+    if (__builtin_popcount(now) == k) chmin(ans, cnt);
+  }
+  if (ans == inf) ans = -1;
+  cout << ans << '\n';
+}

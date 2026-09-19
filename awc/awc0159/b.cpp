@@ -59,4 +59,21 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, k;
+  cin >> n >> k;
+  map<ll, ll> cnt;
+  rep(_, 0, n) {
+    int a;
+    cin >> a;
+    cnt[a]++;
+  }
+  ll ans = 0;
+  for (auto [ai, c] : cnt) {
+    ll tar = ai + k;
+    if (cnt.find(tar) != cnt.end()) {
+      ans += c * cnt[tar];
+    }
+  }
+  cout << ans << '\n';
+}

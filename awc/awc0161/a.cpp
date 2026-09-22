@@ -59,4 +59,17 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  sort(all(a));
+  int ans = 0;
+  do {
+    int tmp = 0;
+    rep(i, 0, n - 1) tmp += abs(a[i] - a[i + 1]);
+    chmax(ans, tmp);
+  } while (next_permutation(all(a)));
+  cout << ans << '\n';
+}

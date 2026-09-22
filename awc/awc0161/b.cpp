@@ -59,4 +59,13 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  sort(rall(a));
+  ll ans = 0;
+  rep(i, 0, n) if (i % 2 == 0) ans += a[i];
+  cout << ans << '\n';
+}

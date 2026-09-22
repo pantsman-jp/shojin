@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  vector<int> t(n);
+  rep(i, 0, n) cin >> t[i];
+  unordered_map<int, int> cnt;
+  int dup = 0, ans = 0, l = 0;
+  rep(r, 0, n) {
+    if (cnt[t[r]] > 0) dup++;
+    cnt[t[r]]++;
+    while (dup > k) {
+      cnt[t[l]]--;
+      if (cnt[t[l]] > 0) dup--;
+      l++;
+    }
+    chmax(ans, r - l + 1 - dup);
+  }
+  cout << ans << '\n';
+}

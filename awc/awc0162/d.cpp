@@ -59,4 +59,41 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int h, w, r, c;
+  cin >> h >> w >> r >> c;
+  r--, c--;
+  vector<string> g(h);
+  rep(i, 0, h) cin >> g[i];
+  int n;
+  string s;
+  cin >> n >> s;
+  vector dp(h, vector<ll>(w, INF));
+  dp[r][c] = 0;
+  for (char chr : s) {
+    auto dist = dp;
+    rep(i, 0, h) rep(j, 0, w) {
+      if (i > 0) chmin(dist[i][j], dist[i - 1][j] + 1);
+      if (j > 0) chmin(dist[i][j], dist[i][j - 1] + 1);
+    }
+    rrep(i, 0, h) rrep(j, 0, w) {
+      if (i + 1 < h) chmin(dist[i][j], dist[i + 1][j] + 1);
+      if (j + 1 < w) chmin(dist[i][j], dist[i][j + 1] + 1);
+    }
+    vector ndp(h, vector<ll>(w, INF));
+    bool ok = false;
+    rep(i, 0, h) rep(j, 0, w) {
+      if (g[i][j] != chr) continue;
+      ndp[i][j] = dist[i][j] + 1;
+      ok = true;
+    }
+    if (!ok) {
+      cout << -1 << '\n';
+      return;
+    }
+    dp = ndp;
+  }
+  ll ans = INF;
+  rep(i, 0, h) rep(j, 0, w) chmin(ans, dp[i][j]);
+  cout << ans << '\n';
+}

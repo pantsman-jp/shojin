@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, x;
+  cin >> n >> x;
+  vector<pii> ab(n);
+  rep(i, 0, n) cin >> ab[i].first >> ab[i].second;
+  sort(rall(ab));
+  ll ans = 0;
+  rep(i, 0, n) {
+    auto [a, b] = ab[i];
+    if (a < x and b > 0) ans += b;
+  }
+  cout << ans << '\n';
+}

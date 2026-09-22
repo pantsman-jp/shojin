@@ -59,4 +59,26 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, d;
+  cin >> n >> d;
+  vector<pll> ac(n);
+  rep(i, 0, n) cin >> ac[i].first >> ac[i].second;
+  sort(all(ac));
+  vector<pair<ll, int>> mn(n);
+  mn[n - 1] = {ac[n - 1].second, n - 1};
+  rrep(i, 0, n - 1) {
+    mn[i] = mn[i + 1];
+    if (ac[i].second < mn[i].first) mn[i] = {ac[i].second, i};
+  }
+  ll ans = INF;
+  rep(i, 0, n) {
+    if (ac[i].first >= d) chmin(ans, ac[i].second);
+    ll need = d - ac[i].first;
+    auto it = lower_bound(all(ac), make_pair(need, -1LL));
+    if (it == ac.end()) continue;
+    int pos = it - ac.begin();
+    if (mn[pos].second != i) chmin(ans, ac[i].second + mn[pos].first);
+  }
+  cout << (ans == INF ? -1 : ans) << '\n';
+}

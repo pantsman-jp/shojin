@@ -48,7 +48,7 @@ const ld pi = acosl(-1.0L);
 using mint = modint998244353;
 // using mint = modint1000000007;
 
-// 素数判定
+// 素数判定(O(√n))
 bool is_prime(ll n) {
   if (n < 2) return false;
   for (ll i = 2; i * i <= n; i++) {
@@ -57,7 +57,7 @@ bool is_prime(ll n) {
   return true;
 }
 
-// 素数判定配列
+// 素数判定配列(O(n loglogn))
 vector<bool> era(ll n) {
   vector<bool> is_prime(n + 2, true);
   is_prime[0] = is_prime[1] = false;
@@ -69,7 +69,7 @@ vector<bool> era(ll n) {
   return is_prime;
 }
 
-// 素数列挙
+// 素数列挙(O(n loglogn))
 vector<ll> primes(ll n) {
   vector<bool> prime(n + 2, true);
   prime[0] = prime[1] = false;
@@ -85,7 +85,7 @@ vector<ll> primes(ll n) {
   return ans;
 }
 
-// 約数列挙
+// 約数列挙O(√n + √n log n)
 vector<ll> divisors(ll n) {
   vector<ll> ans;
   for (ll m = 1; m * m <= n; m++) {
@@ -98,7 +98,7 @@ vector<ll> divisors(ll n) {
 }
 
 // 素因数分解
-/// vector<pll>
+/// vector<pll> O(√n)
 vector<pll> factorization(ll n) {
   vector<pll> ans;
   for (ll p = 2; p * p <= n; p++) {
@@ -111,7 +111,7 @@ vector<pll> factorization(ll n) {
   return ans;
 }
 
-/// vector<ll>
+/// vector<ll> O(√n)
 vector<ll> facts(ll n) {
   vector<ll> ans;
   for (ll p = 2; p * p <= n; p++) {
@@ -124,21 +124,21 @@ vector<ll> facts(ll n) {
   return ans;
 }
 
-// 階乗
+// 階乗(O(n))
 ll fact(ll n, ll mod) {
   ll ans = 1;
   for (ll m = 1; m <= n; m++) ans = ans * m % mod;
   return ans;
 }
 
-// 順列
+// 順列(O(r))
 ll npr(ll n, ll r) {
   ll ans = 1;
   rep(i, 0, r) ans *= (n - i);
   return ans;
 }
 
-// 組み合わせ
+// 組み合わせ(O(r))
 ll ncr(ll n, ll r) {
   if (r > n - r) r = n - r;
   ll ans = 1;
@@ -146,10 +146,11 @@ ll ncr(ll n, ll r) {
   return ans;
 }
 
+// O(1)
 ll nc2(ll n) { return n * (n - 1) / 2; }
 
 // 余りの計算
-/// pow(a,b) % mod （繰り返し二乗法）
+/// pow(a,b) % mod （繰り返し二乗法）(O(log b))
 mint modpow(ll a, ll b) {
   mint x = a, ans = 1;
   while (b > 0) {
@@ -159,24 +160,24 @@ mint modpow(ll a, ll b) {
   return ans;
 }
 
-/// (a÷b) % mod
+/// (a÷b) % mod (O(log b))
 mint modinv(ll a, ll b) { return mint(a) * mint(b).inv(); }
 
-/// 階乗: n!
+/// 階乗: n! (O(n))
 mint modfact(int n) {
   mint ans = 1;
   rep(i, 1, n + 1) ans *= i;
   return ans;
 }
 
-/// 順列: nPr
+/// 順列: nPr (O(r))
 mint modnpr(ll n, ll r) {
   mint ans = 1;
   rep(i, 0, r) ans *= (n - i);
   return ans;
 }
 
-/// 組み合わせ: nCr
+/// 組み合わせ: nCr (O(r))
 mint modncr(ll n, ll r) {
   if (r < 0 or r > n) return 0;
   if (r > n - r) r = n - r;
@@ -185,10 +186,10 @@ mint modncr(ll n, ll r) {
   return num / den;
 }
 
-/// 組み合わせ: nC2
+/// 組み合わせ: nC2 (O(1))
 mint modnc2(ll n) { return mint(n) * (n - 1) / 2; }
 
-// 平方数判別
+// 平方数判別 O(√n)
 bool is_square(ll n) {
   for (ll i = 1; i * i <= n; i++) {
     if (i * i == n) return true;
@@ -196,7 +197,7 @@ bool is_square(ll n) {
   return false;
 }
 
-// 進数変換 (10進->k進)
+// 進数変換 (10進->k進) (O(log n))
 string to_base_k(ll n, int k) {
   if (n == 0) return "0";
   string ans = "";
@@ -205,7 +206,7 @@ string to_base_k(ll n, int k) {
   return ans;
 }
 
-// 進数変換 (k進->10進)
+// 進数変換 (k進->10進) (O(log n))
 ll to_base_10(string n, int k) {
   ll ans = 0;
   reverse(all(n));
@@ -217,7 +218,7 @@ ll to_base_10(string n, int k) {
   return ans;
 }
 
-// 各桁の和
+// 各桁の和 (O(log n))
 int digit_sum(ll n) {
   int ans = 0;
   while (n > 0) ans += n % 10, n /= 10;
@@ -232,12 +233,12 @@ const vector<int> dj = {0, 1, 0, -1};
 const vector<int> di = {-1, -1, 0, 1, 1, 1, 0, -1};
 const vector<int> dj = {0, 1, 1, 1, 0, -1, -1, -1};
 
-// グリッド内判定（0-index）
+// グリッド内判定（0-index） (O(1))
 bool out(int i, int j, int h, int w) {
   return i < 0 or h - 1 < i or j < 0 or w - 1 < j;
 }
 
-// 移動
+// 移動 (O(1))
 void move(int x, int y, char c) {
   if (c == 'R') {
     x++;
@@ -250,14 +251,14 @@ void move(int x, int y, char c) {
   }
 }
 
-// 回文判定
+// 回文判定 (O(|s|))
 bool is_pali(string s) {
   string t = s;
   reverse(all(t));
   return s == t;
 }
 
-// ランレングス圧縮（文字列）
+// ランレングス圧縮（文字列）(O(|s|))
 vector<pair<char, int>> rle(const string& s) {
   vector<pair<char, int>> ans;
   int cnt = 1;
@@ -275,7 +276,7 @@ vector<pair<char, int>> rle(const string& s) {
   return ans;
 }
 
-// ランレングス圧縮（整数配列）
+// ランレングス圧縮（整数配列）(O(|s|))
 vector<pii> rle(const vector<int>& xs) {
   vector<pii> ans;
   int cnt = 1, now = xs[0];
@@ -292,33 +293,33 @@ vector<pii> rle(const vector<int>& xs) {
   return ans;
 }
 
-// 文字列中の文字の出現回数
+// 文字列中の文字の出現回数(O|s|)
 int count_char(const string& s, const char& c) {
   int ans = 0;
   rep(i, 0, s.size()) if (s[i] == c) ans++;
   return ans;
 }
 
-// x 桁になるまで自然数 n を 文字 c で埋める
+// x 桁になるまで自然数 n を 文字 c で埋める(O(log n + x))
 string padding(int x, int n, char c) {
   string s = to_string(n);
   return string(max(0, x - (int)s.size()), c) + s;
 }
 
-// x 桁になるまで文字列 s を 文字 c で埋める
+// x 桁になるまで文字列 s を 文字 c で埋める (O(|s| + x))
 string padding(int x, string s, char c) {
   return string(max(0, x - (int)s.size()), c) + s;
 }
 
-// ユークリッド距離の二乗
+// ユークリッド距離の二乗(O(1))
 ll eudist(ll x1, ll y1, ll x2, ll y2) {
   return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
 }
 
-// マンハッタン距離
+// マンハッタン距離(O(1))
 ll mandist(ll x1, ll y1, ll x2, ll y2) { return abs(x1 - x2) + abs(y1 - y2); }
 
-// ダイクストラ法
+// ダイクストラ法(O((V + E) log V))
 vector<ll> dijkstra(const vector<vector<pair<int, ll>>>& g, int s) {
   using pli = pair<ll, int>;
   rpq<pli> q;
@@ -340,7 +341,7 @@ vector<ll> dijkstra(const vector<vector<pair<int, ll>>>& g, int s) {
   return dist;
 }
 
-// 二部グラフ判定（label の初期値は -1）
+// 二部グラフ判定（label の初期値は -1）(O(V + E))
 bool is_bipartite(const vector<vector<int>>& g, vector<int>& label) {
   int n = g.size();
   label.assign(n, -1);
@@ -356,7 +357,7 @@ bool is_bipartite(const vector<vector<int>>& g, vector<int>& label) {
   return true;
 }
 
-// サイクル検出（無向グラフ）
+// サイクル検出（無向グラフ）(O((V + E) α(V)))
 bool has_cycle(vector<vector<int>>& g) {
   int n = g.size();
   dsu uf(n);
@@ -370,7 +371,7 @@ bool has_cycle(vector<vector<int>>& g) {
   return false;
 }
 
-// サイクル検出（有効グラフ）
+// サイクル検出（有効グラフ）(O(V))
 vector<int> detect_cycle(const vector<int>& g) {
   int v = 0;
   rep(i, 0, g.size()) v = g[v];
@@ -383,7 +384,7 @@ vector<int> detect_cycle(const vector<int>& g) {
   return ans;
 }
 
-// DAG 判定
+// DAG 判定(O(V + E))
 bool is_dag(const vector<vector<int>>& g) {
   int n = g.size();
   vector<int> state(n, 0);
@@ -400,7 +401,7 @@ bool is_dag(const vector<vector<int>>& g) {
   return true;
 }
 
-// 0-indexed DAG トポロジカルソート（辞書順最小）
+// 0-indexed DAG トポロジカルソート（辞書順最小）(O(V + E) log V)
 vector<int> topo_sort(const vector<vector<int>>& g) {
   int n = g.size();
   vector<int> indeg(n, 0);
@@ -421,7 +422,7 @@ vector<int> topo_sort(const vector<vector<int>>& g) {
   return ans;
 }
 
-// ワーシャルフロイド法
+// ワーシャルフロイド法(O(V^3))
 vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
   int n = g.size();
   vector<vector<ll>> dist(n, vector<ll>(n, INF));
@@ -438,7 +439,7 @@ vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
 }
 
 // ans[i][c] := i 文字目以降で最初に文字 c が登場する index
-// 存在しないときは N
+// 存在しないときは N (O(N))
 // https://drken1215.hatenablog.com/entry/2021/10/10/195200
 vector<vector<int>> calc_next(const string& s) {
   int n = (int)s.size();
@@ -450,7 +451,7 @@ vector<vector<int>> calc_next(const string& s) {
   return ans;
 }
 
-// 文字列 s は文字列 t を部分列として持つか？
+// 文字列 s は文字列 t を部分列として持つか？(O(|s| + |t|))
 bool has_subsequence(const string& s, const string& t) {
   int pos = 0, n = s.size(), m = t.size();
   rep(i, 0, m) {
@@ -461,12 +462,13 @@ bool has_subsequence(const string& s, const string& t) {
   return true;
 }
 
-// 文字列 s は文字列 t を部分文字列として持つか？
+// 文字列 t は文字列 s を部分文字列として持つか？(O(|s| + |t|))
 bool has_substring(const string& s, const string& t) {
-  return s.find(t) != string::npos;
+  auto z = z_algorithm(t + s);
+  return *max_element(z.begin() + t.size(), z.end()) >= (int)t.size();
 }
 
-// floor(sqrt(x))
+// floor(sqrt(x))(O(1))
 ll sqrt_floor(const ll& x) {
   ll ans = sqrt((ld)x);
   while ((ans + 1) <= x / (ans + 1)) ans++;
@@ -474,5 +476,5 @@ ll sqrt_floor(const ll& x) {
   return ans;
 }
 
-// 区間 [l,r] の平方数の個数
+// 区間 [l,r] の平方数の個数(O(1))
 ll cnt_sqr(ll l, ll r) { return sqrt_floor(r) - sqrt_floor(l - 1); }

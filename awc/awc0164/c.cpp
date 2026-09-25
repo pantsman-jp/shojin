@@ -59,4 +59,28 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<pii> xs;
+  rep(_, 0, n) {
+    int s;
+    cin >> s;
+    xs.push_back({s, 1});
+  }
+  rep(_, 0, m) {
+    int d;
+    cin >> d;
+    xs.push_back({d, 0});
+  }
+  sort(rall(xs));
+  int waiting = 0, ans = 0;
+  for (auto& [_, type] : xs) {
+    if (type == 1) {
+      waiting++;
+    } else if (waiting > 0) {
+      waiting--, ans++;
+    }
+  }
+  cout << ans << '\n';
+}

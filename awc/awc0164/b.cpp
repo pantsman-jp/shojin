@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, t;
+  cin >> n >> t;
+  int tall = 0, ans = 0;
+  rep(_, 0, n) {
+    int s;
+    cin >> s;
+    if (t <= tall and s < tall) ans++;
+    chmax(tall, s);
+  }
+  cout << ans << '\n';
+}

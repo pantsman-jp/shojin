@@ -59,4 +59,17 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll l, w;
+  cin >> l >> w;
+  if (l <= w) {
+    cout << 0 << '\n';
+    return;
+  }
+  int ans = 0;
+  while (l > w) {
+    l = divceil(l, 2ll);
+    ans++;
+  }
+  cout << ans << '\n';
+}

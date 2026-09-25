@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, m, k;
+  cin >> n >> m >> k;
+  ll tasks = 0;
+  rep(_, 0, n) {
+    ll a;
+    cin >> a;
+    tasks += divceil(a, k);
+  }
+  cout << max(tasks - m, 0ll) << '\n';
+}

@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  char c;
+  cin >> c;
+  char ans;
+  if (c == 'B') {
+    ans = 'Y';
+  } else if (c == 'Y') {
+    ans = 'R';
+  } else {
+    ans = 'B';
+  }
+  cout << ans << '\n';
+}

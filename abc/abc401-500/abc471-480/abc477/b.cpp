@@ -59,4 +59,26 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, d;
+  cin >> n >> d;
+  vector<int> x(n);
+  rep(i, 0, n) cin >> x[i];
+  vector<int> ans;
+  rep(i, 0, n) {
+    bool ok = true;
+    rep(j, 0, n) {
+      if (i == j) continue;
+      if (abs(x[i] - x[j]) < d) {
+        ok = false;
+      }
+    }
+    if (ok) {
+      ans.push_back(i + 1);
+    }
+  }
+  cout << ans.size() << '\n';
+  for (int idx : ans) {
+    cout << idx << '\n';
+  }
+}

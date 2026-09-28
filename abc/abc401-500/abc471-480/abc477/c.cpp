@@ -59,4 +59,26 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int q;
+  string s, t;
+  cin >> q >> s >> t;
+  int n = s.size(), m = t.size();
+  vector<int> start;
+  rep(i, 0, n - m + 1) {
+    if (s.substr(i, m) == t) {
+      start.push_back(i);
+    }
+  }
+  rep(_, 0, q) {
+    int l, r;
+    cin >> l >> r;
+    l--, r--;
+    auto it = lower_bound(all(start), l);
+    if (it == start.end()) {
+      yn(false);
+    } else {
+      yn(*it <= r - (m - 1));
+    }
+  }
+}

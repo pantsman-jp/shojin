@@ -59,4 +59,41 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, q;
+  cin >> n >> q;
+  vector<int> type(q), x(q);
+  vector<char> c(q), ans(n, 'a');
+  vector<bool> is_put(n);
+  rep(i, 0, q) {
+    cin >> type[i];
+    if (type[i] == 1) {
+      cin >> x[i];
+      x[i]--;
+      is_put[x[i]] = !is_put[x[i]];
+    } else {
+      cin >> c[i];
+    }
+  }
+  set<int> remain;
+  rep(i, 0, n) if (!is_put[i]) remain.insert(i);
+  vector<bool> fixed(n);
+  rrep(i, 0, q) {
+    if (type[i] == 1) {
+      if (is_put[x[i]]) {
+        if (!fixed[x[i]]) remain.insert(x[i]);
+      } else {
+        if (!fixed[x[i]]) remain.erase(x[i]);
+      }
+      is_put[x[i]] = !is_put[x[i]];
+    } else {
+      for (int x : remain) {
+        ans[x] = c[i];
+        fixed[x] = true;
+      }
+      remain.clear();
+    }
+  }
+  rep(i, 0, n) cout << ans[i];
+  cout << '\n';
+}

@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, q;
+  cin >> n >> q;
+  vector<ll> a(n), b(n);
+  rep(i, 0, n) cin >> a[i];
+  rep(i, 0, n) cin >> b[i];
+  rep(_, 0, q) {
+    int c;
+    cin >> c;
+    c--;
+    a[c] = max(0LL, a[c] - b[c]);
+    if (c < n - 1) {
+      a[c + 1] += a[c];
+    }
+    a[c] = 0;
+  }
+  rep(i, 0, n) cout << a[i] << ' ';
+  cout << '\n';
+}

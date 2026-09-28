@@ -59,4 +59,20 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  int prev = 0, cnt = 0, ans = 0;
+  rep(_, 0, n) {
+    int a;
+    cin >> a;
+    if (a >= prev) {
+      cnt++;
+    } else {
+      cnt = 1;
+    }
+    chmax(ans, cnt);
+    prev = a;
+  }
+  cout << ans << '\n';
+}

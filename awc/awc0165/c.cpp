@@ -59,4 +59,23 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, u0;
+  cin >> n >> u0;
+  vector<int> rank(n);
+  rank[0] = min(u0, 1);
+  vector<vector<int>> g(n);
+  rep(i, 1, n) {
+    int p, u;
+    cin >> p >> u;
+    p--;
+    rank[i] = u;
+    g[p].push_back(i);
+  }
+  rrep(i, 0, n) {
+    for (int j : g[i]) {
+      chmin(rank[i], rank[j]);
+    }
+  }
+  cout << (rank[0] == 0 ? -1 : accumulate(all(rank), 0ll)) << '\n';
+}

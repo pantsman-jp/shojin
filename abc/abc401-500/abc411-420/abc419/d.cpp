@@ -63,14 +63,14 @@ void solve() {
   int n, m;
   string s, t;
   cin >> n >> m >> s >> t;
-  vector<int> swp(n + 1);
-  rep(_, 0, m) {
+  vector<int> sum(n + 1);
+  rep(i, 0, m) {
     int l, r;
     cin >> l >> r;
     l--, r--;
-    swp[l]++, swp[r + 1]--;
+    sum[l]++, sum[r + 1]--;
   }
-  rep(i, 0, n) swp[i + 1] += swp[i];
-  rep(i, 0, n) cout << (swp[i] % 2 == 0 ? s[i] : t[i]);
+  rep(i, 0, n) sum[i + 1] += sum[i];
+  rep(i, 0, n) cout << (sum[i] % 2 == 0 ? s[i] : t[i]);
   cout << '\n';
 }

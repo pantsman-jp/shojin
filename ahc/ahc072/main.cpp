@@ -12,13 +12,6 @@ struct Move {
   char dir;
 };
 
-struct Route {
-  vector<int> dist;
-  vector<int> prev;
-  vector<int> pdir;
-  vector<int> plen;
-};
-
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
@@ -35,100 +28,21 @@ int main() {
   auto inside = [n](int r, int c) {
     return 0 <= r && r < n && 0 <= c && c < n;
   };
-  vector<int> floor_cell(V, 0), home(k, -1), occ(V, -1);
+  vector<char> floor_cell(V, 0);
+  vector<int> home(k, -1);
+  vector<vector<int>> tower(V);
   for (int r = 0; r < n; ++r) {
     for (int c = 0; c < n; ++c) {
-      const int v = id(r, c);
+      int v = id(r, c);
       if (board[r][c] != '#') floor_cell[v] = 1;
       if ('A' <= board[r][c] && board[r][c] <= 'L') {
         home[board[r][c] - 'A'] = v;
       }
       if ('a' <= board[r][c] && board[r][c] <= 'l') {
-        occ[v] = board[r][c] - 'a';
+        tower[v].push_back(board[r][c] - 'a');
       }
     }
   }
-  vector<vector<int>> grid_dist(V, vector<int>(V, INF));
-  for (int s = 0; s < V; ++s) {
-    if (!floor_cell[s]) continue;
-    queue<int> q;
-    grid_dist[s][s] = 0;
-    q.push(s);
-    while (!q.empty()) {
-      int v = q.front();
-      q.pop();
-      int r = v / n, c = v % n;
-      for (int z = 0; z < 4; ++z) {
-        int nr = r + dr[z], nc = c + dc[z];
-        if (!inside(nr, nc)) continue;
-        int to = id(nr, nc);
-        if (!floor_cell[to] || grid_dist[s][to] != INF) continue;
-        grid_dist[s][to] = grid_dist[s][v] + 1;
-        q.push(to);
-      }
-    }
-  }
-  auto single_route = [&](int src, bool with_parent, int forbidden = -1) {
-    Route ret;
-    ret.dist.assign(V, INF);
-    if (with_parent) {
-      ret.prev.assign(V, -1);
-      ret.pdir.assign(V, -1);
-      ret.plen.assign(V, -1);
-    }
-    queue<int> q;
-    ret.dist[src] = 0;
-    q.push(src);
-    while (!q.empty()) {
-      int v = q.front();
-      q.pop();
-      int reach = (v != src && occ[v] != -1) ? 2 : 1;
-      int r = v / n, c = v % n;
-      for (int z = 0; z < 4; ++z) {
-        for (int len = 1; len <= reach; ++len) {
-          int nr = r + dr[z] * len, nc = c + dc[z] * len;
-          if (!inside(nr, nc)) break;
-          int to = id(nr, nc);
-          if (!floor_cell[to]) break;
-          if (to == forbidden) continue;
-          if (ret.dist[to] != INF) continue;
-          ret.dist[to] = ret.dist[v] + 1;
-          if (with_parent) {
-            ret.prev[to] = v;
-            ret.pdir[to] = z;
-            ret.plen[to] = len;
-          }
-          q.push(to);
-        }
-      }
-    }
-    return ret;
-  };
-  auto grid_path = [&](int src, int dst) {
-    vector<int> prev(V, -1), pdir(V, -1);
-    queue<int> q;
-    prev[src] = src;
-    q.push(src);
-    while (!q.empty()) {
-      int v = q.front();
-      q.pop();
-      if (v == dst) break;
-      int r = v / n, c = v % n;
-      for (int z = 0; z < 4; ++z) {
-        int nr = r + dr[z], nc = c + dc[z];
-        if (!inside(nr, nc)) continue;
-        int to = id(nr, nc);
-        if (!floor_cell[to] || prev[to] != -1) continue;
-        prev[to] = v;
-        pdir[to] = z;
-        q.push(to);
-      }
-    }
-    vector<pair<int, int>> path;
-    for (int v = dst; v != src; v = prev[v]) path.push_back({pdir[v], v});
-    reverse(path.begin(), path.end());
-    return path;
-  };
   vector<Move> answer;
   constexpr int OP_LIMIT = 100000;
   auto add_move = [&](int from, int keep, int dir, int len) {
@@ -136,20 +50,153 @@ int main() {
     answer.push_back({from / n, from % n, keep, len, dch[dir]});
     return true;
   };
-  auto send_single = [&](int src, int target) {
-    const int color = occ[src];
-    occ[src] = -1;
-    const int forbidden = (target == home[color] ? -1 : home[color]);
-    Route route = single_route(src, true, forbidden);
-    vector<int> vertices;
-    for (int v = target; v != src; v = route.prev[v]) vertices.push_back(v);
-    reverse(vertices.begin(), vertices.end());
-    int cur = src;
-    for (int nxt : vertices) {
-      int base = (occ[cur] != -1 ? 1 : 0);
-      add_move(cur, base, route.pdir[nxt], route.plen[nxt]);
-      cur = nxt;
+  auto auto_home = [&](int v) {
+    if (tower[v].empty()) return;
+    int h = home[tower[v].back()];
+    if (h != v) return;
+    int color = tower[v].back();
+    while (!tower[v].empty() && tower[v].back() == color) {
+      tower[v].pop_back();
     }
+  };
+  auto apply_move = [&](int src, int keep, int dir, int len) {
+    int r = src / n;
+    int c = src % n;
+    int dst = id(r + dr[dir] * len, c + dc[dir] * len);
+    int h = (int)tower[src].size();
+    int moving = h - keep;
+    vector<int> part;
+    part.reserve(moving);
+    for (int i = 0; i < moving; ++i) {
+      part.push_back(tower[src].back());
+      tower[src].pop_back();
+    }
+    reverse(part.begin(), part.end());
+    tower[dst].insert(tower[dst].end(), part.begin(), part.end());
+    auto_home(src);
+    auto_home(dst);
+  };
+  auto execute = [&](int src, int keep, int dir, int len) {
+    if (!add_move(src, keep, dir, len)) return false;
+    apply_move(src, keep, dir, len);
+    return true;
+  };
+  auto single_path = [&](int src, int dst, int forbidden) {
+    vector<int> prev(V, -1);
+    vector<int> pdir(V, -1);
+    vector<int> plen(V, -1);
+    queue<int> q;
+    prev[src] = src;
+    q.push(src);
+    while (!q.empty()) {
+      int v = q.front();
+      q.pop();
+      if (v == dst) break;
+      int r = v / n;
+      int c = v % n;
+      for (int z = 0; z < 4; ++z) {
+        int nr = r + dr[z];
+        int nc = c + dc[z];
+        if (!inside(nr, nc)) continue;
+        int to = id(nr, nc);
+        if (!floor_cell[to] || prev[to] != -1) continue;
+        if (to == forbidden) continue;
+        if (to != dst && !tower[to].empty()) continue;
+        prev[to] = v;
+        pdir[to] = z;
+        plen[to] = 1;
+        q.push(to);
+      }
+    }
+    if (prev[dst] == -1) return vector<pair<int, int>>();
+    vector<pair<int, int>> path;
+    for (int v = dst; v != src; v = prev[v]) {
+      path.push_back({pdir[v], plen[v]});
+    }
+    reverse(path.begin(), path.end());
+    return path;
+  };
+  auto move_single = [&](int src, int dst) {
+    if (src == dst) return true;
+    if (tower[src].size() != 1) return false;
+    int color = tower[src].back();
+    int forbidden = home[color] == dst ? -1 : home[color];
+    auto path = single_path(src, dst, forbidden);
+    if (path.empty()) return false;
+    int cur = src;
+    for (auto [dir, len] : path) {
+      if (!execute(cur, 0, dir, len)) return false;
+      cur = id(cur / n + dr[dir] * len, cur % n + dc[dir] * len);
+      if (tower[cur].empty()) return false;
+      if (tower[cur].back() != color && cur != dst) return false;
+    }
+    return cur == dst;
+  };
+  auto top_path = [&](int src, int dst) {
+    int h = (int)tower[src].size();
+    vector<int> prev(V, -1);
+    vector<int> pdir(V, -1);
+    vector<int> plen(V, -1);
+    queue<int> q;
+    prev[src] = src;
+    q.push(src);
+    while (!q.empty()) {
+      int v = q.front();
+      q.pop();
+      if (v == dst) break;
+      int r = v / n;
+      int c = v % n;
+      int reach = v == src ? h : 1;
+      for (int z = 0; z < 4; ++z) {
+        for (int len = 1; len <= reach; ++len) {
+          int nr = r + dr[z] * len;
+          int nc = c + dc[z] * len;
+          if (!inside(nr, nc)) break;
+          int to = id(nr, nc);
+          if (!floor_cell[to]) break;
+          if (prev[to] != -1) continue;
+          if (to != dst && !tower[to].empty()) continue;
+          if (to == dst && (int)tower[to].size() + 1 > 8) continue;
+          prev[to] = v;
+          pdir[to] = z;
+          plen[to] = len;
+          q.push(to);
+        }
+      }
+    }
+    if (prev[dst] == -1) return vector<pair<int, int>>();
+    vector<pair<int, int>> path;
+    for (int v = dst; v != src; v = prev[v]) {
+      path.push_back({pdir[v], plen[v]});
+    }
+    reverse(path.begin(), path.end());
+    return path;
+  };
+  auto move_top_to_home = [&](int src, int color) {
+    int dst = home[color];
+    if (src == dst) {
+      auto_home(src);
+      return true;
+    }
+    auto path = top_path(src, dst);
+    if (path.empty()) return false;
+    int cur = src;
+    for (auto [dir, len] : path) {
+      int keep = (int)tower[cur].size() - 1;
+      if (!execute(cur, keep, dir, len)) return false;
+      cur = id(cur / n + dr[dir] * len, cur % n + dc[dir] * len);
+      if (cur == dst) break;
+    }
+    return true;
+  };
+  auto collectable = [&](int src, int dst, int color) {
+    if (src == dst) return false;
+    if (tower[src].size() != 1) return false;
+    if (tower[src].back() != color) return false;
+    if ((int)tower[dst].size() >= 8) return false;
+    int forbidden = home[color] == dst ? -1 : home[color];
+    auto path = single_path(src, dst, forbidden);
+    return !path.empty();
   };
   const auto start_time = chrono::steady_clock::now();
   auto elapsed_ms = [&]() {
@@ -157,67 +204,89 @@ int main() {
                chrono::steady_clock::now() - start_time)
         .count();
   };
-  while (elapsed_ms() < 1350) {
+  while (elapsed_ms() < 1250 && (int)answer.size() < OP_LIMIT) {
     vector<vector<int>> by_color(k);
-    vector<int> alive;
     for (int v = 0; v < V; ++v) {
-      if (occ[v] != -1) {
-        alive.push_back(v);
-        by_color[occ[v]].push_back(v);
+      if (tower[v].size() == 1) {
+        by_color[tower[v].back()].push_back(v);
       }
     }
-    vector<vector<int>> dist_to_batch(V);
-    vector<int> direct(V, INF);
-    for (int s : alive) {
-      const int color = occ[s];
-      direct[s] = single_route(s, false).dist[home[color]];
-      dist_to_batch[s] = single_route(s, false, home[color]).dist;
-    }
-    int best_value = 1;
     int best_seed = -1;
+    int best_color = -1;
     vector<int> best_members;
+    int best_score = 0;
     for (int color = 0; color < k; ++color) {
-      const auto& cells = by_color[color];
-      if ((int)cells.size() < 2) continue;
-      for (int seed : cells) {
-        vector<pair<int, int>> gains;
-        for (int s : cells) {
+      if ((int)by_color[color].size() < 2) continue;
+      for (int seed : by_color[color]) {
+        if (seed == home[color]) continue;
+        vector<pair<int, int>> candidates;
+        for (int s : by_color[color]) {
           if (s == seed) continue;
-          int gain = direct[s] - dist_to_batch[s][seed];
-          if (gain > 0) gains.push_back({gain, s});
+          if (!collectable(s, seed, color)) continue;
+          auto path = single_path(s, seed, home[color]);
+          if (path.empty()) continue;
+          candidates.push_back({(int)path.size(), s});
         }
-        sort(gains.rbegin(), gains.rend());
-        int value = direct[seed] - grid_dist[seed][home[color]];
+        sort(candidates.begin(), candidates.end());
+        int limit = min(7, (int)candidates.size());
+        int single_cost = 0;
+        for (int s : by_color[color]) {
+          auto path = single_path(s, home[color], seed);
+          if (!path.empty()) single_cost += (int)path.size();
+        }
+        int batch_cost = 0;
         vector<int> members;
-        for (auto [gain, s] : gains) {
-          if ((int)members.size() == 6) break;  // seed + 6 <= 7
-          value += gain;
+        for (int i = 0; i < limit; ++i) {
+          int s = candidates[i].second;
+          batch_cost += candidates[i].first;
           members.push_back(s);
-        }
-        if (!members.empty() && value > best_value) {
-          best_value = value;
-          best_seed = seed;
-          best_members = members;
+          int h = 1 + (int)members.size();
+          if (h > 8) break;
+          int estimated_home = 0;
+          if (h >= 2) {
+            auto path = top_path(seed, home[color]);
+            if (!path.empty()) estimated_home = (int)path.size();
+          }
+          int saving = single_cost - batch_cost - estimated_home;
+          if (saving > best_score) {
+            best_score = saving;
+            best_seed = seed;
+            best_color = color;
+            best_members = members;
+          }
         }
       }
     }
-    if (best_seed == -1) break;
-    const int color = occ[best_seed];
-    occ[best_seed] = -1;  // batch tower is intentionally outside occ
-    for (int s : best_members) send_single(s, best_seed);
-    int cur = best_seed;
-    for (auto [z, nxt] : grid_path(best_seed, home[color])) {
-      int base = (occ[cur] != -1 ? 1 : 0);
-      add_move(cur, base, z, 1);
-      cur = nxt;
+    if (best_seed == -1 || best_score <= 0) break;
+    vector<int> members = best_members;
+    for (int s : members) {
+      if (tower[s].size() != 1) continue;
+      if (tower[s].back() != best_color) continue;
+      move_single(s, best_seed);
+    }
+    if (tower[best_seed].empty()) continue;
+    while (!tower[best_seed].empty() && tower[best_seed].back() == best_color &&
+           (int)answer.size() < OP_LIMIT) {
+      int before = (int)tower[best_seed].size();
+      if (!move_top_to_home(best_seed, best_color)) {
+        break;
+      }
+      if ((int)tower[best_seed].size() == before) break;
     }
   }
-  for (int s = 0; s < V; ++s) {
-    if (occ[s] == -1) continue;
-    int color = occ[s];
-    send_single(s, home[color]);
+  for (int v = 0; v < V && (int)answer.size() < OP_LIMIT; ++v) {
+    while (!tower[v].empty() && (int)answer.size() < OP_LIMIT) {
+      int color = tower[v].back();
+      if (v == home[color]) {
+        auto_home(v);
+        continue;
+      }
+      int before = (int)tower[v].size();
+      if (!move_top_to_home(v, color)) break;
+      if ((int)tower[v].size() == before) break;
+    }
   }
-  for (const Move& mv : answer) {
+  for (const auto& mv : answer) {
     cout << mv.r << ' ' << mv.c << ' ' << mv.keep << ' ' << mv.dir << ' '
          << mv.len << '\n';
   }

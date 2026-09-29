@@ -1,43 +1,80 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
-#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
+#include <atcoder/all>
+using namespace atcoder;
+#define rep(i, l, r) for (int i = (l); i < (r); i++)
+#define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(a, b) a = max(a, b)
-#define chmin(a, b) a = min(a, b)
-#define yn(p) cout << (p ? "Yes\n" : "No\n");
-#define dout(f) cout << fixed << setprecision(10) << f << '\n';
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / std::gcd(a, b)) * b;
+}
+template <typename T>
+inline T divceil(T a, T b) {
+  return (a + b - 1) / b;
+}
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
+using ull = unsigned long long;
 using ld = long double;
-using P = pair<int, int>;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
-// const ll mod =;
+const ld pi = acosl(-1.0L);
+// using mint = modint998244353;
+// using mint = modint1000000007;
 
-int main()
-{
+void solve();
+
+int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  ll n;
-  int m;
+  int t = 1;
+  // cin >> t;
+  rep(i, 0, t) solve();
+  return 0;
+}
+
+void solve() {
+  ll n, m;
   cin >> n >> m;
-  vector<tuple<ll, ll, ll>> c(m);
-  rep(i, 0, m)
-  {
+  vector<tuple<ll, ll, ll>> dab;
+  rep(_, 0, m) {
     ll a, b;
     cin >> a >> b;
-    c[i] = {a - b, a, b};
+    dab.emplace_back(a - b, a, b);
   }
-  sort(all(c));
+  sort(all(dab));
   ll ans = 0;
-  for (auto [d, a, b] : c)
-  {
-    if (n < a)
-      continue;
-    ll cnt = max(0ll, (n - a) / d + 1);
-    ans += cnt;
-    n -= d * cnt;
+  for (auto [d, a, b] : dab) {
+    if (a > n) continue;
+    ll x = (n - a) / d + 1;
+    ans += x;
+    n -= x * d;
   }
-  cout << ans << endl;
+  cout << ans << '\n';
 }

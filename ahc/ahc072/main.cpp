@@ -1,294 +1,235 @@
-#include <algorithm>
-#include <chrono>
-#include <iostream>
-#include <queue>
-#include <string>
-#include <utility>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-struct Move {
-  int r, c, keep, len;
-  char dir;
+struct Op {
+  int p, k, d, l;
+};
+
+struct Solver {
+  int n, K, V;
+  vector<string> board;
+  vector<int> home;
+  vector<vector<int>> st;
+  vector<int> floor_cell;
+  vector<Op> ans;
+  const int dr[4] = {-1, 1, 0, 0};
+  const int dc[4] = {0, 0, -1, 1};
+
+  Solver(int n_, int K_, vector<string> board_)
+      : n(n_), K(K_), V(n_ * n_), board(move(board_)) {
+    home.assign(K, -1);
+    floor_cell.assign(V, 0);
+    st.resize(V);
+    for (int r = 0; r < n; r++) {
+      for (int c = 0; c < n; c++) {
+        int p = r * n + c;
+        floor_cell[p] = board[r][c] != '#';
+        if ('A' <= board[r][c] && board[r][c] <= 'L')
+          home[board[r][c] - 'A'] = p;
+        if ('a' <= board[r][c] && board[r][c] <= 'l')
+          st[p] = {board[r][c] - 'a' + 1};
+      }
+    }
+  }
+
+  int nxt(int p, int d, int len = 1) const {
+    int r = p / n + dr[d] * len;
+    int c = p % n + dc[d] * len;
+    if (r < 0 || r >= n || c < 0 || c >= n) return -1;
+    return r * n + c;
+  }
+
+  int direction(int a, int b) const {
+    for (int d = 0; d < 4; d++)
+      if (nxt(a, d) == b) return d;
+    return -1;
+  }
+
+  void pop_home(int p) {
+    for (int c = 0; c < K; c++) {
+      if (home[c] != p) continue;
+      while (!st[p].empty() && st[p].back() == c + 1) st[p].pop_back();
+      return;
+    }
+  }
+
+  bool apply(int p, int keep, int d, int len) {
+    if (p < 0 || p >= V || st[p].empty() || keep < 0 ||
+        keep >= (int)st[p].size())
+      return false;
+    if (len < 1 || len > keep + 1) return false;
+    int q = p;
+    for (int x = 1; x <= len; x++) {
+      q = nxt(p, d, x);
+      if (q < 0 || !floor_cell[q]) return false;
+    }
+    vector<int> block(st[p].begin() + keep, st[p].end());
+    if ((int)st[q].size() + (int)block.size() > 8) return false;
+    st[p].resize(keep);
+    reverse(block.begin(), block.end());
+    st[q].insert(st[q].end(), block.begin(), block.end());
+    pop_home(p);
+    pop_home(q);
+    ans.push_back({p, keep, d, len});
+    return true;
+  }
+
+  vector<int> route(int s, int g, int color) {
+    vector<int> pre(V, -1);
+    queue<int> q;
+    q.push(s);
+    pre[s] = s;
+    while (!q.empty()) {
+      int p = q.front();
+      q.pop();
+      if (p == g) break;
+      for (int d = 0; d < 4; d++) {
+        int v = nxt(p, d);
+        if (v < 0 || !floor_cell[v] || pre[v] != -1) continue;
+        if (v != g && !st[v].empty()) continue;
+        if (v != g && v == home[color]) continue;
+        pre[v] = p;
+        q.push(v);
+      }
+    }
+    if (pre[g] == -1) return {};
+    vector<int> res;
+    for (int p = g; p != s; p = pre[p]) res.push_back(p);
+    reverse(res.begin(), res.end());
+    return res;
+  }
+
+  bool move_top(int s, int g, int color) {
+    vector<int> path = route(s, g, color);
+    if (path.empty()) return false;
+    int cur = s;
+    for (int v : path) {
+      int d = direction(cur, v);
+      if (d < 0 || !apply(cur, 0, d, 1)) return false;
+      cur = v;
+    }
+    return true;
+  }
+
+  bool try_merge(int s, int g, int color) {
+    if (s == g || st[s].empty() || st[g].empty()) return false;
+    if (st[s].back() != color + 1 || st[g].back() != color + 1) return false;
+    if ((int)st[s].size() + (int)st[g].size() > 8) return false;
+    auto old_st = st;
+    auto old_ans = ans;
+    vector<int> path = route(s, g, color);
+    if (path.empty()) return false;
+    int cur = s;
+    int h = st[s].size();
+    for (int v : path) {
+      int d = direction(cur, v);
+      if (d < 0 || !apply(cur, 0, d, 1)) {
+        st = move(old_st);
+        ans = move(old_ans);
+        return false;
+      }
+      cur = v;
+    }
+    if (st[g].size() > 8) {
+      st = move(old_st);
+      ans = move(old_ans);
+      return false;
+    }
+    return true;
+  }
+
+  long long score() const {
+    int left = 0;
+    for (const auto& s : st) left += s.size();
+    return (long long)ans.size() + 100000LL * left;
+  }
+
+  void greedy(bool allow_merge, mt19937& rng) {
+    for (int iter = 0; iter < 100000; iter++) {
+      struct Candidate {
+        int s = -1;
+        int g = -1;
+        int color = -1;
+        int type = -1;
+        int dist = INT_MAX;
+      };
+      vector<Candidate> cand;
+      for (int color = 0; color < K; color++) {
+        for (int s = 0; s < V; s++) {
+          if (st[s].empty() || st[s].back() != color + 1 || s == home[color])
+            continue;
+          auto path = route(s, home[color], color);
+          if (!path.empty())
+            cand.push_back({s, home[color], color, 0, (int)path.size()});
+        }
+      }
+      if (!cand.empty()) {
+        int best = 0;
+        for (int i = 1; i < (int)cand.size(); i++) {
+          if (cand[i].dist < cand[best].dist)
+            best = i;
+          else if (cand[i].dist == cand[best].dist && rng() % 2)
+            best = i;
+        }
+        auto c = cand[best];
+        move_top(c.s, c.g, c.color);
+        continue;
+      }
+      if (!allow_merge) break;
+      vector<Candidate> merges;
+      for (int color = 0; color < K; color++) {
+        vector<int> p;
+        for (int x = 0; x < V; x++) {
+          if (!st[x].empty() && st[x].back() == color + 1 && x != home[color])
+            p.push_back(x);
+        }
+        for (int i = 0; i < (int)p.size(); i++) {
+          for (int j = 0; j < (int)p.size(); j++) {
+            if (i == j) continue;
+            if ((int)st[p[i]].size() + (int)st[p[j]].size() > 8) continue;
+            auto path = route(p[i], p[j], color);
+            if (path.empty()) continue;
+            merges.push_back({p[i], p[j], color, 1, (int)path.size()});
+          }
+        }
+      }
+      if (merges.empty()) break;
+      int best = 0;
+      for (int i = 1; i < (int)merges.size(); i++) {
+        if (merges[i].dist < merges[best].dist)
+          best = i;
+        else if (merges[i].dist == merges[best].dist && rng() % 2)
+          best = i;
+      }
+      auto c = merges[best];
+      if (!try_merge(c.s, c.g, c.color)) break;
+    }
+  }
 };
 
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  int n, k;
-  cin >> n >> k;
+  int n, K;
+  cin >> n >> K;
   vector<string> board(n);
-  for (int i = 0; i < n; ++i) cin >> board[i];
-  const int V = n * n;
-  const int dr[4] = {-1, 1, 0, 0};
-  const int dc[4] = {0, 0, -1, 1};
-  const char dch[4] = {'U', 'D', 'L', 'R'};
-  const int INF = 1e9;
-  auto id = [n](int r, int c) { return r * n + c; };
-  auto inside = [n](int r, int c) {
-    return 0 <= r && r < n && 0 <= c && c < n;
-  };
-  vector<char> floor_cell(V, 0);
-  vector<int> home(k, -1);
-  vector<vector<int>> tower(V);
-  for (int r = 0; r < n; ++r) {
-    for (int c = 0; c < n; ++c) {
-      int v = id(r, c);
-      if (board[r][c] != '#') floor_cell[v] = 1;
-      if ('A' <= board[r][c] && board[r][c] <= 'L') {
-        home[board[r][c] - 'A'] = v;
-      }
-      if ('a' <= board[r][c] && board[r][c] <= 'l') {
-        tower[v].push_back(board[r][c] - 'a');
-      }
+  for (auto& s : board) cin >> s;
+  mt19937 rng(712367821);
+  long long best_score = (1LL << 62);
+  vector<Op> best_ans;
+  for (int trial = 0; trial < 40; trial++) {
+    Solver solver(n, K, board);
+    bool allow_merge = trial >= 10;
+    solver.greedy(allow_merge, rng);
+    long long score = solver.score();
+    if (score < best_score) {
+      best_score = score;
+      best_ans = solver.ans;
     }
   }
-  vector<Move> answer;
-  constexpr int OP_LIMIT = 100000;
-  auto add_move = [&](int from, int keep, int dir, int len) {
-    if ((int)answer.size() >= OP_LIMIT) return false;
-    answer.push_back({from / n, from % n, keep, len, dch[dir]});
-    return true;
-  };
-  auto auto_home = [&](int v) {
-    if (tower[v].empty()) return;
-    int h = home[tower[v].back()];
-    if (h != v) return;
-    int color = tower[v].back();
-    while (!tower[v].empty() && tower[v].back() == color) {
-      tower[v].pop_back();
-    }
-  };
-  auto apply_move = [&](int src, int keep, int dir, int len) {
-    int r = src / n;
-    int c = src % n;
-    int dst = id(r + dr[dir] * len, c + dc[dir] * len);
-    int h = (int)tower[src].size();
-    int moving = h - keep;
-    vector<int> part;
-    part.reserve(moving);
-    for (int i = 0; i < moving; ++i) {
-      part.push_back(tower[src].back());
-      tower[src].pop_back();
-    }
-    reverse(part.begin(), part.end());
-    tower[dst].insert(tower[dst].end(), part.begin(), part.end());
-    auto_home(src);
-    auto_home(dst);
-  };
-  auto execute = [&](int src, int keep, int dir, int len) {
-    if (!add_move(src, keep, dir, len)) return false;
-    apply_move(src, keep, dir, len);
-    return true;
-  };
-  auto single_path = [&](int src, int dst, int forbidden) {
-    vector<int> prev(V, -1);
-    vector<int> pdir(V, -1);
-    vector<int> plen(V, -1);
-    queue<int> q;
-    prev[src] = src;
-    q.push(src);
-    while (!q.empty()) {
-      int v = q.front();
-      q.pop();
-      if (v == dst) break;
-      int r = v / n;
-      int c = v % n;
-      for (int z = 0; z < 4; ++z) {
-        int nr = r + dr[z];
-        int nc = c + dc[z];
-        if (!inside(nr, nc)) continue;
-        int to = id(nr, nc);
-        if (!floor_cell[to] || prev[to] != -1) continue;
-        if (to == forbidden) continue;
-        if (to != dst && !tower[to].empty()) continue;
-        prev[to] = v;
-        pdir[to] = z;
-        plen[to] = 1;
-        q.push(to);
-      }
-    }
-    if (prev[dst] == -1) return vector<pair<int, int>>();
-    vector<pair<int, int>> path;
-    for (int v = dst; v != src; v = prev[v]) {
-      path.push_back({pdir[v], plen[v]});
-    }
-    reverse(path.begin(), path.end());
-    return path;
-  };
-  auto move_single = [&](int src, int dst) {
-    if (src == dst) return true;
-    if (tower[src].size() != 1) return false;
-    int color = tower[src].back();
-    int forbidden = home[color] == dst ? -1 : home[color];
-    auto path = single_path(src, dst, forbidden);
-    if (path.empty()) return false;
-    int cur = src;
-    for (auto [dir, len] : path) {
-      if (!execute(cur, 0, dir, len)) return false;
-      cur = id(cur / n + dr[dir] * len, cur % n + dc[dir] * len);
-      if (tower[cur].empty()) return false;
-      if (tower[cur].back() != color && cur != dst) return false;
-    }
-    return cur == dst;
-  };
-  auto top_path = [&](int src, int dst) {
-    int h = (int)tower[src].size();
-    vector<int> prev(V, -1);
-    vector<int> pdir(V, -1);
-    vector<int> plen(V, -1);
-    queue<int> q;
-    prev[src] = src;
-    q.push(src);
-    while (!q.empty()) {
-      int v = q.front();
-      q.pop();
-      if (v == dst) break;
-      int r = v / n;
-      int c = v % n;
-      int reach = v == src ? h : 1;
-      for (int z = 0; z < 4; ++z) {
-        for (int len = 1; len <= reach; ++len) {
-          int nr = r + dr[z] * len;
-          int nc = c + dc[z] * len;
-          if (!inside(nr, nc)) break;
-          int to = id(nr, nc);
-          if (!floor_cell[to]) break;
-          if (prev[to] != -1) continue;
-          if (to != dst && !tower[to].empty()) continue;
-          if (to == dst && (int)tower[to].size() + 1 > 8) continue;
-          prev[to] = v;
-          pdir[to] = z;
-          plen[to] = len;
-          q.push(to);
-        }
-      }
-    }
-    if (prev[dst] == -1) return vector<pair<int, int>>();
-    vector<pair<int, int>> path;
-    for (int v = dst; v != src; v = prev[v]) {
-      path.push_back({pdir[v], plen[v]});
-    }
-    reverse(path.begin(), path.end());
-    return path;
-  };
-  auto move_top_to_home = [&](int src, int color) {
-    int dst = home[color];
-    if (src == dst) {
-      auto_home(src);
-      return true;
-    }
-    auto path = top_path(src, dst);
-    if (path.empty()) return false;
-    int cur = src;
-    for (auto [dir, len] : path) {
-      int keep = (int)tower[cur].size() - 1;
-      if (!execute(cur, keep, dir, len)) return false;
-      cur = id(cur / n + dr[dir] * len, cur % n + dc[dir] * len);
-      if (cur == dst) break;
-    }
-    return true;
-  };
-  auto collectable = [&](int src, int dst, int color) {
-    if (src == dst) return false;
-    if (tower[src].size() != 1) return false;
-    if (tower[src].back() != color) return false;
-    if ((int)tower[dst].size() >= 8) return false;
-    int forbidden = home[color] == dst ? -1 : home[color];
-    auto path = single_path(src, dst, forbidden);
-    return !path.empty();
-  };
-  const auto start_time = chrono::steady_clock::now();
-  auto elapsed_ms = [&]() {
-    return chrono::duration_cast<chrono::milliseconds>(
-               chrono::steady_clock::now() - start_time)
-        .count();
-  };
-  while (elapsed_ms() < 1250 && (int)answer.size() < OP_LIMIT) {
-    vector<vector<int>> by_color(k);
-    for (int v = 0; v < V; ++v) {
-      if (tower[v].size() == 1) {
-        by_color[tower[v].back()].push_back(v);
-      }
-    }
-    int best_seed = -1;
-    int best_color = -1;
-    vector<int> best_members;
-    int best_score = 0;
-    for (int color = 0; color < k; ++color) {
-      if ((int)by_color[color].size() < 2) continue;
-      for (int seed : by_color[color]) {
-        if (seed == home[color]) continue;
-        vector<pair<int, int>> candidates;
-        for (int s : by_color[color]) {
-          if (s == seed) continue;
-          if (!collectable(s, seed, color)) continue;
-          auto path = single_path(s, seed, home[color]);
-          if (path.empty()) continue;
-          candidates.push_back({(int)path.size(), s});
-        }
-        sort(candidates.begin(), candidates.end());
-        int limit = min(7, (int)candidates.size());
-        int single_cost = 0;
-        for (int s : by_color[color]) {
-          auto path = single_path(s, home[color], seed);
-          if (!path.empty()) single_cost += (int)path.size();
-        }
-        int batch_cost = 0;
-        vector<int> members;
-        for (int i = 0; i < limit; ++i) {
-          int s = candidates[i].second;
-          batch_cost += candidates[i].first;
-          members.push_back(s);
-          int h = 1 + (int)members.size();
-          if (h > 8) break;
-          int estimated_home = 0;
-          if (h >= 2) {
-            auto path = top_path(seed, home[color]);
-            if (!path.empty()) estimated_home = (int)path.size();
-          }
-          int saving = single_cost - batch_cost - estimated_home;
-          if (saving > best_score) {
-            best_score = saving;
-            best_seed = seed;
-            best_color = color;
-            best_members = members;
-          }
-        }
-      }
-    }
-    if (best_seed == -1 || best_score <= 0) break;
-    vector<int> members = best_members;
-    for (int s : members) {
-      if (tower[s].size() != 1) continue;
-      if (tower[s].back() != best_color) continue;
-      move_single(s, best_seed);
-    }
-    if (tower[best_seed].empty()) continue;
-    while (!tower[best_seed].empty() && tower[best_seed].back() == best_color &&
-           (int)answer.size() < OP_LIMIT) {
-      int before = (int)tower[best_seed].size();
-      if (!move_top_to_home(best_seed, best_color)) {
-        break;
-      }
-      if ((int)tower[best_seed].size() == before) break;
-    }
-  }
-  for (int v = 0; v < V && (int)answer.size() < OP_LIMIT; ++v) {
-    while (!tower[v].empty() && (int)answer.size() < OP_LIMIT) {
-      int color = tower[v].back();
-      if (v == home[color]) {
-        auto_home(v);
-        continue;
-      }
-      int before = (int)tower[v].size();
-      if (!move_top_to_home(v, color)) break;
-      if ((int)tower[v].size() == before) break;
-    }
-  }
-  for (const auto& mv : answer) {
-    cout << mv.r << ' ' << mv.c << ' ' << mv.keep << ' ' << mv.dir << ' '
-         << mv.len << '\n';
+  for (auto op : best_ans) {
+    cout << op.p / n << ' ' << op.p % n << ' ' << op.k << ' ' << "UDLR"[op.d]
+         << ' ' << op.l << '\n';
   }
   return 0;
 }

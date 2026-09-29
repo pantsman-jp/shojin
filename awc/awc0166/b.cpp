@@ -59,4 +59,21 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m, k;
+  cin >> n >> m >> k;
+  vector<ll> s(n), g(m);
+  rep(i, 0, n) cin >> s[i];
+  rep(i, 0, m) cin >> g[i];
+  sort(all(g));
+  vector<int> remain(m, k);
+  int ans = 0;
+  rep(i, 0, n) {
+    int idx = upper_bound(all(g), s[i]) - g.begin() - 1;
+    if (idx >= 0 and remain[idx] > 0) {
+      ans++;
+      remain[idx]--;
+    }
+  }
+  cout << ans << '\n';
+}

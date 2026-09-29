@@ -59,4 +59,29 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<ll> p(n);
+  rep(i, 0, n) cin >> p[i];
+  dsu uf(n);
+  rep(i, 0, m) {
+    int u, v;
+    cin >> u >> v;
+    u--, v--;
+    uf.merge(u, v);
+  }
+  vector<ll> sum(n), cnt(n);
+  rep(i, 0, n) {
+    int r = uf.leader(i);
+    sum[r] += p[i];
+    cnt[r]++;
+  }
+  ll mn = INF, mx = 0;
+  rep(i, 0, n) {
+    if (uf.leader(i) != i) continue;
+    chmin(mn, sum[i] / cnt[i]);
+    chmax(mx, divceil(sum[i], cnt[i]));
+  }
+  cout << mx - mn << '\n';
+}

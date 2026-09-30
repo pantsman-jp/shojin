@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  int zero = 0, one = 0;
+  rep(_, 0, n) {
+    int a;
+    cin >> a;
+    if (a == 0) zero++;
+    if (a == 1) one++;
+  }
+  yn(!(zero < 1 and one < 2));
+}

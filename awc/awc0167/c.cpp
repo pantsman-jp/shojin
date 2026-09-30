@@ -59,4 +59,24 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  ll k;
+  cin >> n >> m >> k;
+  if (n == 1) {
+    cout << 0 << '\n';
+    return;
+  }
+  ll sum = 0, last = 0, cnt = 1;
+  rep(_, 0, m - 1) {
+    ll d;
+    cin >> d;
+    sum += d;
+    last += d;
+    if (last >= k) {
+      cnt++;
+      last = 0;
+    }
+  }
+  cout << (cnt >= n ? sum : -1) << '\n';
+}

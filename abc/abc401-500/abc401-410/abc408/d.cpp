@@ -15,23 +15,18 @@ const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 // const ll mod =;
 
-void solve()
-{
+void solve() {
   int n;
   string s;
   cin >> n >> s;
   vector<int> r1(n + 1);
-  rrep(i, n, 0)
-  {
+  rrep(i, n, 0) {
     r1[i] = r1[i + 1];
-    if (s[i] == '1')
-      r1[i]++;
+    if (s[i] == '1') r1[i]++;
   }
   int ans = inf, l0 = 0, best = 0, l01 = 0;
-  rep(r, 1, n + 1)
-  {
-    if (s[r - 1] == '0')
-      l0++;
+  rep(r, 1, n + 1) {
+    if (s[r - 1] == '0') l0++;
     if (s[r - 1] == '0')
       l01--;
     else
@@ -42,8 +37,7 @@ void solve()
   cout << ans << endl;
 }
 
-int main()
-{
+int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   int t;

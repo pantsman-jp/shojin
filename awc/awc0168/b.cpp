@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, m;
+  cin >> n >> m;
+  ll sum = 0;
+  rep(_, 0, n) {
+    ll d;
+    cin >> d;
+    sum += d;
+  }
+  cout << divceil(sum, m) << '\n';
+}

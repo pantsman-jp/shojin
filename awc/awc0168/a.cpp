@@ -59,4 +59,18 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  string s, t;
+  cin >> n >> s >> t;
+  int ans = 0, cnt = 0;
+  rep(i, 0, n) {
+    if (s[i] == t[i]) {
+      cnt++;
+      chmax(ans, cnt);
+    } else {
+      cnt = 0;
+    }
+  }
+  cout << ans << '\n';
+}

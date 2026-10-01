@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  dsu uf(n);
+  rep(_, 0, n) {
+    int a, b;
+    cin >> a >> b;
+    uf.merge(a - 1, b - 1);
+  }
+  yn(uf.groups().size() <= k);
+}

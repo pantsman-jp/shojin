@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m, k;
+  cin >> n >> m >> k;
+  vector<ll> w(n), r(m);
+  rep(i, 0, n) cin >> w[i];
+  rep(i, 0, m) cin >> r[i];
+  sort(rall(w));
+  ll sumw = 0;
+  rep(i, 0, k) sumw += w[i];
+  yn(sumw >= accumulate(all(r), 0ll));
+}

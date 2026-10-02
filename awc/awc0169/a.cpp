@@ -59,4 +59,18 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, s;
+  cin >> n >> s;
+  ll now = 0, ans = 0;
+  rep(_, 0, n) {
+    ll w;
+    cin >> w;
+    now += w;
+    if (now >= s) {
+      now = 0;
+      ans++;
+    }
+  }
+  cout << ans << '\n';
+}

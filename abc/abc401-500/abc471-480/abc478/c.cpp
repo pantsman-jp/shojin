@@ -59,4 +59,20 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  auto b = a;
+  sort(all(b));
+  int l = 0;
+  while (l < n and a[l] == b[l]) l++;
+  if (l == n) {
+    yn(true);
+    return;
+  }
+  int r = n - 1;
+  while (a[r] == b[r]) r--;
+  yn(r - l + 1 <= k);
+}

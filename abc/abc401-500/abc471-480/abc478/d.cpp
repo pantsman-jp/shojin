@@ -59,4 +59,45 @@ int main() {
   return 0;
 }
 
-void solve() {}
+int op(int a, int b) { return a + b; }
+
+int e() { return 0; }
+
+int mapping(int f, int x) { return f + x; }
+
+int composition(int f, int g) { return f + g; }
+
+int id() { return 0; }
+
+void solve() {
+  int n, q;
+  cin >> n >> q;
+  vector<vector<pair<int, int>>> v(q + 1);
+  rep(_, 0, q) {
+    int l, r, x;
+    cin >> l >> r >> x;
+    l--, r--;
+    v[x].emplace_back(l, r);
+  }
+  lazy_segtree<int, op, e, int, mapping, composition, id> seg(n);
+  rep(x, 1, q + 1) {
+    auto p = v[x];
+    sort(all(p));
+    int l = -1, r = -1;
+    for (auto [nl, nr] : p) {
+      if (l == -1) {
+        l = nl;
+        r = nr;
+      } else if (nl <= r + 1) {
+        chmax(r, nr);
+      } else {
+        seg.apply(l, r + 1, 1);
+        l = nl;
+        r = nr;
+      }
+    }
+    if (l != -1) seg.apply(l, r + 1, 1);
+  }
+  rep(i, 0, n) cout << seg.get(i) << ' ';
+  cout << '\n';
+}

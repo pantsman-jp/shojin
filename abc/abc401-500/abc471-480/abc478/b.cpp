@@ -59,4 +59,20 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, v;
+  cin >> n >> v;
+  vector<pii> xs(n);
+  rep(i, 0, n) {
+    cin >> xs[i].first;
+    xs[i].second = i + 1;
+  }
+  int ans = 0;
+  rep(i, 0, n) rep(j, i + 1, n) rep(k, j + 1, n) {
+    auto [w1, v1] = xs[i];
+    auto [w2, v2] = xs[j];
+    auto [w3, v3] = xs[k];
+    if (v1 + v2 + v3 <= v) chmax(ans, w1 + w2 + w3);
+  }
+  cout << ans << '\n';
+}

@@ -59,4 +59,20 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  int sum = accumulate(all(a), 0);
+  vector dp(n + 1, vector<bool>(sum + 1));
+  dp[0][0] = true;
+  rep(i, 0, n) rep(s, 0, sum + 1) {
+    if (!dp[i][s]) continue;
+    dp[i + 1][s] = true;
+    dp[i + 1][s + a[i]] = true;
+  }
+  int ans = sum;
+  rep(s, 1, sum) if (dp[n][s]) chmin(ans, abs(2 * s - sum));
+  cout << ans << '\n';
+}

@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> h(n), s(n), d(n);
+  rep(i, 0, n) cin >> h[i] >> s[i] >> d[i];
+  vector<pii> pts(n);
+  rep(i, 0, n) {
+    pts[i].first = h[i] + s[i];
+    pts[i].second = i + 1;
+  }
+  sort(rall(pts));
+  cout << pts[0].second << '\n';
+}

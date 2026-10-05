@@ -59,4 +59,28 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, q;
+  cin >> n >> q;
+  vector<pii> ne;
+  scc_graph g(n);
+  rep(_, 0, q) {
+    int t, u, v;
+    cin >> t >> u >> v;
+    u--, v--;
+    g.add_edge(u, v);
+    if (t == 1) ne.emplace_back(u, v);
+  }
+  auto ds = g.scc();
+  vector<int> ans(n);
+  rep(i, 0, ds.size()) for (int v : ds[i]) ans[v] = i + 1;
+  for (auto [u, v] : ne) {
+    if (ans[u] == ans[v]) {
+      yn(false);
+      return;
+    }
+  }
+  yn(true);
+  rep(i, 0, n) cout << ans[i] << ' ';
+  cout << '\n';
+}

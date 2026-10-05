@@ -32,6 +32,7 @@
 #### グラフ
 
 - [DSU](https://atcoder.github.io/ac-library/production/document_ja/dsu.html)
+- [強連結成分分解（Strongly Connected Component）](https://atcoder.github.io/ac-library/production/document_ja/scc.html)
 
 ### 計算
 

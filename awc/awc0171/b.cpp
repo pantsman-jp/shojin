@@ -59,4 +59,19 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int h, w;
+  cin >> h >> w;
+  int ans = 1, mx = 0;
+  rep(i, 1, h + 1) {
+    string s;
+    cin >> s;
+    int cnt = 0;
+    rep(j, 0, w) if (s[j] == '.') cnt++;
+    if (mx < cnt) {
+      ans = i;
+      mx = cnt;
+    }
+  }
+  cout << ans << '\n';
+}

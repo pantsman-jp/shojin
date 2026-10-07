@@ -59,4 +59,26 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  ll k;
+  cin >> n >> k;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  ll tar = accumulate(all(a), 0ll) - k;
+  if (tar <= 0) {
+    cout << (tar == 0 ? 1 : 0) << '\n';
+    return;
+  }
+  int l = 0;
+  ll sum = 0, ans = 0;
+  rep(r, 0, n) {
+    sum += a[r];
+    while (l <= r and tar < sum) {
+      sum -= a[l];
+      l++;
+    }
+    if (sum == tar) ans++;
+  }
+  cout << ans << '\n';
+}

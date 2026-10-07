@@ -59,4 +59,9 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  string s;
+  cin >> n >> s;
+  cout << *max_element(all(s)) << '\n';
+}

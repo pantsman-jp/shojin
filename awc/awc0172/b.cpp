@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int h, w;
+  cin >> h >> w;
+  int ans = 0;
+  rep(i, 0, h) {
+    string s;
+    cin >> s;
+    int cnt = 0;
+    rep(j, 0, w) if (s[j] == 'x') cnt++;
+    chmax(ans, cnt);
+  }
+  cout << ans << '\n';
+}

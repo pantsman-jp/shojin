@@ -59,4 +59,23 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> w(n);
+  rep(i, 0, n) cin >> w[i];
+  vector<bool> is_low(n);
+  rep(_, 0, m) {
+    int u, v;
+    cin >> u >> v;
+    u--, v--;
+    if (w[u] < w[v]) {
+      is_low[u] = true;
+    } else if (w[v] < w[u]) {
+      is_low[v] = true;
+    }
+  }
+  int ans = 0;
+  rep(i, 0, n) if (is_low[i]) ans++;
+  cout << ans << '\n';
+}

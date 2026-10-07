@@ -59,4 +59,12 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  rep(_, 0, n) {
+    int a, b;
+    cin >> a >> b;
+    cout << (a + b) % 24 << '\n';
+  }
+}

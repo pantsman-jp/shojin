@@ -1,91 +1,99 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
-#define rrep(i, a, b) for (int i = (a) - 1; i >= b; i--)
+#include <atcoder/all>
+using namespace atcoder;
+#define rep(i, l, r) for (int i = (l); i < (r); i++)
+#define rrep(i, l, r) for (int i = (r) - 1; i >= (l); i--)
 #define all(p) p.begin(), p.end()
 #define rall(p) p.rbegin(), p.rend()
-#define chmax(a, b) a = max(a, b)
-#define chmin(a, b) a = min(a, b)
-#define yn(p) cout << (p ? "Yes\n" : "No\n");
-#define dout(f) cout << fixed << setprecision(10) << f << '\n';
+#define yn(tf) cout << (tf ? "Yes\n" : "No\n")
+#define YN(tf) cout << (tf ? "YES\n" : "NO\n")
+#define dout(x) cout << fixed << setprecision(10) << x << '\n'
+template <typename T, typename U>
+inline bool chmax(T& x, const U& y) {
+  if (x < y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T, typename U>
+inline bool chmin(T& x, const U& y) {
+  if (x > y) {
+    x = y;
+    return true;
+  }
+  return false;
+}
+template <typename T>
+inline T lcm(T a, T b) {
+  return (a / std::gcd(a, b)) * b;
+}
+template <typename T>
+inline T divceil(T a, T b) {
+  return (a + b - 1) / b;
+}
+template <typename T>
+using pq = priority_queue<T>;
+template <typename T>
+using rpq = priority_queue<T, vector<T>, greater<T>>;
 using ll = long long;
+using ull = unsigned long long;
 using ld = long double;
-using P = pair<int, int>;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
-// const ll mod = 998244353;
-// const ll mod = 1000000007;
+const ld pi = acosl(-1.0L);
+// using mint = modint998244353;
+// using mint = modint1000000007;
 
-int main()
-{
+void solve();
+
+int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
+  int t = 1;
+  // cin >> t;
+  rep(i, 0, t) solve();
+  return 0;
+}
+
+void solve() {
   int n, k;
+  cin >> n >> k;
   string s;
-  cin >> n >> k >> s;
-  vector dpl_min(n + 1, vector<int>(2, inf));
-  vector dpl_max(n + 1, vector<int>(2, -inf));
-  dpl_min[0][0] = dpl_max[0][0] = 0;
-  rep(i, 0, n) rep(j, 0, 2)
-  {
-    if (dpl_max[i][j] < 0)
-      continue;
-    if (s[i] == '.' or s[i] == '?')
-    {
-      chmin(dpl_min[i + 1][0], dpl_min[i][j]);
-      chmax(dpl_max[i + 1][0], dpl_max[i][j]);
-    }
-    if ((s[i] == 'o' or s[i] == '?') and j == 0)
-    {
-      chmin(dpl_min[i + 1][1], dpl_min[i][j] + 1);
-      chmax(dpl_max[i + 1][1], dpl_max[i][j] + 1);
+  cin >> s;
+  rep(i, 0, n) {
+    if (s[i] == 'o') {
+      if (i != 0) s[i - 1] = '.';
+      if (i + 1 < n) s[i + 1] = '.';
     }
   }
-  vector dpr_min(n + 1, vector<int>(2, inf));
-  vector dpr_max(n + 1, vector<int>(2, -inf));
-  dpr_min[n][0] = dpr_max[n][0] = 0;
-  rrep(i, n, 0) rep(j, 0, 2)
+  int cnt = k - count(all(s), 'o');
+  vector<pii> ps;
   {
-    if (dpr_max[i + 1][j] < 0)
-      continue;
-    if (s[i] == '.' or s[i] == '?')
-    {
-      chmin(dpr_min[i][0], dpr_min[i + 1][j]);
-      chmax(dpr_max[i][0], dpr_max[i + 1][j]);
-    }
-    if ((s[i] == 'o' or s[i] == '?') and j == 0)
-    {
-      chmin(dpr_min[i][1], dpr_min[i + 1][j] + 1);
-      chmax(dpr_max[i][1], dpr_max[i + 1][j] + 1);
+    int i = 0;
+    while (i < n) {
+      if (s[i] == '?') {
+        int l = i;
+        while (i < n and s[i] == '?') i++;
+        int r = i;
+        ps.emplace_back(l, r);
+      } else {
+        i++;
+      }
     }
   }
-  auto ok = [&](int lmin, int lmax, int rmin, int rmax, int need)
-  {
-    return lmin + rmin <= need and need <= lmax + rmax;
-  };
-  rep(i, 0, n)
-  {
-    bool o = false, dot = false;
-    if (s[i] == 'o' or s[i] == '?')
-    {
-      if (ok(dpl_min[i][0], dpl_max[i][0], dpr_min[i + 1][0], dpr_max[i + 1][0], k - 1))
-        o = true;
+  int mx = 0;
+  for (auto [l, r] : ps) mx += (r - l + 1) / 2;
+  if (cnt == 0) {
+    for (auto [l, r] : ps) rep(i, l, r) s[i] = '.';
+  } else if (cnt == mx) {
+    for (auto [l, r] : ps) {
+      if ((r - l) % 2 == 0) continue;
+      rep(i, 0, r - l) s[l + i] = "o."[i % 2];
     }
-    if (s[i] == '.' or s[i] == '?')
-    {
-      int lmin = min(dpl_min[i][0], dpl_min[i][1]);
-      int lmax = max(dpl_max[i][0], dpl_max[i][1]);
-      int rmin = min(dpr_min[i + 1][0], dpr_min[i + 1][1]);
-      int rmax = max(dpr_max[i + 1][0], dpr_max[i + 1][1]);
-      if (ok(lmin, lmax, rmin, rmax, k))
-        dot = true;
-    }
-    if (o and dot)
-      cout << '?';
-    else if (o)
-      cout << 'o';
-    else
-      cout << '.';
   }
-  cout << endl;
+  cout << s << '\n';
 }

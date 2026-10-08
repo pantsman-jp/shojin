@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int h, w;
+  cin >> h >> w;
+  vector<string> s(h);
+  rep(i, 0, h) cin >> s[i];
+  int ans = 0;
+  rep(j, 0, w) {
+    bool ok = true;
+    rep(i, 0, h) if (s[i][j] == '#') ok = false;
+    if (ok) ans++;
+  }
+  cout << ans << '\n';
+}

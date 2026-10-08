@@ -59,4 +59,8 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, k, m, l;
+  cin >> n >> k >> m >> l;
+  cout << n * l << '\n';
+}

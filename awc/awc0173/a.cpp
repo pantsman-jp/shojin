@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  ll b;
+  cin >> n >> b;
+  ll sum = 0;
+  rep(_, 0, n) {
+    ll a;
+    cin >> a;
+    sum += a;
+  }
+  yn(sum <= b);
+}

@@ -59,4 +59,8 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll d, v, t;
+  cin >> d >> v >> t;
+  cout << t + d / v << '\n';
+}

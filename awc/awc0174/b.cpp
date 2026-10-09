@@ -59,4 +59,21 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int h, w;
+  cin >> h >> w;
+  bool ok = true;
+  rep(_, 0, h) {
+    string s;
+    cin >> s;
+    bool now = false;
+    rep(i, 0, w) {
+      if (s[i] == 'o') {
+        now = true;
+        break;
+      }
+    }
+    ok &= now;
+  }
+  yn(ok);
+}

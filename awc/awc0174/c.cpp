@@ -59,4 +59,26 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  vector<int> a(n);
+  map<int, ll> cnt;
+  rep(i, 0, n) {
+    cin >> a[i];
+    cnt[a[i]]++;
+  }
+  ll ans = 0;
+  for (auto [a, m] : cnt) {
+    int tar = k - a;
+    if (a > tar) continue;
+    auto it = cnt.find(tar);
+    if (it == cnt.end()) continue;
+    if (a == tar) {
+      ans += m * (m - 1) / 2;
+    } else {
+      ans += m * (*it).second;
+    }
+  }
+  cout << ans << '\n';
+}

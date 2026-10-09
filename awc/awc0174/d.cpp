@@ -50,6 +50,27 @@ const ld pi = acosl(-1.0L);
 
 void solve();
 
+vector<ll> dijkstra(const vector<vector<pair<int, ll>>>& g, int s) {
+  using pli = pair<ll, int>;
+  rpq<pli> q;
+  vector<ll> dist(g.size(), INF);
+  dist[s] = 0;
+  q.push({0, s});
+  while (!q.empty()) {
+    auto [d, u] = q.top();
+    q.pop();
+    if (d != dist[u]) continue;
+    for (auto [v, w] : g[u]) {
+      ll nd = d + w;
+      if (nd < dist[v]) {
+        dist[v] = nd;
+        q.push({nd, v});
+      }
+    }
+  }
+  return dist;
+}
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
@@ -59,4 +80,38 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<tuple<int, int, ll>> edge(m);
+  rep(i, 0, m) {
+    int u, v;
+    ll w;
+    cin >> u >> v >> w;
+    edge[i] = {u - 1, v - 1, w};
+  }
+  int k;
+  cin >> k;
+  set<int> e;
+  rep(i, 0, k) {
+    int ei;
+    cin >> ei;
+    e.insert(ei - 1);
+  }
+  vector<vector<pair<int, ll>>> g1(n);
+  for (auto [u, v, w] : edge) {
+    g1[u].emplace_back(v, w);
+    g1[v].emplace_back(u, w);
+  }
+  ll ans1 = dijkstra(g1, 0)[n - 1];
+  cout << (ans1 == INF ? -1 : ans1) << '\n';
+  vector<vector<pair<int, ll>>> g2(n);
+  rep(i, 0, m) {
+    if (e.find(i) != e.end()) continue;
+    auto [u, v, w] = edge[i];
+    g2[u].emplace_back(v, w);
+    g2[v].emplace_back(u, w);
+  }
+  ll ans2 = dijkstra(g2, 0)[n - 1];
+  cout << (ans2 == INF ? -1 : ans2) << '\n';
+}

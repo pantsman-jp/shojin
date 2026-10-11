@@ -213,7 +213,7 @@ int var = i++; // var = 0, i = 1
 
 ## 整数除算の仕様
 
-### Last Updated : 2025-11-10
+### Last Updated : 2026-10-11
 
 ### 概要
 
@@ -236,10 +236,11 @@ C++ において床関数は以下で定義できる。
 ```C++
 ll floor(ll a, ll b)
 {
-  if (a < 0 and a % b != 0)
+  if (a < 0 and a % b != 0) {
     return a / b - 1;
-  else
+  } else {
     return a / b;
+  }
 }
 ```
 
@@ -303,7 +304,7 @@ rep(i, 1, n + 1) sum[i] = sum[i - 1] + a[i];
 
 ## 深さ優先探索
 
-### Last Updated : 2026-06-08
+### Last Updated : 2026-10-11
 
 ### 概要
 
@@ -313,8 +314,9 @@ vector<bool> seen;
 
 void dfs(int u) {
   seen[u] = true;
-  for (int v : g[u])
+  for (int v : g[u]) {
     if (!seen[v]) dfs(v);
+  }
   seen[u] = false;
 }
 ```
@@ -340,7 +342,7 @@ auto dfs = [&](auto self, int u) -> void {
 
 ## 幅優先探索
 
-### Last Updated : 2026-01-30
+### Last Updated : 2026-10-11
 
 ### 概要
 
@@ -354,8 +356,9 @@ seen[u] = true;
 while (!q.empty())
   int v = q.front();
   q.pop();
-  for (int w : g[v])
+  for (int w : g[v]) {
     if (!seen[w]) seen[w] = true, q.push(w);
+  }
 ```
 
 [先頭に戻る](#what-i-learned)
@@ -513,7 +516,7 @@ rep(i, 0, a.size()) ans[i] = lower_bound(all(b), a[i]) - b.begin();
 
 ## 二分探索
 
-### Last Updated : 2026-02-14
+### Last Updated : 2026-10-11
 
 ### 概要
 
@@ -527,11 +530,12 @@ rep(i, 0, a.size()) ans[i] = lower_bound(all(b), a[i]) - b.begin();
 ```C++
 ll l = 1, r = INF;
 while (l <= r) {
-    ll mid = l + (r - l) / 2;
-    if (check(mid))   // 条件を満たす（成功）
-      l = mid + 1;    // もっと大きくできるかも？
-    else              // 条件を満たさない（失敗）
-      r = mid - 1;    // 大きすぎたので下げる
+  ll mid = l + (r - l) / 2;
+  if (check(mid)) { // 条件を満たす（成功）
+    l = mid + 1;   // もっと大きくできるかも？
+  } else {        // 条件を満たさない（失敗）
+    r = mid - 1; // 大きすぎたので下げる
+  }
 }
 cout << r << endl; // 最後に残った r が最大値
 ```
@@ -546,11 +550,12 @@ cout << r << endl; // 最後に残った r が最大値
 ```C++
 ll l = 1, r = INF;
 while (l <= r) {
-    ll mid = l + (r - l) / 2;
-    if (check(mid)) // 条件を満たす（成功）
-      r = mid - 1;  // もっと小さくできるかも？
-    else            // 条件を満たさない（失敗）
-      l = mid + 1;  // 小さすぎたので上げる
+  ll mid = l + (r - l) / 2;
+  if (check(mid)){  // 条件を満たす（成功）
+    r = mid - 1;   // もっと小さくできるかも？
+  } else {        // 条件を満たさない（失敗）
+    l = mid + 1; // 小さすぎたので上げる
+  }
 }
 cout << l << endl; // 最後に残った l が最小値
 ```

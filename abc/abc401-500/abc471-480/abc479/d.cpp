@@ -59,4 +59,26 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, q;
+  cin >> n >> q;
+  vector<ll> l(n + 1), r(n + 1);
+  rep(i, 2, n + 1) cin >> l[i];
+  rep(i, 1, n) cin >> r[i];
+  vector<ll> pref(n + 1, INF), suff(n + 2, INF);
+  rep(i, 1, n + 1) pref[i] = min(pref[i - 1], r[i]);
+  rrep(i, 1, n + 1) suff[i] = min(suff[i + 1], l[i]);
+  rep(i, 0, q) {
+    int s, t;
+    cin >> s >> t;
+    ll ans;
+    if (s < t) {
+      ans = r[s];
+      if (s > 1) chmin(ans, l[s] + pref[s - 1]);
+    } else {
+      ans = l[s];
+      if (s < n) chmin(ans, r[s] + suff[s + 1]);
+    }
+    cout << ans << '\n';
+  }
+}

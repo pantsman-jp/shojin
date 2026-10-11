@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  ll w;
+  cin >> n >> w;
+  vector<ll> a(n), b(n);
+  rep(i, 0, n) cin >> a[i] >> b[i];
+  ll ans = 0;
+  rep(bit, 0, 1 << n) {
+    ll now = 0, sum = 0;
+    rep(i, 0, n) {
+      if ((bit & (1 << i)) != 0) {
+        now += a[i];
+        sum += b[i];
+      }
+    }
+    if (sum <= w) chmax(ans, now);
+  }
+  cout << ans << '\n';
+}

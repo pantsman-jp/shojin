@@ -59,4 +59,34 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  ll l = 0, r = INF;
+  while (l < r) {
+    ll mid = l + (r - l) / 2;
+    int trucks = 1;
+    ll sum = 0;
+    rep(i, 0, n) {
+      if (a[i] > mid) {
+        trucks = k + 1;
+        break;
+      }
+      if (sum + a[i] > mid) {
+        trucks++;
+        sum = a[i];
+        if (trucks > k) break;
+      } else {
+        sum += a[i];
+      }
+    }
+    if (trucks <= k) {
+      r = mid;
+    } else {
+      l = mid + 1;
+    }
+  }
+  cout << l << '\n';
+}

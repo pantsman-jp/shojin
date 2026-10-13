@@ -59,4 +59,18 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<ll> h(n);
+  rep(i, 0, n) cin >> h[i];
+  ll ans = 0;
+  rep(i, 1, n - 1) {
+    if (h[i - 1] > h[i] and h[i] < h[i + 1]) {
+      ll mn = min(h[i - 1], h[i + 1]);
+      ans += mn - h[i];
+      h[i] = mn;
+    }
+  }
+  cout << ans << '\n';
+}

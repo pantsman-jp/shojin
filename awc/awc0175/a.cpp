@@ -59,4 +59,8 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int a, b, c;
+  cin >> a >> b >> c;
+  yn(a + b >= c);
+}

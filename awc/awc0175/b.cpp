@@ -59,4 +59,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int h, w, k;
+  cin >> h >> w >> k;
+  k--;
+  rep(_, 0, h) {
+    string s;
+    cin >> s;
+    cout << (char)s[k];
+  }
+  cout << '\n';
+}

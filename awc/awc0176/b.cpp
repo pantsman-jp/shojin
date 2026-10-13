@@ -59,4 +59,11 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  string s;
+  cin >> n >> s;
+  int ans = 0;
+  rep(i, 0, n - 1) if (s[i] == 'C' and s[i + 1] == 'A') ans++;
+  cout << ans << '\n';
+}

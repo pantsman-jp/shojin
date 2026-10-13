@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m, k;
+  cin >> n >> m >> k;
+  vector<int> s(n), r(m);
+  rep(i, 0, n) cin >> s[i];
+  rep(i, 0, m) cin >> r[i];
+  sort(all(s)), sort(all(r));
+  s.resize(n - k);
+  reverse(all(s));
+  int ans = 0;
+  for (int si : s) {
+    while (!r.empty() and r.back() > si) r.pop_back();
+    if (!r.empty()) {
+      ans++;
+      r.pop_back();
+    }
+  }
+  cout << ans << '\n';
+}

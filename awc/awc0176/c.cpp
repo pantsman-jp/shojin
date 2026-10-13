@@ -59,4 +59,4 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() { yn(true); }

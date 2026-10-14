@@ -59,4 +59,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  vector<ll> c(n + 1);
+  rep(i, 1, n + 1) cin >> c[i];
+  vector<int> p(n + 1), a(k);
+  rep(i, 2, n + 1) cin >> p[i];
+  rep(i, 0, k) cin >> a[i];
+  vector<bool> used(n + 1);
+  ll ans = 0;
+  rep(i, 0, k) {
+    while (a[i] != 0 and !used[a[i]]) {
+      used[a[i]] = true;
+      ans += c[a[i]];
+      a[i] = p[a[i]];
+    }
+  }
+  cout << ans << '\n';
+}

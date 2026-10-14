@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, t;
+  cin >> n >> t;
+  rep(_, 0, n) {
+    int a;
+    cin >> a;
+    if (a > t) {
+      yn(false);
+      return;
+    }
+  }
+  yn(true);
+}

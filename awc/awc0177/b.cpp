@@ -59,4 +59,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  string s;
+  cin >> n >> s;
+  string t = s;
+  rep(i, 0, n) {
+    if (s[i] != 'G') continue;
+    if (i > 0) t[i - 1] = 'G';
+    if (i < n - 1) t[i + 1] = 'G';
+  }
+  cout << count(all(t), '.') << '\n';
+}

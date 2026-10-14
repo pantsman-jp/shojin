@@ -59,4 +59,24 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, m, k;
+  cin >> n >> m >> k;
+  vector<pll> bc(k);
+  rep(i, 0, k) {
+    ll b, c;
+    cin >> b >> c;
+    bc[i] = {b, c};
+  }
+  sort(rall(bc));
+  ll remain = n * m;
+  ll limit = divceil(remain, 2ll);
+  ll ans = 0;
+  rep(i, 0, k) {
+    auto [b, c] = bc[i];
+    ll x = min({c, limit, remain});
+    ans += b * x;
+    remain -= x;
+  }
+  cout << ans << '\n';
+}

@@ -1,4 +1,5 @@
 // Template: https://github.com/pantsman-jp/shojin/blob/main/abc/template/f.cpp
+// License: CC0 1.0 Universal
 #include <bits/stdc++.h>
 using namespace std;
 #include <atcoder/all>

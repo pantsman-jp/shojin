@@ -1,6 +1,7 @@
 # Shojin
 
 **This repository is dedicated to the public domain under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).**
+**See the [LICENSE](https://github.com/pantsman-jp/shojin/blob/main/LICENSE) file for details.**
 
 This repository contains my solutions to problems on [AtCoder](https://atcoder.jp/).
 

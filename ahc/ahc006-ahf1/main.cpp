@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 #include <atcoder/all>
@@ -45,8 +46,6 @@ using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);
-// using mint = modint998244353;
-// using mint = modint1000000007;
 
 struct Point {
   int x, y;
@@ -58,23 +57,62 @@ struct Order {
   int dist;
 };
 
+int manhattan(const Point& a, const Point& b) {
+  return abs(a.x - b.x) + abs(a.y - b.y);
+}
+
+int route_dist(const vector<Order>& ord, const vector<int>& seq) {
+  Point cur = {400, 400};
+  int total = 0;
+  for (int i : seq) {
+    total += manhattan(cur, ord[i].start);
+    total += manhattan(ord[i].start, ord[i].goal);
+    cur = ord[i].goal;
+  }
+  total += manhattan(cur, {400, 400});
+  return total;
+}
+
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
   const int order_count = 1000;
+  const int select_count = 50;
+  const int iterations = 200000;
   vector<Order> ord(order_count);
   rep(i, 0, order_count) {
     cin >> ord[i].start.x >> ord[i].start.y >> ord[i].goal.x >> ord[i].goal.y;
     ord[i].id = i + 1;
-    ord[i].dist = abs(ord[i].start.x - ord[i].goal.x) +
-                  abs(ord[i].start.y - ord[i].goal.y);
+    ord[i].dist = manhattan(ord[i].start, ord[i].goal);
   }
   sort(all(ord),
        [](const Order& a, const Order& b) { return a.dist < b.dist; });
+  vector<int> seq(select_count);
+  iota(all(seq), 0);
+  int cur_dist = route_dist(ord, seq);
+  mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+  rep(it, 0, iterations) {
+    vector<int> cand = seq;
+    if (rng() % 2 == 0) {
+      int i = rng() % select_count;
+      int j = rng() % select_count;
+      swap(cand[i], cand[j]);
+    } else {
+      int i = rng() % select_count;
+      int j = rng() % order_count;
+      if (find(all(cand), j) != cand.end()) continue;
+      cand[i] = j;
+    }
+    int cand_dist = route_dist(ord, cand);
+    if (cand_dist < cur_dist) {
+      seq = move(cand);
+      cur_dist = cand_dist;
+    }
+  }
   vector<int> ans_order;
   vector<Point> route;
   route.push_back({400, 400});
-  rep(i, 0, 50) {
+  for (int i : seq) {
     ans_order.push_back(ord[i].id);
     route.push_back(ord[i].start);
     route.push_back(ord[i].goal);

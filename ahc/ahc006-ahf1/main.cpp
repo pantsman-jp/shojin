@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 #include <atcoder/all>
@@ -79,6 +78,8 @@ int main() {
   const int order_count = 1000;
   const int select_count = 50;
   const int iterations = 200000;
+  const double start_temp = 100.0;
+  const double end_temp = 1.0;
   vector<Order> ord(order_count);
   rep(i, 0, order_count) {
     cin >> ord[i].start.x >> ord[i].start.y >> ord[i].goal.x >> ord[i].goal.y;
@@ -90,8 +91,13 @@ int main() {
   vector<int> seq(select_count);
   iota(all(seq), 0);
   int cur_dist = route_dist(ord, seq);
+  vector<int> best_seq = seq;
+  int best_dist = cur_dist;
   mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+  uniform_real_distribution<double> prob(0.0, 1.0);
   rep(it, 0, iterations) {
+    double progress = static_cast<double>(it) / iterations;
+    double temp = start_temp * pow(end_temp / start_temp, progress);
     vector<int> cand = seq;
     if (rng() % 2 == 0) {
       int i = rng() % select_count;
@@ -104,15 +110,19 @@ int main() {
       cand[i] = j;
     }
     int cand_dist = route_dist(ord, cand);
-    if (cand_dist < cur_dist) {
+    int delta = cand_dist - cur_dist;
+    if (delta < 0 || prob(rng) < exp(-static_cast<double>(delta) / temp)) {
       seq = move(cand);
       cur_dist = cand_dist;
+      if (chmin(best_dist, cur_dist)) {
+        best_seq = seq;
+      }
     }
   }
   vector<int> ans_order;
   vector<Point> route;
   route.push_back({400, 400});
-  for (int i : seq) {
+  for (int i : best_seq) {
     ans_order.push_back(ord[i].id);
     route.push_back(ord[i].start);
     route.push_back(ord[i].goal);

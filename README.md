@@ -1,5 +1,7 @@
 # Shojin
 
+**This repository is dedicated to the public domain under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).**
+
 This repository contains my solutions to problems on [AtCoder](https://atcoder.jp/).
 
 ## My Rating
@@ -25,7 +27,3 @@ This repository contains my solutions to problems on [AtCoder](https://atcoder.j
 - [AtCoder Rating Comparer](https://atcoderratingcomparer.onrender.com)
 - [AtCoder Clans](https://kato-hiro.github.io/AtCoderClans/)
 - [AtCoder Algorithm Lectures](https://info.atcoder.jp/entry/algorithm_lectures/index)
-
----
-
-Copyright © 2025-2026 [@pantsman](https://github.com/pantsman-jp)

@@ -1,3 +1,4 @@
+// Template: https://github.com/pantsman-jp/shojin/blob/main/abc/template/a.cpp
 #include <bits/stdc++.h>
 using namespace std;
 #include <atcoder/all>

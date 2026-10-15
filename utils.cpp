@@ -49,6 +49,7 @@ using mint = modint998244353;
 // using mint = modint1000000007;
 
 // 素数判定(O(√n))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 bool is_prime(ll n) {
   if (n < 2) return false;
   for (ll i = 2; i * i <= n; i++) {
@@ -58,6 +59,7 @@ bool is_prime(ll n) {
 }
 
 // 素数判定配列(O(n loglogn))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 vector<bool> era(ll n) {
   vector<bool> is_prime(n + 2, true);
   is_prime[0] = is_prime[1] = false;
@@ -70,6 +72,7 @@ vector<bool> era(ll n) {
 }
 
 // 素数列挙(O(n loglogn))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 vector<ll> primes(ll n) {
   vector<bool> prime(n + 2, true);
   prime[0] = prime[1] = false;
@@ -86,6 +89,7 @@ vector<ll> primes(ll n) {
 }
 
 // 約数列挙O(√n + √n log n)
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 vector<ll> divisors(ll n) {
   vector<ll> ans;
   for (ll m = 1; m * m <= n; m++) {
@@ -99,6 +103,7 @@ vector<ll> divisors(ll n) {
 
 // 素因数分解
 /// vector<pll> O(√n)
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 vector<pll> factorization(ll n) {
   vector<pll> ans;
   for (ll p = 2; p * p <= n; p++) {
@@ -112,6 +117,7 @@ vector<pll> factorization(ll n) {
 }
 
 /// vector<ll> O(√n)
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 vector<ll> facts(ll n) {
   vector<ll> ans;
   for (ll p = 2; p * p <= n; p++) {
@@ -125,6 +131,7 @@ vector<ll> facts(ll n) {
 }
 
 // 階乗(O(n))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 ll fact(ll n, ll mod) {
   ll ans = 1;
   for (ll m = 1; m <= n; m++) ans = ans * m % mod;
@@ -132,6 +139,7 @@ ll fact(ll n, ll mod) {
 }
 
 // 順列(O(r))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 ll npr(ll n, ll r) {
   ll ans = 1;
   rep(i, 0, r) ans *= (n - i);
@@ -139,6 +147,7 @@ ll npr(ll n, ll r) {
 }
 
 // 組み合わせ(O(r))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 ll ncr(ll n, ll r) {
   if (r > n - r) r = n - r;
   ll ans = 1;
@@ -147,10 +156,12 @@ ll ncr(ll n, ll r) {
 }
 
 // O(1)
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 ll nc2(ll n) { return n * (n - 1) / 2; }
 
 // 余りの計算
 /// pow(a,b) % mod （繰り返し二乗法）(O(log b))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 mint modpow(ll a, ll b) {
   mint x = a, ans = 1;
   while (b > 0) {
@@ -161,9 +172,11 @@ mint modpow(ll a, ll b) {
 }
 
 /// (a÷b) % mod (O(log b))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 mint modinv(ll a, ll b) { return mint(a) * mint(b).inv(); }
 
 /// 階乗: n! (O(n))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 mint modfact(int n) {
   mint ans = 1;
   rep(i, 1, n + 1) ans *= i;
@@ -171,6 +184,7 @@ mint modfact(int n) {
 }
 
 /// 順列: nPr (O(r))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 mint modnpr(ll n, ll r) {
   mint ans = 1;
   rep(i, 0, r) ans *= (n - i);
@@ -178,6 +192,7 @@ mint modnpr(ll n, ll r) {
 }
 
 /// 組み合わせ: nCr (O(r))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 mint modncr(ll n, ll r) {
   if (r < 0 or r > n) return 0;
   if (r > n - r) r = n - r;
@@ -187,9 +202,11 @@ mint modncr(ll n, ll r) {
 }
 
 /// 組み合わせ: nC2 (O(1))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 mint modnc2(ll n) { return mint(n) * (n - 1) / 2; }
 
 // 平方数判別 O(√n)
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 bool is_square(ll n) {
   for (ll i = 1; i * i <= n; i++) {
     if (i * i == n) return true;
@@ -198,6 +215,7 @@ bool is_square(ll n) {
 }
 
 // 進数変換 (10進->k進) (O(log n))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 string to_base_k(ll n, int k) {
   if (n == 0) return "0";
   string ans = "";
@@ -207,6 +225,7 @@ string to_base_k(ll n, int k) {
 }
 
 // 進数変換 (k進->10進) (O(log n))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 ll to_base_10(string n, int k) {
   ll ans = 0;
   reverse(all(n));
@@ -219,6 +238,7 @@ ll to_base_10(string n, int k) {
 }
 
 // 各桁の和 (O(log n))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 int digit_sum(ll n) {
   int ans = 0;
   while (n > 0) ans += n % 10, n /= 10;
@@ -239,6 +259,7 @@ bool out(int i, int j, int h, int w) {
 }
 
 // 移動 (O(1))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 void move(int x, int y, char c) {
   if (c == 'R') {
     x++;
@@ -252,6 +273,7 @@ void move(int x, int y, char c) {
 }
 
 // 回文判定 (O(|s|))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 bool is_pali(string s) {
   string t = s;
   reverse(all(t));
@@ -259,6 +281,7 @@ bool is_pali(string s) {
 }
 
 // ランレングス圧縮（文字列）(O(|s|))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 vector<pair<char, int>> rle(const string& s) {
   vector<pair<char, int>> ans;
   int cnt = 1;
@@ -277,6 +300,7 @@ vector<pair<char, int>> rle(const string& s) {
 }
 
 // ランレングス圧縮（整数配列）(O(|s|))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 vector<pii> rle(const vector<int>& xs) {
   vector<pii> ans;
   int cnt = 1, now = xs[0];
@@ -294,6 +318,7 @@ vector<pii> rle(const vector<int>& xs) {
 }
 
 // 文字列中の文字の出現回数(O|s|)
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 int count_char(const string& s, const char& c) {
   int ans = 0;
   rep(i, 0, s.size()) if (s[i] == c) ans++;
@@ -301,25 +326,30 @@ int count_char(const string& s, const char& c) {
 }
 
 // x 桁になるまで自然数 n を 文字 c で埋める(O(log n + x))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 string padding(int x, int n, char c) {
   string s = to_string(n);
   return string(max(0, x - (int)s.size()), c) + s;
 }
 
 // x 桁になるまで文字列 s を 文字 c で埋める (O(|s| + x))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 string padding(int x, string s, char c) {
   return string(max(0, x - (int)s.size()), c) + s;
 }
 
 // ユークリッド距離の二乗(O(1))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 ll eudist(ll x1, ll y1, ll x2, ll y2) {
   return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
 }
 
 // マンハッタン距離(O(1))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 ll mandist(ll x1, ll y1, ll x2, ll y2) { return abs(x1 - x2) + abs(y1 - y2); }
 
 // ダイクストラ法(O((V + E) log V))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 vector<ll> dijkstra(const vector<vector<pair<int, ll>>>& g, int s) {
   using pli = pair<ll, int>;
   rpq<pli> q;
@@ -342,6 +372,7 @@ vector<ll> dijkstra(const vector<vector<pair<int, ll>>>& g, int s) {
 }
 
 // 二部グラフ判定（label の初期値は -1）(O(V + E))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 bool is_bipartite(const vector<vector<int>>& g, vector<int>& label) {
   int n = g.size();
   label.assign(n, -1);
@@ -358,6 +389,7 @@ bool is_bipartite(const vector<vector<int>>& g, vector<int>& label) {
 }
 
 // サイクル検出（無向グラフ）(O((V + E) α(V)))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 bool has_cycle(vector<vector<int>>& g) {
   int n = g.size();
   dsu uf(n);
@@ -372,6 +404,7 @@ bool has_cycle(vector<vector<int>>& g) {
 }
 
 // サイクル検出（有効グラフ）(O(V))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 vector<int> detect_cycle(const vector<int>& g) {
   int v = 0;
   rep(i, 0, g.size()) v = g[v];
@@ -385,6 +418,7 @@ vector<int> detect_cycle(const vector<int>& g) {
 }
 
 // DAG 判定(O(V + E))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 bool is_dag(const vector<vector<int>>& g) {
   int n = g.size();
   vector<int> state(n, 0);
@@ -402,6 +436,7 @@ bool is_dag(const vector<vector<int>>& g) {
 }
 
 // 0-indexed DAG トポロジカルソート（辞書順最小）(O(V + E) log V)
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 vector<int> topo_sort(const vector<vector<int>>& g) {
   int n = g.size();
   vector<int> indeg(n, 0);
@@ -423,6 +458,7 @@ vector<int> topo_sort(const vector<vector<int>>& g) {
 }
 
 // ワーシャルフロイド法(O(V^3))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 vector<vector<ll>> warshall_floyd(const vector<vector<pair<int, ll>>>& g) {
   int n = g.size();
   vector<vector<ll>> dist(n, vector<ll>(n, INF));
@@ -452,6 +488,7 @@ vector<vector<int>> calc_next(const string& s) {
 }
 
 // 文字列 s は文字列 t を部分列として持つか？(O(|s| + |t|))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 bool has_subsequence(const string& s, const string& t) {
   int pos = 0, n = s.size(), m = t.size();
   rep(i, 0, m) {
@@ -463,12 +500,14 @@ bool has_subsequence(const string& s, const string& t) {
 }
 
 // 文字列 t は文字列 s を部分文字列として持つか？(O(|s| + |t|))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 bool has_substring(const string& s, const string& t) {
   auto z = z_algorithm(t + s);
   return *max_element(z.begin() + t.size(), z.end()) >= (int)t.size();
 }
 
 // floor(sqrt(x))(O(1))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 ll sqrt_floor(const ll& x) {
   ll ans = sqrt((ld)x);
   while ((ans + 1) <= x / (ans + 1)) ans++;
@@ -477,9 +516,11 @@ ll sqrt_floor(const ll& x) {
 }
 
 // 区間 [l,r] の平方数の個数(O(1))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 ll cnt_sqr(ll l, ll r) { return sqrt_floor(r) - sqrt_floor(l - 1); }
 
 // クラスカル法（最小全域木のコストを返す）(O(|E| log|E|))
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
 ll kruskal(const vector<vector<pair<int, ll>>>& g) {
   int n = g.size();
   vector<tuple<ll, int, int>> edges;

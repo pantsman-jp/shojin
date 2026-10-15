@@ -51,8 +51,12 @@ using Timer = chrono::time_point<Clock>;
 
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-int randint(int l, int r) { return uniform_int_distribution<int>(l, r)(rng); }
+// [l, r)
+int randrange(int l, int r) {
+  return uniform_int_distribution<int>(l, r - 1)(rng);
+}
 
+// [0.0, 1.0)
 double randdouble() { return uniform_real_distribution<double>(0.0, 1.0)(rng); }
 
 struct TimeKeeper {

@@ -59,4 +59,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k, m;
+  cin >> n >> k >> m;
+  vector<ll> d(k);
+  rep(i, 0, k) {
+    int _;
+    cin >> _ >> d[i];
+  }
+  sort(rall(d));
+  ll ans = 0;
+  for (int i = 0; i < k; i += m) ans += 2 * d[i];
+  cout << ans << '\n';
+}

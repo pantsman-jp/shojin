@@ -59,4 +59,36 @@ int main() {
   return 0;
 }
 
-void solve() {}
+ll kruskal(const vector<vector<pair<int, ll>>>& g) {
+  int n = g.size();
+  vector<tuple<ll, int, int>> edges;
+  rep(u, 0, n) {
+    for (auto [v, w] : g[u]) {
+      if (u < v) edges.emplace_back(w, u, v);
+    }
+  }
+  sort(all(edges));
+  dsu uf(n);
+  ll ans = 0;
+  for (auto [w, u, v] : edges) {
+    if (uf.same(u, v)) continue;
+    uf.merge(u, v);
+    ans += w;
+  }
+  return ans;
+}
+
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<vector<pair<int, ll>>> g(n);
+  rep(_, 0, m) {
+    int u, v;
+    ll c;
+    cin >> u >> v >> c;
+    u--, v--;
+    g[u].emplace_back(v, c);
+    g[v].emplace_back(u, c);
+  }
+  cout << kruskal(g) << '\n';
+}

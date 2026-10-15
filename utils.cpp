@@ -478,3 +478,23 @@ ll sqrt_floor(const ll& x) {
 
 // 区間 [l,r] の平方数の個数(O(1))
 ll cnt_sqr(ll l, ll r) { return sqrt_floor(r) - sqrt_floor(l - 1); }
+
+// クラスカル法（最小全域木のコストを返す）(O(|E| log|E|))
+ll kruskal(const vector<vector<pair<int, ll>>>& g) {
+  int n = g.size();
+  vector<tuple<ll, int, int>> edges;
+  rep(u, 0, n) {
+    for (auto [v, w] : g[u]) {
+      if (u < v) edges.emplace_back(w, u, v);
+    }
+  }
+  sort(all(edges));
+  dsu uf(n);
+  ll ans = 0;
+  for (auto [w, u, v] : edges) {
+    if (uf.same(u, v)) continue;
+    uf.merge(u, v);
+    ans += w;
+  }
+  return ans;
+}

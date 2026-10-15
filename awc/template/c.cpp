@@ -1,3 +1,6 @@
+// Template: https://github.com/pantsman-jp/shojin/blob/main/awc/template/c.cpp
+// License: CC0 1.0 Universal
+// https://github.com/pantsman-jp/shojin/blob/main/LICENSE
 #include <bits/stdc++.h>
 using namespace std;
 #include <atcoder/all>

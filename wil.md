@@ -741,6 +741,3 @@ __builtin_clzll(x)
 [先頭に戻る](#what-i-learned)
 
 --- -->
-
----
-Copyright © 2025-2026 [@pantsman](https://github.com/pantsman-jp)

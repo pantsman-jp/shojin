@@ -62,4 +62,13 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, x;
+  cin >> n >> x;
+  rep(_, 0, n) {
+    int a;
+    cin >> a;
+    cout << (a <= x ? "o" : "x");
+  }
+  cout << '\n';
+}

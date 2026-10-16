@@ -48,7 +48,7 @@ using pll = pair<ll, ll>;
 const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);
-// using mint = modint998244353;
+using mint = modint998244353;
 // using mint = modint1000000007;
 
 void solve();
@@ -62,4 +62,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  string s;
+  cin >> n >> s;
+  vector dp(n + 1, vector<mint>(2));
+  dp[0][1] = 1;
+  rep(i, 1, n + 1) {
+    if (s[i - 1] != 'B') dp[i][0] = dp[i - 1][1];
+    if (s[i - 1] != 'A') dp[i][1] = dp[i - 1][0] + dp[i - 1][1];
+  }
+  cout << (dp[n][0] + dp[n][1]).val() << '\n';
+}

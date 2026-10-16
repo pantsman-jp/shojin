@@ -62,4 +62,17 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k;
+  cin >> n >> k;
+  vector<ll> cat(k);
+  rep(_, 0, n) {
+    int b;
+    ll d;
+    cin >> b >> d;
+    chmax(cat[b - 1], d);
+  }
+  ll ans = 0;
+  rep(i, 0, k) ans += cat[i];
+  cout << ans << '\n';
+}

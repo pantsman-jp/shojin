@@ -62,4 +62,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<pii> meat(n);
+  rep(i, 0, n) {
+    int a;
+    cin >> a;
+    meat[i] = {a, i + 1};
+  }
+  sort(all(meat));
+  cout << meat[0].second << '\n';
+}

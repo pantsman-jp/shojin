@@ -62,4 +62,35 @@ int main() {
   return 0;
 }
 
-void solve() {}
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
+vector<int> lis(const vector<int>& a, bool strict = true) {
+  vector<int> dp, idx, pre(a.size(), -1);
+  rep(i, 0, a.size()) {
+    auto it = strict ? lower_bound(all(dp), a[i]) : upper_bound(all(dp), a[i]);
+    int j = it - dp.begin();
+    if (j > 0) pre[i] = idx[j - 1];
+    if (it == dp.end()) {
+      dp.push_back(a[i]);
+      idx.push_back(i);
+    } else {
+      *it = a[i];
+      idx[j] = i;
+    }
+  }
+  vector<int> ans;
+  if (!idx.empty()) {
+    for (int i = idx.back(); i != -1; i = pre[i]) {
+      ans.push_back(i);
+    }
+    reverse(all(ans));
+  }
+  return ans;
+}
+
+void solve() {
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  cout << n - lis(a, false).size() << '\n';
+}

@@ -542,3 +542,33 @@ ll kruskal(const vector<vector<pair<int, ll>>>& g) {
   }
   return ans;
 }
+
+// 最長増加部分列のインデックス列
+// lis(a)：狭義単調増加部分列（LIS）のインデックス列
+// lis(a, false)：広義単調増加部分列（LNDS）のインデックス列
+// 戻り値：元の配列 a における 0-indexed のインデックス列
+// 長さは lis(a).size() で取得できる
+// Source: https://github.com/pantsman-jp/shojin/blob/main/utils.cpp
+vector<int> lis(const vector<int>& a, bool strict = true) {
+  vector<int> dp, idx, pre(a.size(), -1);
+  rep(i, 0, a.size()) {
+    auto it = strict ? lower_bound(all(dp), a[i]) : upper_bound(all(dp), a[i]);
+    int j = it - dp.begin();
+    if (j > 0) pre[i] = idx[j - 1];
+    if (it == dp.end()) {
+      dp.push_back(a[i]);
+      idx.push_back(i);
+    } else {
+      *it = a[i];
+      idx[j] = i;
+    }
+  }
+  vector<int> ans;
+  if (!idx.empty()) {
+    for (int i = idx.back(); i != -1; i = pre[i]) {
+      ans.push_back(i);
+    }
+    reverse(all(ans));
+  }
+  return ans;
+}

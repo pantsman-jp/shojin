@@ -62,4 +62,22 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, k, t;
+  cin >> n >> k >> t;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  sort(all(a));
+  ll ans = (a[0] != 0), end = k;
+  rep(i, 0, n) {
+    if (a[i] > t) break;
+    if (a[i] > end) {
+      ll cnt = divceil(a[i] - end, k);
+      ans += cnt;
+      end += cnt * k;
+    }
+    chmax(end, a[i] + k);
+  }
+  if (end < t) ans += divceil(t - end, k);
+  cout << ans << '\n';
+}

@@ -62,4 +62,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  string s, t;
+  cin >> s >> t;
+  yn((s[0] == 'A' and s[1] == 'D') or
+     (s[0] == 'D' and s[1] == 'A') or
+     (t[0] == 'A' and t[1] == 'D') or
+     (t[0] == 'D' and t[1] == 'A') or
+     (s[0] == 'A' and t[0] == 'D') or
+     (s[0] == 'D' and t[0] == 'A') or
+     (s[1] == 'A' and t[1] == 'D') or
+     (s[1] == 'D' and t[1] == 'A'));
+}

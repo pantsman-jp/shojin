@@ -62,4 +62,24 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, q;
+  cin >> n >> q;
+  vector<ll> a(n);
+  rep(i, 0, n) cin >> a[i];
+  vector<ll> sum(n + 1), sum2(n + 1);
+  rep(i, 0, n) sum[i + 1] = sum[i] + a[i];
+  rep(i, 0, n) sum2[i + 1] = sum2[i] + sum[i + 1];
+  vector<ll> cnt(n + 1);
+  rep(i, 0, n + 1) cnt[i] = 1LL * i * (i + 1) / 2;
+  auto f = [&](ll x) -> ll {
+    if (x == 0) return 0ll;
+    int t = lower_bound(all(cnt), x) - cnt.begin();
+    return sum2[t - 1] + sum[x - cnt[t - 1]];
+  };
+  rep(_, 0, q) {
+    ll l, r;
+    cin >> l >> r;
+    cout << f(r) - f(l - 1) << '\n';
+  }
+}

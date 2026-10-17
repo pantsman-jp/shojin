@@ -62,4 +62,27 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<string> s(n), t(m);
+  rep(i, 0, n) cin >> s[i];
+  rep(i, 0, m) cin >> t[i];
+  vector<int> ans(n);
+  rep(j, 0, m) {
+    int cnt = 0, id = -1;
+    rep(i, 0, n) {
+      if (s[i] == t[j]) {
+        id = i;
+        cnt = 1;
+        break;
+      }
+      if (s[i].size() != t[j].size()) continue;
+      int diff = 0;
+      rep(k, 0, s[i].size()) diff += s[i][k] != t[j][k];
+      if (diff == 1) cnt++, id = i;
+    }
+    if (cnt == 1) ans[id]++;
+  }
+  rep(i, 0, n) cout << ans[i] << '\n';
+}

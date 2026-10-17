@@ -62,4 +62,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<pii> xs(n);
+  rep(i, 0, n) {
+    int a;
+    cin >> a;
+    xs[i] = {a, i + 1};
+  }
+  sort(all(xs));
+  for (auto [_, ans] : xs) cout << ans << ' ';
+  cout << '\n';
+}

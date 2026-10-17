@@ -62,4 +62,13 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  string s;
+  cin >> n >> s;
+  int ans = 0;
+  for (char c : s) {
+    if (isupper(c)) ans++;
+  }
+  cout << ans << '\n';
+}

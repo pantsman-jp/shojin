@@ -62,4 +62,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  string s, t;
+  cin >> n >> m >> s >> t;
+  int ans = inf;
+  rep(i, 0, n - m + 1) {
+    string u = s.substr(i, m);
+    int cnt = 0;
+    rep(j, 0, m) if (t[j] != u[j]) cnt++;
+    chmin(ans, cnt);
+  }
+  cout << ans << '\n';
+}

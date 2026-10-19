@@ -49,9 +49,6 @@ const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);
 
-using Clock = chrono::steady_clock;
-using Timer = chrono::time_point<Clock>;
-
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 // [l, r)
@@ -62,13 +59,21 @@ int randrange(int l, int r) {
 // [0.0, 1.0)
 double randdouble() { return uniform_real_distribution<double>(0.0, 1.0)(rng); }
 
+using Clock = chrono::steady_clock;
+using Timer = chrono::time_point<Clock>;
+// 使用例
+// TimeKeeper tk(1900);             // 制限時間を1900 msに設定
+// tk.elapsed();                    // 経過時間をmsで取得
+// tk.remaining();                  // 残り時間をmsで取得
+// tk.is_time_over();               // 制限時間を超えたか判定
+// while (!tk.is_time_over()) { ... }  // 制限時間内で探索
 struct TimeKeeper {
   Timer start;
   double time_limit;
-  explicit TimeKeeper(double time_limit)
-      : start(Clock::now()), time_limit(time_limit) {}
+  explicit TimeKeeper(double time_limit_ms)
+      : start(Clock::now()), time_limit(time_limit_ms) {}
   double elapsed() const {
-    return chrono::duration<double>(Clock::now() - start).count();
+    return chrono::duration<double, milli>(Clock::now() - start).count();
   }
   double remaining() const { return max(0.0, time_limit - elapsed()); }
   bool is_time_over() const { return elapsed() >= time_limit; }

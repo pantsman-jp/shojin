@@ -45,98 +45,164 @@ const int inf = 1 << 30;
 const ll INF = 1LL << 60;
 const ld pi = acosl(-1.0L);
 
-int N = 128, M = 150, K = 3, T, si, sj;
-vector<pii> g(M);
-map<pii, int> magic_count;
+int N, M, K, T, si, sj;
+vector<pii> g;
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+
+struct Result {
+  int score;
+  vector<string> ops;
+};
 
 void input() {
   cin >> N >> M >> K >> T;
   cin >> si >> sj;
   g.resize(M);
   rep(i, 0, M) {
-    int gi, gj;
-    cin >> gi >> gj;
-    g[i] = {gi, gj};
+    cin >> g[i].first >> g[i].second;
   }
-}
-
-void walk(int gi, int gj) {
-  while (si < gi) {
-    cout << "D\n";
-    si++;
-  }
-  while (si > gi) {
-    cout << "U\n";
-    si--;
-  }
-  while (sj < gj) {
-    cout << "R\n";
-    sj++;
-  }
-  while (sj > gj) {
-    cout << "L\n";
-    sj--;
-  }
-}
-
-pii midpoint(pii a, pii b) {
-  return {(a.first + b.first) / 2, (a.second + b.second) / 2};
-}
-
-bool is_inside(pii p) {
-  return 0 <= p.first and p.first < N and 0 <= p.second and p.second < N;
 }
 
 int dist(pii a, pii b) {
   return abs(a.first - b.first) + abs(a.second - b.second);
 }
 
-void jump(pii q) {
-  cout << "J " << q.first << ' ' << q.second << '\n';
-  magic_count[q]--;
-  magic_count[{si, sj}]++;
-  si = 2 * q.first - si;
-  sj = 2 * q.second - sj;
+bool is_inside(pii p) {
+  return 0 <= p.first && p.first < N &&
+         0 <= p.second && p.second < N;
 }
 
-bool try_jump(pii target) {
-  pii cur = {si, sj};
-  int before = dist(cur, target);
-  pii best_q = {-1, -1};
-  int best_dist = before;
-  for (auto [q, count] : magic_count) {
-    if (count <= 0) continue;
-    pii dest = {2 * q.first - si, 2 * q.second - sj};
-    if (!is_inside(dest)) continue;
-    int d = dist(dest, target);
-    if (d < best_dist) {
-      best_dist = d;
-      best_q = q;
-    }
+pii midpoint(pii a, pii b) {
+  return {(a.first + b.first) / 2,
+          (a.second + b.second) / 2};
+}
+
+void walk(pii target, pii& cur, vector<string>& ops) {
+  while (cur.first < target.first) {
+    ops.push_back("D");
+    cur.first++;
   }
-  if (best_q.first == -1) return false;
-  jump(best_q);
-  return true;
+  while (cur.first > target.first) {
+    ops.push_back("U");
+    cur.first--;
+  }
+  while (cur.second < target.second) {
+    ops.push_back("R");
+    cur.second++;
+  }
+  while (cur.second > target.second) {
+    ops.push_back("L");
+    cur.second--;
+  }
+}
+
+void jump(pii q, pii& cur, map<pii, int>& magic_count,
+          vector<string>& ops) {
+  ops.push_back("J " + to_string(q.first) + " " +
+                to_string(q.second));
+  magic_count[q]--;
+  magic_count[cur]++;
+  cur = {2 * q.first - cur.first,
+         2 * q.second - cur.second};
+}
+
+Result simulate(const vector<pii>& magic) {
+  pii cur = {si, sj};
+  map<pii, int> magic_count;
+  for (pii p : magic) {
+    magic_count[p]++;
+  }
+  vector<string> ops;
+  for (pii target : g) {
+    int before = dist(cur, target);
+    int best_dist = before;
+    pii best_q = {-1, -1};
+    for (auto [q, count] : magic_count) {
+      if (count <= 0) continue;
+      pii dest = {2 * q.first - cur.first,
+                  2 * q.second - cur.second};
+      if (!is_inside(dest)) continue;
+      int d = dist(dest, target);
+      if (d < best_dist) {
+        best_dist = d;
+        best_q = q;
+      }
+    }
+    if (best_q.first != -1) {
+      jump(best_q, cur, magic_count, ops);
+    }
+    walk(target, cur, ops);
+  }
+  return {(int)ops.size() <= T ? T - (int)ops.size() : -inf,
+          move(ops)};
+}
+
+vector<pii> neighbor(const vector<pii>& magic) {
+  vector<pii> next = magic;
+  int idx = uniform_int_distribution<int>(0, K - 1)(rng);
+  if (uniform_int_distribution<int>(0, 99)(rng) < 15) {
+    next[idx] = {
+        uniform_int_distribution<int>(0, N - 1)(rng),
+        uniform_int_distribution<int>(0, N - 1)(rng)};
+  } else {
+    int d = uniform_int_distribution<int>(0, 3)(rng);
+    if (d == 0) next[idx].first++;
+    if (d == 1) next[idx].first--;
+    if (d == 2) next[idx].second++;
+    if (d == 3) next[idx].second--;
+    next[idx].first = clamp(next[idx].first, 0, N - 1);
+    next[idx].second = clamp(next[idx].second, 0, N - 1);
+  }
+  return next;
 }
 
 void solve() {
-  vector<pii> magic = {midpoint({si, sj}, g[0]), midpoint(g[0], g[1]), midpoint(g[1], g[2])};
-  for (auto [a, b] : magic) {
-    cout << a << ' ' << b << '\n';
-    magic_count[{a, b}]++;
-  }
-  rep(i, 0, 3) {
-    pii target = g[i];
-    pii q = magic[i];
-    pii dest = {2 * q.first - si, 2 * q.second - sj};
-    if (magic_count[q] > 0 and is_inside(dest)) {
-      jump(q);
+  vector<pii> current(K);
+  current[0] = midpoint({si, sj}, g[0]);
+  current[1] = midpoint(g[0], g[1]);
+  current[2] = midpoint(g[1], g[2]);
+
+  Result current_result = simulate(current);
+  vector<pii> best = current;
+  Result best_result = current_result;
+
+  const double time_limit = 1.85;
+  const double start_temp = 2.0;
+  const double end_temp = 0.1;
+  auto start = chrono::steady_clock::now();
+
+  while (true) {
+    double elapsed = chrono::duration<double>(
+                         chrono::steady_clock::now() - start)
+                         .count();
+    if (elapsed >= time_limit) break;
+
+    double progress = elapsed / time_limit;
+    double temp = start_temp *
+                  pow(end_temp / start_temp, progress);
+
+    vector<pii> next = neighbor(current);
+    Result next_result = simulate(next);
+
+    int delta = next_result.score - current_result.score;
+    if (delta >= 0 ||
+        uniform_real_distribution<double>(0.0, 1.0)(rng) <
+            exp((double)delta / temp)) {
+      current = move(next);
+      current_result = move(next_result);
     }
-    walk(target.first, target.second);
+
+    if (current_result.score > best_result.score) {
+      best = current;
+      best_result = current_result;
+    }
   }
-  rep(i, 3, M) {
-    try_jump(g[i]);
-    walk(g[i].first, g[i].second);
+
+  for (pii p : best) {
+    cout << p.first << ' ' << p.second << '\n';
+  }
+  for (const string& op : best_result.ops) {
+    cout << op << '\n';
   }
 }
 

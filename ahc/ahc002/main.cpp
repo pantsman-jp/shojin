@@ -79,9 +79,55 @@ struct TimeKeeper {
   bool is_time_over() const { return elapsed() >= time_limit; }
 };
 
-void input() {}
+int si, sj;
 
-void solve() {}
+const int H = 50, W = 50;
+vector t(H, vector<int>(W)), p(H, vector<int>(W));
+
+void input() {
+  cin >> si >> sj;
+  rep(i, 0, H) rep(j, 0, W) cin >> t[i][j];
+  rep(i, 0, H) rep(j, 0, W) cin >> p[i][j];
+}
+
+vector<bool> used(H* W);
+
+const vector<int> di = {-1, 0, 1, 0};
+const vector<int> dj = {0, 1, 0, -1};
+
+bool out(int i, int j, int h, int w) {
+  return i < 0 or h - 1 < i or j < 0 or w - 1 < j;
+}
+
+string dir(int d) {
+  if (d == 0) {
+    return "U";
+  } else if (d == 1) {
+    return "R";
+  } else if (d == 2) {
+    return "D";
+  }
+  return "L";
+}
+
+string ans;
+
+void dfs(int i, int j) {
+  rep(d, 0, 4) {
+    int ni = i + di[d], nj = j + dj[d];
+    if (out(ni, nj, H, W) or used[t[ni][nj]]) continue;
+    used[t[ni][nj]] = true;
+    ans += dir(d);
+    dfs(ni, nj);
+    return;
+  }
+}
+
+void solve() {
+  used[t[si][sj]] = true;
+  dfs(si, sj);
+  cout << ans << '\n';
+}
 
 int main() {
   ios::sync_with_stdio(false);

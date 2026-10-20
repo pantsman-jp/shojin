@@ -110,23 +110,77 @@ string dir(int d) {
   return "L";
 }
 
-string ans;
+string ans, best_ans, current_ans;
+ll score, best_score, current_score;
 
-void dfs(int i, int j) {
-  rep(d, 0, 4) {
-    int ni = i + di[d], nj = j + dj[d];
-    if (out(ni, nj, H, W) or used[t[ni][nj]]) continue;
-    used[t[ni][nj]] = true;
-    ans += dir(d);
-    dfs(ni, nj);
-    return;
+void dfs(int i, int j, TimeKeeper& tk) {
+  while (!tk.is_time_over()) {
+    array<int, 4> order = {0, 1, 2, 3};
+    shuffle(all(order), rng);
+    bool moved = false;
+    for (int d : order) {
+      int ni = i + di[d], nj = j + dj[d];
+      if (out(ni, nj, H, W) || used[t[ni][nj]]) continue;
+      used[t[ni][nj]] = true;
+      ans += dir(d);
+      score += p[ni][nj];
+      i = ni;
+      j = nj;
+      moved = true;
+      break;
+    }
+    if (!moved) break;
   }
 }
 
+int rev_dir(char c) {
+  if (c == 'U') return 0;
+  if (c == 'R') return 1;
+  if (c == 'D') return 2;
+  return 3;
+}
+
 void solve() {
+  TimeKeeper tk(1950);
+  fill(all(used), false);
   used[t[si][sj]] = true;
-  dfs(si, sj);
-  cout << ans << '\n';
+  score = p[si][sj];
+  ans.clear();
+  dfs(si, sj, tk);
+  current_ans = ans;
+  current_score = score;
+  best_ans = ans;
+  best_score = score;
+  const double T0 = 100.0;
+  const double T1 = 1.0;
+  while (!tk.is_time_over()) {
+    int cut = randrange(0, (int)current_ans.size() + 1);
+    fill(all(used), false);
+    used[t[si][sj]] = true;
+    int i = si, j = sj;
+    score = p[si][sj];
+    ans = current_ans.substr(0, cut);
+    rep(k, 0, cut) {
+      int d = rev_dir(current_ans[k]);
+      i += di[d];
+      j += dj[d];
+      used[t[i][j]] = true;
+      score += p[i][j];
+    }
+    dfs(i, j, tk);
+    if (tk.is_time_over()) break;
+    if (chmax(best_score, score)) {
+      best_ans = ans;
+    }
+    double progress = tk.elapsed() / 1900.0;
+    double temp = T0 + (T1 - T0) * progress;
+    ll diff = score - current_score;
+    if (diff >= 0 || randdouble() < exp((double)diff / temp)) {
+      current_ans = ans;
+      current_score = score;
+    }
+  }
+  cout << best_ans << '\n';
 }
 
 int main() {

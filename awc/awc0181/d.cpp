@@ -62,4 +62,25 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<set<int>> on(n + 1), off(n + 1);
+  for (int i = 0; i < m; i++) {
+    int l, r;
+    cin >> l >> r;
+    l--, r--;
+    on[l].insert(i);
+    off[r + 1].insert(i);
+  }
+  vector<int> ans(m);
+  int on_time = 0;
+  set<int> on_switches;
+  rep(i, 0, n) {
+    for (auto x : off[i]) on_switches.erase(x);
+    on_switches.insert(on[i].begin(), on[i].end());
+    if (on_switches.size() > 0) on_time++;
+    if (on_switches.size() == 1) ans[*on_switches.begin()]++;
+  }
+  cout << on_time - *min_element(all(ans)) << '\n';
+}

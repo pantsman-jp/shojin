@@ -62,4 +62,25 @@ int main() {
   return 0;
 }
 
-void solve() {}
+pii op(pii x, pii y) { return min(x, y); }
+
+pii e() { return {inf, inf}; }
+
+void solve() {
+  int n, m, t;
+  cin >> n >> m >> t;
+  vector<pii> temp(n);
+  rep(i, 0, n) temp[i].second = i;
+  segtree<pii, op, e> seg(temp);
+  vector<int> ans(n);
+  rep(_, 0, m) {
+    int s, l, r;
+    cin >> s >> l >> r;
+    l--, r--;
+    auto [cnt, idx] = seg.prod(l, r + 1);
+    seg.set(idx, {cnt + 1, idx});
+    ans[idx] += max(100 - (t - s), 0);
+  }
+  rep(i, 0, n) cout << ans[i] << ' ';
+  cout << '\n';
+}

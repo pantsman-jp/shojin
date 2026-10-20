@@ -62,4 +62,19 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  ll c;
+  cin >> n >> c;
+  vector<ll> w(n);
+  rep(i, 0, n) cin >> w[i];
+  sort(all(w));
+  w.pop_back();
+  int ans = 1;
+  rep(i, 0, n - 1) {
+    if (w[i] > c) break;
+    c -= w[i];
+    ans++;
+  }
+  cout << ans << '\n';
+}

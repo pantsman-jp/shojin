@@ -62,4 +62,18 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  rep(_, 0, n) {
+    int a, b;
+    cin >> a >> b;
+    if (a > b) {
+      cout << "Left" << '\n';
+    } else if (a == b) {
+      cout << "Balanced" << '\n';
+    } else {
+      cout << "Right" << '\n';
+    }
+  }
+}

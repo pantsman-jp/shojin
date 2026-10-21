@@ -62,4 +62,34 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> a(n);
+  rep(i, 0, n) cin >> a[i];
+  vector<tuple<int, int, ll, ll>> magic;
+  rep(_, 0, m) {
+    int l, r;
+    ll c, w;
+    cin >> l >> r >> c >> w;
+    magic.emplace_back(l - 1, r - 1, c, w);
+  }
+  ll ans = INF;
+  rep(bit, 0, 1 << m) {
+    vector<ll> diff(n + 1);
+    ll temp = 0;
+    rep(i, 0, m) {
+      if ((bit & (1 << i)) != 0) {
+        auto [l, r, c, w] = magic[i];
+        diff[l] += c;
+        diff[r + 1] -= c;
+        temp += w;
+      }
+    }
+    rep(i, 0, n) diff[i + 1] += diff[i];
+    int cnt = 0;
+    rep(i, 0, n) if (a[i] <= diff[i]) cnt++;
+    if (cnt == n) chmin(ans, temp);
+  }
+  cout << (ans == INF ? -1 : ans) << '\n';
+}

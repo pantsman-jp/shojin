@@ -62,4 +62,19 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  bool ok = true;
+  rep(_, 0, n) {
+    int a;
+    cin >> a;
+    if (a == 0) ok = false;
+    if (ok) {
+      cout << "o";
+    } else {
+      cout << "x";
+    }
+  }
+  cout << '\n';
+}

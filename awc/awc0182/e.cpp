@@ -62,4 +62,31 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, q;
+  cin >> n >> q;
+  set<pair<int, ll>> store;
+  rep(i, 1, n + 1) {
+    int a;
+    cin >> a;
+    if (a > 0) store.emplace(i, a);
+  }
+  rep(_, 0, q) {
+    int l, r;
+    cin >> l >> r;
+    ll ans = 0, l_count = 0, r_count = 0;
+    auto it = store.lower_bound({l, 0});
+    while (it != store.end() && it->first <= r) {
+      ans += min(it->first - l, r - it->first) * it->second;
+      if (it->first - l <= r - it->first) {
+        l_count += it->second;
+      } else {
+        r_count += it->second;
+      }
+      it = store.erase(it);
+    }
+    if (l_count > 0) store.emplace(l, l_count);
+    if (r_count > 0) store.emplace(r, r_count);
+    cout << ans << '\n';
+  }
+}

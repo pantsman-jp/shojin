@@ -62,4 +62,21 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, k;
+  cin >> n >> k;
+  vector<pll> ba;
+  rep(_, 0, n) {
+    ll a, b;
+    cin >> a >> b;
+    ba.emplace_back(b, a);
+  }
+  sort(rall(ba));
+  ll ans = 0;
+  for (auto [b, a] : ba) {
+    ll x = min(k, a);
+    k -= x;
+    ans += x * b;
+  }
+  cout << (k > 0 ? -1 : ans) << '\n';
+}

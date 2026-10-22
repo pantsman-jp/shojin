@@ -62,4 +62,8 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll a, b, k;
+  cin >> a >> b >> k;
+  cout << (a - b) * k << '\n';
+}

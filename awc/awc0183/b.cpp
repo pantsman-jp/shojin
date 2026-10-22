@@ -62,4 +62,16 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int h, w;
+  cin >> h >> w;
+  rep(i, 1, h + 1) {
+    string s;
+    cin >> s;
+    if (count(all(s), 'X') > 0) {
+      cout << i << '\n';
+      return;
+    }
+  }
+  cout << -1 << '\n';
+}

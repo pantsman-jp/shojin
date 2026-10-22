@@ -62,4 +62,23 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n;
+  cin >> n;
+  vector<string> s(n);
+  unordered_set<string> tags;
+  rep(i, 0, n) {
+    cin >> s[i];
+    tags.insert(s[i]);
+  }
+  ll ans = 0;
+  rep(i, 0, n) {
+    unordered_set<string> subs;
+    int m = s[i].size();
+    rep(len, 1, m) rep(l, 0, m - len + 1) {
+      subs.insert(s[i].substr(l, len));
+    }
+    for (string sub : subs) ans += tags.count(sub);
+  }
+  cout << ans << '\n';
+}

@@ -62,4 +62,12 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  ll n, c;
+  cin >> n >> c;
+  rep(_, 0, n) {
+    ll w, a;
+    cin >> w >> a;
+    cout << max(0ll, w * a - c) << '\n';
+  }
+}

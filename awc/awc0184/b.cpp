@@ -62,4 +62,30 @@ int main() {
   return 0;
 }
 
-void solve() {}
+vector<pair<char, int>> rle(const string& s) {
+  vector<pair<char, int>> ans;
+  int cnt = 1;
+  char now = s[0];
+  rep(i, 1, s.size()) {
+    if (s[i] == now) {
+      cnt++;
+    } else {
+      ans.push_back({now, cnt});
+      now = s[i];
+      cnt = 1;
+    }
+  }
+  ans.push_back({now, cnt});
+  return ans;
+}
+
+void solve() {
+  int n;
+  string s;
+  cin >> n >> s;
+  int ans = 0;
+  for (auto [c, m] : rle(s)) {
+    if (c == '#') ans++;
+  }
+  cout << ans << '\n';
+}

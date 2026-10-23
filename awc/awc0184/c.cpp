@@ -62,4 +62,15 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, m;
+  cin >> n >> m;
+  vector<int> d(m);
+  rep(i, 0, m) cin >> d[i];
+  sort(all(d));
+  rep(_, 0, n) {
+    int s;
+    cin >> s;
+    cout << upper_bound(all(d), s) - d.begin() << '\n';
+  }
+}

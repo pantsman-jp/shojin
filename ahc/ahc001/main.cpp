@@ -79,9 +79,76 @@ struct TimeKeeper {
   bool is_time_over() const { return elapsed() >= time_limit; }
 };
 
-void input() {}
+const int H = 10000, W = 10000;
+int n;
+vector<ll> x, y, r;
 
-void solve() {}
+void input() {
+  cin >> n;
+  x.resize(n), y.resize(n), r.resize(n);
+  rep(i, 0, n) cin >> x[i] >> y[i] >> r[i];
+}
+
+struct Rect {
+  ll x1, y1, x2, y2;
+};
+
+void output(const Rect& a) {
+  cout << a.x1 << ' ' << a.y1 << ' ' << a.x2 << ' ' << a.y2 << '\n';
+}
+
+ll area(const Rect& a) {
+  return (a.x2 - a.x1) * (a.y2 - a.y1);
+}
+
+bool is_overlap(const Rect& a, const Rect& b) {
+  return (a.x1 < b.x2) && (b.x1 < a.x2) && (a.y1 < b.y2) && (b.y1 < a.y2);
+}
+
+bool is_in(const Rect& a) {
+  return (0 <= a.x1) and (0 <= a.y1) and (a.x2 <= W) and (a.y2 <= H);
+}
+
+ld satisfaction(const Rect& a, ll target) {
+  ld s = area(a) * 1.0;
+  ld r = target * 1.0;
+  ld tmp = 1.0 - min(r, s) / max(r, s);
+  return 1.0 - tmp * tmp;
+}
+
+ld score(const vector<Rect>& xs) {
+  ld res = 0.0;
+  rep(i, 0, n) res += satisfaction(xs[i], r[i]);
+  return res;
+}
+
+void solve() {
+  vector<Rect> ans;
+  rep(i, 0, n) {
+    ans.emplace_back(Rect{x[i], y[i], x[i] + 1, y[i] + 1});
+  }
+  // expansion
+  rep(i, 0, n) {
+    auto now = ans[i];
+    while (satisfaction(now, r[i]) < satisfaction(ans[i], r[i])) {
+      now.x2++;
+      if (is_in(now)) {
+        bool ok = true;
+        rep(j, 0, n) {
+          if (i == j) continue;
+          if (is_overlap(now, ans[j])) {
+            ok = false;
+            break;
+          }
+        }
+        if (ok) ans[i] = now;
+      } else {
+        break;
+      }
+    }
+  }
+  for (auto x : ans) output(x);
+}
 
 int main() {
   ios::sync_with_stdio(false);

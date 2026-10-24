@@ -127,23 +127,33 @@ void solve() {
   rep(i, 0, n) {
     ans.emplace_back(Rect{x[i], y[i], x[i] + 1, y[i] + 1});
   }
-  // expansion
-  rep(i, 0, n) {
-    auto now = ans[i];
-    while (satisfaction(now, r[i]) < satisfaction(ans[i], r[i])) {
-      now.x2++;
-      if (is_in(now)) {
-        bool ok = true;
-        rep(j, 0, n) {
-          if (i == j) continue;
-          if (is_overlap(now, ans[j])) {
-            ok = false;
-            break;
-          }
+  TimeKeeper tk(4990);
+  while (!tk.is_time_over()) {
+    ld now = score(ans);
+    auto copy = ans;
+    int d = randrange(0, 4);
+    int i = randrange(0, n);
+    if (d == 0) {
+      copy[i].x1 = randrange(0, x[i] + 1);
+    } else if (d == 1) {
+      copy[i].x2 = randrange(x[i] + 1, W + 1);
+    } else if (d == 2) {
+      copy[i].y1 = randrange(0, y[i] + 1);
+    } else {
+      copy[i].y2 = randrange(y[i] + 1, H + 1);
+    }
+    if (is_in(copy[i])) {
+      bool ok = true;
+      rep(j, 0, n) {
+        if (i == j) continue;
+        if (is_overlap(copy[i], ans[j])) {
+          ok = false;
+          break;
         }
-        if (ok) ans[i] = now;
-      } else {
-        break;
+      }
+      if (ok) {
+        ld next = now - satisfaction(ans[i], r[i]) + satisfaction(copy[i], r[i]);
+        if (now < next) ans = copy;
       }
     }
   }

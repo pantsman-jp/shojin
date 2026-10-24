@@ -62,4 +62,19 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int n, k, c;
+  cin >> n >> k >> c;
+  vector<int> w(n), v(n);
+  rep(i, 0, n) cin >> w[i] >> v[i];
+  vector dp(k + 1, vector<int>(c + 1, -inf));
+  dp[0][0] = 0;
+  rep(x, 0, n) rrep(y, 1, k + 1) rrep(z, w[x], c + 1) {
+    if (dp[y - 1][z - w[x]] != -inf) {
+      chmax(dp[y][z], dp[y - 1][z - w[x]] + v[x]);
+    }
+  }
+  int ans = 0;
+  rep(y, 0, k + 1) rep(z, 0, c + 1) chmax(ans, dp[y][z]);
+  cout << ans << '\n';
+}

@@ -62,4 +62,13 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  vector<pii> xs;
+  rep(i, 1, 4) {
+    int x;
+    cin >> x;
+    xs.emplace_back(-x, i);
+  }
+  sort(all(xs));
+  cout << xs[0].second << '\n';
+}

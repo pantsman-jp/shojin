@@ -62,4 +62,14 @@ int main() {
   return 0;
 }
 
-void solve() {}
+void solve() {
+  int h, w;
+  cin >> h >> w;
+  rep(_, 0, h) {
+    string s;
+    cin >> s;
+    int ans = 0;
+    rep(i, 0, w) if (s[i] == '.') ans++;
+    cout << ans << '\n';
+  }
+}

@@ -106,7 +106,7 @@ bool is_overlap(const Rect& a, const Rect& b) {
 }
 
 bool is_in(const Rect& a) {
-  return (0 <= a.x1) and (0 <= a.y1) and (a.x2 <= W) and (a.y2 <= H);
+  return (0 <= a.x1) && (0 <= a.y1) && (a.x2 <= W) && (a.y2 <= H);
 }
 
 ld satisfaction(const Rect& a, ll target) {
@@ -127,9 +127,16 @@ void solve() {
   rep(i, 0, n) {
     ans.emplace_back(Rect{x[i], y[i], x[i] + 1, y[i] + 1});
   }
-  TimeKeeper tk(4990);
+  ld now = score(ans);
+  ld best_score = now;
+  vector<Rect> best = ans;
+  const double time_limit = 4990.0;
+  const ld start_temp = 0.2;
+  const ld end_temp = 0.001;
+  TimeKeeper tk(time_limit);
   while (!tk.is_time_over()) {
-    ld now = score(ans);
+    ld progress = tk.elapsed() / time_limit;
+    ld temp = start_temp * pow(end_temp / start_temp, progress);
     auto copy = ans;
     int d = randrange(0, 4);
     int i = randrange(0, n);
@@ -142,22 +149,25 @@ void solve() {
     } else {
       copy[i].y2 = randrange(y[i] + 1, H + 1);
     }
-    if (is_in(copy[i])) {
-      bool ok = true;
-      rep(j, 0, n) {
-        if (i == j) continue;
-        if (is_overlap(copy[i], ans[j])) {
-          ok = false;
-          break;
-        }
-      }
-      if (ok) {
-        ld next = now - satisfaction(ans[i], r[i]) + satisfaction(copy[i], r[i]);
-        if (now < next) ans = copy;
+    if (!is_in(copy[i])) continue;
+    bool ok = true;
+    rep(j, 0, n) {
+      if (i == j) continue;
+      if (is_overlap(copy[i], ans[j])) {
+        ok = false;
+        break;
       }
     }
+    if (!ok) continue;
+    ld next = now - satisfaction(ans[i], r[i]) + satisfaction(copy[i], r[i]);
+    ld delta = next - now;
+    if (delta >= 0 || randdouble() < exp(delta / temp)) {
+      ans = move(copy);
+      now = next;
+      if (chmax(best_score, now)) best = ans;
+    }
   }
-  for (auto x : ans) output(x);
+  for (auto a : best) output(a);
 }
 
 int main() {
